@@ -1,5 +1,7 @@
 ﻿# ATRIO API
 
+[![tests](https://github.com/christiancozta/atrio-api/actions/workflows/tests.yml/badge.svg)](https://github.com/christiancozta/atrio-api/actions/workflows/tests.yml)
+
 Método governado de produção jurídica, formalizado como uma API local,
 versionada e verificável.
 
