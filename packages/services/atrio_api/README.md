@@ -4,7 +4,7 @@ Implementação local, versionada e governada do método operacional ATRIO.
 
 - **Versão da API:** `0.7.0`
 - **Schema PostgreSQL:** `1.3.0`
-- **Estado:** release técnica pública em preparação
+- **Estado:** release técnica pública
 - **Distribuição prevista:** repositório público de código-fonte
 
 ## Definição
@@ -216,7 +216,7 @@ As condições de uso estão fixadas no arquivo
 [LICENSE](../../../LICENSE): código público para leitura e avaliação, com
 todos os direitos reservados.
 
-A versão `0.7.0` está em preparação para a release técnica pública. O
-acompanhamento detalhado permanece em
+A versão `0.7.0` corresponde à release técnica pública. O acompanhamento
+detalhado permanece em
 [VERSIONAMENTO.md](../../../VERSIONAMENTO.md) e no
 [guia de operação](../../../docs/api/OPERACAO.md).

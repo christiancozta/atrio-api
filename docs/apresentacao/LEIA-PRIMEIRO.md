@@ -90,7 +90,7 @@ Identificador da release: `atrio-local-0.7.0-f9f81d9d-7ca7a772`. Os dois
 sufixos são recortes dos digests do manifesto de build e do pacote normativo.
 Se qualquer arquivo normativo mudar, o identificador muda.
 
-Release técnica da API: `0.7.0`, em preparação para publicação.
+Release técnica pública da API: `0.7.0`.
 
 ---
 
