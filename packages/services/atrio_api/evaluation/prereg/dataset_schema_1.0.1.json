@@ -1,0 +1,647 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/atrio-eval/1.0.0/registro-experimental.json",
+  "title": "Registro Experimental — Avaliação Independente ATRIO",
+  "description": "Um registro por tripla (caso, braço experimental, execução). Nenhum texto integral é armazenado. Apenas hashes e referências a artefatos sob custódia.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "record_id",
+    "caso",
+    "experimento",
+    "sistema",
+    "io",
+    "estado_execucao",
+    "integridade"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "record_id": { "type": "string", "format": "uuid" },
+
+    "caso": {
+      "type": "object",
+      "required": ["pseudo_id", "tribunal", "classe_processual", "tipo_peca", "estrato"],
+      "additionalProperties": false,
+      "properties": {
+        "pseudo_id": {
+          "type": "string",
+          "pattern": "^CASO-[0-9]{5}$",
+          "description": "Identificador pseudonimizado. O mapa reverso fica exclusivamente com a custódia externa."
+        },
+        "hash_identificador_original": {
+          "$ref": "#/$defs/sha256",
+          "description": "SHA-256 do número CNJ com sal secreto. Permite deduplicação sem reidentificação."
+        },
+        "tribunal": { "type": "string" },
+        "orgao_julgador": { "type": "string" },
+        "classe_processual": { "enum": ["RI", "ED", "MS"] },
+        "tipo_peca": { "enum": ["voto_merito", "voto_ed", "decisao_ms"] },
+        "ano_distribuicao": { "type": "integer", "minimum": 2000, "maximum": 2100 },
+        "data_decisao_original": { "type": "string", "format": "date" },
+        "materia_locator": {
+          "type": "string",
+          "description": "Locador da taxonomia de dez posições, ou 'fora_de_dominio'."
+        },
+        "estrato": {
+          "type": "object",
+          "required": ["dificuldade", "ordem_publica", "dado_sensivel", "dominio"],
+          "additionalProperties": false,
+          "properties": {
+            "dificuldade": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 3,
+              "description": "Atribuída por painel cego antes de qualquer processamento."
+            },
+            "ordem_publica": { "type": "boolean" },
+            "dado_sensivel": { "type": "boolean" },
+            "dominio": { "enum": ["em_dominio", "fora_de_dominio"] },
+            "celula_amostral": { "type": "string" },
+            "peso_amostral": { "type": "number", "exclusiveMinimum": 0 }
+          }
+        },
+        "holdout": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "posterior_corte_corpus": { "type": "boolean" },
+            "data_corte_corpus": { "type": "string", "format": "date" },
+            "posterior_corte_modelo": { "type": "boolean" },
+            "data_corte_modelo_declarada": { "type": "string", "format": "date" },
+            "sondagem_memorizacao_executada": { "type": "boolean" },
+            "sondagem_memorizacao_resultado": {
+              "enum": ["sem_recuperacao", "recuperacao_parcial", "recuperacao_substancial", "nao_testado"]
+            }
+          }
+        }
+      }
+    },
+
+    "experimento": {
+      "type": "object",
+      "required": ["fase", "braco", "protocolo_versao", "run_index"],
+      "additionalProperties": false,
+      "properties": {
+        "fase": { "enum": ["piloto", "desenvolvimento", "teste_final"] },
+        "pre_registro_id": { "type": "string" },
+        "protocolo_versao": { "type": "string" },
+        "braco": {
+          "enum": ["A0", "A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10"],
+          "description": "A1 é o comparador primário. A8 é o ATRIO completo. A10 é humano sem IA."
+        },
+        "camada_medicao": { "enum": ["A", "B", "C"] },
+        "run_index": { "type": "integer", "minimum": 1 },
+        "k_total": { "type": "integer", "minimum": 1 },
+        "run_designada_avaliacao_humana": {
+          "type": "boolean",
+          "description": "Sorteada antes da execução, nunca escolhida por qualidade observada."
+        },
+        "semente_aleatorizacao": { "type": "string" },
+        "ordem_execucao_indice": { "type": "integer", "minimum": 0 },
+        "timestamp_inicio": { "type": "string", "format": "date-time" },
+        "timestamp_fim": { "type": "string", "format": "date-time" },
+        "subconjunto_calibracao_deriva": { "type": "boolean" }
+      }
+    },
+
+    "sistema": {
+      "type": "object",
+      "required": ["atrio_versao", "componentes", "modelo"],
+      "additionalProperties": false,
+      "properties": {
+        "atrio_versao": { "type": "string" },
+        "atrio_commit": { "type": "string" },
+        "componentes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["nome", "modo"],
+            "additionalProperties": false,
+            "properties": {
+              "nome": { "enum": ["CORPUS", "RATIO", "TROIA", "CERNE", "LUX"] },
+              "versao": { "type": "string" },
+              "commit_hash": { "type": "string" },
+              "prompt_hash": { "$ref": "#/$defs/sha256" },
+              "modo": { "enum": ["ativo", "observador", "desativado"] },
+              "config_hash": { "$ref": "#/$defs/sha256" }
+            }
+          }
+        },
+        "modelo": {
+          "type": "object",
+          "required": ["provedor", "model_id"],
+          "additionalProperties": false,
+          "properties": {
+            "provedor": { "type": "string" },
+            "model_id": { "type": "string" },
+            "snapshot": { "type": "string" },
+            "temperature": { "type": "number", "minimum": 0 },
+            "top_p": { "type": "number", "minimum": 0, "maximum": 1 },
+            "max_tokens": { "type": "integer", "minimum": 1 },
+            "seed": { "type": ["integer", "null"] },
+            "orcamento_raciocinio_tokens": { "type": ["integer", "null"] }
+          }
+        },
+        "indice_corpus": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "versao": { "type": "string" },
+            "n_documentos": { "type": "integer", "minimum": 0 },
+            "data_corte": { "type": "string", "format": "date" },
+            "hash_indice": { "$ref": "#/$defs/sha256" }
+          }
+        },
+        "orcamento_equalizado_ao": {
+          "type": ["string", "null"],
+          "description": "Braço de referência para equalização de orçamento de tokens. Preenchido em A2 e A3."
+        }
+      }
+    },
+
+    "io": {
+      "type": "object",
+      "required": ["input_hash", "output_valido"],
+      "additionalProperties": false,
+      "properties": {
+        "input_hash": { "$ref": "#/$defs/sha256" },
+        "input_tokens": { "type": "integer", "minimum": 0 },
+        "input_ref": { "type": "string" },
+        "output_hash": { "$ref": "#/$defs/sha256" },
+        "output_tokens": { "type": "integer", "minimum": 0 },
+        "output_ref": { "type": "string" },
+        "output_valido": { "type": "boolean" },
+        "motivo_invalidez": {
+          "enum": ["formato_irrecuperavel", "texto_vazio", "truncamento", "codificacao", "nenhum", "outro"]
+        },
+        "output_normalizado_hash": {
+          "$ref": "#/$defs/sha256",
+          "description": "Hash da versão normalizada para cegamento. Gerado por operador que não avalia."
+        }
+      }
+    },
+
+    "artefatos_intermediarios": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["etapa", "tipo", "hash"],
+        "additionalProperties": false,
+        "properties": {
+          "etapa": { "enum": ["CORPUS", "RATIO", "TROIA", "CERNE", "LUX"] },
+          "tipo": { "type": "string" },
+          "hash": { "$ref": "#/$defs/sha256" },
+          "ref": { "type": "string" },
+          "tokens": { "type": "integer", "minimum": 0 },
+          "latencia_ms": { "type": "integer", "minimum": 0 },
+          "chamadas_modelo": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+
+    "corpus_metricas": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "n_documentos_recuperados": { "type": "integer", "minimum": 0 },
+        "ids_recuperados": { "type": "array", "items": { "type": "string" } },
+        "precisao_recuperacao": { "$ref": "#/$defs/proporcao" },
+        "recall_recuperacao": { "$ref": "#/$defs/proporcao" },
+        "cobertura_citacoes_requeridas": {
+          "$ref": "#/$defs/proporcao",
+          "description": "Fração das citações requeridas pelo padrão ouro presentes no conjunto recuperado."
+        },
+        "documento_do_proprio_caso_recuperado": {
+          "type": "boolean",
+          "description": "Sinaliza vazamento. Verdadeiro invalida o registro para a análise primária."
+        }
+      }
+    },
+
+    "troia_eventos": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["evento_id", "tipo", "acao"],
+        "additionalProperties": false,
+        "properties": {
+          "evento_id": { "type": "string" },
+          "timestamp": { "type": "string", "format": "date-time" },
+          "etapa": { "enum": ["CORPUS", "RATIO", "TROIA", "CERNE", "LUX"] },
+          "tipo": { "type": "string" },
+          "gatilho": { "type": "string" },
+          "severidade_declarada_pelo_sistema": { "type": "integer", "minimum": 0, "maximum": 4 },
+          "acao": { "enum": ["bloqueio", "alerta", "reescrita", "nenhuma"] },
+          "payload_hash": { "$ref": "#/$defs/sha256" },
+          "classificacao_verdade": {
+            "enum": ["verdadeiro_positivo", "falso_positivo", "falso_negativo", "verdadeiro_negativo", "nao_classificado"],
+            "description": "Preenchida pelo painel independente após a bateria. Nunca pelo sistema."
+          },
+          "classificado_por": { "type": "string" },
+          "caso_injetado": {
+            "type": "boolean",
+            "description": "Verdadeiro quando o defeito foi introduzido pelo conjunto de injeção construído por terceiro."
+          }
+        }
+      }
+    },
+
+    "cerne_auditoria": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "executado": { "type": "boolean" },
+        "modo": { "enum": ["ativo", "observador", "desativado"] },
+        "achados": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["achado_id", "tipo", "acao"],
+            "additionalProperties": false,
+            "properties": {
+              "achado_id": { "type": "string" },
+              "tipo": { "type": "string" },
+              "alvo": { "type": "string" },
+              "severidade_atribuida_pelo_sistema": { "type": "integer", "minimum": 0, "maximum": 4 },
+              "acao": { "enum": ["correcao", "alerta", "bloqueio", "nenhuma"] },
+              "correspondencia_padrao_ouro": {
+                "enum": ["confirmado", "nao_confirmado", "parcial", "nao_avaliado"]
+              }
+            }
+          }
+        },
+        "erros_detectados_n": { "type": "integer", "minimum": 0 },
+        "erros_corrigidos_n": { "type": "integer", "minimum": 0 },
+        "erros_residuais_n": { "type": "integer", "minimum": 0 },
+        "falsos_alarmes_n": { "type": "integer", "minimum": 0 },
+        "output_pre_cerne_hash": { "$ref": "#/$defs/sha256" },
+        "taxa_erro_residual": {
+          "$ref": "#/$defs/proporcao",
+          "description": "Erros S>=3 na saída final sobre erros S>=3 na saída pré-CERNE."
+        }
+      }
+    },
+
+    "lux_resultado": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "executado": { "type": "boolean" },
+        "anonimizacao_aplicada": { "type": "boolean" },
+        "entidades_detectadas_n": { "type": "integer", "minimum": 0 },
+        "entidades_esperadas_n": { "type": "integer", "minimum": 0 },
+        "recall_anonimizacao": { "$ref": "#/$defs/proporcao" },
+        "precisao_anonimizacao": { "$ref": "#/$defs/proporcao" },
+        "vazamentos": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["tipo", "severidade"],
+            "additionalProperties": false,
+            "properties": {
+              "tipo": { "enum": ["nome", "documento", "endereco", "contato", "saude", "financeiro", "outro_sensivel"] },
+              "severidade": { "type": "integer", "minimum": 0, "maximum": 4 },
+              "localizacao": { "type": "string" }
+            }
+          }
+        },
+        "distancia_edicao_normalizada_vs_pre_lux": { "type": "number", "minimum": 0 },
+        "indice_legibilidade": { "type": "number" }
+      }
+    },
+
+    "intervencoes_humanas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["intervencao_id", "etapa", "tipo", "duracao_minutos"],
+        "additionalProperties": false,
+        "properties": {
+          "intervencao_id": { "type": "string" },
+          "etapa": { "enum": ["CORPUS", "RATIO", "TROIA", "CERNE", "LUX", "pos_saida"] },
+          "tipo": { "enum": ["correcao", "desbloqueio", "complemento", "rejeicao", "reexecucao_autorizada"] },
+          "duracao_minutos": { "type": "number", "minimum": 0 },
+          "operador_pseudonimo": { "type": "string" },
+          "descricao_hash": { "$ref": "#/$defs/sha256" },
+          "alterou_dispositivo": { "type": "boolean" }
+        }
+      }
+    },
+
+    "padrao_ouro_ref": {
+      "type": "object",
+      "required": ["gold_id", "versao"],
+      "additionalProperties": false,
+      "properties": {
+        "gold_id": { "type": "string" },
+        "versao": { "type": "string" },
+        "construido_sem_saida_de_sistema": {
+          "const": true,
+          "description": "Invariante do protocolo. O painel de padrão ouro nunca vê saída de qualquer braço."
+        },
+        "painel_ids": { "type": "array", "items": { "type": "string" } },
+        "questoes_obrigatorias": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["questao_id", "ordem_publica"],
+            "additionalProperties": false,
+            "properties": {
+              "questao_id": { "type": "string" },
+              "descricao_hash": { "$ref": "#/$defs/sha256" },
+              "ordem_publica": { "type": "boolean" },
+              "citacoes_requeridas": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        },
+        "questoes_uteis_nao_obrigatorias": { "type": "array", "items": { "type": "string" } },
+        "conjunto_resultados_admissiveis": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" },
+          "description": "Conjunto, não valor único. Impede que concordância com o tribunal opere como critério de correção."
+        },
+        "fatos_dispositivos": { "type": "array", "items": { "type": "string" } },
+        "decisao_original_classificada": { "enum": ["aceitavel", "controversa", "inadequada"] },
+        "caso_marcado_controverso": { "type": "boolean" },
+        "concordancia_interna_painel": { "type": "number", "minimum": -1, "maximum": 1 }
+      }
+    },
+
+    "avaliacoes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["avaliacao_id", "avaliador_pseudonimo", "cego", "dimensoes"],
+        "additionalProperties": false,
+        "properties": {
+          "avaliacao_id": { "type": "string" },
+          "avaliador_pseudonimo": { "type": "string" },
+          "cego": { "type": "boolean" },
+          "ordem_apresentacao": { "type": "integer", "minimum": 0 },
+          "palpite_do_braco": {
+            "type": ["string", "null"],
+            "description": "Registrado após avaliar. Sustenta o teste de integridade de cegamento."
+          },
+          "palpite_correto": { "type": ["boolean", "null"] },
+          "timestamp": { "type": "string", "format": "date-time" },
+          "duracao_minutos": { "type": "number", "minimum": 0 },
+          "conflito_declarado": { "type": "boolean" },
+          "dimensoes": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "correcao_factual": { "$ref": "#/$defs/escala04" },
+              "correcao_juridica": { "$ref": "#/$defs/escala04" },
+              "fundamentacao": { "$ref": "#/$defs/escala04" },
+              "cobertura_argumentativa": { "$ref": "#/$defs/escala04" },
+              "proveniencia": { "$ref": "#/$defs/escala04" },
+              "alucinacao": { "$ref": "#/$defs/escala04" },
+              "omissao": { "$ref": "#/$defs/escala04" },
+              "coerencia_logica": { "$ref": "#/$defs/escala04" },
+              "resultado_dispositivo": { "$ref": "#/$defs/escala04" },
+              "seguranca_privacidade": { "$ref": "#/$defs/escala04" },
+              "necessidade_intervencao": { "$ref": "#/$defs/escala04" }
+            }
+          },
+          "citacoes_classificadas": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["citacao_ref", "classe"],
+              "additionalProperties": false,
+              "properties": {
+                "citacao_ref": { "type": "string" },
+                "classe": {
+                  "enum": ["P0", "P1", "P2", "P3", "P4"],
+                  "description": "P0 sustenta. P1 existe e não sustenta. P2 distorce. P3 inexiste. P4 lacuna de lastro."
+                },
+                "verificada_contra": { "type": "string" }
+              }
+            }
+          },
+          "questoes_endereçadas": { "type": "array", "items": { "type": "string" } },
+          "erros": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["erro_id", "dimensao", "severidade"],
+              "additionalProperties": false,
+              "properties": {
+                "erro_id": { "type": "string" },
+                "dimensao": {
+                  "enum": [
+                    "correcao_factual", "correcao_juridica", "fundamentacao",
+                    "cobertura_argumentativa", "proveniencia", "alucinacao",
+                    "omissao", "coerencia_logica", "resultado_dispositivo",
+                    "seguranca_privacidade"
+                  ]
+                },
+                "severidade": { "type": "integer", "minimum": 0, "maximum": 4 },
+                "classe_proveniencia": { "enum": ["P0", "P1", "P2", "P3", "P4", "nao_aplicavel"] },
+                "localizacao": { "type": "string" },
+                "descricao_hash": { "$ref": "#/$defs/sha256" },
+                "afeta_dispositivo": { "type": "boolean" },
+                "detectado_por_cerne": { "type": ["boolean", "null"] },
+                "detectado_por_troia": { "type": ["boolean", "null"] }
+              }
+            }
+          },
+          "dispositivo_identificado": { "type": "string" },
+          "dispositivo_no_conjunto_admissivel": { "type": "boolean" },
+          "aceitavel_sem_intervencao": { "type": "boolean" },
+          "tempo_estimado_correcao_minutos": { "type": "number", "minimum": 0 }
+        }
+      }
+    },
+
+    "divergencias": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["dimensao", "encaminhado_adjudicacao"],
+        "additionalProperties": false,
+        "properties": {
+          "dimensao": { "type": "string" },
+          "avaliadores": { "type": "array", "items": { "type": "string" } },
+          "valores": { "type": "array", "items": { "type": ["number", "string", "boolean"] } },
+          "magnitude": { "type": "number" },
+          "criterio_acionado": {
+            "enum": ["diferenca_maior_igual_2", "discordancia_binaria_aceitabilidade", "discordancia_erro_grave"]
+          },
+          "encaminhado_adjudicacao": { "type": "boolean" }
+        }
+      }
+    },
+
+    "adjudicacao": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "realizada": { "type": "boolean" },
+        "adjudicadores": { "type": "array", "items": { "type": "string" } },
+        "cego": { "type": "boolean" },
+        "viu_avaliacoes_originais_antes": { "type": "boolean" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "decisao_por_dimensao": {
+          "type": "object",
+          "additionalProperties": { "type": ["number", "string", "boolean"] }
+        },
+        "severidade_final_maxima": { "type": "integer", "minimum": 0, "maximum": 4 },
+        "consenso_entre_adjudicadores": { "type": "boolean" },
+        "justificativa_hash": { "$ref": "#/$defs/sha256" }
+      }
+    },
+
+    "metricas_temporais": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "latencia_total_ms": { "type": "integer", "minimum": 0 },
+        "latencia_por_etapa_ms": {
+          "type": "object",
+          "additionalProperties": { "type": "integer", "minimum": 0 }
+        },
+        "tempo_humano_total_minutos": { "type": "number", "minimum": 0 },
+        "tempo_ate_aceitavel_minutos": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "description": "TTA. Nulo quando a saída nunca atinge o critério de aceitação."
+        },
+        "atingiu_aceitacao": { "type": "boolean" }
+      }
+    },
+
+    "consumo": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tokens_entrada": { "type": "integer", "minimum": 0 },
+        "tokens_saida": { "type": "integer", "minimum": 0 },
+        "tokens_raciocinio": { "type": "integer", "minimum": 0 },
+        "chamadas_api_n": { "type": "integer", "minimum": 0 },
+        "custo_modelo_brl": { "type": "number", "minimum": 0 },
+        "custo_humano_brl": { "type": "number", "minimum": 0 },
+        "custo_total_brl": { "type": "number", "minimum": 0 }
+      }
+    },
+
+    "estado_execucao": {
+      "type": "object",
+      "required": ["status"],
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": ["concluido", "bloqueado", "falha_tecnica", "interrompido", "excluido"],
+          "description": "bloqueado é resultado válido e conta como não entrega na análise por intenção de tratar. Nunca se confunde com falha_tecnica."
+        },
+        "motivo": { "type": "string" },
+        "componente_bloqueador": { "enum": ["TROIA", "CERNE", "LUX", "modelo", "nenhum"] },
+        "rerun": { "type": "boolean" },
+        "rerun_index": { "type": "integer", "minimum": 0, "maximum": 2 },
+        "rerun_justificativa": {
+          "enum": ["erro_5xx", "timeout_rede", "corte_conexao", "nao_aplicavel"],
+          "description": "Reexecução só é permitida por falha de infraestrutura. Nunca por insatisfação com a saída."
+        },
+        "excluido_por_criterio": { "type": ["string", "null"] },
+        "data_exclusao": { "type": ["string", "null"], "format": "date" },
+        "incluido_analise_primaria": { "type": "boolean" }
+      }
+    },
+
+    "resultado_final": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "erro_grave_presente": {
+          "type": "boolean",
+          "description": "Desfecho primário. Presença de ao menos um erro de severidade final maior ou igual a 3."
+        },
+        "n_erros_por_severidade": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "S0": { "type": "integer", "minimum": 0 },
+            "S1": { "type": "integer", "minimum": 0 },
+            "S2": { "type": "integer", "minimum": 0 },
+            "S3": { "type": "integer", "minimum": 0 },
+            "S4": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "densidade_erro_ponderada": { "type": "number", "minimum": 0 },
+        "precisao_proveniencia": { "$ref": "#/$defs/proporcao" },
+        "taxa_alucinacao_fonte": { "$ref": "#/$defs/proporcao" },
+        "recall_questoes_obrigatorias": { "$ref": "#/$defs/proporcao" },
+        "f1_cobertura": { "$ref": "#/$defs/proporcao" },
+        "omissao_ordem_publica": { "type": "boolean" },
+        "dispositivo_predito": { "type": "string" },
+        "dispositivo_no_conjunto_admissivel": { "type": "boolean" },
+        "concordancia_com_decisao_original": {
+          "type": "boolean",
+          "description": "Descritor secundário. Vedado o uso como critério de correção."
+        },
+        "aceitavel_sem_intervencao": { "type": "boolean" },
+        "estabilidade_dispositivo_k": { "$ref": "#/$defs/proporcao" },
+        "estabilidade_textual": { "type": "number", "minimum": 0, "maximum": 1 },
+        "jaccard_citacoes_entre_runs": { "$ref": "#/$defs/proporcao" }
+      }
+    },
+
+    "integridade": {
+      "type": "object",
+      "required": ["registro_hash"],
+      "additionalProperties": false,
+      "properties": {
+        "registro_hash": {
+          "$ref": "#/$defs/sha256",
+          "description": "SHA-256 do registro serializado canonicamente, excluído este objeto."
+        },
+        "assinado_em": { "type": "string", "format": "date-time" },
+        "custodia": { "type": "string" },
+        "carimbo_tempo_externo": { "type": "string" },
+        "conjunto_teste_lacrado": { "type": "boolean" }
+      }
+    }
+  },
+
+  "allOf": [
+    {
+      "if": {
+        "properties": { "estado_execucao": { "properties": { "status": { "const": "bloqueado" } } } },
+        "required": ["estado_execucao"]
+      },
+      "then": {
+        "properties": {
+          "estado_execucao": { "required": ["componente_bloqueador", "motivo"] }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "estado_execucao": { "properties": { "rerun": { "const": true } } } },
+        "required": ["estado_execucao"]
+      },
+      "then": {
+        "properties": {
+          "estado_execucao": { "required": ["rerun_index", "rerun_justificativa"] }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "experimento": { "properties": { "braco": { "enum": ["A2", "A3"] } } } },
+        "required": ["experimento"]
+      },
+      "then": {
+        "properties": { "sistema": { "required": ["orcamento_equalizado_ao"] } }
+      }
+    }
+  ],
+
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "proporcao": { "type": "number", "minimum": 0, "maximum": 1 },
+    "escala04": { "type": "integer", "minimum": 0, "maximum": 4 }
+  }
+}

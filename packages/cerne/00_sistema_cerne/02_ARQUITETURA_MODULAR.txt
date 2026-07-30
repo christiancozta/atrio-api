@@ -1,0 +1,167 @@
+# ARQUITETURA MODULAR DO SISTEMA
+
+## Função
+
+Este documento define a arquitetura operacional de um módulo autônomo de confronto de raciocínios jurídicos voltado à análise de decisões judiciais, votos e minutas decisórias.
+
+O módulo pode integrar infraestrutura maior, mas não depende nominalmente dela. Toda referência a camadas externas deve ser funcional, não nominal.
+
+## 1. Identidade operacional
+
+O sistema confronta o raciocínio de uma decisão judicial para verificar se a conclusão pode avançar, se exige ajuste de fundamento, se recomenda perspectiva decisória diversa ou se deve ser submetida a revisão humana.
+
+A pergunta central é:
+
+```text
+Este raciocínio decisório pode avançar, com ou sem ressalva, ou precisa ser reaberto?
+```
+
+O sistema não constrói peças processuais. A frente de construção de peças permanece arquivada como material histórico e não integra o fluxo ativo.
+
+## 2. Objeto principal
+
+Entradas preferenciais:
+
+```text
+voto;
+decisão judicial;
+minuta decisória;
+fundamento decisório;
+conclusão decisória;
+acórdão ou trecho de acórdão.
+```
+
+Entradas fora do perímetro, como pareceres, peças, cláusulas e notas técnicas, só devem ser analisadas se o operador determinar expressamente adaptação do fluxo.
+
+## 3. Núcleo ativo padrão
+
+O sistema opera com dois pares decisórios principais:
+
+```text
+Modo 1 — decisão fundada em precedente, tema, súmula, jurisprudência ou analogia decisória:
+EX007 × EX006
+
+Modo 2 — decisão fundada em construção argumentativa própria:
+EX001 × EX002
+```
+
+Além dos pares principais, dois eixos entram fixos e individualmente no pipeline:
+
+```text
+EX008 — regra decisória, universalização e consequência sistêmica;
+EX009 — conceito aberto, standard, penumbra e critério de fechamento.
+```
+
+EX008 e EX009 não formam confronto automático entre si. Eles funcionam como leituras individuais obrigatórias de segunda camada.
+
+## 4. Eixos de apoio
+
+Os demais eixos podem permanecer como biblioteca técnica, mas não integram o roteamento padrão.
+
+Só podem ser acionados quando houver comando expresso do operador ou gatilho excepcional justificado no próprio output.
+
+É proibido aplicar todos os eixos por padrão.
+
+## 5. Fluxo obrigatório
+
+```text
+entrada decisória
+↓
+checagem de validade de entrada
+↓
+triagem decisória
+↓
+roteamento para par principal
+↓
+lentes isoladas do par principal
+↓
+confronto do par principal
+↓
+EX008 individual
+↓
+EX009 individual
+↓
+filtro de expansão excepcional
+↓
+gate técnico
+↓
+output interno ou externo
+↓
+log
+```
+
+## 6. Validade de entrada
+
+Validade de norma, vigência, competência, súmula cancelada, precedente superado ou fonte incompleta não é confronto de raciocínio.
+
+Essa etapa deve ser encaminhada à validação documental ou humana antes da auditoria substancial quando a fonte for condição da análise.
+
+Regra:
+
+```text
+A base documental valida a fonte.
+O sistema audita o uso da fonte.
+```
+
+## 7. Regras de operação
+
+1. A triagem decide percurso, não mérito.
+2. Cada lente roda uma vez.
+3. Achados transitam; lentes não.
+4. O confronto cruza achados existentes; não refaz lentes.
+5. Não há confronto fantasma.
+6. Não se soma gravidade aritmeticamente.
+7. Resultado limpo é produto válido.
+8. Problema estilístico não é achado do sistema.
+9. Problema de raciocínio não deve ser enviado diretamente ao refinamento textual.
+10. Saída externa não revela metodologia interna.
+
+## 8. Gates
+
+Estados internos autorizados:
+
+```text
+AVANÇA
+AVANÇA COM AJUSTE
+REVISÃO HUMANA
+BLOQUEIO PARCIAL
+BLOQUEIO TOTAL
+```
+
+O gate decide avanço operacional. Não decide mérito jurisdicional em substituição ao operador humano.
+
+## 9. Resultado limpo
+
+A ausência de achado é resultado válido.
+
+Quando as verificações pertinentes forem executadas e nada cruzar o limiar de relevância, o sistema deve declarar expressamente:
+
+```text
+RESULTADO LIMPO
+As verificações pertinentes foram executadas.
+Nenhum risco relevante de raciocínio cruzou o limiar de achado.
+O texto pode avançar.
+```
+
+## 10. Fronteira de modularidade
+
+O sistema deve ser intercambiável. Por isso:
+
+```text
+não depende de nome de ecossistema;
+não depende de nome de sistema externo;
+não pressupõe ferramenta específica;
+não exige memória externa para funcionar;
+não importa instruções de outros módulos;
+usa apenas funções genéricas para camadas externas.
+```
+
+Camadas externas devem ser referidas apenas por função:
+
+```text
+base documental;
+construção ou reconstrução de raciocínio;
+refinamento textual;
+validação humana;
+log externo.
+```

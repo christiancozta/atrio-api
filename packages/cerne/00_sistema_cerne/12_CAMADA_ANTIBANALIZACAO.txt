@@ -1,0 +1,719 @@
+# CAMADA ANTI-BANALIZAÇÃO — AJUSTES INTEGRADOS
+
+## Função
+
+Este documento atualiza a camada anti-banalização do sistema à luz das auditorias externas realizadas.
+
+A função desta camada é impedir que o sistema se torne um motor de crítica automática, um gerador de bloqueios excessivos ou um sistema que encontra defeitos por hábito.
+
+A anti-banalização incide sobre todas as etapas:
+
+```text
+TRIAGEM
+LENTE ISOLADA
+CONFRONTO / RODADA DE CONFRONTO
+GATE
+OUTPUT INTERNO
+OUTPUT CLIENTE
+LOG
+```
+
+Regra central:
+
+```text
+Um achado só informa se o “nada a apontar” for um resultado possível.
+```
+
+---
+
+# 1. Princípio de contenção
+
+O o sistema não presume defeito.
+
+A auditoria deve começar neutra.
+
+A existência de um texto jurídico complexo não autoriza, por si só, acionar lentes, confrontos ou bloqueios.
+
+O sistema deve procurar risco relevante, não imperfeição abstrata.
+
+Regra:
+
+```text
+Não há achado sem impacto operacional.
+```
+
+Impacto operacional significa alteração real sobre:
+
+```text
+tese;
+conclusão;
+regime jurídico;
+precedente;
+autoridade;
+ônus;
+responsabilidade;
+proteção;
+risco;
+recomendação estratégica;
+decisão de avanço.
+```
+
+---
+
+# 2. Resultado limpo como produto
+
+O resultado limpo é entrega válida.
+
+Não é ausência de trabalho.
+
+Não é silêncio.
+
+Não é falha de auditoria.
+
+Quando as lentes pertinentes forem executadas e nada cruzar o limiar de achado, o sistema deve declarar:
+
+```text
+# RESULTADO LIMPO
+
+As verificações pertinentes foram executadas.
+Nenhum risco relevante de raciocínio cruzou o limiar de achado.
+O documento pode avançar.
+Observações menores: [se houver].
+```
+
+A versão cliente deve ser ainda mais seca:
+
+```text
+# SÍNTESE DE AUDITORIA
+
+Estado do documento:
+Pode avançar.
+
+Síntese objetiva:
+Não foram identificados riscos relevantes que comprometam o raciocínio, o enquadramento jurídico ou a recomendação apresentada.
+
+Ajustes necessários:
+Não há ajuste técnico obrigatório.
+
+Recomendação final:
+O documento pode seguir para refinamento formal ou uso, conforme o fo módulo de refinamento textualo aplicável.
+```
+
+Regra:
+
+```text
+Resultado limpo deve ser registrado no BLOCO DE LOG.
+```
+
+---
+
+# 3. Direito da lente de não achar nada
+
+Toda lente tem direito de não encontrar achado.
+
+Esse direito deve aparecer expressamente na Lente isolada.
+
+Se a lente for acionada e não encontrar risco próprio, a saída deve registrar:
+
+```text
+## Resultado negativo da lente
+
+A lente foi aplicada e não identificou risco relevante dentro do seu escopo.
+
+Isso não significa que o documento inteiro esteja limpo.
+Significa apenas que esta lente não encontrou achado próprio.
+```
+
+Registrar no log:
+
+```text
+lentes_sem_achado: [lente]
+resultado_limpo: sim/não
+```
+
+Uma lente que nunca fica quieta está mal calibrada.
+
+---
+
+# 4. Limiar de relevância
+
+Só vira achado o que for, no mínimo:
+
+```text
+gravidade média;
+impacto operacional demonstrável;
+capaz de alterar decisão de avanço.
+```
+
+Não vira achado:
+
+```text
+observação cosmética;
+preferência estilística;
+ausência de exaustividade absoluta;
+cautela jurídica ordinária;
+divergência interpretativa legítima;
+frase forte isolada sem impacto;
+risco já declarado adequadamente;
+analogia delimitada;
+autoridade calibrada;
+conceito aberto com critério suficiente.
+```
+
+Esses itens podem virar:
+
+```text
+nota menor;
+observação;
+ajuste editorial;
+encaminhamento ao módulo de refinamento textual;
+descarte.
+```
+
+---
+
+# 5. Anti-banalização na triagem
+
+A triagem é a primeira barreira contra excesso.
+
+Inserir no PROMPT TRIAGEM:
+
+```text
+## Regra Anti-Banalização da Triagem
+
+Não acione lente por palavra solta.
+Não acione lente por mera semelhança terminológica.
+Não acione todas as lentes por padrão.
+Não confunda complexidade jurídica com risco de raciocínio.
+Não transforme estilo em achado.
+Não transforme fonte duvidosa em confronto.
+Não declare falha definitiva na triagem.
+
+Se não houver sinal de risco relevante, devolva resultado limpo preliminar e registre no log.
+```
+
+Triagem deve responder:
+
+```text
+Há risco suficiente para gastar inferência adicional?
+```
+
+Se não houver:
+
+```text
+Estado: AVANÇA
+Resultado limpo: sim
+Encaminhamento: o módulo de refinamento textual ou entrega
+```
+
+---
+
+# 6. Anti-banalização na Lente isolada
+
+A Lente isolada deve proteger a fronteira da lente.
+
+Inserir no PROMPT LENTE ISOLADA:
+
+```text
+## Regra Anti-Banalização da Lente Isolada
+
+A lente não deve justificar sua execução fabricando achado.
+
+Se o problema pertencer a outra lente, sinalize, mas não marque.
+
+Se a gravidade for baixa e não alterar decisão de avanço, descartar ou registrar como observação menor.
+
+Se a lente não encontrar nada, declarar resultado negativo da lente.
+
+Não elevar severidade por desconforto teórico.
+```
+
+Campo obrigatório:
+
+```text
+## Achados descartados ou rebaixados
+
+| Ponto considerado | Tratamento | Motivo |
+|---|---|---|
+| ... | descartado/rebaixado/observação | ... |
+```
+
+Registrar no log:
+
+```text
+achados_sugeridos:
+achados_confirmados:
+achados_descartados:
+achados_rebaixados:
+lentes_sem_achado:
+```
+
+---
+
+# 7. Anti-banalização na Rodada de confronto
+
+A Rodada de confronto é o maior ponto de risco de banalização.
+
+Modelos podem fabricar emergente porque foram solicitados a procurar um.
+
+Por isso, a Rodada de confronto deve começar pelo teste negativo.
+
+Inserir no PROMPT CONFRONTO / RODADA DE CONFRONTO:
+
+```text
+## Teste Anti-Banalização da Emergência
+
+Antes de confirmar achado emergente, responda:
+
+1. Existem dois achados reais?
+2. Eles pertencem a lentes distintas?
+3. Há acoplamento funcional entre eles?
+4. Um achado encobre, viabiliza, reforça ou distorce o outro?
+5. A interação altera a natureza do erro?
+6. A correção de apenas uma lente seria insuficiente?
+7. É possível explicar a irredutibilidade sem tautologia?
+
+Se qualquer resposta crítica for negativa, não há achado emergente.
+```
+
+Resultado obrigatório quando não houver emergente:
+
+```text
+Sem achado emergente.
+Manter achados isolados ou registrar resultado limpo.
+Não há irredutibilidade suficiente.
+```
+
+Regra:
+
+```text
+Emergente falso é mais grave que ausência de emergente.
+```
+
+---
+
+# 8. Justificativa auditável, não cadeia oculta
+
+A anti-banalização exige justificativa verificável, não raciocínio oculto.
+
+Rodada de confronto deve apresentar:
+
+```text
+achado A;
+achado B;
+mecanismo de acoplamento;
+razão da irredutibilidade;
+efeito sobre o gate.
+```
+
+Não deve apresentar:
+
+```text
+cadeia especulativa;
+explicação filosófica longa;
+justificativa tautológica;
+emergência por elegância conceitual;
+conclusão sem mecanismo.
+```
+
+Modelo:
+
+```text
+## Justificativa auditável de irredutibilidade
+
+Achado A:
+Achado B:
+Mecanismo de acoplamento:
+Por que não é apenas A+B:
+Consequência para o gate:
+```
+
+---
+
+# 9. Anti-banalização no Gate Técnico
+
+O gate não deve punir o texto por excesso de zelo.
+
+Inserir no PROMPT GATE TÉCNICO:
+
+```text
+## Regra Anti-Banalização do Gate
+
+Não bloquear por desconforto teórico.
+Não bloquear por ausência de exaustividade absoluta.
+Não transformar ajuste local em bloqueio total.
+Não usar BLOQUEIO PARCIAL como estado padrão.
+Não usar REVISÃO HUMANA como rota de fuga genérica.
+Não encaminhar ao módulo de refinamento textual problema de raciocínio real.
+Não rebaixar risco real para preservar produtividade.
+```
+
+Perguntas obrigatórias:
+
+```text
+O erro afeta a tese central?
+O erro altera a conclusão?
+O erro muda regime, ônus, responsabilidade, risco ou estratégia?
+O erro é corrigível localmente?
+A revisão humana tem pergunta objetiva?
+```
+
+Se não houver impacto operacional:
+
+```text
+AVANÇA
+ou
+AVANÇA COM AJUSTE
+```
+
+Se houver risco real:
+
+```text
+REVISÃO HUMANA
+BLOQUEIO PARCIAL
+BLOQUEIO TOTAL
+```
+
+---
+
+# 10. Tipologia da revisão humana
+
+A revisão humana não pode virar escape para ambiguidade.
+
+Quando o gate for REVISÃO HUMANA, classificar:
+
+```text
+validação de fonte;
+decisão estratégica;
+tese inovadora;
+risco institucional;
+dúvida de enquadramento;
+conflito entre hipóteses plausíveis;
+governança;
+insuficiência documental.
+```
+
+E formular pergunta objetiva:
+
+```text
+## Revisão humana requerida
+
+Motivo:
+Pergunta ao operador:
+Decisão esperada:
+Consequência se confirmado:
+Consequência se rejeitado:
+```
+
+Se não houver pergunta objetiva, o gate não deve ser REVISÃO HUMANA.
+
+---
+
+# 11. Anti-banalização na saída cliente
+
+A saída cliente não deve dramatizar.
+
+A saída cliente não deve expor a metodologia.
+
+A saída cliente não deve converter risco interno em alarme externo.
+
+Inserir no OUTPUT CLIENTE:
+
+```text
+## Regra Anti-Banalização da Saída Cliente
+
+Não usar linguagem alarmista.
+Não expor códigos internos.
+Não multiplicar problemas.
+Não apresentar observação menor como impeditivo.
+Não converter ajuste editorial em risco jurídico.
+Não usar “não deve avançar” se apenas trecho específico precisa de correção.
+```
+
+Tradução externa ajustada:
+
+```text
+AVANÇA → Pode avançar.
+AVANÇA COM AJUSTE → Pode avançar após ajuste pontual.
+REVISÃO HUMANA → Exige revisão técnica antes de uso.
+BLOQUEIO PARCIAL → Trecho ou conclusão específica não deve ser usada sem correção.
+BLOQUEIO TOTAL → O documento não deve ser usado na forma atual.
+```
+
+---
+
+# 12. Anti-banalização na reescrita material
+
+Toda reescrita material deve estar em code-block.
+
+Mas a reescrita não deve expandir o problema além do necessário.
+
+Regra:
+
+```text
+Reescrever apenas o trecho afetado, salvo se o gate exigir reconstrução ampla.
+```
+
+Quando houver bloqueio parcial:
+
+```text
+reescrever trecho específico;
+preservar o que está correto;
+não reconstruir a peça inteira.
+```
+
+Quando houver bloqueio total:
+
+```text
+indicar que a reconstrução é substancial;
+não fingir correção local.
+```
+
+Modelo:
+
+````markdown
+## Trecho reescrito
+
+```text
+[texto reescrito]
+```
+
+## Nota técnica
+[explicar o ajuste sem ampliar a crítica]
+````
+
+---
+
+# 13. Anti-banalização no log
+
+O log é o mecanismo de prova da anti-banalização.
+
+O BLOCO DE LOG deve registrar:
+
+```text
+lentes_sem_achado;
+achados_descartados;
+achados_rebaixados;
+resultado_limpo;
+falso_positivo;
+falso_bloqueio;
+falso_avanco;
+decisao_humana_final;
+```
+
+Sem esses campos, não há como medir excesso.
+
+O log deve permitir responder:
+
+```text
+O o sistema está achando demais?
+Está bloqueando demais?
+Está deixando passar risco real?
+Está usando revisão humana como fuga?
+Está gerando resultado limpo em textos bons?
+```
+
+---
+
+# 14. Métricas de anti-banalização
+
+Calcular periodicamente:
+
+```text
+taxa_resultado_limpo = resultados_limpos / total_casos
+taxa_lente_sem_achado = lentes_sem_achado / lentes_acionadas
+taxa_descarte = achados_descartados / achados_sugeridos
+taxa_rebaixamento = achados_rebaixados / achados_sugeridos
+taxa_emergente = emergentes_confirmados / confrontos_acionados
+taxa_bloqueio = bloqueios_parciais_e_totais / total_casos
+taxa_revisao_humana = revisoes_humanas / total_casos
+taxa_reversao_humana = decisoes_revertidas / revisoes_humanas
+taxa_falso_positivo = falsos_positivos / achados_confirmados
+taxa_falso_avanco = falsos_avancos / casos_avanca
+```
+
+---
+
+# 15. Alertas de banalização
+
+Sinais de excesso:
+
+```text
+quase nunca há resultado limpo;
+Rodada de confronto sempre encontra emergente;
+BLOQUEIO PARCIAL vira estado padrão;
+REVISÃO HUMANA vira saída genérica;
+lente acionada em quase todos os casos;
+lente sempre encontra achado;
+muitos achados são rebaixados;
+muitos bloqueios são revertidos;
+saída cliente dramatiza risco menor.
+```
+
+Ação:
+
+```text
+recalibrar gatilhos;
+endurecer limiar de relevância;
+reduzir lentes acionadas;
+exigir teste negativo de emergência;
+rebaixar lente para uso assistido;
+ampliar casos-controle limpos.
+```
+
+---
+
+# 16. Alertas de frouxidão
+
+Sinais de falso avanço:
+
+```text
+casos ruins avançam;
+percentual sem método sobrevive;
+colapso de regime vira ajuste leve;
+autoridade superestimada não gera revisão;
+precedente sem validação sustenta conclusão;
+revisão humana agrava muitos casos liberados.
+```
+
+Ação:
+
+```text
+endurecer gate;
+revisar triagem;
+recalibrar lentes sensíveis;
+reforçar o módulo de validação de fontes;
+aumentar amostra de casos com defeito plantado.
+```
+
+---
+
+# 17. Anti-banalização e custo de inferência
+
+A execução completa também pode banalizar o sistema.
+
+Rodar tudo em tudo gera ruído.
+
+Regra:
+
+```text
+A menor intervenção suficiente é a melhor intervenção.
+```
+
+Profundidade progressiva:
+
+```text
+Nível 0 — checagem de entrada;
+Nível 1 — triagem;
+Nível 2 — lente isolada;
+Nível 3 — confronto mecanismo interno de confronto;
+Nível 4 — auditoria completa.
+```
+
+Executar nível superior apenas quando o nível anterior justificar.
+
+---
+
+# 18. Anti-banalização e o módulo de validação de fontes
+
+O o sistema não deve usar dúvida de fonte para fabricar confronto.
+
+Se a questão for existência, vigência, identificação ou superação da fonte:
+
+```text
+encaminhar ao módulo de validação de fontes;
+registrar checagem de validade na entrada;
+não produzir achado sistema sobre esse ponto.
+```
+
+Se a questão for uso argumentativo da fonte:
+
+```text
+manter no sistema;
+acionar EX007, EX011, EX003 ou confronto pertinente.
+```
+
+Regra:
+
+```text
+o módulo de validação de fontes valida fonte.
+o sistema audita uso da fonte.
+```
+
+---
+
+# 19. Casos-controle limpos
+
+A anti-banalização só se prova com texto bom.
+
+O pacote deve conter casos-controle limpos.
+
+Características:
+
+```text
+matéria difícil;
+tese qualificada;
+fonte delimitada;
+risco declarado;
+conceito aberto com critério;
+precedente com alcance definido;
+hipóteses concorrentes enfrentadas;
+conclusão proporcional;
+sem percentual inventado;
+sem transporte indevido de regime.
+```
+
+Resultado esperado:
+
+```text
+AVANÇA
+ou
+AVANÇA COM AJUSTE leve
+ou
+RESULTADO LIMPO
+```
+
+Se o sistema bloquear casos-controle limpos com frequência, há banalização.
+
+---
+
+# 20. Regra de fechamento
+
+A camada anti-banalização deve ser aplicada antes de qualquer bloqueio.
+
+Antes de finalizar, responder:
+
+```text
+Este achado muda a decisão?
+Este bloqueio é proporcional?
+Esta Rodada de confronto demonstrou irredutibilidade real?
+Esta revisão humana tem pergunta objetiva?
+Este resultado poderia ser limpo?
+Estou criticando por risco ou por hábito?
+```
+
+Se a resposta indicar excesso:
+
+```text
+rebaixar;
+descartar;
+registrar observação;
+ou devolver resultado limpo.
+```
+
+---
+
+# 21. Regra final
+
+O o sistema perde valor se achar tudo.
+
+O o sistema perde segurança se deixar passar risco real.
+
+A boa calibração está entre os dois riscos:
+
+```text
+não inventar defeito;
+não ignorar falha.
+```
+
+A força do sistema está em saber quando falar — e quando calar.

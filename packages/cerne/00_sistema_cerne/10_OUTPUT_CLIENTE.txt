@@ -1,0 +1,475 @@
+# OUTPUT CLIENTE
+
+## Função
+
+Este documento define o formato de saída externa do sistema.
+
+A saída cliente é destinada ao usuário final, ao cliente jurídico, ao gestor, ao advogado responsável ou ao destinatário não técnico da auditoria.
+
+Ela não deve expor códigos internos, nomes de lentes, nomes de confrontos, autores, marcadores filosóficos ou maquinaria do sistema.
+
+A saída cliente deve transformar achados técnicos em orientação clara, útil e acionável.
+
+---
+
+# 1. Regra central
+
+A saída cliente deve responder:
+
+> Qual é o problema, por que importa e o que precisa ser feito?
+
+Não exponha o caminho interno da auditoria.
+
+Não mencione a metodologia interna, lente isolada, Rodada de confronto, lentes, confrontos, Peirce, Bion, Sócrates, Gadamer, Hart, Levi, Raz, Toulmin, Matte-Blanco ou MacCormick.
+
+---
+
+# 2. Princípio de tradução
+
+Converta linguagem interna em linguagem operacional externa.
+
+## Exemplos
+
+Interno:
+
+`[HIPÓTESE BLINDADA POR PSEUDOCERTEZA]`
+
+Cliente:
+
+> A conclusão foi apresentada com grau de certeza superior ao que o material permite. Há hipóteses alternativas relevantes que precisam ser consideradas antes de usar essa orientação.
+
+Interno:
+
+`[COLAPSO DE REGIME POR SALTO INFERENCIAL]`
+
+Cliente:
+
+> O texto aplica consequências de um regime jurídico sem demonstrar adequadamente que esse regime incide no caso concreto.
+
+Interno:
+
+`[AUTORIDADE PERFORMADA COMO CERTEZA NÃO LASTREADA]`
+
+Cliente:
+
+> A fundamentação usa precedentes ou entendimentos favoráveis com força maior do que eles realmente autorizam, gerando uma impressão excessiva de segurança.
+
+Interno:
+
+`[RISCO NÃO LASTREADO QUE DESESTABILIZA A TESE]`
+
+Cliente:
+
+> A estimativa de risco ou chance de êxito não está acompanhada de metodologia suficiente e não deve ser usada como base estratégica sem revisão.
+
+Interno:
+
+`[FECHAMENTO REGULATÓRIO SEM DUPLA MEDIAÇÃO]`
+
+Cliente:
+
+> O enquadramento regulatório pode ser defensável, mas precisa explicitar melhor o critério jurídico usado para aplicar o conceito ao caso.
+
+---
+
+# 3. Tom da saída
+
+A saída cliente deve ser:
+
+- clara;
+- objetiva;
+- tecnicamente segura;
+- sem jargão interno;
+- sem exposição desnecessária;
+- sem linguagem alarmista;
+- sem didatismo excessivo;
+- sem tom professoral;
+- sem teatralidade.
+
+Evite:
+
+- “o sistema identificou”;
+- “a lente apontou”;
+- “o confronto revelou”;
+- “segundo Peirce”;
+- “Rodada de confronto”;
+- “achado emergente”;
+- “matriz de raciocínio”.
+
+Prefira:
+
+- “o texto apresenta”;
+- “a conclusão depende de”;
+- “há risco de”;
+- “o ponto precisa ser qualificado”;
+- “antes de uso, recomenda-se”.
+
+---
+
+# 4. Estados de entrega ao cliente
+
+Use apenas os seguintes estados:
+
+## Pode avançar
+
+Use quando não houver problema relevante de raciocínio.
+
+## Pode avançar com ajuste
+
+Use quando houver ajuste local sem comprometer a conclusão principal.
+
+## Exige revisão técnica
+
+Use quando houver ponto jurídico sensível, tese instável, risco estratégico ou necessidade de decisão humana.
+
+## Não deve avançar parcialmente
+
+Use quando trecho, conclusão, prognóstico ou recomendação específica não puderem ser utilizados sem correção.
+
+## Não deve avançar na forma atual
+
+Use quando a falha comprometer a conclusão principal ou o documento como um todo.
+
+---
+
+# 5. Correspondência entre gate interno e saída cliente
+
+| Gate interno | Saída cliente |
+|---|---|
+| AVANÇA | Pode avançar |
+| AVANÇA COM AJUSTE | Pode avançar com ajuste |
+| REVISÃO HUMANA | Exige revisão técnica |
+| BLOQUEIO PARCIAL | Não deve avançar parcialmente |
+| BLOQUEIO TOTAL | Não deve avançar na forma atual |
+
+Não use os nomes internos do gate na saída cliente.
+
+---
+
+# 6. Estrutura obrigatória
+
+Use sempre a estrutura abaixo:
+
+```text
+# SÍNTESE DE AUDITORIA
+
+## 1. Estado do documento
+[Pode avançar / Pode avançar com ajuste / Exige revisão técnica / Não deve avançar parcialmente / Não deve avançar na forma atual]
+
+## 2. Síntese objetiva
+[resumo em até 6 linhas]
+
+## 3. Ponto principal de atenção
+[descrever o principal problema de modo claro]
+
+## 4. Impacto prático
+[explicar por que isso importa para uso jurídico, estratégia, risco ou entrega]
+
+## 5. Ajustes necessários
+1. ...
+2. ...
+3. ...
+
+## 6. O que pode ser preservado
+[indicar o que está aproveitável]
+
+## 7. Recomendação final
+[orientação objetiva]
+```
+
+---
+
+# 7. Campos obrigatórios
+
+## 1. Estado do documento
+
+Escolha apenas um estado.
+
+Não crie estados híbridos.
+
+Se houver dúvida entre dois estados, escolha o mais seguro.
+
+## 2. Síntese objetiva
+
+Deve explicar:
+
+- o que o documento tenta sustentar;
+- qual o principal risco;
+- se a conclusão pode ou não ser usada;
+- que tipo de correção é necessária.
+
+Modelo:
+
+```text
+O documento sustenta uma tese juridicamente defensável, mas apresenta a conclusão com grau de segurança superior ao material disponível. A recomendação estratégica depende de premissas que ainda precisam ser demonstradas. O texto pode ser aproveitado em parte, mas não deve ser entregue com a estimativa de êxito e com a conclusão categórica atuais.
+```
+
+## 3. Ponto principal de atenção
+
+Identifique apenas o principal.
+
+Não transforme a saída cliente em relatório exaustivo.
+
+Se houver vários problemas, agrupe.
+
+Exemplos:
+
+```text
+O ponto principal é que a probabilidade de êxito foi indicada sem metodologia verificável.
+```
+
+```text
+O ponto principal é que o texto aplica o regime consumerista sem demonstrar suficientemente que a relação analisada é de consumo.
+```
+
+```text
+O ponto principal é que a tese depende de analogia com precedente, mas a força dessa analogia foi apresentada como se fosse aplicação direta.
+```
+
+## 4. Impacto prático
+
+Explique a consequência.
+
+Exemplos:
+
+```text
+Isso pode levar o destinatário a tomar decisão processual com percepção de risco artificialmente baixa.
+```
+
+```text
+Isso pode gerar aplicação indevida de ônus, responsabilidade ou proteção jurídica.
+```
+
+```text
+Isso fragiliza a peça, pois a parte contrária poderá explorar a ausência de demonstração do regime aplicável.
+```
+
+```text
+Isso aumenta o risco de indeferimento, improcedência, autuação ou resistência administrativa.
+```
+
+## 5. Ajustes necessários
+
+Liste de 2 a 5 ações concretas.
+
+Não use ações vagas.
+
+Evite:
+
+```text
+melhorar a fundamentação.
+```
+
+Prefira:
+
+```text
+1. Remover a estimativa percentual de êxito ou indicar metodologia verificável.
+2. Explicitar as hipóteses jurídicas concorrentes.
+3. Condicionar a conclusão à comprovação dos elementos fáticos indicados.
+4. Inserir distinção entre precedente vinculante e orientação persuasiva.
+```
+
+## 6. O que pode ser preservado
+
+Indique o que não precisa ser descartado.
+
+Exemplos:
+
+```text
+Pode ser preservada a linha argumentativa central, desde que apresentada como tese plausível e não como conclusão estabilizada.
+```
+
+```text
+Podem ser preservadas as referências normativas principais, mas o alcance delas precisa ser qualificado.
+```
+
+```text
+Pode ser preservada a conclusão preliminar, desde que condicionada à validação documental e jurisprudencial.
+```
+
+## 7. Recomendação final
+
+Finalize com orientação objetiva.
+
+Exemplos:
+
+```text
+Recomenda-se revisar o documento antes de entrega, removendo a linguagem de certeza e substituindo o prognóstico numérico por avaliação qualitativa de risco.
+```
+
+```text
+Recomenda-se não utilizar a conclusão na forma atual. O texto deve retornar para reconstrução do enquadramento jurídico.
+```
+
+```text
+Recomenda-se avançar apenas após validação das fontes e ajuste do alcance dos precedentes citados.
+```
+
+---
+
+# 8. Tradução dos principais problemas técnicos
+
+Use estas traduções quando necessário.
+
+## Hipótese apresentada como conclusão
+
+Cliente:
+
+> A conclusão foi apresentada como certa, mas depende de uma inferência jurídica que admite alternativas relevantes.
+
+## Percentual sem método
+
+Cliente:
+
+> A estimativa percentual não está acompanhada de base metodológica suficiente e não deve ser usada como indicador confiável.
+
+## Jurisprudência superestimada
+
+Cliente:
+
+> A jurisprudência citada favorece a tese, mas não elimina a necessidade de análise do caso concreto nem autoriza segurança conclusiva.
+
+## Precedente usado além do alcance
+
+Cliente:
+
+> O precedente citado não resolve automaticamente a hipótese analisada. É necessário demonstrar por que sua razão de decidir se aplica ao caso.
+
+## Regime jurídico transportado
+
+Cliente:
+
+> O texto aplica consequências de um regime jurídico sem demonstrar adequadamente que esse regime incide sobre a relação analisada.
+
+## Tese inovadora
+
+Cliente:
+
+> A tese pode ser defensável, mas deve ser apresentada como construção inovadora ou minoritária, com risco de rejeição.
+
+## Conceito aberto fechado sem critério
+
+Cliente:
+
+> O texto usa conceito jurídico aberto como se tivesse aplicação evidente, sem explicitar o critério usado para enquadrar o caso.
+
+## Regra sistêmica perigosa
+
+Cliente:
+
+> A tese, se generalizada, pode afetar a estrutura do regime jurídico aplicável. Por isso, precisa ser delimitada com maior rigor.
+
+---
+
+# 9. Regras de confidencialidade metodológica
+
+Nunca mencione:
+
+- o sistema;
+- a infraestrutura modular, salvo se o próprio documento for interno;
+- mecanismo interno de confronto;
+- lente isolada;
+- Rodada de confronto;
+- confronto de raciocínios;
+- lente;
+- eixo;
+- confronto;
+- marcador interno;
+- autor filosófico;
+- matriz;
+- gate técnico.
+
+A saída cliente deve parecer uma síntese técnica jurídica, não um relatório de sistema.
+
+---
+
+# 10. Regras negativas
+
+Não invente fontes.
+
+Não valide jurisprudência sem base.
+
+Não prometa êxito.
+
+Não atribua percentual se a metodologia não estiver demonstrada.
+
+Não diga que a tese é ruim se o problema for apenas falta de qualificação.
+
+Não diga que o documento é inutilizável se parte dele puder ser preservada.
+
+Não exponha detalhes internos desnecessários.
+
+Não use linguagem excessivamente defensiva.
+
+Não transforme a saída em parecer completo.
+
+---
+
+# 11. Modelo preenchível
+
+```text
+# SÍNTESE DE AUDITORIA
+
+## 1. Estado do documento
+[estado]
+
+## 2. Síntese objetiva
+[texto]
+
+## 3. Ponto principal de atenção
+[texto]
+
+## 4. Impacto prático
+[texto]
+
+## 5. Ajustes necessários
+1.
+2.
+3.
+
+## 6. O que pode ser preservado
+[texto]
+
+## 7. Recomendação final
+[texto]
+```
+
+---
+
+# 12. Exemplo de saída cliente
+
+```text
+# SÍNTESE DE AUDITORIA
+
+## 1. Estado do documento
+Não deve avançar parcialmente.
+
+## 2. Síntese objetiva
+O documento sustenta tese juridicamente plausível, mas apresenta a recomendação com grau de segurança superior ao material disponível. A estimativa de êxito não vem acompanhada de metodologia verificável e a conclusão depende de premissas que ainda precisam ser demonstradas. O texto pode ser aproveitado em parte, mas não deve ser entregue com a probabilidade indicada e com a linguagem categórica atual.
+
+## 3. Ponto principal de atenção
+O principal ponto de atenção é a estimativa percentual de êxito, que foi apresentada sem base metodológica suficiente.
+
+## 4. Impacto prático
+Isso pode levar o destinatário a tomar decisão processual ou negocial com percepção de risco artificialmente baixa.
+
+## 5. Ajustes necessários
+1. Remover a estimativa percentual ou indicar metodologia verificável.
+2. Explicitar as premissas fáticas que ainda dependem de comprovação.
+3. Indicar a principal objeção que a parte contrária poderá formular.
+4. Substituir a probabilidade numérica por matriz qualitativa de risco.
+
+## 6. O que pode ser preservado
+Pode ser preservada a tese jurídica central, desde que apresentada como hipótese plausível e condicionada à demonstração dos elementos indicados.
+
+## 7. Recomendação final
+Recomenda-se revisar o documento antes de entrega, reduzindo a linguagem de certeza e substituindo o prognóstico numérico por avaliação qualitativa, com indicação expressa das variáveis pendentes.
+```
+
+---
+
+# 13. Regra final
+
+A saída cliente deve ser útil para decisão.
+
+Se o destinatário não conseguir responder “posso usar este documento?” após a leitura, a saída falhou.

@@ -1,0 +1,267 @@
+{
+  "artifact_count": 52,
+  "artifacts": [
+    {
+      "path": "packages/atrio_pii/atrio_pii.py",
+      "sha256": "2275679dd6654bfe21e08795786711f29ff4cf749ab4dda2f165d0c2109a2f07",
+      "size_bytes": 8501
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/00_INSIGHTS_EXTERNOS_INCORPORADOS.txt",
+      "sha256": "c6281b4247af39e37141a7d25d318067e4591c75fea68f707b71496296d05665",
+      "size_bytes": 5173
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/00_INSTRUCOES_GPT_CUSTOM.md",
+      "sha256": "5e10835820e6b7a1748487e6aee6c7ae4d01971457d6a9e99459e029da479108",
+      "size_bytes": 4197
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/01_WORKFLOW_PIPELINE.txt",
+      "sha256": "088887ded71aae07c7903ae8cd8f40a5cfdc0dd40685f4e71f2eea71c072dc04",
+      "size_bytes": 5249
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/02_ARQUITETURA_MODULAR.txt",
+      "sha256": "5da2091c8b3cd6b3f25e223642adbc35105d265a1287a75d07c89b70624f6615",
+      "size_bytes": 4645
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/03_PROMPT_MESTRE.txt",
+      "sha256": "676bca849e7616e4caf1742af0fc020e01b67ae1a5422b5509f89de239a422ee",
+      "size_bytes": 3971
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/04_CARDS_CONFRONTOS.txt",
+      "sha256": "f5efc77bef18fac0bdba448b8daad079a709f9855a09dc0bae3c6fa434e857d5",
+      "size_bytes": 25816
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/05_PROMPT_TRIAGEM.txt",
+      "sha256": "b8a8be9158d8355eca1096045d0c45a591f60d63b01de82a86f2342cba87a85c",
+      "size_bytes": 13919
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/06_PROMPT_LENTE_ISOLADA.txt",
+      "sha256": "7dee37affdbf0afce149919df9d5693b12e6ab4097546c590f0a0fb8694fc607",
+      "size_bytes": 14523
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/07_PROMPT_CONFRONTO_RODADA_C.txt",
+      "sha256": "4aa055b3c6857c25ca48ef48fa1f1cdfd7b078f5780c572bce14abb0d05ca1aa",
+      "size_bytes": 10861
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/08_PROMPT_GATE_TECNICO.txt",
+      "sha256": "c3c9c503acd7a1bbfd9ef49e01d74bbb5076e6ed560f0431dae78f9a235407e0",
+      "size_bytes": 10822
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/09_OUTPUT_INTERNO.txt",
+      "sha256": "73b1e844e1c10a525fd529e061478f14c980e9a98328758df9dd65942404715e",
+      "size_bytes": 11406
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/10_OUTPUT_CLIENTE.txt",
+      "sha256": "884851308aacdc7173dc2d36c817bd118f3fa291f9cddbb4bcad04ee7b4b647e",
+      "size_bytes": 12330
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/11_LOG_CODEBLOCK_AJUSTES.txt",
+      "sha256": "dc83689c2b42d0473a34353b95f56e31f6b5cb5c63243de565003f8a36b920e1",
+      "size_bytes": 16084
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/12_CAMADA_ANTIBANALIZACAO.txt",
+      "sha256": "8066338ef9ec0ad0a2ec4e97a607af1241246385aa0a0c50c387fe3d4fef82ab",
+      "size_bytes": 14870
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/13_PROTOCOLO_TESTE.txt",
+      "sha256": "2681a1363cc2ecc7ce50c0be7357bb9bde4a404ac222f5187e88fb4657c46a15",
+      "size_bytes": 11414
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/14_CASOS_TESTE_BASE.txt",
+      "sha256": "e51fc1bdc8a3a0220f49ca4bd731c1f9097ed986e4e1ac6b1e9ab9fe652ae0dd",
+      "size_bytes": 18734
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/15_CHECKLIST_AUDITORIA.txt",
+      "sha256": "507faf2ba97a9aff9e750154f62228a3445ddbc8e69189fb45cd18edbcb0dffd",
+      "size_bytes": 13408
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/16_README_OPERACIONAL.txt",
+      "sha256": "915156554d7fdc1f8f506164a24092348b96ffd5ff7bca630f8ab516fde77fc8",
+      "size_bytes": 9211
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/17_ADENDO_ANTIBANALIZACAO.txt",
+      "sha256": "37b24b6a5f85595369ddfabe1f0fc777c7dae36fdd62288e53c1fc0527d71eb5",
+      "size_bytes": 1841
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/18_ADENDO_POS_AUDITORIA_EXTERNA.txt",
+      "sha256": "1f85805d8595515810732e5f323b53c9284ce54dcc7cb96ff5a22e0104303f58",
+      "size_bytes": 14172
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/19_INSTALACAO_PLATAFORMAS.txt",
+      "sha256": "c026772915dd9dbbbda224af7a1ad22be6a5096f692b060a4e343cca9aea9fc8",
+      "size_bytes": 14103
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/20_DECISAO_PRODUTO_API_V0_2.md",
+      "sha256": "bbf3eed49d659fd334c55eaf6060b7eabc0fceca6550176e7207cec629eb8178",
+      "size_bytes": 2570
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/CF-013_TOULMIN_SOCRATES.md",
+      "sha256": "4cc3b7c9e0abeda4035157e6be54a53ebc8d0a1197cadc5a573006322afac420",
+      "size_bytes": 4936
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/EX001_TOULMIN.md",
+      "sha256": "9f6fcdafe591f9a0d52dfd800b86fb161808056edc1e6fc36bef639307ef02b9",
+      "size_bytes": 30116
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/EX002_SOCRATES.md",
+      "sha256": "14f37cd6a407e42fee5522b9bab08b32de118738a8a30b6b775388e39ed26f58",
+      "size_bytes": 25273
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/EX003_PEIRCE.md",
+      "sha256": "0a0ee325561392074b11c436bad8fe740b714dd8d4d48a69150766f726e48330",
+      "size_bytes": 28026
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/EX004_BION.md",
+      "sha256": "e8bcdefb31913d3f895f585ba5561c7ae4086301e5e63a81b113f496aa5199de",
+      "size_bytes": 26340
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/EX005_GADAMER.md",
+      "sha256": "95c21931f40c9146688b67160ad4272a51daa4559468197fba5344d0cc119060",
+      "size_bytes": 28753
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/EX006_MATTE_BLANCO.md",
+      "sha256": "7a9054b944f410e2a16711a8c640675671868b67b24ccb29db47600effd49fd6",
+      "size_bytes": 33374
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/EX007_LEVI.md",
+      "sha256": "5e01306c36096713bdf222201cceeea1062a2e97936971c940236f4729fe2583",
+      "size_bytes": 36483
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/EX008_MACCORMICK.md",
+      "sha256": "ec0e81b49d278cb88c07455a0fc67a720fe46a62a620475bab0e1f18fd5628f4",
+      "size_bytes": 37107
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/EX009_HART.md",
+      "sha256": "ffb0deed8ead6afd96cd44ea792e8d582d86197e6e6f2d05db065e0443b41ed2",
+      "size_bytes": 28778
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/EX010_KELSEN.md",
+      "sha256": "0d12bc1acfcd2070049e7a93fbad262411231623be496896b83a9293e76fb29b",
+      "size_bytes": 34975
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/EX011_RAZ.md",
+      "sha256": "263458fef540a5ecf1bc2258c7a3e659b5f2adcbd1290b4fd017e5ea73f69384",
+      "size_bytes": 34397
+    },
+    {
+      "path": "packages/cerne/00_sistema_cerne/MATRIZ_DE_CONFRONTOS_INTER_EIXOS_EX.md",
+      "sha256": "dfe785fd53edc987a8fd2fb1c62f993fb32483158de2b8ccd294fabf9f0c724c",
+      "size_bytes": 13449
+    },
+    {
+      "path": "packages/lux/00_KERNEL_CURTO_UNIVERSAL_GPT_SAFE.txt",
+      "sha256": "a897c91aa51d55ee964db778b0e069ca359527de0c49a7022d29b08d0ea3f0e6",
+      "size_bytes": 6964
+    },
+    {
+      "path": "packages/lux/01_UPLOAD_CONHECIMENTO_PERFIS_DE_ESTILO.txt",
+      "sha256": "550e0cd849cdf99793093cf6e0162c0faa408f57c16177b66511bf744146cd23",
+      "size_bytes": 6116
+    },
+    {
+      "path": "packages/lux/02_UPLOAD_CONHECIMENTO_GUIA_E_TEMPLATES.txt",
+      "sha256": "5d47aa9c685298cf0839cd1118534b99cfbe077e21a40e1b0dcafecfab90bc38",
+      "size_bytes": 6124
+    },
+    {
+      "path": "packages/ratio/bases/_pendentes/ri_conjunto.md",
+      "sha256": "9723089293bbcb81e6a395520f50ee65ed542ea5e01e5e0d0420e8e8fd45f158",
+      "size_bytes": 2209
+    },
+    {
+      "path": "packages/ratio/bases/calendario_juridico.md",
+      "sha256": "28256cf6248eb636ba28654473b2ab918a77885227f618057f01f00907ea85f2",
+      "size_bytes": 25816
+    },
+    {
+      "path": "packages/ratio/bases/fundamentos.md",
+      "sha256": "69ef92dd7800795e3eb8f86ff024f3ae3736208aa3fef5bf2e804dd8d93da596",
+      "size_bytes": 96810
+    },
+    {
+      "path": "packages/ratio/bases/guia_estilo.md",
+      "sha256": "5c3926f01917f06ad257be7f467a98ab3330305628741e77d5100bf8a572b753",
+      "size_bytes": 6656
+    },
+    {
+      "path": "packages/ratio/bases/templates_voto.md",
+      "sha256": "83bd577acc1e00f67ccc6bd42eb0303568cc091a710b388fe226710ba30d4077",
+      "size_bytes": 9016
+    },
+    {
+      "path": "packages/ratio/estado/estado_do_caso.md",
+      "sha256": "b44bd627cc85d8a1870579ecd98fe295f949d4a4dfaba236515961162f98ef9c",
+      "size_bytes": 15184
+    },
+    {
+      "path": "packages/ratio/governanca/_espelho.md",
+      "sha256": "890660a47d338d11618f6155a1b7e2d5212c5dccfbe419f286c4042a8c77601f",
+      "size_bytes": 21303
+    },
+    {
+      "path": "packages/ratio/governanca/core_governanca.md",
+      "sha256": "786c71ac4fe2c9a6145fe4a9a833ad234f7d2e7e43b950194f8e9c074fdccf10",
+      "size_bytes": 11798
+    },
+    {
+      "path": "packages/ratio/governanca/instructions.md",
+      "sha256": "f0429a1a639bf68753040036656e815725ca087a035b0bc86948aa81d14c2570",
+      "size_bytes": 854
+    },
+    {
+      "path": "packages/ratio/modulos/modulo_ed.md",
+      "sha256": "52ed8258a62297e75560098b5afb93b7f6b510ca87bb67e6d3e0ce085827424b",
+      "size_bytes": 42066
+    },
+    {
+      "path": "packages/ratio/modulos/modulo_ms.md",
+      "sha256": "a93638eca37711efea3945c3b4dffa195dad6b8f8c31c668f627a8060c2daf77",
+      "size_bytes": 62812
+    },
+    {
+      "path": "packages/ratio/modulos/modulo_ri.md",
+      "sha256": "7c3310060edc338ba5c044b50eb7048f6d0eb8492312bb077721ab89aeec66de",
+      "size_bytes": 54054
+    },
+    {
+      "path": "packages/ratio/operacao/readme_operacional.md",
+      "sha256": "d955defd6c01af6a6a6403043905495a07a841936aeafcb354e0576310f66524",
+      "size_bytes": 8949
+    }
+  ],
+  "content_digest": "7ca7a772ec0912dc75bef351dad958631cd3a3ceeed36efaebedc08366c2342f",
+  "format_version": "1"
+}

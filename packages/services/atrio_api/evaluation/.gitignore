@@ -1,0 +1,10 @@
+_audit/
+_custody/
+_freeze/
+cases/
+rater_packets/
+runs/
+validation/
+evidence/
+*.tsr
+__pycache__/

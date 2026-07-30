@@ -1,0 +1,633 @@
+# CHECKLIST DE AUDITORIA
+
+## Função
+
+Este checklist serve para controlar a execução do sistema durante auditorias reais ou testes.
+
+Use antes, durante e depois da aplicação dos prompts.
+
+O objetivo é evitar:
+
+- inflação de lentes;
+- crítica artificial;
+- contaminação entre rodadas;
+- achado emergente falso;
+- gate desproporcional;
+- saída cliente com metodologia interna exposta.
+
+---
+
+# 1. Checklist inicial
+
+Antes de iniciar a auditoria, verificar:
+
+```text
+[ ] O objeto jurídico foi identificado.
+[ ] A tese ou conclusão principal foi resumida.
+[ ] O uso pretendido do output foi entendido.
+[ ] Há clareza se a saída será interna, cliente ou ambas.
+[ ] Foi verificado se há necessidade de checagem de validade de entrada.
+[ ] Não há tentativa de começar pela Rodada de confronto sem achados isolados.
+[ ] Não há intenção de aplicar todas as lentes por padrão.
+```
+
+---
+
+# 2. Checklist de validade de entrada
+
+Antes de auditar raciocínio, verificar:
+
+```text
+[ ] Há norma citada?
+[ ] Há precedente citado?
+[ ] Há súmula, tema repetitivo, IRDR ou IAC?
+[ ] Há fonte administrativa, regulatória ou contratual?
+[ ] A fonte está suficientemente identificada?
+[ ] A vigência é relevante?
+[ ] O precedente pode estar superado?
+[ ] A fonte pode estar deslocada do caso?
+[ ] A validade da fonte é condição para auditar o raciocínio?
+```
+
+Se sim, registrar:
+
+```text
+[CHECAGEM DE VALIDADE NA ENTRADA]
+```
+
+Encaminhamento:
+
+```text
+[ ] o módulo de validação de fontes deve validar antes de avanço substancial.
+```
+
+---
+
+# 3. Checklist de triagem
+
+A triagem está adequada se:
+
+```text
+[ ] Não produziu achados definitivos.
+[ ] Não definiu gate final.
+[ ] Identificou trechos de risco real.
+[ ] Indicou lentes apenas quando havia sintoma compatível.
+[ ] Indicou confrontos apenas quando havia acoplamento plausível.
+[ ] Diferenciou problema de fonte e problema de raciocínio.
+[ ] Propôs sequência de auditoria.
+[ ] Classificou prioridade.
+```
+
+Sinais de triagem ruim:
+
+```text
+[ ] Acionou lentes demais sem justificativa.
+[ ] Ignorou o risco central.
+[ ] Tratou estilo como falha de raciocínio.
+[ ] Tratou validade como confronto.
+[ ] Declarou bloqueio antes da auditoria.
+[ ] Inventou hipótese ou fonte.
+```
+
+---
+
+# 4. Checklist de lente isolada
+
+Durante Lente isolada, verificar:
+
+```text
+[ ] Apenas uma lente está sendo aplicada.
+[ ] O achado pertence à lente acionada.
+[ ] O problema não foi importado de outra lente.
+[ ] Achados de outras lentes foram apenas sinalizados.
+[ ] Não houve Rodada de confronto antecipada.
+[ ] Não houve achado emergente.
+[ ] A severidade foi proporcional ao impacto.
+[ ] Houve registro de achados descartados.
+[ ] Houve risco de dupla marcação, se aplicável.
+[ ] Foi produzido material exportável para Rodada de confronto.
+```
+
+Pergunta de controle:
+
+```text
+Este achado pertence mesmo à lente aplicada?
+```
+
+Se a resposta for não:
+
+```text
+[ ] Descartar como achado.
+[ ] Registrar apenas como sinalização para outra lente.
+```
+
+---
+
+# 5. Checklist por lente
+
+## EX001 — Arquitetura Argumentativa
+
+```text
+[ ] Há tese identificável?
+[ ] Há dados?
+[ ] Há garantia?
+[ ] Há backing?
+[ ] Há qualificador?
+[ ] Há exceções ou condições de derrota?
+[ ] A conclusão está mais forte do que a estrutura permite?
+```
+
+Não marcar se o problema for apenas:
+
+```text
+[ ] hipótese como conclusão;
+[ ] percentual sem método;
+[ ] objeção adversarial;
+[ ] conceito aberto;
+[ ] peso de autoridade.
+```
+
+---
+
+## EX002 — Dialética
+
+```text
+[ ] Há tese substantiva?
+[ ] Há pressuposto central?
+[ ] Há objeção forte previsível?
+[ ] A objeção foi enfrentada?
+[ ] A conclusão depende de superar essa objeção?
+```
+
+Não marcar se o problema for apenas:
+
+```text
+[ ] estrutura argumentativa;
+[ ] hipótese inferencial;
+[ ] percentual sem método;
+[ ] horizonte interpretativo;
+[ ] conceito aberto.
+```
+
+---
+
+## EX003 — Abdutivo
+
+```text
+[ ] Há qualificação jurídica dos fatos?
+[ ] A conclusão é hipótese plausível ou dedução necessária?
+[ ] Há hipóteses concorrentes?
+[ ] As hipóteses foram hierarquizadas?
+[ ] A força de apresentação excede o tipo de inferência?
+```
+
+Não marcar se o problema for apenas:
+
+```text
+[ ] percentual sem método;
+[ ] objeção adversarial;
+[ ] colapso de regime como efeito;
+[ ] o módulo de construção do raciocínio de precedente;
+[ ] estrutura interna.
+```
+
+---
+
+## EX004 — Integridade Cognitiva
+
+```text
+[ ] Há percentual ou probabilidade?
+[ ] Há método declarado?
+[ ] Há jurisprudência tratada como pacífica?
+[ ] Há controvérsia omitida?
+[ ] A segurança excede o lastro?
+[ ] A fluência substitui prova, método ou ressalva?
+```
+
+Não marcar se o problema for apenas:
+
+```text
+[ ] hipótese sem pseudocerteza;
+[ ] precedente mal aplicado;
+[ ] objeção adversarial;
+[ ] arquitetura incompleta.
+```
+
+---
+
+## EX005 — Hermenêutico
+
+```text
+[ ] Há interpretação de texto jurídico?
+[ ] O horizonte interpretativo foi declarado?
+[ ] Há pré-compreensão relevante?
+[ ] Há leitura concorrente plausível?
+[ ] A tradição invocada foi situada?
+```
+
+Não marcar se o problema for apenas:
+
+```text
+[ ] conceito aberto sem horizonte;
+[ ] falta de prova;
+[ ] autoridade superestimada;
+[ ] precedente mal aplicado.
+```
+
+---
+
+## EX006 — Simetrização
+
+```text
+[ ] Há regimes ou categorias distintas?
+[ ] Elas foram tratadas como equivalentes?
+[ ] Houve transporte de efeitos jurídicos?
+[ ] A distinção relevante foi apagada?
+[ ] O apagamento altera ônus, proteção, responsabilidade ou regime?
+```
+
+Não marcar se o problema for apenas:
+
+```text
+[ ] qualificação inferencial;
+[ ] técnica precedental;
+[ ] universalização sistêmica;
+[ ] percentual sem método.
+```
+
+---
+
+## EX007 — Analógico-Precedental
+
+```text
+[ ] Há precedente, súmula, tema, IRDR, IAC ou analogia?
+[ ] A o módulo de construção do raciocínio foi isolada?
+[ ] Houve distinguishing?
+[ ] Holding e obiter foram separados?
+[ ] O alcance do precedente foi respeitado?
+[ ] A força vinculante foi corretamente delimitada?
+```
+
+Não marcar se o problema for apenas:
+
+```text
+[ ] força inferencial da analogia tecnicamente correta;
+[ ] autoridade prática superestimada;
+[ ] colapso categorial independente;
+[ ] conceito aberto.
+```
+
+---
+
+## EX008 — Justificação de Segunda Ordem
+
+```text
+[ ] A tese cria regra geral?
+[ ] A regra foi formulada?
+[ ] A regra é universalizável?
+[ ] Há consequência sistêmica não declarada?
+[ ] Há tensão com escolha legislativa expressa?
+[ ] Premissas concorrentes foram justificadas?
+```
+
+Não marcar se o problema for apenas:
+
+```text
+[ ] colapso local sem vocação geral;
+[ ] objeção adversarial;
+[ ] validade formal;
+[ ] precedente técnico.
+```
+
+---
+
+## EX009 — Textura Aberta
+
+```text
+[ ] Há conceito aberto ou standard?
+[ ] Há zona de penumbra?
+[ ] O critério de fechamento foi declarado?
+[ ] A aplicação foi tratada como clara sem mediação?
+[ ] Há leitura concorrente plausível?
+```
+
+Não marcar se o problema for apenas:
+
+```text
+[ ] horizonte interpretativo sem conceito aberto;
+[ ] autoridade prática;
+[ ] precedente;
+[ ] estimativa sem método.
+```
+
+---
+
+## EX011 — Autoridade Prática
+
+```text
+[ ] Há autoridade invocada?
+[ ] Ela é vinculante ou persuasiva?
+[ ] O peso real foi calibrado?
+[ ] A autoridade foi usada fora do alcance?
+[ ] Fonte parcial foi tratada como decisiva?
+```
+
+Não marcar se o problema for apenas:
+
+```text
+[ ] o módulo de construção do raciocínio não isolada;
+[ ] distinguishing omitido;
+[ ] percentual sem método;
+[ ] hipótese como conclusão.
+```
+
+---
+
+# 6. Checklist de Rodada de confronto
+
+Antes de produzir achado emergente, verificar:
+
+```text
+[ ] Existem dois achados ou sinais isolados reais.
+[ ] Os achados pertencem a lentes distintas.
+[ ] Há confronto ativo previsto.
+[ ] Há acoplamento funcional entre os achados.
+[ ] O problema não é apenas soma A+B.
+[ ] É possível explicar a irredutibilidade.
+[ ] Há risco de dupla marcação.
+[ ] O emergente melhora o diagnóstico operacional.
+```
+
+Se qualquer item crítico falhar:
+
+```text
+[ ] Não produzir achado emergente.
+[ ] Manter achados isolados.
+```
+
+Pergunta obrigatória:
+
+```text
+Por que isso não é apenas A+B?
+```
+
+Se a resposta for fraca, não há emergência.
+
+---
+
+# 7. Checklist de dupla marcação
+
+Verificar:
+
+```text
+[ ] Os achados incidem sobre o mesmo trecho?
+[ ] Eles descrevem operações diferentes?
+[ ] Um achado absorve o outro?
+[ ] Devem ser mantidos separados?
+[ ] Devem ser hierarquizados?
+[ ] Devem ser fundidos em emergente?
+[ ] Devem contar como uma única entrada de gate?
+```
+
+Tratamentos possíveis:
+
+```text
+[ ] manter separados;
+[ ] hierarquizar principal/secundário;
+[ ] fundir no emergente;
+[ ] descartar redundante;
+[ ] registrar como entrada única;
+[ ] enviar para revisão humana.
+```
+
+---
+
+# 8. Checklist de gate técnico
+
+Antes de definir o gate, verificar:
+
+```text
+[ ] O erro afeta a tese central?
+[ ] O erro afeta conclusão?
+[ ] O erro afeta regime jurídico?
+[ ] O erro afeta ônus, prazo, proteção ou responsabilidade?
+[ ] O erro afeta recomendação estratégica?
+[ ] O erro pode induzir decisão mal calibrada?
+[ ] O erro é corrigível localmente?
+[ ] O erro exige reconstrução?
+[ ] O erro exige decisão humana?
+[ ] Há achado emergente?
+```
+
+Escolha:
+
+```text
+[ ] AVANÇA
+[ ] AVANÇA COM AJUSTE
+[ ] REVISÃO HUMANA
+[ ] BLOQUEIO PARCIAL
+[ ] BLOQUEIO TOTAL
+```
+
+Regra de decisão:
+
+```text
+[ ] Se problema for lateral: AVANÇA COM AJUSTE.
+[ ] Se houver escolha sensível: REVISÃO HUMANA.
+[ ] Se trecho específico não puder avançar: BLOQUEIO PARCIAL.
+[ ] Se tese central depender do erro: BLOQUEIO TOTAL.
+```
+
+---
+
+# 9. Checklist de saída interna
+
+A saída interna deve conter:
+
+```text
+[ ] Identificação do objeto.
+[ ] Estado da auditoria.
+[ ] Síntese executiva interna.
+[ ] Trechos críticos.
+[ ] Lentes acionadas.
+[ ] Confrontos acionados.
+[ ] Achados isolados.
+[ ] Achado emergente, se houver.
+[ ] Risco de dupla marcação.
+[ ] Gate técnico.
+[ ] Roteamento corretivo.
+[ ] Encaminhamento final.
+[ ] Observação para operador.
+```
+
+Verificar:
+
+```text
+[ ] Outro operador conseguiria auditar o resultado?
+[ ] Há localização suficiente?
+[ ] Há impacto prático?
+[ ] Há próximo passo?
+```
+
+---
+
+# 10. Checklist de saída cliente
+
+A saída cliente deve conter:
+
+```text
+[ ] Estado do documento.
+[ ] Síntese objetiva.
+[ ] Ponto principal de atenção.
+[ ] Impacto prático.
+[ ] Ajustes necessários.
+[ ] O que pode ser preservado.
+[ ] Recomendação final.
+```
+
+Não pode conter:
+
+```text
+[ ] o sistema.
+[ ] mecanismo interno de confronto.
+[ ] Lente isolada/C.
+[ ] Lente.
+[ ] Eixo.
+[ ] Confronto.
+[ ] Marcador interno.
+[ ] Nome de autor filosófico.
+[ ] Gate técnico.
+[ ] Código EX/CF.
+```
+
+Pergunta final:
+
+```text
+O cliente consegue decidir se pode usar o documento?
+```
+
+Se não, reescrever.
+
+---
+
+# 11. Checklist de parcimônia
+
+Verificar:
+
+```text
+[ ] A auditoria acionou apenas lentes necessárias?
+[ ] O número de achados é proporcional?
+[ ] Algum achado é apenas comentário?
+[ ] Algum achado é meramente estilístico?
+[ ] Algum bloqueio foi exagerado?
+[ ] Algum confronto foi acionado sem acoplamento?
+[ ] Algum trecho foi criticado apenas por parecer criticável?
+```
+
+Regra:
+
+```text
+Menos achados, mais precisão.
+```
+
+---
+
+# 12. Checklist de encaminhamento
+
+Encaminhar para:
+
+## o módulo de validação de fontes
+
+```text
+[ ] validar fonte;
+[ ] validar vigência;
+[ ] validar precedente;
+[ ] validar documento;
+[ ] validar lastro factual;
+[ ] validar jurisprudência.
+```
+
+## o módulo de construção do raciocínio
+
+```text
+[ ] reconstruir tese;
+[ ] reformular fundamentação;
+[ ] reorganizar argumento;
+[ ] abrir hipóteses;
+[ ] refazer enquadramento.
+```
+
+## o sistema
+
+```text
+[ ] rodar outra lente;
+[ ] rodar Rodada de confronto;
+[ ] revisar gate;
+[ ] controlar dupla marcação.
+```
+
+## o módulo de refinamento textual
+
+```text
+[ ] refinar linguagem;
+[ ] melhorar clareza;
+[ ] ajustar tom;
+[ ] formatar entrega;
+[ ] organizar visualmente.
+```
+
+Somente encaminhar para o módulo de refinamento textual se não houver falha de raciocínio pendente.
+
+## Revisão humana
+
+```text
+[ ] tese inovadora;
+[ ] risco estratégico;
+[ ] escolha jurídica sensível;
+[ ] conflito de hipóteses plausíveis;
+[ ] recomendação de conduta.
+```
+
+---
+
+# 13. Checklist final
+
+Antes de encerrar, verificar:
+
+```text
+[ ] O problema central foi identificado?
+[ ] A lente aplicada era a correta?
+[ ] Houve contaminação entre lentes?
+[ ] A Rodada de confronto demonstrou irredutibilidade?
+[ ] O gate foi proporcional?
+[ ] O roteamento é executável?
+[ ] A saída interna é auditável?
+[ ] A saída cliente é limpa?
+[ ] Não houve crítica artificial?
+[ ] Não houve omissão de risco central?
+```
+
+---
+
+# 14. Comando rápido de auditoria
+
+```text
+Aplique o sistema com base neste checklist. Controle triagem, fronteira entre lentes, Rodada de confronto, gate, saída interna e saída cliente. Não critique por criticar. Não exponha metodologia interna ao cliente.
+```
+
+---
+
+# 15. Regra final
+
+A auditoria o sistema é aprovada quando o resultado permite uma decisão operacional clara:
+
+- avançar;
+- ajustar;
+- revisar;
+- bloquear parcialmente;
+- bloquear totalmente;
+- reconstruir;
+- validar fonte;
+- refinar linguagem.
+
+Se a auditoria apenas explica, mas não orienta decisão, ela está incompleta.

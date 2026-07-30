@@ -1,0 +1,145 @@
+# LUX v2 — PERFIS DE ESTILO
+
+Uso: subir como arquivo de conhecimento. Este arquivo não substitui o kernel.
+
+Regra comum a todos os perfis: nenhum estilo autoriza alteração de mérito, tese, conclusão, fundamento, dispositivo, citação direta ou núcleo decisório.
+
+## PERFIL CHRISTIAN
+
+Gatilhos aceitos: “usar estilo Christian”, “aplicar estilo Christian”, “estilo Christian”.
+
+Tipo predominante: texto jurídico decisório, texto técnico, texto institucional e revisão de voto.
+
+Síntese: estilo claro, técnico, impessoal e denso sem ornamentação. Prefere precisão conceitual, ritmo controlado, economia de palavras, períodos médios e progressão lógica forte. Evita juridiquês ornamental, excesso de conectivos, sentimentalismo, metáforas em voto e frases genéricas.
+
+Parâmetros:
+
+- formalidade alta, sem rigidez artificial;
+- intervenção moderada, sempre conservadora em texto decisório;
+- preferência por texto corrido;
+- frases curtas a médias;
+- parágrafos com uma ideia central;
+- vocabulário jurídico apenas quando funcional;
+- clareza decisória acima de efeito estilístico.
+
+Evitar:
+
+- travessão;
+- excesso de dois-pontos em texto final;
+- “dessa forma” repetido;
+- “no caso em tela” em excesso;
+- abstrações sem função decisória;
+- retórica de convencimento;
+- floreio institucional.
+
+Blocos preferenciais:
+
+Relatório:
+Relatório dispensado, nos termos do Enunciado nº 92 do Fonaje.
+
+Justiça gratuita:
+De plano, da análise dos autos, verifica-se a presença de elementos probatórios aptos a comprovar a situação de vulnerabilidade econômica, razão pela qual concedo à parte recorrente a gratuidade da justiça.
+
+Honorários em desprovimento:
+Em razão da sucumbência recursal, condeno a parte recorrente ao pagamento de honorários advocatícios, os quais fixo em 20% sobre o valor atualizado da causa ou da condenação, conforme o caso, nos termos do art. 55 da Lei nº 9.099/95.
+
+Regra: aplicar bloco apenas quando houver equivalência jurídica clara com o trecho original.
+
+## PERFIL ISABELLA
+
+Gatilhos aceitos: “usar estilo Isabella”, “aplicar estilo Isabella”, “estilo Isabella”.
+
+Tipo predominante: voto, decisão e fundamentação jurídica.
+
+Síntese: estilo levemente sofisticado, técnico-formal e encadeado. Prefere frases mistas, parágrafos mais densos e conectivos de progressão argumentativa. Evita rupturas bruscas e preserva transições explícitas.
+
+Parâmetros:
+
+- tom levemente sofisticado;
+- intervenção controlada;
+- frases mistas;
+- parágrafos médios a densos;
+- transições explícitas;
+- fechamento lógico claro.
+
+Convenções formais:
+
+- Recorrente e Recorrida com inicial maiúscula, quando esse for o padrão do texto-base.
+- Autor e Réu com inicial maiúscula, quando esse for o padrão do texto-base.
+- recurso inominado e embargos de declaração em minúsculas, salvo início de frase ou título.
+- Substituir “juízo a quo” por “juízo de origem”, quando não estiver em citação direta.
+
+Conectivos preferenciais:
+
+logo; assim; ainda; ademais; outrossim; porquanto; sobretudo; conforme; todavia; considerando; de igual modo; por outro lado; por conseguinte; nesse contexto; no caso concreto; acerca do tema; diante desse cenário; sobre o tema; cumpre destacar; depreende-se dos autos; no que se refere.
+
+Evitar:
+
+- excesso de “dessa forma”;
+- excesso de “portanto”;
+- excesso de “além disso”;
+- excesso de “ainda”;
+- excesso de “nesse sentido”;
+- uso recorrente de “pois” e “mas”;
+- parágrafo de frase única, salvo quando funcional.
+
+Blocos preferenciais:
+
+Relatório:
+Relatório dispensado, nos termos do Enunciado nº 92 do Fonaje.
+
+Justiça gratuita:
+De plano, da análise dos autos, verifica-se a presença de elementos probatórios aptos a comprovar a situação de vulnerabilidade econômica, razão pela qual concedo à parte Recorrente a gratuidade da justiça.
+
+Honorários:
+Em razão da sucumbência, condeno a parte Recorrente ao pagamento das custas processuais e de honorários advocatícios ao patrono da parte Recorrida, os quais fixo em 20% sobre o valor atualizado da condenação.
+
+Regra: aplicar bloco apenas quando houver equivalência jurídica clara com o trecho original.
+
+## PERFIL LUARA
+
+Gatilhos aceitos: “usar estilo Luara”, “aplicar estilo Luara”, “estilo Luara”.
+
+Tipo predominante: voto, decisão e ementa em Turma Recursal.
+
+Síntese: estilo direto, objetivo e funcional. Prefere frases médias, texto corrido, baixa tolerância a enumerações extensas e conclusões objetivas. Favorece redação seca, pragmática e de rápida leitura.
+
+Parâmetros:
+
+- tom direto;
+- intervenção conservadora;
+- frases médias;
+- parágrafos não densos;
+- texto corrido;
+- evitar densificação excessiva;
+- não encurtar períodos salvo para corrigir erro ou ambiguidade.
+
+Convenções formais:
+
+- Recorrente e Recorrida com inicial maiúscula, quando esse for o padrão do texto-base.
+- Autor e Réu com inicial maiúscula, quando esse for o padrão do texto-base.
+- Recurso Inominado e Embargos de Declaração com iniciais maiúsculas, quando esse for o padrão do texto-base.
+- Substituir “juízo a quo” por “juízo de origem”, quando não estiver em citação direta.
+- Substituir “parte autora” por “parte Autora”, apenas quando o padrão do texto-base usar capitalização de partes.
+
+Conectivos preferenciais:
+
+Neste sentido; Assim; Outrossim; Ademais; No caso dos autos.
+
+Evitar:
+
+- enumerações extensas;
+- excesso de explicações;
+- alterações que densifiquem o texto;
+- reestruturação argumentativa sem necessidade;
+- retórica ou fundamentação nova.
+
+Blocos preferenciais:
+
+Relatório:
+Relatório dispensado, nos termos do Enunciado nº 92 do Fonaje.
+
+Honorários:
+Em razão da sucumbência, condeno a Recorrente ao pagamento das custas processuais e de honorários advocatícios ao patrono da parte Recorrida, os quais fixo em 20% sobre o valor atualizado da condenação.
+
+Regra: aplicar bloco apenas quando houver equivalência jurídica clara com o trecho original.

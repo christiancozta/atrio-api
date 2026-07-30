@@ -1,0 +1,490 @@
+# CASOS TESTE BASE
+
+## Função
+
+Este documento reúne casos sintéticos para testar o pacote operacional do sistema.
+
+Os casos foram desenhados para verificar se o sistema:
+
+- identifica riscos relevantes;
+- preserva fronteiras entre lentes;
+- aciona confrontos adequados;
+- evita falsa crítica;
+- evita bloqueio excessivo;
+- produz gate proporcional;
+- gera saída interna e saída cliente corretamente.
+
+---
+
+# 1. Como usar este documento
+
+Para cada caso:
+
+1. Copie o texto do caso.
+2. Aplique o sistema em modo triagem.
+3. Rode as lentes sugeridas.
+4. Rode Rodada de confronto se houver confronto ativo.
+5. Aplique gate técnico.
+6. Gere saída interna.
+7. Gere saída cliente.
+8. Avalie o resultado com o Protocolo de Teste.
+
+---
+
+# 2. Tipos de caso
+
+O conjunto contém três níveis:
+
+## Caso ruim
+
+Deve gerar bloqueio parcial ou total.
+
+## Caso médio
+
+Deve gerar ajuste, revisão humana ou bloqueio parcial limitado.
+
+## Caso bom
+
+Deve avançar ou avançar com ajuste leve.
+
+---
+
+# 3. Caso 1 — Ruim — Hipótese blindada por pseudocerteza
+
+## Objeto
+
+Parecer trabalhista sobre reconhecimento de vínculo empregatício em prestação de serviços por pessoa jurídica.
+
+## Texto para teste
+
+O consulente prestou serviços de desenvolvimento de software por meio de pessoa jurídica durante 28 meses, recebendo remuneração mensal de R$ 18.500,00. Embora trabalhasse de forma remota e tivesse flexibilidade de horários, participava de reuniões semanais com a equipe da contratante e utilizava ferramentas internas de comunicação.
+
+Os elementos apresentados configuram vínculo empregatício, pois revelam inserção na dinâmica empresarial, habitualidade, onerosidade e subordinação estrutural. Trata-se inequivocamente de relação de emprego dissimulada por contrato de prestação de serviços.
+
+A jurisprudência consolidada do TST reconhece a nulidade da pejotização em situações semelhantes, especialmente quando o trabalhador atua de forma contínua e integrada à atividade principal da empresa. Assim, recomenda-se o ajuizamento de reclamação trabalhista para reconhecimento do vínculo, com probabilidade de êxito estimada em aproximadamente 85%.
+
+## Riscos esperados
+
+- hipótese jurídica apresentada como conclusão;
+- hipóteses concorrentes não enfrentadas;
+- percentual sem método;
+- jurisprudência apresentada como consolidada;
+- pseudocerteza estratégica.
+
+## Confronto esperado
+
+CF-019 — Peirce × Bion.
+
+## Emergente esperado
+
+`[HIPÓTESE BLINDADA POR PSEUDOCERTEZA]`
+
+## Gate esperado
+
+BLOQUEIO TOTAL ou BLOQUEIO PARCIAL, conforme avaliação da centralidade.
+
+---
+
+# 4. Caso 2 — Ruim — Colapso de regime por salto inferencial
+
+## Objeto
+
+Parecer contratual sobre contrato B2B de software corporativo.
+
+## Texto para teste
+
+A empresa contratante celebrou contrato de software corporativo customizado, com módulos de gestão financeira, logística e confronto de raciocíniosM, pelo valor mensal de R$ 32.000,00. O sistema será usado internamente para otimizar a atividade administrativa da contratante.
+
+Trata-se de relação de consumo. Embora a contratante seja pessoa jurídica, ela atua como destinatária final do serviço, pois não revende o software ao mercado. Além disso, a hipossuficiência técnica é evidente, uma vez que a empresa não domina a arquitetura tecnológica da solução contratada.
+
+Aplica-se, portanto, integralmente o Código de Defesa do Consumidor, inclusive responsabilidade objetiva da fornecedora, inversão do ônus da prova e interpretação mais favorável à contratante em caso de dúvida contratual.
+
+## Riscos esperados
+
+- qualificação jurídica incerta apresentada como conclusão;
+- B2B tratado como consumo típico;
+- hipossuficiência técnica confundida com vulnerabilidade consumerista;
+- transporte integral do CDC;
+- ausência de hipótese concorrente de contrato empresarial paritário.
+
+## Confronto esperado
+
+CF-010 — Matte-Blanco × Peirce.
+
+## Emergente esperado
+
+`[COLAPSO DE REGIME POR SALTO INFERENCIAL]`
+
+## Gate esperado
+
+BLOQUEIO TOTAL ou BLOQUEIO PARCIAL.
+
+---
+
+# 5. Caso 3 — Ruim — Autoridade performada como certeza não lastreada
+
+## Objeto
+
+Parecer tributário sobre creditamento de PIS/COFINS.
+
+## Texto para teste
+
+O conceito de insumo para fins de creditamento de PIS/COFINS encontra-se pacificado pelo STJ, especialmente após o julgamento do REsp 1.221.170/PR, que fixou os critérios de essencialidade e relevância.
+
+No caso da empresa consulente, que atua em e-commerce, os gastos com mídia paga, tráfego digital, produção de conteúdo e gestão de redes sociais são essenciais à atividade econômica. A jurisprudência consolidada do CARF e dos Tribunais Regionais Federais tem reconhecido reiteradamente o direito ao creditamento dessas despesas.
+
+Diante do entendimento jurisprudencial consolidado, recomenda-se o aproveitamento integral dos créditos relativos aos gastos de marketing digital, com ajuizamento de ação declaratória para afastar autuações fiscais. As chances de êxito são elevadas, na faixa de 70% a 80%.
+
+## Riscos esperados
+
+- autoridade vinculante geral usada para subtema específico;
+- fonte persuasiva tratada como consolidada;
+- recomendação fiscal forte;
+- percentual sem método;
+- risco de autuação subestimado.
+
+## Confronto esperado
+
+CF-006 — Raz × Bion.
+
+## Emergente esperado
+
+`[AUTORIDADE PERFORMADA COMO CERTEZA NÃO LASTREADA]`
+
+## Gate esperado
+
+BLOQUEIO PARCIAL, podendo chegar a BLOQUEIO TOTAL se a recomendação for central.
+
+---
+
+# 6. Caso 4 — Ruim — Regime especial substituído por regra sistêmica
+
+## Objeto
+
+Nota técnica sobre representação comercial autônoma.
+
+## Texto para teste
+
+Defende-se a aplicação analógica do regime trabalhista aos contratos de representação comercial autônoma firmados por pessoa física, quando houver hipossuficiência econômica e técnica do representante frente ao representado, ainda que formalmente vigente a Lei 4.886/1965.
+
+A Lei de Representação Comercial foi concebida em contexto histórico diverso e não oferece proteção adequada a representantes economicamente dependentes. Em coerência com o princípio constitucional de proteção ao trabalho e com a função social do contrato, o representante comercial autônomo hipossuficiente deve receber proteções trabalhistas, tais como irredutibilidade remuneratória, aviso prévio proporcional, indenização equivalente ao FGTS com multa e enquadramento sindical.
+
+A tese é juridicamente sólida e deve ser sustentada em demandas envolvendo representantes comerciais pessoas físicas vulneráveis.
+
+## Riscos esperados
+
+- representação comercial autônoma equiparada a regime trabalhista;
+- hipossuficiência usada como chave de transposição;
+- regime especial deslocado;
+- regra universalizável perigosa;
+- consequência sistêmica não declarada.
+
+## Confronto esperado
+
+CF-012 — Matte-Blanco × MacCormick.
+
+## Emergente esperado
+
+`[REGIME ESPECIAL SUBSTITUÍDO POR REGRA SISTÊMICA NÃO UNIVERSALIZÁVEL]`
+
+## Gate esperado
+
+BLOQUEIO TOTAL.
+
+---
+
+# 7. Caso 5 — Médio — Analogia técnica com força inferencial excedida
+
+## Objeto
+
+Memorial em execução fiscal sobre desconsideração inversa.
+
+## Texto para teste
+
+O STJ, no REsp 1.493.071/SP, reconheceu que a desconsideração inversa da personalidade jurídica é medida excepcional, condicionada à demonstração de fraude ou confusão patrimonial específica, com observância do contraditório e do procedimento incidental previsto no art. 133 do CPC.
+
+Aplica-se à hipótese dos autos a mesma razão de decidir. Embora o precedente tenha sido firmado em contexto de direito patrimonial privado, a pretensão da Fazenda Pública de atingir pessoa jurídica por dívida do sócio também configura desconsideração inversa, razão pela qual deve observar os mesmos requisitos: prova de fraude ou confusão patrimonial e instauração de incidente.
+
+A execução contra a empresa deve ser afastada, pois não houve demonstração de fraude ou confusão patrimonial, nem observância do procedimento incidental.
+
+## Riscos esperados
+
+- operação precedental possivelmente bem estruturada;
+- aplicação analógica plausível;
+- força conclusiva possivelmente excessiva;
+- hipóteses tributárias concorrentes não enfrentadas.
+
+## Confronto esperado
+
+CF-008 — Levi × Peirce.
+
+## Emergente esperado
+
+`[ANALOGIA TÉCNICA COM FORÇA INFERENCIAL EXCEDIDA]`
+
+## Gate esperado
+
+BLOQUEIO PARCIAL ou REVISÃO HUMANA.
+
+---
+
+# 8. Caso 6 — Médio — Fechamento regulatório sem dupla mediação
+
+## Objeto
+
+Parecer regulatório sobre compartilhamento de infraestrutura.
+
+## Texto para teste
+
+O art. 73 da Lei Geral de Telecomunicações assegura às prestadoras de serviços de telecomunicações de interesse coletivo o direito de utilização de postes, dutos, condutos e servidões pertencentes ou controlados por prestadoras de outros serviços de interesse coletivo, em condições justas e não discriminatórias.
+
+A regulamentação setorial define compartilhamento de infraestrutura como uso comum de elementos da infraestrutura por mais de uma prestadora. A doutrina especializada e a prática administrativa convergem no sentido de que o conceito abrange tanto o compartilhamento ativo quanto o passivo.
+
+No caso descrito, duas operadoras dividem espaço físico em torre, mantendo equipamentos independentes. O caso enquadra-se claramente como compartilhamento passivo regular.
+
+## Riscos esperados
+
+- conceito aberto fechado sem critério;
+- horizonte regulatório implícito;
+- uso de prática administrativa genérica;
+- falsa clareza normativa;
+- ausência de distinção entre torre, espaço físico, equipamento ativo e infraestrutura passiva.
+
+## Confronto esperado
+
+CF-024 — Gadamer × Hart.
+
+## Emergente esperado
+
+`[FECHAMENTO REGULATÓRIO SEM DUPLA MEDIAÇÃO]`
+
+## Gate esperado
+
+BLOQUEIO PARCIAL.
+
+---
+
+# 9. Caso 7 — Médio — Tese inovadora não estabilizada como hipótese
+
+## Objeto
+
+Nota técnica trabalhista sobre multa do FGTS em culpa recíproca.
+
+## Texto para teste
+
+A interpretação majoritária tem admitido que, em hipóteses de culpa recíproca, a multa do FGTS seja reduzida de 40% para 20%. Contudo, a tese ora proposta inova ao sustentar que, considerando a natureza protetiva do FGTS e sua função de poupança forçada em favor do trabalhador, não cabe redução da multa indenizatória, devendo o empregado receber o percentual integral de 40%.
+
+Tal entendimento alinha-se ao princípio da proteção e à função social do contrato de trabalho, sendo defensável em juízo com elevada probabilidade de êxito.
+
+Recomenda-se a sustentação da tese em ações trabalhistas envolvendo rescisão por culpa recíproca, para garantir ao empregado o recebimento integral da multa fundiária.
+
+## Riscos esperados
+
+- tese inovadora;
+- objeção legal e jurisprudencial forte;
+- hipótese interpretativa tratada como conclusão viável;
+- probabilidade de êxito superestimada;
+- recomendação estratégica sem estabilização.
+
+## Confronto esperado
+
+CF-016 — Sócrates × Peirce.
+
+## Emergente esperado
+
+`[TESE INOVADORA NÃO ESTABILIZADA COMO HIPÓTESE]`
+
+## Gate esperado
+
+REVISÃO HUMANA ou BLOQUEIO PARCIAL.
+
+---
+
+# 10. Caso 8 — Médio — Arquitetura formal com inferência não estabilizada
+
+## Objeto
+
+Petição inicial sobre responsabilidade civil do Estado.
+
+## Texto para teste
+
+O Município aprovou loteamento urbano em 2018 com base em laudo geotécnico apresentado pelo loteador, sem realizar inspeção independente do solo. Em 2023, constatou-se que a área era inadequada para edificação, em razão da presença de aterro irregular em camada profunda do subsolo, o que causou rachaduras estruturais no imóvel do Autor.
+
+A Constituição Federal, em seu art. 37, § 6º, consagra a responsabilidade objetiva do Estado. A Lei 6.766/1979 impõe ao Município dever específico de fiscalização do parcelamento do solo urbano. A jurisprudência reconhece a responsabilidade estatal por omissão específica quando há nexo causal direto entre o dever de fiscalização e o dano.
+
+Dado que o Município possuía dever específico de fiscalização e não o exerceu por meio de inspeção independente, e considerando que o dano decorre diretamente da falha fiscalizatória, configura-se a responsabilidade objetiva do ente público, com obrigação de indenizar integralmente os danos materiais e morais sofridos pelo Autor.
+
+## Riscos esperados
+
+- arquitetura formal presente;
+- conclusão categórica;
+- nexo causal tratado como dado;
+- hipóteses alternativas não enfrentadas;
+- qualificador suprimido.
+
+## Confronto esperado
+
+CF-014 — Toulmin × Peirce.
+
+## Emergente esperado
+
+`[ARQUITETURA FORMAL COM INFERÊNCIA NÃO ESTABILIZADA]`
+
+## Gate esperado
+
+BLOQUEIO PARCIAL.
+
+---
+
+# 11. Caso 9 — Bom — Parecer com qualificação adequada
+
+## Objeto
+
+Parecer trabalhista sobre possível vínculo empregatício.
+
+## Texto para teste
+
+Os elementos informados indicam plausibilidade da tese de reconhecimento de vínculo empregatício, especialmente pela continuidade da prestação, integração em rotinas internas e participação em reuniões periódicas com equipe da contratante.
+
+Ainda assim, a conclusão não pode ser apresentada como inequívoca. Há fatores que sustentam hipótese concorrente de contratação autônoma lícita, como remuneração elevada, prestação por pessoa jurídica, trabalho remoto e flexibilidade de horários. Esses elementos exigem análise da efetiva subordinação jurídica e da forma concreta de controle exercida pela contratante.
+
+Assim, recomenda-se tratar a tese de vínculo como hipótese juridicamente defensável, mas dependente de prova documental e testemunhal. Não há base metodológica suficiente, no material disponível, para atribuir percentual confiável de êxito. A recomendação estratégica deve ser qualitativa, considerando os fatores favoráveis, os fatores adversos e a instabilidade jurisprudencial sobre a matéria.
+
+## Resultado esperado
+
+- Pode acionar triagem.
+- Pode sinalizar EX003/EX004, mas sem achado forte.
+- Deve evitar bloqueio indevido.
+- Gate provável: AVANÇA ou AVANÇA COM AJUSTE.
+
+---
+
+# 12. Caso 10 — Bom — Precedente bem qualificado
+
+## Objeto
+
+Memorial com aplicação analógica de precedente.
+
+## Texto para teste
+
+O precedente citado não possui incidência vinculante direta sobre a hipótese, pois foi firmado em contexto fático distinto. Ainda assim, sua razão de decidir pode servir como elemento persuasivo, desde que preservados seus limites.
+
+A razão de decidir relevante está na exigência de demonstração concreta de fraude ou confusão patrimonial antes da extensão de responsabilidade a pessoa jurídica distinta. No caso analisado, essa razão pode ser invocada analogicamente, não como aplicação automática, mas como parâmetro de contenção para medidas de redirecionamento patrimonial.
+
+A tese, portanto, deve ser apresentada como analogia persuasiva. A conclusão depende de verificação adicional sobre eventual disciplina específica aplicável à execução fiscal e sobre a existência de precedentes próprios em matéria tributária.
+
+## Resultado esperado
+
+- Não deve marcar analogia ementária.
+- Não deve marcar alcance excedido.
+- Pode registrar cautela.
+- Gate provável: AVANÇA ou AVANÇA COM AJUSTE.
+
+---
+
+# 13. Caso 11 — Bom — Conceito aberto com critério de fechamento
+
+## Objeto
+
+Parecer regulatório.
+
+## Texto para teste
+
+A expressão “uso comum de elementos da infraestrutura” deve ser interpretada a partir de critério regulatório funcional: o objeto do compartilhamento é o suporte físico necessário à prestação do serviço, e não necessariamente os equipamentos ativos ou a integração operacional das redes.
+
+Sob esse critério, a divisão de espaço físico em torre pode configurar compartilhamento passivo de infraestrutura, ainda que os equipamentos permaneçam independentes. A conclusão decorre de leitura regulatório-sistemática, orientada pela finalidade de promover acesso não discriminatório, eficiência no uso de infraestrutura e racionalização de custos setoriais.
+
+Há leitura concorrente possível, segundo a qual a mera cessão de espaço físico não bastaria para caracterizar compartilhamento regulatório pleno. Essa leitura, contudo, parece menos adequada quando o suporte físico comum é condição material para instalação e operação dos equipamentos das prestadoras.
+
+## Resultado esperado
+
+- Deve reconhecer critério de fechamento.
+- Deve reconhecer horizonte interpretativo.
+- Não deve gerar CF-024 forte.
+- Gate provável: AVANÇA.
+
+---
+
+# 14. Caso 12 — Bom — Tese inovadora com risco declarado
+
+## Objeto
+
+Nota técnica trabalhista.
+
+## Texto para teste
+
+A tese de manutenção integral da multa de 40% do FGTS em hipótese de culpa recíproca pode ser construída como argumento principiológico, com base na natureza protetiva do fundo e na função social da indenização.
+
+Trata-se, porém, de tese inovadora e contrária ao entendimento dominante, que admite a redução para 20% nas hipóteses legalmente previstas. Por isso, não deve ser apresentada como orientação provável, mas como construção argumentativa de uso excepcional, dependente de estratégia processual específica e de enfrentamento direto da disciplina legal aplicável.
+
+A recomendação é não utilizá-la como tese principal sem argumento subsidiário. Caso seja manejada, deve vir acompanhada de tese alternativa compatível com a interpretação dominante.
+
+## Resultado esperado
+
+- Pode sinalizar CF-016.
+- Não deve gerar bloqueio forte.
+- Gate provável: AVANÇA COM AJUSTE ou REVISÃO HUMANA leve, se uso estratégico.
+
+---
+
+# 15. Registro de resultados
+
+Para cada caso, preencher:
+
+```text
+# RESULTADO DO TESTE
+
+Caso:
+Modelo:
+Data:
+Prompt usado:
+
+## Triagem
+Lentes sugeridas:
+Confrontos sugeridos:
+Avaliação:
+
+## Rodada por lente isolada
+Lente:
+Resultado:
+
+## Rodada por lente isolada
+Lente:
+Resultado:
+
+## Rodada de confronto
+Confronto:
+Emergente:
+Irredutibilidade demonstrada: sim/não
+
+## Gate
+Estado:
+Compatível com esperado: sim/não
+
+## Saída interna
+Adequada: sim/não
+
+## Saída cliente
+Adequada: sim/não
+
+## Nota final
+[0 a 10]
+
+## Ajustes necessários
+1.
+2.
+3.
+```
+
+---
+
+# 16. Critério final
+
+O pacote o sistema passa no teste se:
+
+1. detectar os riscos centrais dos casos ruins;
+2. aplicar gates proporcionais nos casos médios;
+3. não fabricar achados fortes nos casos bons;
+4. preservar fronteiras entre lentes;
+5. produzir Rodada de confronto apenas quando houver emergência real;
+6. impedir saída cliente com metodologia interna exposta.

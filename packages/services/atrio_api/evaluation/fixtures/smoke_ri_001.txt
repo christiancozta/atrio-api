@@ -1,0 +1,48 @@
+CASO FICTÍCIO PARA TESTE TÉCNICO — RECURSO INOMINADO
+
+Trata-se de recurso inominado interposto pela parte consumidora contra sentença
+que reconheceu falha na prestação de serviço de comércio eletrônico e condenou
+a parte fornecedora apenas à restituição do preço pago. O pedido de indenização
+por dano moral foi rejeitado. Todos os fatos, valores e documentos descritos
+neste caso são inteiramente fictícios e existem apenas para testar a cadeia
+técnica do ATRIO.
+
+A parte consumidora adquiriu um eletrodoméstico anunciado como disponível para
+entrega em cinco dias úteis. O pagamento foi confirmado no mesmo dia. Passados
+vinte dias úteis, o produto ainda não havia sido entregue. O atendimento da
+fornecedora registrou três protocolos e informou, em momentos diferentes, que
+o pedido estava em separação, em transporte e, por fim, extraviado. A compra
+foi cancelada administrativamente, mas o valor permaneceu lançado na fatura
+do cartão por mais dois ciclos.
+
+Na petição inicial, a parte consumidora pediu restituição integral do preço e
+compensação por dano moral. Alegou perda de tempo útil e frustração que teria
+superado mero aborrecimento. A fornecedora reconheceu o atraso e o cancelamento,
+mas sustentou que o estorno havia sido solicitado à administradora do cartão,
+que não houve negativação, exposição pública, interrupção de serviço essencial
+ou outra repercussão concreta sobre direito da personalidade.
+
+Os documentos do caso demonstram a confirmação da compra, o prazo de entrega,
+os protocolos de atendimento, o cancelamento e as duas faturas subsequentes.
+Não existe prova de inscrição em cadastro restritivo, aquisição substitutiva
+por preço superior, perda de compromisso profissional, risco à saúde ou uso
+do produto para finalidade essencial. A restituição ocorreu antes da audiência
+de instrução, depois do ajuizamento da demanda.
+
+A sentença considerou incontroversa a falha do serviço, confirmou a restituição
+e concluiu que atraso e demora no estorno, nas circunstâncias provadas, não
+demonstraram lesão moral indenizável. Também rejeitou pedido de aplicação de
+multa por litigância de má-fé, porque a contestação não alterou os documentos
+nem negou o atraso.
+
+No recurso, a parte consumidora busca exclusivamente a reforma do capítulo do
+dano moral. Defende que a sucessão de informações contraditórias e a retenção
+temporária do valor bastam para caracterizar violação extrapatrimonial. A parte
+fornecedora pede manutenção integral da sentença.
+
+O objeto técnico é elaborar voto de recurso inominado que enfrente
+admissibilidade, delimitação da controvérsia, falha do serviço, critérios para
+dano moral, distribuição do ônus argumentativo e dispositivo. O texto deve
+distinguir fatos comprovados de inferências, não inventar precedentes, números
+de processo ou conteúdo documental e declarar qualquer ponto que dependa de
+validação jurídica externa.

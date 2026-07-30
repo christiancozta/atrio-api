@@ -1,0 +1,6 @@
+Reservado. captura.py NAO esta ausente: existe, roda, e foi migrado para
+packages/corpus/src/captura.py junto com o seu lancador CAPTURA.bat.
+
+O inventario da diretriz de normalizacao o listava como ausente. A diretriz
+estava desatualizada em relacao ao disco. Registrado em
+RELATORIO_NORMALIZACAO.md.

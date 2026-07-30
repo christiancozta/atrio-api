@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.env
+
+infra/secrets/
+packages/services/atrio_api/var/
+var/
+_backups/
+*.partial
+
+packages/services/atrio_api/evaluation/evidence/
+

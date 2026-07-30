@@ -1,0 +1,3167 @@
+{
+  "components": {
+    "schemas": {
+      "ArtifactBody": {
+        "additionalProperties": false,
+        "properties": {
+          "artifact_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:@/-]*$",
+            "title": "Artifact Id",
+            "type": "string"
+          },
+          "classification": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:-]*$",
+            "title": "Classification",
+            "type": "string"
+          },
+          "media_type": {
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Media Type",
+            "type": "string"
+          },
+          "producer": {
+            "$ref": "#/components/schemas/ComponentName"
+          },
+          "producer_version": {
+            "maxLength": 80,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.+-]*$",
+            "title": "Producer Version",
+            "type": "string"
+          },
+          "release_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:@/-]*$",
+            "title": "Release Id",
+            "type": "string"
+          },
+          "schema_version": {
+            "maxLength": 80,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.+-]*$",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Sha256",
+            "type": "string"
+          }
+        },
+        "required": [
+          "artifact_id",
+          "sha256",
+          "media_type",
+          "classification",
+          "producer",
+          "producer_version",
+          "release_id",
+          "schema_version"
+        ],
+        "title": "ArtifactBody",
+        "type": "object"
+      },
+      "ArtifactResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "artifact_id": {
+            "title": "Artifact Id",
+            "type": "string"
+          },
+          "classification": {
+            "title": "Classification",
+            "type": "string"
+          },
+          "media_type": {
+            "title": "Media Type",
+            "type": "string"
+          },
+          "producer": {
+            "$ref": "#/components/schemas/ComponentName"
+          },
+          "producer_version": {
+            "title": "Producer Version",
+            "type": "string"
+          },
+          "release_id": {
+            "title": "Release Id",
+            "type": "string"
+          },
+          "schema_version": {
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "sha256": {
+            "title": "Sha256",
+            "type": "string"
+          }
+        },
+        "required": [
+          "artifact_id",
+          "sha256",
+          "media_type",
+          "classification",
+          "producer",
+          "producer_version",
+          "release_id",
+          "schema_version"
+        ],
+        "title": "ArtifactResponse",
+        "type": "object"
+      },
+      "CerneAuditBody": {
+        "additionalProperties": false,
+        "properties": {
+          "actor_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:@/-]*$",
+            "title": "Actor Id",
+            "type": "string"
+          },
+          "expected_version": {
+            "minimum": 0.0,
+            "title": "Expected Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "expected_version",
+          "actor_id"
+        ],
+        "title": "CerneAuditBody",
+        "type": "object"
+      },
+      "CerneAuditResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "artifact": {
+            "$ref": "#/components/schemas/ArtifactResponse"
+          },
+          "client_output": {
+            "$ref": "#/components/schemas/CerneClientOutputResponse"
+          },
+          "created": {
+            "title": "Created",
+            "type": "boolean"
+          },
+          "execution": {
+            "$ref": "#/components/schemas/ExecutionResponse"
+          },
+          "gate": {
+            "$ref": "#/components/schemas/CerneGate"
+          },
+          "warnings": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Warnings",
+            "type": "array"
+          }
+        },
+        "required": [
+          "created",
+          "execution",
+          "artifact",
+          "gate",
+          "client_output",
+          "warnings"
+        ],
+        "title": "CerneAuditResponse",
+        "type": "object"
+      },
+      "CerneClientOutputResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "ajustes_necessarios": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Ajustes Necessarios",
+            "type": "array"
+          },
+          "estado_documento": {
+            "title": "Estado Documento",
+            "type": "string"
+          },
+          "impacto_pratico": {
+            "title": "Impacto Pratico",
+            "type": "string"
+          },
+          "pode_ser_preservado": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Pode Ser Preservado",
+            "type": "array"
+          },
+          "ponto_principal_atencao": {
+            "title": "Ponto Principal Atencao",
+            "type": "string"
+          },
+          "recomendacao_final": {
+            "title": "Recomendacao Final",
+            "type": "string"
+          },
+          "sintese_objetiva": {
+            "title": "Sintese Objetiva",
+            "type": "string"
+          }
+        },
+        "required": [
+          "estado_documento",
+          "sintese_objetiva",
+          "ponto_principal_atencao",
+          "impacto_pratico",
+          "ajustes_necessarios",
+          "pode_ser_preservado",
+          "recomendacao_final"
+        ],
+        "title": "CerneClientOutputResponse",
+        "type": "object"
+      },
+      "CerneGate": {
+        "enum": [
+          "AVANCA",
+          "AVANCA_COM_AJUSTE",
+          "REVISAO_HUMANA",
+          "BLOQUEIO_PARCIAL",
+          "BLOQUEIO_TOTAL"
+        ],
+        "title": "CerneGate",
+        "type": "string"
+      },
+      "CerneOperatorBody": {
+        "additionalProperties": false,
+        "properties": {
+          "actor_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:@/-]*$",
+            "title": "Actor Id",
+            "type": "string"
+          },
+          "decision_code": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:-]*$",
+            "title": "Decision Code",
+            "type": "string"
+          },
+          "expected_version": {
+            "minimum": 0.0,
+            "title": "Expected Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "expected_version",
+          "actor_id",
+          "decision_code"
+        ],
+        "title": "CerneOperatorBody",
+        "type": "object"
+      },
+      "CommandBody": {
+        "additionalProperties": false,
+        "properties": {
+          "actor_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:@/-]*$",
+            "title": "Actor Id",
+            "type": "string"
+          },
+          "expected_version": {
+            "minimum": 0.0,
+            "title": "Expected Version",
+            "type": "integer"
+          },
+          "kind": {
+            "$ref": "#/components/schemas/CommandKind"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/CommandPayloadBody"
+          }
+        },
+        "required": [
+          "kind",
+          "expected_version",
+          "actor_id"
+        ],
+        "title": "CommandBody",
+        "type": "object"
+      },
+      "CommandKind": {
+        "enum": [
+          "START_INGESTION",
+          "REGISTER_CORPUS_DOCUMENT",
+          "REQUEST_CORPUS_REVIEW",
+          "RESUME_CORPUS",
+          "COMPLETE_CORPUS",
+          "START_RATIO",
+          "REQUEST_OPERATOR_DECISION",
+          "RECORD_OPERATOR_DECISION",
+          "COMPLETE_RATIO",
+          "START_CERNE",
+          "APPLY_CERNE_GATE",
+          "RETURN_TO_RATIO",
+          "REOPEN_TOTAL_BLOCK",
+          "COMPLETE_RATIO_REWORK",
+          "START_LUX",
+          "COMPLETE_LUX",
+          "PASS_FINAL_INTEGRITY",
+          "FAIL_FINAL_INTEGRITY",
+          "RETRY_LUX",
+          "RELEASE",
+          "FAIL_TECHNICAL",
+          "RETRY_TECHNICAL",
+          "CANCEL"
+        ],
+        "title": "CommandKind",
+        "type": "string"
+      },
+      "CommandPayloadBody": {
+        "additionalProperties": false,
+        "properties": {
+          "artifact": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ArtifactBody"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "decision_code": {
+            "anyOf": [
+              {
+                "maxLength": 128,
+                "minLength": 1,
+                "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:-]*$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Decision Code"
+          },
+          "error_code": {
+            "anyOf": [
+              {
+                "maxLength": 128,
+                "minLength": 1,
+                "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:-]*$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error Code"
+          },
+          "gate": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CerneGate"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "phase": {
+            "anyOf": [
+              {
+                "maxLength": 128,
+                "minLength": 1,
+                "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:-]*$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Phase"
+          },
+          "reason_code": {
+            "anyOf": [
+              {
+                "maxLength": 128,
+                "minLength": 1,
+                "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:-]*$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason Code"
+          },
+          "review_type": {
+            "anyOf": [
+              {
+                "maxLength": 128,
+                "minLength": 1,
+                "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:-]*$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Review Type"
+          }
+        },
+        "title": "CommandPayloadBody",
+        "type": "object"
+      },
+      "ComponentName": {
+        "enum": [
+          "atrio_api",
+          "corpus",
+          "ratio",
+          "cerne",
+          "lux",
+          "atrio_pii"
+        ],
+        "title": "ComponentName",
+        "type": "string"
+      },
+      "CorpusActionBody": {
+        "additionalProperties": false,
+        "properties": {
+          "actor_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:@/-]*$",
+            "title": "Actor Id",
+            "type": "string"
+          },
+          "expected_version": {
+            "minimum": 0.0,
+            "title": "Expected Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "expected_version",
+          "actor_id"
+        ],
+        "title": "CorpusActionBody",
+        "type": "object"
+      },
+      "CorpusBatchResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "documents": {
+            "items": {
+              "$ref": "#/components/schemas/CorpusDocumentStatusResponse"
+            },
+            "title": "Documents",
+            "type": "array"
+          },
+          "execution": {
+            "$ref": "#/components/schemas/ExecutionResponse"
+          },
+          "halted_for_review": {
+            "title": "Halted For Review",
+            "type": "boolean"
+          },
+          "processed_count": {
+            "title": "Processed Count",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "execution",
+          "documents",
+          "processed_count",
+          "halted_for_review"
+        ],
+        "title": "CorpusBatchResponse",
+        "type": "object"
+      },
+      "CorpusDocumentResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "byte_length": {
+            "title": "Byte Length",
+            "type": "integer"
+          },
+          "document_id": {
+            "title": "Document Id",
+            "type": "string"
+          },
+          "encryption_algorithm": {
+            "title": "Encryption Algorithm",
+            "type": "string"
+          },
+          "envelope_version": {
+            "title": "Envelope Version",
+            "type": "string"
+          },
+          "execution_id": {
+            "title": "Execution Id",
+            "type": "string"
+          },
+          "intake_version": {
+            "title": "Intake Version",
+            "type": "string"
+          },
+          "media_type": {
+            "title": "Media Type",
+            "type": "string"
+          },
+          "sha256": {
+            "title": "Sha256",
+            "type": "string"
+          }
+        },
+        "required": [
+          "document_id",
+          "execution_id",
+          "sha256",
+          "byte_length",
+          "media_type",
+          "encryption_algorithm",
+          "envelope_version",
+          "intake_version"
+        ],
+        "title": "CorpusDocumentResponse",
+        "type": "object"
+      },
+      "CorpusDocumentStatusResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "byte_length": {
+            "title": "Byte Length",
+            "type": "integer"
+          },
+          "document_id": {
+            "title": "Document Id",
+            "type": "string"
+          },
+          "effective_status": {
+            "title": "Effective Status",
+            "type": "string"
+          },
+          "execution_id": {
+            "title": "Execution Id",
+            "type": "string"
+          },
+          "input_sha256": {
+            "title": "Input Sha256",
+            "type": "string"
+          },
+          "intake_version": {
+            "title": "Intake Version",
+            "type": "string"
+          },
+          "inventory": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CorpusInventoryResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "media_type": {
+            "title": "Media Type",
+            "type": "string"
+          },
+          "processing_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Processing Id"
+          },
+          "review_decision": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CorpusReviewDecision"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "document_id",
+          "execution_id",
+          "input_sha256",
+          "byte_length",
+          "media_type",
+          "intake_version",
+          "processing_id",
+          "effective_status",
+          "review_decision",
+          "inventory"
+        ],
+        "title": "CorpusDocumentStatusResponse",
+        "type": "object"
+      },
+      "CorpusFinalizeResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "artifact": {
+            "$ref": "#/components/schemas/ArtifactResponse"
+          },
+          "document_count": {
+            "title": "Document Count",
+            "type": "integer"
+          },
+          "execution": {
+            "$ref": "#/components/schemas/ExecutionResponse"
+          }
+        },
+        "required": [
+          "execution",
+          "artifact",
+          "document_count"
+        ],
+        "title": "CorpusFinalizeResponse",
+        "type": "object"
+      },
+      "CorpusInventoryResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "atrio_pii_version": {
+            "title": "Atrio Pii Version",
+            "type": "string"
+          },
+          "byte_length": {
+            "title": "Byte Length",
+            "type": "integer"
+          },
+          "cnj": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cnj"
+          },
+          "corpus_pipeline_version": {
+            "title": "Corpus Pipeline Version",
+            "type": "string"
+          },
+          "document_id": {
+            "title": "Document Id",
+            "type": "string"
+          },
+          "execution_id": {
+            "title": "Execution Id",
+            "type": "string"
+          },
+          "extracted_char_count": {
+            "title": "Extracted Char Count",
+            "type": "integer"
+          },
+          "extraction_method": {
+            "title": "Extraction Method",
+            "type": "string"
+          },
+          "input_sha256": {
+            "title": "Input Sha256",
+            "type": "string"
+          },
+          "media_type": {
+            "title": "Media Type",
+            "type": "string"
+          },
+          "ocr_mean_confidence": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ocr Mean Confidence"
+          },
+          "page_count": {
+            "title": "Page Count",
+            "type": "integer"
+          },
+          "pii_counts": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "title": "Pii Counts",
+            "type": "object"
+          },
+          "procedural_class": {
+            "title": "Procedural Class",
+            "type": "string"
+          },
+          "pseudonym_count": {
+            "title": "Pseudonym Count",
+            "type": "integer"
+          },
+          "pseudonymized_sha256": {
+            "title": "Pseudonymized Sha256",
+            "type": "string"
+          },
+          "review_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Review Type"
+          },
+          "secrecy_level": {
+            "title": "Secrecy Level",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "document_id",
+          "execution_id",
+          "input_sha256",
+          "byte_length",
+          "media_type",
+          "extraction_method",
+          "page_count",
+          "extracted_char_count",
+          "ocr_mean_confidence",
+          "cnj",
+          "procedural_class",
+          "secrecy_level",
+          "pii_counts",
+          "pseudonym_count",
+          "pseudonymized_sha256",
+          "status",
+          "review_type",
+          "corpus_pipeline_version",
+          "atrio_pii_version"
+        ],
+        "title": "CorpusInventoryResponse",
+        "type": "object"
+      },
+      "CorpusReviewBody": {
+        "additionalProperties": false,
+        "properties": {
+          "actor_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:@/-]*$",
+            "title": "Actor Id",
+            "type": "string"
+          },
+          "decision": {
+            "$ref": "#/components/schemas/CorpusReviewDecision"
+          },
+          "expected_version": {
+            "minimum": 0.0,
+            "title": "Expected Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "expected_version",
+          "actor_id",
+          "decision"
+        ],
+        "title": "CorpusReviewBody",
+        "type": "object"
+      },
+      "CorpusReviewDecision": {
+        "enum": [
+          "APPROVE",
+          "EXCLUDE"
+        ],
+        "title": "CorpusReviewDecision",
+        "type": "string"
+      },
+      "CorpusReviewResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "document": {
+            "$ref": "#/components/schemas/CorpusDocumentStatusResponse"
+          },
+          "execution": {
+            "$ref": "#/components/schemas/ExecutionResponse"
+          }
+        },
+        "required": [
+          "execution",
+          "document"
+        ],
+        "title": "CorpusReviewResponse",
+        "type": "object"
+      },
+      "CreateCorpusDocumentResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "created": {
+            "title": "Created",
+            "type": "boolean"
+          },
+          "document": {
+            "$ref": "#/components/schemas/CorpusDocumentResponse"
+          },
+          "execution": {
+            "$ref": "#/components/schemas/ExecutionResponse"
+          }
+        },
+        "required": [
+          "created",
+          "document",
+          "execution"
+        ],
+        "title": "CreateCorpusDocumentResponse",
+        "type": "object"
+      },
+      "CreateExecutionBody": {
+        "additionalProperties": false,
+        "properties": {
+          "actor_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:@/-]*$",
+            "title": "Actor Id",
+            "type": "string"
+          },
+          "destination": {
+            "$ref": "#/components/schemas/Destination"
+          },
+          "ratio_module": {
+            "$ref": "#/components/schemas/RatioModule"
+          },
+          "tenant_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:@/-]*$",
+            "title": "Tenant Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "tenant_id",
+          "actor_id",
+          "ratio_module",
+          "destination"
+        ],
+        "title": "CreateExecutionBody",
+        "type": "object"
+      },
+      "CreateExecutionResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "created": {
+            "title": "Created",
+            "type": "boolean"
+          },
+          "execution": {
+            "$ref": "#/components/schemas/ExecutionResponse"
+          }
+        },
+        "required": [
+          "created",
+          "execution"
+        ],
+        "title": "CreateExecutionResponse",
+        "type": "object"
+      },
+      "Destination": {
+        "enum": [
+          "interno",
+          "externo",
+          "publico"
+        ],
+        "title": "Destination",
+        "type": "string"
+      },
+      "EventResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "actor_id": {
+            "title": "Actor Id",
+            "type": "string"
+          },
+          "command": {
+            "$ref": "#/components/schemas/CommandKind"
+          },
+          "component": {
+            "$ref": "#/components/schemas/ComponentName"
+          },
+          "component_version": {
+            "title": "Component Version",
+            "type": "string"
+          },
+          "execution_id": {
+            "title": "Execution Id",
+            "type": "string"
+          },
+          "from_stage": {
+            "title": "From Stage",
+            "type": "string"
+          },
+          "metadata": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Metadata",
+            "type": "object"
+          },
+          "occurred_at": {
+            "title": "Occurred At",
+            "type": "string"
+          },
+          "release_id": {
+            "title": "Release Id",
+            "type": "string"
+          },
+          "sequence": {
+            "title": "Sequence",
+            "type": "integer"
+          },
+          "to_stage": {
+            "title": "To Stage",
+            "type": "string"
+          }
+        },
+        "required": [
+          "execution_id",
+          "sequence",
+          "command",
+          "from_stage",
+          "to_stage",
+          "component",
+          "component_version",
+          "release_id",
+          "actor_id",
+          "occurred_at",
+          "metadata"
+        ],
+        "title": "EventResponse",
+        "type": "object"
+      },
+      "ExecutionResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "cerne_artifact": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ArtifactResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "cerne_gate": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CerneGate"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "corpus_artifact": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ArtifactResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "created_by": {
+            "title": "Created By",
+            "type": "string"
+          },
+          "current_ratio_phase": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Current Ratio Phase"
+          },
+          "destination": {
+            "$ref": "#/components/schemas/Destination"
+          },
+          "execution_id": {
+            "title": "Execution Id",
+            "type": "string"
+          },
+          "last_error_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Error Code"
+          },
+          "last_operator_actor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Operator Actor"
+          },
+          "last_operator_decision": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Operator Decision"
+          },
+          "lux_artifact": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ArtifactResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "ratio_artifact": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ArtifactResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "ratio_module": {
+            "$ref": "#/components/schemas/RatioModule"
+          },
+          "release": {
+            "$ref": "#/components/schemas/ReleaseResponse"
+          },
+          "released_artifact": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ArtifactResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "retry_stage": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Retry Stage"
+          },
+          "stage": {
+            "title": "Stage",
+            "type": "string"
+          },
+          "state_version": {
+            "title": "State Version",
+            "type": "integer"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "tenant_id": {
+            "title": "Tenant Id",
+            "type": "string"
+          },
+          "waiting_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Waiting Reason"
+          }
+        },
+        "required": [
+          "execution_id",
+          "tenant_id",
+          "created_by",
+          "ratio_module",
+          "destination",
+          "release",
+          "stage",
+          "status",
+          "state_version",
+          "corpus_artifact",
+          "ratio_artifact",
+          "cerne_artifact",
+          "lux_artifact",
+          "released_artifact",
+          "current_ratio_phase",
+          "waiting_reason",
+          "last_operator_actor",
+          "last_operator_decision",
+          "cerne_gate",
+          "last_error_code",
+          "retry_stage"
+        ],
+        "title": "ExecutionResponse",
+        "type": "object"
+      },
+      "FinalActionBody": {
+        "additionalProperties": false,
+        "properties": {
+          "actor_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:@/-]*$",
+            "title": "Actor Id",
+            "type": "string"
+          },
+          "expected_version": {
+            "minimum": 0.0,
+            "title": "Expected Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "expected_version",
+          "actor_id"
+        ],
+        "title": "FinalActionBody",
+        "type": "object"
+      },
+      "FinalIntegrityFailureBody": {
+        "additionalProperties": false,
+        "properties": {
+          "actor_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:@/-]*$",
+            "title": "Actor Id",
+            "type": "string"
+          },
+          "expected_version": {
+            "minimum": 0.0,
+            "title": "Expected Version",
+            "type": "integer"
+          },
+          "reason_code": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:-]*$",
+            "title": "Reason Code",
+            "type": "string"
+          }
+        },
+        "required": [
+          "expected_version",
+          "actor_id",
+          "reason_code"
+        ],
+        "title": "FinalIntegrityFailureBody",
+        "type": "object"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "title": "Detail",
+            "type": "array"
+          }
+        },
+        "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "LuxDataMode": {
+        "enum": [
+          "PUBLICO",
+          "PSEUDONIMIZADO",
+          "CORPUS"
+        ],
+        "title": "LuxDataMode",
+        "type": "string"
+      },
+      "LuxMode": {
+        "enum": [
+          "PADRAO",
+          "CLAREZA",
+          "ESTILO"
+        ],
+        "title": "LuxMode",
+        "type": "string"
+      },
+      "LuxRefineBody": {
+        "additionalProperties": false,
+        "properties": {
+          "actor_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:@/-]*$",
+            "title": "Actor Id",
+            "type": "string"
+          },
+          "data_mode": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LuxDataMode"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "expected_version": {
+            "minimum": 0.0,
+            "title": "Expected Version",
+            "type": "integer"
+          },
+          "mode": {
+            "$ref": "#/components/schemas/LuxMode",
+            "default": "PADRAO"
+          },
+          "profile": {
+            "anyOf": [
+              {
+                "maxLength": 128,
+                "minLength": 1,
+                "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:-]*$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Profile"
+          }
+        },
+        "required": [
+          "expected_version",
+          "actor_id"
+        ],
+        "title": "LuxRefineBody",
+        "type": "object"
+      },
+      "LuxRefineResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "artifact": {
+            "$ref": "#/components/schemas/ArtifactResponse"
+          },
+          "created": {
+            "title": "Created",
+            "type": "boolean"
+          },
+          "data_mode": {
+            "$ref": "#/components/schemas/LuxDataMode"
+          },
+          "execution": {
+            "$ref": "#/components/schemas/ExecutionResponse"
+          },
+          "mode": {
+            "$ref": "#/components/schemas/LuxMode"
+          },
+          "privacy_applied": {
+            "title": "Privacy Applied",
+            "type": "boolean"
+          },
+          "profile": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Profile"
+          },
+          "suppression_reinforced": {
+            "title": "Suppression Reinforced",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "created",
+          "execution",
+          "artifact",
+          "mode",
+          "data_mode",
+          "profile",
+          "privacy_applied",
+          "suppression_reinforced"
+        ],
+        "title": "LuxRefineResponse",
+        "type": "object"
+      },
+      "LuxRetryBody": {
+        "additionalProperties": false,
+        "properties": {
+          "actor_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:@/-]*$",
+            "title": "Actor Id",
+            "type": "string"
+          },
+          "decision_code": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:-]*$",
+            "title": "Decision Code",
+            "type": "string"
+          },
+          "expected_version": {
+            "minimum": 0.0,
+            "title": "Expected Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "expected_version",
+          "actor_id",
+          "decision_code"
+        ],
+        "title": "LuxRetryBody",
+        "type": "object"
+      },
+      "RatioActionBody": {
+        "additionalProperties": false,
+        "properties": {
+          "action": {
+            "$ref": "#/components/schemas/RatioActionKind"
+          },
+          "actor_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:@/-]*$",
+            "title": "Actor Id",
+            "type": "string"
+          },
+          "blocking_code": {
+            "anyOf": [
+              {
+                "maxLength": 128,
+                "minLength": 1,
+                "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:-]*$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Blocking Code"
+          },
+          "expected_revision": {
+            "minimum": 0.0,
+            "title": "Expected Revision",
+            "type": "integer"
+          },
+          "target_phase": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RatioPhase"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "troia_triggers": {
+            "items": {
+              "$ref": "#/components/schemas/TroiaTrigger"
+            },
+            "title": "Troia Triggers",
+            "type": "array"
+          }
+        },
+        "required": [
+          "action",
+          "expected_revision",
+          "actor_id"
+        ],
+        "title": "RatioActionBody",
+        "type": "object"
+      },
+      "RatioActionKind": {
+        "enum": [
+          "VALIDATE",
+          "VALIDATE_WITH_CAVEAT",
+          "ADVANCE",
+          "CONFIGURE_TROIA",
+          "VALIDATE_TROIA",
+          "BLOCK_TROIA",
+          "RESUME_TROIA",
+          "RETURN_AFTER_CHANGE"
+        ],
+        "title": "RatioActionKind",
+        "type": "string"
+      },
+      "RatioExecuteBody": {
+        "additionalProperties": false,
+        "properties": {
+          "actor_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:@/-]*$",
+            "title": "Actor Id",
+            "type": "string"
+          },
+          "expected_revision": {
+            "minimum": 0.0,
+            "title": "Expected Revision",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "expected_revision",
+          "actor_id"
+        ],
+        "title": "RatioExecuteBody",
+        "type": "object"
+      },
+      "RatioExecutionResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "artifact": {
+            "$ref": "#/components/schemas/ArtifactResponse"
+          },
+          "artifact_roles": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Artifact Roles",
+            "type": "array"
+          },
+          "created": {
+            "title": "Created",
+            "type": "boolean"
+          },
+          "execution": {
+            "$ref": "#/components/schemas/ExecutionResponse"
+          },
+          "ratio": {
+            "$ref": "#/components/schemas/RatioStateResponse"
+          }
+        },
+        "required": [
+          "created",
+          "execution",
+          "ratio",
+          "artifact",
+          "artifact_roles"
+        ],
+        "title": "RatioExecutionResponse",
+        "type": "object"
+      },
+      "RatioFinalizeBody": {
+        "additionalProperties": false,
+        "properties": {
+          "actor_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:@/-]*$",
+            "title": "Actor Id",
+            "type": "string"
+          },
+          "expected_revision": {
+            "minimum": 0.0,
+            "title": "Expected Revision",
+            "type": "integer"
+          },
+          "expected_version": {
+            "minimum": 0.0,
+            "title": "Expected Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "expected_revision",
+          "actor_id",
+          "expected_version"
+        ],
+        "title": "RatioFinalizeBody",
+        "type": "object"
+      },
+      "RatioFinalizeResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "artifact": {
+            "$ref": "#/components/schemas/ArtifactResponse"
+          },
+          "created": {
+            "title": "Created",
+            "type": "boolean"
+          },
+          "execution": {
+            "$ref": "#/components/schemas/ExecutionResponse"
+          },
+          "ratio": {
+            "$ref": "#/components/schemas/RatioStateResponse"
+          }
+        },
+        "required": [
+          "created",
+          "execution",
+          "ratio",
+          "artifact"
+        ],
+        "title": "RatioFinalizeResponse",
+        "type": "object"
+      },
+      "RatioModule": {
+        "enum": [
+          "RI",
+          "ED",
+          "MS"
+        ],
+        "title": "RatioModule",
+        "type": "string"
+      },
+      "RatioMutationResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "created": {
+            "title": "Created",
+            "type": "boolean"
+          },
+          "execution": {
+            "$ref": "#/components/schemas/ExecutionResponse"
+          },
+          "ratio": {
+            "$ref": "#/components/schemas/RatioStateResponse"
+          }
+        },
+        "required": [
+          "created",
+          "execution",
+          "ratio"
+        ],
+        "title": "RatioMutationResponse",
+        "type": "object"
+      },
+      "RatioPhase": {
+        "enum": [
+          "RI_01",
+          "RI_02",
+          "RI_03",
+          "RI_04",
+          "RI_05",
+          "RI_06",
+          "ED_01",
+          "ED_02",
+          "ED_03",
+          "ED_04",
+          "ED_05",
+          "MS_01",
+          "MS_02",
+          "MS_03",
+          "MS_04",
+          "MS_05",
+          "MS_06",
+          "MS_07"
+        ],
+        "title": "RatioPhase",
+        "type": "string"
+      },
+      "RatioPhaseResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "phase": {
+            "$ref": "#/components/schemas/RatioPhase"
+          },
+          "status": {
+            "$ref": "#/components/schemas/RatioPhaseStatus"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "phase",
+          "title",
+          "status"
+        ],
+        "title": "RatioPhaseResponse",
+        "type": "object"
+      },
+      "RatioPhaseStatus": {
+        "enum": [
+          "NOT_STARTED",
+          "ANALYZING",
+          "BLOCKED",
+          "PENDING_REMEDIATION",
+          "VALIDATED",
+          "VALIDATED_WITH_NONBLOCKING_CAVEAT",
+          "DISPENSED_BY_EXCEPTION",
+          "INVALIDATED_BY_SUBSTANTIAL_CHANGE",
+          "ENDED_FOR_NOW_AFTER_INJUNCTION"
+        ],
+        "title": "RatioPhaseStatus",
+        "type": "string"
+      },
+      "RatioStartBody": {
+        "additionalProperties": false,
+        "properties": {
+          "actor_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:@/-]*$",
+            "title": "Actor Id",
+            "type": "string"
+          },
+          "expected_version": {
+            "minimum": 0.0,
+            "title": "Expected Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "expected_version",
+          "actor_id"
+        ],
+        "title": "RatioStartBody",
+        "type": "object"
+      },
+      "RatioStateResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "current_phase": {
+            "$ref": "#/components/schemas/RatioPhase"
+          },
+          "current_phase_title": {
+            "title": "Current Phase Title",
+            "type": "string"
+          },
+          "last_operator_action": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Operator Action"
+          },
+          "module": {
+            "$ref": "#/components/schemas/RatioModule"
+          },
+          "phases": {
+            "items": {
+              "$ref": "#/components/schemas/RatioPhaseResponse"
+            },
+            "title": "Phases",
+            "type": "array"
+          },
+          "revision": {
+            "title": "Revision",
+            "type": "integer"
+          },
+          "troia": {
+            "$ref": "#/components/schemas/RatioTroiaResponse"
+          }
+        },
+        "required": [
+          "module",
+          "current_phase",
+          "current_phase_title",
+          "revision",
+          "last_operator_action",
+          "phases",
+          "troia"
+        ],
+        "title": "RatioStateResponse",
+        "type": "object"
+      },
+      "RatioTroiaResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "blocking_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Blocking Code"
+          },
+          "mode": {
+            "$ref": "#/components/schemas/TroiaMode"
+          },
+          "phase": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RatioPhase"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "status": {
+            "$ref": "#/components/schemas/TroiaStatus"
+          },
+          "triggers": {
+            "items": {
+              "$ref": "#/components/schemas/TroiaTrigger"
+            },
+            "title": "Triggers",
+            "type": "array"
+          }
+        },
+        "required": [
+          "mode",
+          "phase",
+          "status",
+          "triggers",
+          "blocking_code"
+        ],
+        "title": "RatioTroiaResponse",
+        "type": "object"
+      },
+      "ReleaseResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "atrio_api_version": {
+            "title": "Atrio Api Version",
+            "type": "string"
+          },
+          "atrio_pii_version": {
+            "title": "Atrio Pii Version",
+            "type": "string"
+          },
+          "cerne_module_version": {
+            "title": "Cerne Module Version",
+            "type": "string"
+          },
+          "cerne_service_build": {
+            "title": "Cerne Service Build",
+            "type": "string"
+          },
+          "corpus_version": {
+            "title": "Corpus Version",
+            "type": "string"
+          },
+          "lux_version": {
+            "title": "Lux Version",
+            "type": "string"
+          },
+          "prompt_bundle_hash": {
+            "title": "Prompt Bundle Hash",
+            "type": "string"
+          },
+          "ratio_version": {
+            "title": "Ratio Version",
+            "type": "string"
+          },
+          "release_id": {
+            "title": "Release Id",
+            "type": "string"
+          },
+          "schema_version": {
+            "title": "Schema Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "release_id",
+          "atrio_api_version",
+          "corpus_version",
+          "ratio_version",
+          "cerne_module_version",
+          "cerne_service_build",
+          "lux_version",
+          "atrio_pii_version",
+          "prompt_bundle_hash",
+          "schema_version"
+        ],
+        "title": "ReleaseResponse",
+        "type": "object"
+      },
+      "TroiaMode": {
+        "description": "Forma de presença de TROIA no módulo ativo.",
+        "enum": [
+          "AUTONOMOUS_REQUIRED",
+          "EMBEDDED_CONDITIONAL",
+          "NOT_DEFINED"
+        ],
+        "title": "TroiaMode",
+        "type": "string"
+      },
+      "TroiaStatus": {
+        "description": "Estado interno do protocolo TROIA.",
+        "enum": [
+          "NOT_STARTED",
+          "RUNNING",
+          "BLOCKED",
+          "PENDING_REMEDIATION",
+          "VALIDATED",
+          "DISPENSED",
+          "INVALIDATED",
+          "NOT_DEFINED"
+        ],
+        "title": "TroiaStatus",
+        "type": "string"
+      },
+      "TroiaTrigger": {
+        "description": "Gatilhos normativos do teste contrafactual interno do módulo ED.",
+        "enum": [
+          "INFRINGING_EFFECT_REQUEST",
+          "MATERIAL_RESULT_CHANGE",
+          "RELEVANT_ADVERSARIAL_ROUTE",
+          "MERITS_REDISCUSSION_RISK",
+          "REASONING_DISPOSITION_CONTRADICTION",
+          "BREAKING_POINT_IDENTIFIED",
+          "FUTURE_VOTE_OMISSION_RISK"
+        ],
+        "title": "TroiaTrigger",
+        "type": "string"
+      },
+      "ValidationError": {
+        "properties": {
+          "ctx": {
+            "title": "Context",
+            "type": "object"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "title": "Location",
+            "type": "array"
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "description": "Via única local para CORPUS → RATIO → CERNE → LUX. A API transporta apenas comandos, códigos e referências.",
+    "title": "ATRIO Local API",
+    "version": "0.7.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/v1/executions": {
+      "post": {
+        "operationId": "create_execution_v1_executions_post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "maxLength": 200,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:@/-]*$",
+              "title": "Idempotency-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateExecutionBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateExecutionResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create Execution"
+      }
+    },
+    "/v1/executions/{execution_id}": {
+      "get": {
+        "operationId": "get_execution_v1_executions__execution_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "execution_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Execution Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExecutionResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Execution"
+      }
+    },
+    "/v1/executions/{execution_id}/cerne/audit": {
+      "post": {
+        "operationId": "audit_cerne_v1_executions__execution_id__cerne_audit_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "execution_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Execution Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "maxLength": 200,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:@/-]*$",
+              "title": "Idempotency-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CerneAuditBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CerneAuditResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Audit Cerne"
+      }
+    },
+    "/v1/executions/{execution_id}/cerne/reopen-total-block": {
+      "post": {
+        "operationId": "reopen_cerne_total_block_v1_executions__execution_id__cerne_reopen_total_block_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "execution_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Execution Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CerneOperatorBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExecutionResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Reopen Cerne Total Block"
+      }
+    },
+    "/v1/executions/{execution_id}/cerne/return-to-ratio": {
+      "post": {
+        "operationId": "return_cerne_to_ratio_v1_executions__execution_id__cerne_return_to_ratio_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "execution_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Execution Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CerneOperatorBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExecutionResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Return Cerne To Ratio"
+      }
+    },
+    "/v1/executions/{execution_id}/commands": {
+      "post": {
+        "operationId": "apply_command_v1_executions__execution_id__commands_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "execution_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Execution Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExecutionResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Apply Command"
+      }
+    },
+    "/v1/executions/{execution_id}/corpus/documents": {
+      "get": {
+        "operationId": "list_corpus_documents_v1_executions__execution_id__corpus_documents_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "execution_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Execution Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/CorpusDocumentStatusResponse"
+                  },
+                  "title": "Response List Corpus Documents V1 Executions  Execution Id  Corpus Documents Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "List Corpus Documents"
+      },
+      "post": {
+        "operationId": "create_corpus_document_v1_executions__execution_id__corpus_documents_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "execution_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Execution Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "maxLength": 200,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:@/-]*$",
+              "title": "Idempotency-Key",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "X-ATRIO-Expected-Version",
+            "required": true,
+            "schema": {
+              "minimum": 0,
+              "title": "X-Atrio-Expected-Version",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "header",
+            "name": "X-ATRIO-Actor",
+            "required": true,
+            "schema": {
+              "maxLength": 200,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:@/-]*$",
+              "title": "X-Atrio-Actor",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "title": "Content-Type",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Content-Length",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Content-Length"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateCorpusDocumentResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create Corpus Document"
+      }
+    },
+    "/v1/executions/{execution_id}/corpus/documents/{document_id}/review": {
+      "post": {
+        "operationId": "review_corpus_document_v1_executions__execution_id__corpus_documents__document_id__review_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "execution_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Execution Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "document_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Document Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CorpusReviewBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CorpusReviewResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Review Corpus Document"
+      }
+    },
+    "/v1/executions/{execution_id}/corpus/finalize": {
+      "post": {
+        "operationId": "finalize_corpus_v1_executions__execution_id__corpus_finalize_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "execution_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Execution Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CorpusActionBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CorpusFinalizeResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Finalize Corpus"
+      }
+    },
+    "/v1/executions/{execution_id}/corpus/process": {
+      "post": {
+        "operationId": "process_corpus_documents_v1_executions__execution_id__corpus_process_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "execution_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Execution Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CorpusActionBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CorpusBatchResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Process Corpus Documents"
+      }
+    },
+    "/v1/executions/{execution_id}/events": {
+      "get": {
+        "operationId": "get_events_v1_executions__execution_id__events_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "execution_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Execution Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/EventResponse"
+                  },
+                  "title": "Response Get Events V1 Executions  Execution Id  Events Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Events"
+      }
+    },
+    "/v1/executions/{execution_id}/final-integrity/fail": {
+      "post": {
+        "operationId": "fail_final_integrity_v1_executions__execution_id__final_integrity_fail_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "execution_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Execution Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FinalIntegrityFailureBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExecutionResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Fail Final Integrity"
+      }
+    },
+    "/v1/executions/{execution_id}/final-integrity/pass": {
+      "post": {
+        "operationId": "pass_final_integrity_v1_executions__execution_id__final_integrity_pass_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "execution_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Execution Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FinalActionBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExecutionResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Pass Final Integrity"
+      }
+    },
+    "/v1/executions/{execution_id}/final-integrity/retry-lux": {
+      "post": {
+        "operationId": "retry_lux_after_integrity_block_v1_executions__execution_id__final_integrity_retry_lux_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "execution_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Execution Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LuxRetryBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExecutionResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Retry Lux After Integrity Block"
+      }
+    },
+    "/v1/executions/{execution_id}/lux/refine": {
+      "post": {
+        "operationId": "refine_lux_v1_executions__execution_id__lux_refine_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "execution_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Execution Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "maxLength": 200,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:@/-]*$",
+              "title": "Idempotency-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LuxRefineBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LuxRefineResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Refine Lux"
+      }
+    },
+    "/v1/executions/{execution_id}/ratio": {
+      "get": {
+        "operationId": "get_ratio_v1_executions__execution_id__ratio_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "execution_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Execution Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RatioStateResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Ratio"
+      }
+    },
+    "/v1/executions/{execution_id}/ratio/actions": {
+      "post": {
+        "operationId": "apply_ratio_action_v1_executions__execution_id__ratio_actions_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "execution_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Execution Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "maxLength": 200,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:@/-]*$",
+              "title": "Idempotency-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RatioActionBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RatioMutationResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Apply Ratio Action"
+      }
+    },
+    "/v1/executions/{execution_id}/ratio/execute": {
+      "post": {
+        "operationId": "execute_ratio_phase_v1_executions__execution_id__ratio_execute_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "execution_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Execution Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "maxLength": 200,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:@/-]*$",
+              "title": "Idempotency-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RatioExecuteBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RatioExecutionResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Execute Ratio Phase"
+      }
+    },
+    "/v1/executions/{execution_id}/ratio/finalize": {
+      "post": {
+        "operationId": "finalize_ratio_v1_executions__execution_id__ratio_finalize_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "execution_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Execution Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "maxLength": 200,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:@/-]*$",
+              "title": "Idempotency-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RatioFinalizeBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RatioFinalizeResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Finalize Ratio"
+      }
+    },
+    "/v1/executions/{execution_id}/ratio/start": {
+      "post": {
+        "operationId": "start_ratio_v1_executions__execution_id__ratio_start_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "execution_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Execution Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "maxLength": 200,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.:@/-]*$",
+              "title": "Idempotency-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RatioStartBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RatioMutationResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Start Ratio"
+      }
+    },
+    "/v1/executions/{execution_id}/release": {
+      "post": {
+        "operationId": "release_execution_v1_executions__execution_id__release_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "execution_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Execution Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FinalActionBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExecutionResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Release Execution"
+      }
+    },
+    "/v1/health/live": {
+      "get": {
+        "operationId": "live_v1_health_live_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "title": "Response Live V1 Health Live Get",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Live"
+      }
+    },
+    "/v1/health/ready": {
+      "get": {
+        "operationId": "ready_v1_health_ready_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "title": "Response Ready V1 Health Ready Get",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Ready"
+      }
+    }
+  }
+}

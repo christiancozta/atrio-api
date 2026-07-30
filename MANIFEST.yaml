@@ -1,0 +1,160 @@
+# ATRIO — manifesto da fonte canonica. GERADO por build/build.py.
+build: 698248
+gerado_em: 2026-07-26
+
+# build resolve para versao, data e caminho de origem. E por isso que
+# nada envelhece dentro do conteudo e arquivo orfao segue rastreavel.
+artefatos:
+  - artefato: corpus/guia.md
+    pacote: corpus
+    versao: 1.5.0
+    origem: ver RELATORIO_NORMALIZACAO.md, secao 3
+    sha256: cb3b57b74c42d71c05ed4d86d23cf3191261798a15083bf3b0154382313146af
+  - artefato: lux/conhecimento/_pendentes/perfis_retirados.md
+    pacote: lux
+    versao: 6.0.0
+    origem: ver RELATORIO_NORMALIZACAO.md, secao 3
+    sha256: 24bb31cc0d697e15323e23f218945e854594d5a3bad5d1894af9195a1babc8ad
+  - artefato: lux/conhecimento/guia_templates.md
+    pacote: lux
+    versao: 6.0.0
+    origem: 4.LUX/02_UPLOAD_CONHECIMENTO_GUIA_E_TEMPLATES.txt
+    sha256: 5d37828020b5fe117b6c88b8919f34602224786afa5ac09b7640e4ff15f0b8ee
+  - artefato: lux/conhecimento/perfis_estilo.md
+    pacote: lux
+    versao: 6.0.0
+    origem: 4.LUX/01_UPLOAD_CONHCIMENTO_PERFIS_DE_ESTILO.txt
+    sha256: 62a0e32b6e0673ff1541a63ae5a1e43cd1b4402cd2c2acace4edcb5328653715
+  - artefato: lux/kernel/instructions.md
+    pacote: lux
+    versao: 6.0.0
+    origem: 4.LUX/00_LUX_INSTRUCTIONS.txt
+    sha256: 86fc379e25832fa032049e56cc7da1374bd4ea8102407e0ef277559237f51b3e
+  - artefato: ratio/bases/_pendentes/ri_conjunto.md
+    pacote: ratio
+    versao: 7.0.0
+    origem: ver RELATORIO_NORMALIZACAO.md, secao 3
+    sha256: 9723089293bbcb81e6a395520f50ee65ed542ea5e01e5e0d0420e8e8fd45f158
+  - artefato: ratio/bases/calendario_juridico.md
+    pacote: ratio
+    versao: 7.0.0
+    origem: 2.RATIO/03_calendario_juridico_v4.txt
+    sha256: 28256cf6248eb636ba28654473b2ab918a77885227f618057f01f00907ea85f2
+  - artefato: ratio/bases/fundamentos.md
+    pacote: ratio
+    versao: 7.0.0
+    origem: 2.RATIO/04_fundamentos_v4.txt
+    sha256: 69ef92dd7800795e3eb8f86ff024f3ae3736208aa3fef5bf2e804dd8d93da596
+  - artefato: ratio/bases/guia_estilo.md
+    pacote: ratio
+    versao: 7.0.0
+    origem: 2.RATIO/02_guia_estilo_v4.txt
+    sha256: 5c3926f01917f06ad257be7f467a98ab3330305628741e77d5100bf8a572b753
+  - artefato: ratio/bases/templates_voto.md
+    pacote: ratio
+    versao: 7.0.0
+    origem: 2.RATIO/05_templates_voto_v4.txt
+    sha256: 83bd577acc1e00f67ccc6bd42eb0303568cc091a710b388fe226710ba30d4077
+  - artefato: ratio/estado/estado_do_caso.md
+    pacote: ratio
+    versao: 7.0.0
+    origem: 2.RATIO/01_estado_do_caso_v4.txt
+    sha256: b44bd627cc85d8a1870579ecd98fe295f949d4a4dfaba236515961162f98ef9c
+  - artefato: ratio/governanca/_espelho.md
+    pacote: ratio
+    versao: 7.0.0
+    origem: ver RELATORIO_NORMALIZACAO.md, secao 3
+    sha256: 890660a47d338d11618f6155a1b7e2d5212c5dccfbe419f286c4042a8c77601f
+  - artefato: ratio/governanca/core_governanca.md
+    pacote: ratio
+    versao: 7.0.0
+    origem: 2.RATIO/00_ratio_core_governanca_v4.txt
+    sha256: e95e305702fc020be6e531fbfb601f8ab2e747bc0b7009d5819852190db25169
+  - artefato: ratio/governanca/instructions.md
+    pacote: ratio
+    versao: 7.0.0
+    origem: bloco RATIO — GOVERNANCA CRITICA, entregue pelo autor em 2026-07-26
+    sha256: f0429a1a639bf68753040036656e815725ca087a035b0bc86948aa81d14c2570
+  - artefato: ratio/modulos/modulo_ed.md
+    pacote: ratio
+    versao: 7.0.0
+    origem: 2.RATIO/MD_ED_v4.txt
+    sha256: 52ed8258a62297e75560098b5afb93b7f6b510ca87bb67e6d3e0ce085827424b
+  - artefato: ratio/modulos/modulo_ms.md
+    pacote: ratio
+    versao: 7.0.0
+    origem: 2.RATIO/MD_MS_v4.txt
+    sha256: a93638eca37711efea3945c3b4dffa195dad6b8f8c31c668f627a8060c2daf77
+  - artefato: ratio/modulos/modulo_ri.md
+    pacote: ratio
+    versao: 7.0.0
+    origem: 2.RATIO/MD_RI_v4.txt
+    sha256: 7c3310060edc338ba5c044b50eb7048f6d0eb8492312bb077721ab89aeec66de
+  - artefato: ratio/operacao/readme_operacional.md
+    pacote: ratio
+    versao: 7.0.0
+    origem: 2.RATIO/09_readme_operacional_v4.txt
+    sha256: d955defd6c01af6a6a6403043905495a07a841936aeafcb354e0576310f66524
+  - artefato: atrio_pii/atrio_pii.py
+    pacote: atrio_pii
+    versao: 1.0.0
+    origem: ver RELATORIO_NORMALIZACAO.md, secao 3
+    sha256: 2275679dd6654bfe21e08795786711f29ff4cf749ab4dda2f165d0c2109a2f07
+  - artefato: atrio_pii/test_atrio_pii.py
+    pacote: atrio_pii
+    versao: 1.0.0
+    origem: ver RELATORIO_NORMALIZACAO.md, secao 3
+    sha256: 73131e67efc91632196516ebb70da64797888d5ddb3de17d4812a604a5b7be55
+  - artefato: corpus/src/atrio_inventario.py
+    pacote: corpus
+    versao: 1.5.0
+    origem: ver RELATORIO_NORMALIZACAO.md, secao 3
+    sha256: 5d92a925ceae8157d52a56c75306c6c8bf07f9deb176b51bb9a0a4379f3022b8
+  - artefato: corpus/src/atrio_pdf.py
+    pacote: corpus
+    versao: 1.5.0
+    origem: ver RELATORIO_NORMALIZACAO.md, secao 3
+    sha256: 052d8d564e43df1b195a37cc4ba83ba0b281cd848f0c923e233ad128bbda8b3b
+  - artefato: corpus/src/captura.py
+    pacote: corpus
+    versao: 1.5.0
+    origem: ver RELATORIO_NORMALIZACAO.md, secao 3
+    sha256: 7e337c51b144d2235e7dca4fc9e37a882ca92d5b37d5c233bff5a17a93b4b08d
+  - artefato: corpus/src/corpus_pseudonimizar.py
+    pacote: corpus
+    versao: 1.5.0
+    origem: ver RELATORIO_NORMALIZACAO.md, secao 3
+    sha256: 621981a8f4c37b317c4496fb915bb3e428e6eae85a19fb77f724665be4e3f0e1
+  - artefato: corpus/src/exportar_inventario.py
+    pacote: corpus
+    versao: 1.5.0
+    origem: ver RELATORIO_NORMALIZACAO.md, secao 3
+    sha256: 96013d1b84a2910caa24514d0344a7ee8ce49b5f31e79abf31f86880df34c4b1
+  - artefato: corpus/src/ocr_pendentes.py
+    pacote: corpus
+    versao: 1.5.0
+    origem: ver RELATORIO_NORMALIZACAO.md, secao 3
+    sha256: 6d50f6bd5e996af4cd92c0e5a0d602a5601e79bcb58b8106258b8c40c80aa93b
+  - artefato: corpus/src/painel.py
+    pacote: corpus
+    versao: 1.5.0
+    origem: ver RELATORIO_NORMALIZACAO.md, secao 3
+    sha256: 4368dade62851231922acb39c56a07c5478323f1ad44e2d23c75d5531749ef38
+  - artefato: corpus/src/verificar_dependencias.py
+    pacote: corpus
+    versao: 1.5.0
+    origem: ver RELATORIO_NORMALIZACAO.md, secao 3
+    sha256: b0169fb0703485e6d368cfb1eac728ac2786d876089f2b163f9176e7c843e50c
+  - artefato: lux/bin/lux_pentefino.py
+    pacote: lux
+    versao: 6.0.0
+    origem: ver RELATORIO_NORMALIZACAO.md, secao 3
+    sha256: ac4cea0963f47f5ff0129a39972ffe016f2af4f66d3fd02b6f01a7825f6ecb8c
+alvos_gerados:
+  - ratio_restrito
+  - ratio_amplo
+  - lux_restrito
+  - lux_amplo
+  - cerne_restrito
+  - cerne_amplo
+  - corpus_local

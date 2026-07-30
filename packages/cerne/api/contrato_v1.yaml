@@ -1,0 +1,104 @@
+# ATRIO · CERNE · contrato da API v1
+#
+# DOCUMENTACAO, NAO IMPLEMENTACAO. Este arquivo descreve o contrato que o
+# servico ja atende hoje. Nenhum endpoint foi inventado aqui: tudo abaixo foi
+# lido do codigo em execucao, em CORPUS/.ATRIO/3.CERNE/api/.
+#
+# Fonte: src/cerne_api/main.py, src/cerne_api/domain.py
+# Lido em: 2026-07-26
+#
+# DIVERGENCIA DE VERSAO, registrada em RELATORIO_NORMALIZACAO.md:
+#   o servico se declara 0.2.0 (pyproject.toml e __init__.py)
+#   o cliente HTML e o inventario do ATRIO tratam o CERNE como 1.2.0
+# Os dois numeros nao foram mexidos. Conferir com o autor antes de unificar.
+
+servico:
+  nome: cerne_api
+  versao_declarada_no_codigo: "0.2.0"
+  base_path: /v1
+  autenticacao: chave de API no endpoint de auditoria (require_api_key)
+  persistencia: somente metadados; o texto juridico e o relatorio nao sao gravados
+
+endpoints:
+
+  - metodo: POST
+    caminho: /v1/auditorias
+    resposta_http: 201
+    autenticado: true
+    descricao: executa a auditoria completa do raciocinio decisorio
+
+  - metodo: GET
+    caminho: /v1/saude
+    autenticado: false
+    descricao: estado operacional, versao da API e provedor de modelo
+
+  - metodo: GET
+    caminho: /v1/contrato
+    autenticado: false
+    descricao: devolve este mesmo contrato, resolvido em tempo de execucao
+
+entrada:
+  # os cinco campos de POST /v1/auditorias
+  caso_id:
+    tipo: string
+    obrigatorio: false
+    min: 1
+    max: 120
+  tipo_objeto:
+    tipo: enum
+    obrigatorio: true
+    valores: [decisao_liminar, voto, sentenca, acordao]
+  natureza_fonte:
+    tipo: enum
+    obrigatorio: true
+    valores: [caso_ficticio, decisao_publica]
+  origem:
+    tipo: string
+    obrigatorio: condicional
+    max: 300
+    regra: "natureza_fonte = decisao_publica exige origem preenchida"
+  texto:
+    tipo: string
+    obrigatorio: true
+    min: 40
+    max: 250000
+
+eixos:
+  # onze eixos, aplicados de forma isolada antes dos confrontos
+  quantidade: 11
+  codigos: [EX001, EX002, EX003, EX004, EX005, EX006, EX007, EX008, EX009, EX010, EX011]
+
+gates:
+  # cinco estados de saida da consolidacao
+  - AVANCA
+  - AVANCA_COM_AJUSTE
+  - REVISAO_HUMANA
+  - BLOQUEIO_PARCIAL
+  - BLOQUEIO_TOTAL
+
+saida:
+  # campos de AuditResponse
+  - auditoria_id
+  - criada_em
+  - triagem
+  - lentes
+  - confrontos
+  - gate
+  - saida_interna
+  - saida_cliente
+  - relatorio
+  - log
+  - bloco_log
+  - rastro_modelo
+  - avisos_operacionais
+
+protocolo:
+  # a versao 0.2.0 nao aceita parametro de profundidade, modo abreviado,
+  # escolha de eixos nem formato de saida. Toda entrada valida executa isto:
+  - conferencia e triagem
+  - aplicacao isolada dos onze eixos
+  - confrontos que cumprirem os criterios de ativacao
+  - consolidacao pelo gate
+  - traducao sanitizada para a tela
+  - relatorio tecnico completo em Markdown
+  - log somente de metadados

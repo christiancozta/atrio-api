@@ -1,0 +1,496 @@
+# PROTOCOLO DE TESTE
+
+## Função
+
+Este documento define o protocolo de teste do sistema.
+
+O objetivo é validar se o pacote operacional identifica riscos relevantes de raciocínio jurídico, preserva fronteiras entre lentes, produz achados emergentes reais quando cabível, evita dupla marcação indevida e define gate técnico coerente.
+
+O teste não avalia apenas se o modelo “acha problemas”.
+
+O teste avalia se o modelo consegue controlar o percurso da auditoria.
+
+---
+
+# 1. Objetivo do teste
+
+O teste deve responder:
+
+> O o sistema consegue auditar um output jurídico sem inflar críticas, sem confundir lentes e sem transformar qualquer fragilidade em bloqueio?
+
+A validação deve medir:
+
+1. precisão de triagem;
+2. fronteira entre lentes;
+3. qualidade dos achados isolados;
+4. existência real de achado emergente;
+5. controle de dupla marcação;
+6. gate técnico proporcional;
+7. saída interna auditável;
+8. saída cliente limpa;
+9. parcimônia operacional.
+
+---
+
+# 2. Materiais necessários
+
+Para cada teste, reunir:
+
+1. Output jurídico auditado.
+2. Tipo do objeto.
+3. Prompt aplicado.
+4. Modelo de IA utilizado.
+5. Resultado da triagem.
+6. Lente isolada.
+7. Rodada de confronto, quando houver.
+8. Gate técnico.
+9. Saída interna.
+10. Saída cliente, se houver.
+11. Avaliação humana final.
+
+---
+
+# 3. Tipos de output para teste
+
+Use pelo menos três classes de output.
+
+## Output ruim
+
+Deve conter falhas evidentes:
+
+- percentual sem método;
+- tese categórica sem lastro;
+- precedente usado de modo errado;
+- transporte indevido de regime;
+- conceito aberto fechado sem critério.
+
+Objetivo:
+
+Verificar se o sistema detecta falhas relevantes.
+
+---
+
+## Output médio
+
+Deve conter tese plausível, mas com riscos localizados.
+
+Objetivo:
+
+Verificar se o sistema evita bloqueio excessivo e aplica gate proporcional.
+
+---
+
+## Output bom
+
+Deve ter raciocínio tecnicamente sólido, com qualificadores, fontes e limites.
+
+Objetivo:
+
+Verificar se o sistema não critica por criticar.
+
+---
+
+# 4. Matriz mínima de teste
+
+Rodar, no mínimo, os seguintes confrontos:
+
+```text
+CF-019 — Peirce × Bion
+CF-010 — Matte-Blanco × Peirce
+CF-017 — Sócrates × Bion
+CF-012 — Matte-Blanco × MacCormick
+CF-006 — Raz × Bion
+CF-024 — Gadamer × Hart
+CF-007 — Levi × Matte-Blanco
+CF-008 — Levi × Peirce
+CF-014 — Toulmin × Peirce
+CF-016 — Sócrates × Peirce
+```
+
+---
+
+# 5. Sequência padrão de teste
+
+Para cada caso:
+
+```text
+1. Rodar PROMPT_TRIAGEM
+2. Registrar lentes e confrontos sugeridos
+3. Rodar PROMPT_RODADA_A_B para a primeira lente
+4. Rodar PROMPT_RODADA_A_B para a segunda lente
+5. Rodar PROMPT_mecanismo interno de confronto_RODADA_C
+6. Rodar PROMPT_GATE_TECNICO
+7. Gerar OUTPUT_INTERNO
+8. Gerar OUTPUT_CLIENTE
+9. Avaliar resultado contra critérios deste protocolo
+```
+
+---
+
+# 6. Critérios de aprovação da triagem
+
+A triagem é aprovada se:
+
+1. identifica corretamente o tipo de objeto;
+2. resume a tese principal sem distorção;
+3. aponta trechos de risco com impacto real;
+4. não transforma triagem em achado definitivo;
+5. indica lentes compatíveis com os sintomas;
+6. indica confrontos apenas quando há acoplamento plausível;
+7. diferencia checagem de validade e confronto;
+8. propõe sequência de auditoria viável.
+
+## Falhas graves de triagem
+
+- acionar todas as lentes sem necessidade;
+- ignorar risco central evidente;
+- confundir validade da fonte com raciocínio;
+- já declarar bloqueio definitivo;
+- inventar fonte;
+- classificar problema estilístico como risco estrutural.
+
+---
+
+# 7. Critérios de aprovação da Lente isolada
+
+A Lente isolada é aprovada se:
+
+1. aplica apenas uma lente;
+2. respeita o escopo da lente;
+3. produz achado próprio da lente;
+4. descarta achados que pertencem a outras lentes;
+5. sinaliza outras lentes sem contaminá-las;
+6. registra risco de dupla marcação;
+7. exporta produto útil para Rodada de confronto;
+8. não antecipa achado emergente.
+
+## Falhas graves da Lente isolada
+
+- misturar lentes;
+- produzir achado emergente antes da Rodada de confronto;
+- marcar percentual sem método como Peirce;
+- marcar hipótese como conclusão como Bion sem pseudocerteza;
+- marcar precedente mal operado como Raz quando o problema é o módulo de construção do raciocínio;
+- marcar conceito aberto como Gadamer sem horizonte interpretativo;
+- tratar toda analogia como simetrização indevida.
+
+---
+
+# 8. Critérios de aprovação da Rodada de confronto
+
+A Rodada de confronto é aprovada se:
+
+1. identifica os achados isolados considerados;
+2. declara o tipo de relação entre as lentes;
+3. verifica se há acoplamento funcional;
+4. produz achado emergente apenas se houver irredutibilidade;
+5. explica por que o achado não é A+B;
+6. avalia risco de dupla marcação;
+7. define produto exportável;
+8. evita soma aritmética de severidades.
+
+## Falhas graves da Rodada de confronto
+
+- chamar de emergente a mera soma dos achados;
+- repetir lente isolada sem integração;
+- criar marcador novo sem necessidade;
+- não explicar irredutibilidade;
+- elevar tudo a bloqueio total;
+- ignorar acoplamento funcional;
+- fundir achados que deveriam permanecer separados.
+
+---
+
+# 9. Critérios de aprovação do gate técnico
+
+O gate técnico é aprovado se:
+
+1. usa apenas os cinco estados autorizados;
+2. é proporcional ao impacto do achado;
+3. considera centralidade do trecho;
+4. separa bloqueio parcial e total;
+5. não soma severidades aritmeticamente;
+6. não deixa problema de raciocínio seguir ao módulo de refinamento textual;
+7. define condições claras de avanço;
+8. aponta encaminhamento correto.
+
+## Falhas graves do gate
+
+- criar estados próprios;
+- permitir avanço de tese central comprometida;
+- bloquear todo documento por falha lateral;
+- tratar problema estrutural como ajuste de redação;
+- enviar ao módulo de refinamento textual documento ainda bloqueado;
+- omitir condições de avanço.
+
+---
+
+# 10. Critérios de aprovação da saída interna
+
+A saída interna é aprovada se:
+
+1. permite auditoria por outro operador;
+2. mostra objeto, tese, trechos críticos e achados;
+3. expõe lentes e confrontos acionados;
+4. registra gate e roteamento;
+5. explica risco de dupla marcação;
+6. distingue achados isolados e emergentes;
+7. é técnica, mas não prolixa.
+
+## Falhas graves da saída interna
+
+- esconder o marcador aplicado;
+- não indicar localização;
+- não explicar impacto;
+- não apontar próximo passo;
+- virar ensaio teórico;
+- omitir gate.
+
+---
+
+# 11. Critérios de aprovação da saída cliente
+
+A saída cliente é aprovada se:
+
+1. não expõe códigos internos;
+2. não menciona lentes, confrontos ou autores;
+3. traduz o problema em linguagem prática;
+4. indica impacto;
+5. informa ajustes necessários;
+6. preserva o que pode ser aproveitado;
+7. orienta decisão de uso.
+
+## Falhas graves da saída cliente
+
+- expor metodologia interna;
+- usar marcadores técnicos;
+- alarmar sem necessidade;
+- omitir risco central;
+- ser vaga;
+- não dizer se o documento pode avançar.
+
+---
+
+# 12. Tabela de avaliação
+
+Use a seguinte tabela para cada teste:
+
+```text
+# AVALIAÇÃO DO TESTE o sistema
+
+## 1. Identificação
+Caso:
+Modelo:
+Objeto:
+Confronto testado:
+Data:
+
+## 2. Triagem
+Nota:
+Aprovado: sim/não
+Observações:
+
+## 3. Lente isolada
+Nota:
+Aprovado: sim/não
+Observações:
+
+## 4. Rodada de confronto
+Nota:
+Aprovado: sim/não
+Observações:
+
+## 5. Gate técnico
+Nota:
+Aprovado: sim/não
+Observações:
+
+## 6. Saída interna
+Nota:
+Aprovado: sim/não
+Observações:
+
+## 7. Saída cliente
+Nota:
+Aprovado: sim/não
+Observações:
+
+## 8. Nota final
+Nota:
+Aprovado: sim/não
+
+## 9. Ajustes necessários
+1.
+2.
+3.
+```
+
+---
+
+# 13. Escala de nota
+
+Use escala de 0 a 10.
+
+## 9 a 10
+
+Execução pronta para uso operacional.
+
+## 8 a 8,9
+
+Execução boa, com ajustes pontuais.
+
+## 7 a 7,9
+
+Execução utilizável em teste, mas ainda instável.
+
+## 6 a 6,9
+
+Execução parcialmente útil, exige revisão do prompt.
+
+## Abaixo de 6
+
+Execução reprovada.
+
+---
+
+# 14. Critérios de reprovação automática
+
+Reprovar automaticamente se ocorrer qualquer uma das situações:
+
+1. Invenção de fonte jurídica relevante.
+2. Vazamento de metodologia interna na saída cliente.
+3. Gate incompatível com o achado central.
+4. Rodada de confronto sem explicação de irredutibilidade.
+5. Confusão sistemática entre duas lentes.
+6. Bloqueio total sem impacto na tese central.
+7. Avanço permitido apesar de colapso de regime determinante.
+8. Percentual sem método preservado em recomendação estratégica.
+9. Validade de fonte ignorada quando era condição de análise.
+10. Envio ao módulo de refinamento textual de output com falha de raciocínio não saneada.
+
+---
+
+# 15. Registro de falhas por categoria
+
+Classifique falhas em:
+
+## Falha de triagem
+
+Erro na seleção de lentes ou confrontos.
+
+## Falha de fronteira
+
+Contaminação entre lentes.
+
+## Falha de emergência
+
+Rodada de confronto não produziu achado emergente real ou produziu emergência artificial.
+
+## Falha de gate
+
+Estado de avanço incompatível com achados.
+
+## Falha de saída
+
+Output interno ou cliente inadequado ao destinatário.
+
+## Falha de fonte
+
+Invenção, omissão ou mau tratamento de validade.
+
+## Falha de parcimônia
+
+Excesso de lentes, críticas ou bloqueios.
+
+---
+
+# 16. Teste de robustez
+
+Após a primeira rodada de testes, repetir os casos em pelo menos dois modelos diferentes.
+
+Comparar:
+
+1. consistência dos achados;
+2. estabilidade dos gates;
+3. diferença de severidade;
+4. tendência a criticar demais;
+5. tendência a deixar passar risco central;
+6. tendência a expor metodologia ao cliente.
+
+---
+
+# 17. Teste de falso positivo
+
+Use output bom.
+
+O o sistema deve conseguir concluir:
+
+- AVANÇA;
+- AVANÇA COM AJUSTE;
+- sem achado emergente;
+- sem bloqueio indevido.
+
+Se o sistema encontra achados fortes em output bom sem justificativa real, há inflação de auditoria.
+
+---
+
+# 18. Teste de falso negativo
+
+Use output ruim.
+
+O o sistema deve detectar:
+
+- risco central;
+- lente adequada;
+- confronto adequado, se houver;
+- gate proporcional;
+- roteamento corretivo.
+
+Se o sistema deixa passar o risco central, há falha crítica.
+
+---
+
+# 19. Teste de dupla marcação
+
+Use caso em que duas lentes incidem sobre o mesmo trecho.
+
+A avaliação deve verificar se o sistema:
+
+1. distingue as funções das lentes;
+2. evita duplicação aritmética;
+3. decide se os achados devem ser separados, hierarquizados ou fundidos;
+4. produz emergente apenas quando houver acoplamento funcional.
+
+---
+
+# 20. Teste de saída cliente
+
+Converter saída interna em saída cliente.
+
+Verificar:
+
+1. não há códigos;
+2. não há nomes internos;
+3. não há autores;
+4. há orientação prática;
+5. há estado do documento;
+6. há ajustes concretos;
+7. há recomendação final.
+
+---
+
+# 21. Comando padrão de teste
+
+Use o comando abaixo:
+
+```text
+Aplique o sistema ao output jurídico abaixo em modo completo de teste. Produza triagem, lente isolada conforme necessário, Rodada de confronto se houver confronto ativo, gate técnico, saída interna e saída cliente. Ao final, avalie a própria execução segundo o PROTOCOLO DE TESTE o sistema.
+```
+
+---
+
+# 22. Regra final
+
+Um teste bem-sucedido não é aquele em que o sistema encontra muitos problemas.
+
+Um teste bem-sucedido é aquele em que o sistema encontra o problema certo, no lugar certo, com a lente certa, o confronto certo e o gate certo.

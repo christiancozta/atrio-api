@@ -1,0 +1,368 @@
+# WORKFLOW SINTÉTICO DO PIPELINE
+
+## Função
+
+Este documento resume o pipeline operacional do sistema em etapas sequenciais.
+
+Use como mapa rápido de execução.
+
+---
+
+# 1. Pipeline geral
+
+```text
+ENTRADA
+↓
+CHECAGEM DE VALIDADE
+↓
+TRIAGEM
+↓
+LENTES ISOLADAS
+↓
+CONFRONTO / RODADA DE CONFRONTO
+↓
+GATE
+↓
+OUTPUT INTERNO
+↓
+OUTPUT CLIENTE
+↓
+LOG
+↓
+ENCAMINHAMENTO
+```
+
+---
+
+# 2. Etapa 0 — Entrada
+
+## Objetivo
+
+Receber o texto jurídico ou output de IA a ser auditado.
+
+## Entradas possíveis
+
+```text
+parecer;
+peça processual;
+cláusula;
+nota técnica;
+voto;
+decisão;
+memorial;
+output de IA jurídica;
+análise de risco.
+```
+
+## Saída da etapa
+
+```text
+texto recebido;
+tipo de objeto estimado;
+uso pretendido;
+necessidade aparente de validação de fonte.
+```
+
+---
+
+# 3. Etapa 1 — Checagem de validade
+
+## Objetivo
+
+Separar problema de fonte de problema de raciocínio.
+
+## Regra
+
+```text
+o módulo de validação de fontes valida fonte.
+o sistema audita uso da fonte.
+```
+
+## Encaminhar ao módulo de validação de fontes quando houver
+
+```text
+norma possivelmente revogada;
+precedente não identificado;
+súmula cancelada;
+tema superado;
+fonte inexistente;
+competência duvidosa;
+vigência não verificada.
+```
+
+## Saída da etapa
+
+```text
+[CHECAGEM DE VALIDADE NA ENTRADA]
+ou
+seguir para triagem.
+```
+
+---
+
+# 4. Etapa 2 — Triagem
+
+## Objetivo
+
+Decidir percurso, não mérito.
+
+## O que faz
+
+```text
+identifica tese principal;
+localiza trechos de risco;
+sugere lentes;
+sugere confrontos;
+define prioridade;
+decide se há risco suficiente para avançar.
+```
+
+## Se não houver risco
+
+```text
+RESULTADO LIMPO PRELIMINAR
+gate_final: AVANÇA
+registrar no log.
+```
+
+## Se houver risco
+
+```text
+encaminhar para lente isolada.
+```
+
+---
+
+# 5. Etapa 3 — Lente isolada
+
+## Objetivo
+
+Aplicar uma lente por vez.
+
+## Regra
+
+```text
+Achados transitam.
+Lentes não.
+```
+
+## A lente pode
+
+```text
+confirmar achado;
+rebaixar achado;
+descartar ponto;
+não achar nada;
+sinalizar outra lente.
+```
+
+## A lente não pode
+
+```text
+produzir emergente;
+confrontar outra lente;
+antecipar Rodada de confronto;
+inventar problema para justificar execução.
+```
+
+## Saída da etapa
+
+```text
+achado isolado;
+resultado negativo da lente;
+gate preliminar;
+produto exportável para Rodada de confronto;
+bloco de log.
+```
+
+---
+
+# 6. Etapa 4 — Confronto / Rodada de confronto
+
+## Objetivo
+
+Verificar se dois achados reais produzem erro emergente.
+
+## Só roda quando houver
+
+```text
+dois achados reais;
+duas lentes distintas;
+confronto ativo compatível;
+acoplamento funcional plausível.
+```
+
+## Teste negativo
+
+```text
+Se a interação apenas soma dois erros, não há emergente.
+Se uma lente resolver tudo, não há emergente.
+Se não houver mecanismo de acoplamento, não há emergente.
+```
+
+## Saída da etapa
+
+```text
+emergente confirmado;
+ou
+sem achado emergente;
+risco de dupla marcação;
+produto exportável para gate;
+bloco de log.
+```
+
+---
+
+# 7. Etapa 5 — Gate
+
+## Objetivo
+
+Decidir avanço.
+
+## Estados internos
+
+```text
+AVANÇA
+AVANÇA COM AJUSTE
+REVISÃO HUMANA
+BLOQUEIO PARCIAL
+BLOQUEIO TOTAL
+```
+
+## Regra
+
+```text
+Gate decide avanço, não mérito final.
+```
+
+## Saída da etapa
+
+```text
+estado de gate;
+fundamento sintético;
+condições de avanço;
+encaminhamento;
+bloco de log.
+```
+
+---
+
+# 8. Etapa 6 — Output interno
+
+## Objetivo
+
+Gerar rastro técnico auditável.
+
+## Pode conter
+
+```text
+códigos;
+lentes;
+confrontos;
+marcadores;
+achados;
+gate;
+roteamento;
+risco de dupla marcação.
+```
+
+## Deve conter
+
+```text
+encaminhamento final;
+bloco de log;
+reescrita material em code-block, se houver.
+```
+
+---
+
+# 9. Etapa 7 — Output cliente
+
+## Objetivo
+
+Traduzir o resultado para linguagem externa.
+
+## Não pode conter
+
+```text
+o sistema;
+mecanismo interno de confronto;
+Lente isolada/C;
+lente;
+confronto;
+EX;
+CF;
+autor filosófico;
+marcador interno;
+gate técnico.
+```
+
+## Tradução dos gates
+
+```text
+AVANÇA → Pode avançar.
+AVANÇA COM AJUSTE → Pode avançar após ajuste pontual.
+REVISÃO HUMANA → Exige revisão técnica antes de uso.
+BLOQUEIO PARCIAL → Trecho ou conclusão específica não deve ser usada sem correção.
+BLOQUEIO TOTAL → O documento não deve ser usado na forma atual.
+```
+
+---
+
+# 10. Etapa 8 — Log
+
+## Objetivo
+
+Registrar a execução fora da plataforma de IA.
+
+## Regra
+
+```text
+Toda execução gera uma linha de log.
+```
+
+## Registrar sempre
+
+```text
+plataforma;
+modelo;
+modo;
+lentes acionadas;
+lentes sem achado;
+achados confirmados;
+achados descartados;
+confrontos acionados;
+emergentes confirmados;
+gate final;
+resultado limpo;
+decisão humana final.
+```
+
+---
+
+# 11. Etapa 9 — Encaminhamento
+
+## Possíveis destinos
+
+```text
+o módulo de validação de fontes — validar fonte.
+o módulo de construção do raciocínio — reconstruir raciocínio.
+o sistema — continuar auditoria.
+o módulo de refinamento textual — refinar linguagem.
+REVISÃO HUMANA — decidir ponto sensível.
+ENTREGA — usar o documento.
+```
+
+---
+
+# 12. Regra final
+
+O pipeline deve gastar energia proporcional ao risco.
+
+```text
+Triagem é universal.
+Lente é condicional.
+O mecanismo interno de confronto é excepcional.
+Gate é obrigatório quando há decisão de avanço.
+Log é sempre obrigatório.
+```

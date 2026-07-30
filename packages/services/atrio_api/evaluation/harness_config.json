@@ -1,0 +1,121 @@
+{
+  "harness_version": "0.2.0",
+  "arms": {
+    "A0": {
+      "enabled": false,
+      "kind": "automated",
+      "command": "",
+      "timeout_seconds": 1800,
+      "env": {}
+    },
+    "A1": {
+      "enabled": false,
+      "kind": "automated",
+      "command": "",
+      "timeout_seconds": 1800,
+      "env": {}
+    },
+    "A2": {
+      "enabled": false,
+      "kind": "automated",
+      "command": "",
+      "timeout_seconds": 1800,
+      "env": {}
+    },
+    "A3": {
+      "enabled": false,
+      "kind": "automated",
+      "command": "",
+      "timeout_seconds": 1800,
+      "env": {}
+    },
+    "A4": {
+      "enabled": false,
+      "kind": "automated",
+      "command": "",
+      "timeout_seconds": 1800,
+      "env": {}
+    },
+    "A5": {
+      "enabled": false,
+      "kind": "automated",
+      "command": "",
+      "timeout_seconds": 1800,
+      "env": {}
+    },
+    "A6": {
+      "enabled": false,
+      "kind": "automated",
+      "command": "",
+      "timeout_seconds": 1800,
+      "env": {}
+    },
+    "A7": {
+      "enabled": false,
+      "kind": "automated",
+      "command": "",
+      "timeout_seconds": 1800,
+      "env": {}
+    },
+    "A8": {
+      "enabled": true,
+      "kind": "automated",
+      "command": "\"{working_directory}/.venv/Scripts/python.exe\" \"{working_directory}/tools/evaluation/run_atrio_smoke_arm.py\" --input \"{input_path}\" --output \"{output_path}\"",
+      "timeout_seconds": 7200,
+      "env": {
+        "ATRIO_EVAL_API_URL": "http://127.0.0.1:8080",
+        "ATRIO_EVAL_OLLAMA_URL": "http://127.0.0.1:11434",
+        "ATRIO_EVAL_MODEL": "qwen3:8b",
+        "ATRIO_EVAL_MODEL_DIGEST": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+        "ATRIO_EVAL_CANDIDATE_COMMIT": "e39584fe52817418eb6e1ece8321ad02834eb5b8",
+        "ATRIO_EVAL_NUM_CTX": "40960",
+        "ATRIO_EVAL_NUM_PREDICT": "4096",
+        "ATRIO_EVAL_VAULT_ROOT": "{working_directory}/var/vault",
+        "ATRIO_EVAL_VAULT_PASSPHRASE_FILE": "REQUIRED_CORPUS_VAULT_SECRET_PATH"
+      }
+    },
+    "A9": {
+      "enabled": false,
+      "kind": "automated",
+      "command": "",
+      "timeout_seconds": 1800,
+      "env": {}
+    },
+    "A10": {
+      "enabled": false,
+      "kind": "human",
+      "command": "",
+      "timeout_seconds": 0,
+      "env": {}
+    }
+  },
+  "execution": {
+    "working_directory": "..",
+    "output_filename": "output.json",
+    "stdout_filename": "stdout.txt",
+    "stderr_filename": "stderr.txt",
+    "metadata_filename": "execution.json",
+    "output_schema": "prereg/arm_output_schema_1.0.0.json",
+    "gate": {
+      "enabled": false,
+      "freeze_id": null,
+      "require_external_timestamp": true
+    }
+  },
+  "custody": {
+    "blind_id_prefix": "OUT"
+  },
+  "notes": {
+    "command_placeholders": [
+      "{case_dir}",
+      "{case_id}",
+      "{pool}",
+      "{arm}",
+      "{run_dir}",
+      "{input_path}",
+      "{output_path}",
+      "{working_directory}"
+    ],
+    "contract": "Smoke técnico habilita somente A8. Calibração e teste permanecem bloqueados até A0-A9 terem implementações congeladas e A10 possuir fluxo humano sob custódia."
+  }
+}

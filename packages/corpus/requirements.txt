@@ -1,0 +1,26 @@
+# ATRIO · CORPUS — dependencias externas
+#
+# O CORPUS roda com `py script.py`, chamado de arquivo .bat. Nao ha pyproject,
+# nao ha ambiente virtual obrigatorio e nao ha passo de instalacao. Esta lista
+# existe para o VERIFICAR.bat conferir e para voce saber o que instalar.
+#
+#   py -m pip install -r requirements.txt
+
+# --- obrigatorio -----------------------------------------------------------
+pdfplumber      # extracao de texto de PDF (atrio_pdf.py)
+openpyxl        # exportacao do inventario para Excel (exportar_inventario.py)
+
+# --- OCR: so para PDF escaneado, sem camada de texto -----------------------
+# ocr_pendentes.py so e chamado quando ha PDF em corpus/_ocr_pendente/.
+# Alem destes pacotes, e preciso instalar o proprio Tesseract no sistema,
+# com o idioma portugues. Ver VERIFICAR.bat.
+pymupdf         # renderiza a pagina do PDF em imagem
+pytesseract     # ponte para o Tesseract
+pillow          # manipulacao da imagem antes do OCR
+
+# --- opcional: deteccao de nome de pessoa ----------------------------------
+# Sem spaCy, atrio_pii cai na heuristica por pista textual, que funciona e
+# nao precisa de instalacao nenhuma. Com spaCy, a deteccao de nome melhora.
+# O modelo tambem precisa ser baixado:
+#   py -m spacy download pt_core_news_lg
+# spacy

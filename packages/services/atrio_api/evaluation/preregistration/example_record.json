@@ -1,0 +1,508 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "8f3c1d2e-7a4b-4c19-9e05-b6d81f2a4c73",
+
+  "caso": {
+    "pseudo_id": "CASO-00147",
+    "hash_identificador_original": "a3f1c92b47de05aa16f8c3d2e5b07419cc82ad35f6e91b0472d8ac5be1930f6d",
+    "tribunal": "TJPR",
+    "orgao_julgador": "Turma Recursal — órgão pseudonimizado OJ-02",
+    "classe_processual": "RI",
+    "tipo_peca": "voto_merito",
+    "ano_distribuicao": 2026,
+    "data_decisao_original": "2026-04-17",
+    "materia_locator": "L07",
+    "estrato": {
+      "dificuldade": 3,
+      "ordem_publica": true,
+      "dado_sensivel": true,
+      "dominio": "em_dominio",
+      "celula_amostral": "RI-voto_merito-D3-L07-OP1-DS1",
+      "peso_amostral": 0.62
+    },
+    "holdout": {
+      "posterior_corte_corpus": true,
+      "data_corte_corpus": "2025-12-31",
+      "posterior_corte_modelo": true,
+      "data_corte_modelo_declarada": "2025-10-31",
+      "sondagem_memorizacao_executada": true,
+      "sondagem_memorizacao_resultado": "sem_recuperacao"
+    }
+  },
+
+  "experimento": {
+    "fase": "teste_final",
+    "pre_registro_id": "OSF-ATRIO-EVAL-2026-0001",
+    "protocolo_versao": "1.0",
+    "braco": "A8",
+    "camada_medicao": "B",
+    "run_index": 3,
+    "k_total": 5,
+    "run_designada_avaliacao_humana": true,
+    "semente_aleatorizacao": "seed-2026-07-11-9f4a",
+    "ordem_execucao_indice": 812,
+    "timestamp_inicio": "2026-07-14T09:12:04Z",
+    "timestamp_fim": "2026-07-14T09:16:51Z",
+    "subconjunto_calibracao_deriva": false
+  },
+
+  "sistema": {
+    "atrio_versao": "2.3.1",
+    "atrio_commit": "c41e9b7",
+    "componentes": [
+      {
+        "nome": "CORPUS",
+        "versao": "1.8.0",
+        "commit_hash": "b72f4a1",
+        "prompt_hash": "1c9f4d8e2b7a06c3f5e18d4b9a2c60f37e5d18ba4c9f2e07d6b3a1584c7e9021",
+        "modo": "ativo",
+        "config_hash": "5e2d7b19c4a836f0e91d5c72b48a3f6019dc4e8b7a2f5091c3d6b84e7f210a5c"
+      },
+      {
+        "nome": "RATIO",
+        "versao": "2.1.4",
+        "commit_hash": "9ad30c5",
+        "prompt_hash": "77b1e4c8a25d930f6c81b4e37a92d5f08c6e1b39d4a70f25c8b19e63047fa2d5",
+        "modo": "ativo"
+      },
+      {
+        "nome": "TROIA",
+        "versao": "0.9.2",
+        "commit_hash": "3fe81b0",
+        "prompt_hash": "d4a70f25c8b19e63047fa2d5b81c36e9074ab2f5d18c63e90a47b25dc8f10369",
+        "modo": "ativo"
+      },
+      {
+        "nome": "CERNE",
+        "versao": "1.4.0",
+        "commit_hash": "51c7d92",
+        "prompt_hash": "e91b47d052a6c38f14b70d95e26a83c07f4d19b65a28c30e97b41d5f68a02c73",
+        "modo": "ativo"
+      },
+      {
+        "nome": "LUX",
+        "versao": "1.2.7",
+        "commit_hash": "a08f634",
+        "prompt_hash": "62c94e07b3d1a58f27e0c46b91d38a75f0b2e64c17a95d380e6b24c9f5178ad3",
+        "modo": "ativo"
+      }
+    ],
+    "modelo": {
+      "provedor": "provedor-pseudonimizado-M1",
+      "model_id": "modelo-M1-generico",
+      "snapshot": "2026-05-02",
+      "temperature": 0.2,
+      "top_p": 0.95,
+      "max_tokens": 8000,
+      "seed": 4471,
+      "orcamento_raciocinio_tokens": 6000
+    },
+    "indice_corpus": {
+      "versao": "corpus-2025-12",
+      "n_documentos": 115114,
+      "data_corte": "2025-12-31",
+      "hash_indice": "0b5e39a7c14d82f6091b7e35c48a2d0f96b13e57a842c9d015f6b73e2a48c091"
+    },
+    "orcamento_equalizado_ao": null
+  },
+
+  "io": {
+    "input_hash": "4d7a91c02e6b385f1c94a0d7b62e83f519c7d40ab836e12f95d7c308b41ea672",
+    "input_tokens": 18422,
+    "input_ref": "custodia://autos/CASO-00147/entrada",
+    "output_hash": "9c14e8b307d2a56f0e93b71c4d85a20f68c3d91b47e05a2f6d81c39b7e40a512",
+    "output_tokens": 3164,
+    "output_ref": "custodia://saidas/CASO-00147/A8/run3",
+    "output_valido": true,
+    "motivo_invalidez": "nenhum",
+    "output_normalizado_hash": "2f8b0c7e93a41d56b28e07c4f19a3d80b56c2e71f4a09d38c17b6e52a9034fd1"
+  },
+
+  "artefatos_intermediarios": [
+    { "etapa": "CORPUS", "tipo": "conjunto_recuperado", "hash": "aa1b3c5d7e90f24681b3d5f709a2c48e60b1d37f59a2c48e60b1d37f59a2c481", "ref": "custodia://artefatos/CASO-00147/A8/run3/corpus", "tokens": 9840, "latencia_ms": 4120, "chamadas_modelo": 1 },
+    { "etapa": "RATIO", "tipo": "cadeia_de_criterio", "hash": "bb2c4d6e8f01a35792c4e6a81b3d5f7092c4e6a81b3d5f7092c4e6a81b3d5f70", "ref": "custodia://artefatos/CASO-00147/A8/run3/ratio", "tokens": 12730, "latencia_ms": 96400, "chamadas_modelo": 2 },
+    { "etapa": "TROIA", "tipo": "log_eventos", "hash": "cc3d5e7f9012b468a3d5f7092c4e6a81b3d5f7092c4e6a81b3d5f7092c4e6a81", "ref": "custodia://artefatos/CASO-00147/A8/run3/troia", "tokens": 1120, "latencia_ms": 5300, "chamadas_modelo": 1 },
+    { "etapa": "CERNE", "tipo": "relatorio_auditoria", "hash": "dd4e6f8a0123c579b4e6a81c3d5f7092c4e6a81b3d5f7092c4e6a81b3d5f7092", "ref": "custodia://artefatos/CASO-00147/A8/run3/cerne", "tokens": 4210, "latencia_ms": 71800, "chamadas_modelo": 2 },
+    { "etapa": "LUX", "tipo": "saida_acabada", "hash": "ee5f7a9b1234d680c5f7092c4e6a81b3d5f7092c4e6a81b3d5f7092c4e6a81b3", "ref": "custodia://artefatos/CASO-00147/A8/run3/lux", "tokens": 3164, "latencia_ms": 109000, "chamadas_modelo": 1 }
+  ],
+
+  "corpus_metricas": {
+    "n_documentos_recuperados": 24,
+    "ids_recuperados": ["DOC-04412", "DOC-19837", "DOC-27104", "DOC-31980", "DOC-44217"],
+    "precisao_recuperacao": 0.58,
+    "recall_recuperacao": 0.71,
+    "cobertura_citacoes_requeridas": 0.6,
+    "documento_do_proprio_caso_recuperado": false
+  },
+
+  "troia_eventos": [
+    {
+      "evento_id": "TR-00147-A8-r3-01",
+      "timestamp": "2026-07-14T09:13:47Z",
+      "etapa": "RATIO",
+      "tipo": "divergencia_jurisprudencial_nao_resolvida",
+      "gatilho": "duas_teses_incompativeis_no_conjunto_recuperado",
+      "severidade_declarada_pelo_sistema": 3,
+      "acao": "alerta",
+      "payload_hash": "7a0c3e51b9d24f68a03c5e71b9d24f68a03c5e71b9d24f68a03c5e71b9d24f68",
+      "classificacao_verdade": "verdadeiro_positivo",
+      "classificado_por": "AVAL-S2",
+      "caso_injetado": false
+    },
+    {
+      "evento_id": "TR-00147-A8-r3-02",
+      "timestamp": "2026-07-14T09:14:22Z",
+      "etapa": "RATIO",
+      "tipo": "suspeita_de_fato_nao_constante_dos_autos",
+      "gatilho": "entidade_nao_encontrada_no_input",
+      "severidade_declarada_pelo_sistema": 2,
+      "acao": "reescrita",
+      "payload_hash": "1e4b7d0a36c92f58e14b7d0a36c92f58e14b7d0a36c92f58e14b7d0a36c92f58",
+      "classificacao_verdade": "falso_positivo",
+      "classificado_por": "AVAL-S2",
+      "caso_injetado": false
+    }
+  ],
+
+  "cerne_auditoria": {
+    "executado": true,
+    "modo": "ativo",
+    "achados": [
+      {
+        "achado_id": "CE-00147-01",
+        "tipo": "fundamentacao_insuficiente_para_a_conclusao",
+        "alvo": "seção III, parágrafo 4",
+        "severidade_atribuida_pelo_sistema": 3,
+        "acao": "correcao",
+        "correspondencia_padrao_ouro": "confirmado"
+      },
+      {
+        "achado_id": "CE-00147-02",
+        "tipo": "citacao_sem_aderencia_a_tese",
+        "alvo": "seção II, nota 3",
+        "severidade_atribuida_pelo_sistema": 1,
+        "acao": "alerta",
+        "correspondencia_padrao_ouro": "parcial"
+      }
+    ],
+    "erros_detectados_n": 2,
+    "erros_corrigidos_n": 1,
+    "erros_residuais_n": 2,
+    "falsos_alarmes_n": 0,
+    "output_pre_cerne_hash": "3b6d9f2c58a0e714b3d6f9c2a58e0714b3d6f9c2a58e0714b3d6f9c2a58e0714",
+    "taxa_erro_residual": 0.5
+  },
+
+  "lux_resultado": {
+    "executado": true,
+    "anonimizacao_aplicada": true,
+    "entidades_detectadas_n": 17,
+    "entidades_esperadas_n": 19,
+    "recall_anonimizacao": 0.89,
+    "precisao_anonimizacao": 1,
+    "vazamentos": [
+      { "tipo": "saude", "severidade": 4, "localizacao": "relatório, parágrafo 2" },
+      { "tipo": "nome", "severidade": 2, "localizacao": "voto, parágrafo 9" }
+    ],
+    "distancia_edicao_normalizada_vs_pre_lux": 0.21,
+    "indice_legibilidade": 41.8
+  },
+
+  "intervencoes_humanas": [
+    {
+      "intervencao_id": "IH-00147-01",
+      "etapa": "pos_saida",
+      "tipo": "correcao",
+      "duracao_minutos": 26.5,
+      "operador_pseudonimo": "PERITO-04",
+      "descricao_hash": "6c19e3b8047a2d5f6c19e3b8047a2d5f6c19e3b8047a2d5f6c19e3b8047a2d5f",
+      "alterou_dispositivo": false
+    }
+  ],
+
+  "padrao_ouro_ref": {
+    "gold_id": "GOLD-00147",
+    "versao": "1.0",
+    "construido_sem_saida_de_sistema": true,
+    "painel_ids": ["GOLD-P1", "GOLD-P2", "GOLD-P3"],
+    "questoes_obrigatorias": [
+      {
+        "questao_id": "Q1",
+        "descricao_hash": "8d2f6a0b47c93e158d2f6a0b47c93e158d2f6a0b47c93e158d2f6a0b47c93e15",
+        "ordem_publica": true,
+        "citacoes_requeridas": ["CIT-A", "CIT-B"]
+      },
+      {
+        "questao_id": "Q2",
+        "descricao_hash": "5a9c1e73b04d68f25a9c1e73b04d68f25a9c1e73b04d68f25a9c1e73b04d68f2",
+        "ordem_publica": false,
+        "citacoes_requeridas": ["CIT-C"]
+      },
+      {
+        "questao_id": "Q3",
+        "descricao_hash": "0f4b8d26a91c53e70f4b8d26a91c53e70f4b8d26a91c53e70f4b8d26a91c53e7",
+        "ordem_publica": false,
+        "citacoes_requeridas": ["CIT-D", "CIT-E"]
+      }
+    ],
+    "questoes_uteis_nao_obrigatorias": ["Q4", "Q5"],
+    "conjunto_resultados_admissiveis": [
+      "provimento_parcial_com_reducao_de_quantum",
+      "desprovimento_com_manutencao_integral"
+    ],
+    "fatos_dispositivos": ["F1", "F2", "F3"],
+    "decisao_original_classificada": "controversa",
+    "caso_marcado_controverso": true,
+    "concordancia_interna_painel": 0.67
+  },
+
+  "avaliacoes": [
+    {
+      "avaliacao_id": "AV-00147-A8-r3-01",
+      "avaliador_pseudonimo": "AVAL-07",
+      "cego": true,
+      "ordem_apresentacao": 2,
+      "palpite_do_braco": "A4",
+      "palpite_correto": false,
+      "timestamp": "2026-07-22T14:05:10Z",
+      "duracao_minutos": 31.2,
+      "conflito_declarado": false,
+      "dimensoes": {
+        "correcao_factual": 3,
+        "correcao_juridica": 3,
+        "fundamentacao": 2,
+        "cobertura_argumentativa": 3,
+        "proveniencia": 2,
+        "alucinacao": 4,
+        "omissao": 3,
+        "coerencia_logica": 3,
+        "resultado_dispositivo": 4,
+        "seguranca_privacidade": 0,
+        "necessidade_intervencao": 2
+      },
+      "citacoes_classificadas": [
+        { "citacao_ref": "CIT-A", "classe": "P0", "verificada_contra": "base_externa_jurisprudencia" },
+        { "citacao_ref": "CIT-B", "classe": "P1", "verificada_contra": "base_externa_jurisprudencia" },
+        { "citacao_ref": "CIT-C", "classe": "P0", "verificada_contra": "base_externa_legislacao" },
+        { "citacao_ref": "CIT-D", "classe": "P2", "verificada_contra": "base_externa_jurisprudencia" },
+        { "citacao_ref": "CIT-E", "classe": "P4", "verificada_contra": "nao_aplicavel" }
+      ],
+      "questoes_endereçadas": ["Q1", "Q2", "Q4"],
+      "erros": [
+        {
+          "erro_id": "ER-00147-01",
+          "dimensao": "proveniencia",
+          "severidade": 3,
+          "classe_proveniencia": "P1",
+          "localizacao": "seção II, nota 3",
+          "descricao_hash": "9b3e7c15d0a84f629b3e7c15d0a84f629b3e7c15d0a84f629b3e7c15d0a84f62",
+          "afeta_dispositivo": false,
+          "detectado_por_cerne": true,
+          "detectado_por_troia": false
+        },
+        {
+          "erro_id": "ER-00147-02",
+          "dimensao": "seguranca_privacidade",
+          "severidade": 4,
+          "classe_proveniencia": "nao_aplicavel",
+          "localizacao": "relatório, parágrafo 2",
+          "descricao_hash": "4e8a2c60b19d75f34e8a2c60b19d75f34e8a2c60b19d75f34e8a2c60b19d75f3",
+          "afeta_dispositivo": false,
+          "detectado_por_cerne": false,
+          "detectado_por_troia": false
+        },
+        {
+          "erro_id": "ER-00147-03",
+          "dimensao": "omissao",
+          "severidade": 2,
+          "classe_proveniencia": "nao_aplicavel",
+          "localizacao": "ausência de enfrentamento de Q3",
+          "descricao_hash": "1d5f9b37c82e64a01d5f9b37c82e64a01d5f9b37c82e64a01d5f9b37c82e64a0",
+          "afeta_dispositivo": false,
+          "detectado_por_cerne": false,
+          "detectado_por_troia": false
+        }
+      ],
+      "dispositivo_identificado": "provimento_parcial_com_reducao_de_quantum",
+      "dispositivo_no_conjunto_admissivel": true,
+      "aceitavel_sem_intervencao": false,
+      "tempo_estimado_correcao_minutos": 25
+    },
+    {
+      "avaliacao_id": "AV-00147-A8-r3-02",
+      "avaliador_pseudonimo": "AVAL-12",
+      "cego": true,
+      "ordem_apresentacao": 5,
+      "palpite_do_braco": "A8",
+      "palpite_correto": true,
+      "timestamp": "2026-07-22T16:41:55Z",
+      "duracao_minutos": 27.8,
+      "conflito_declarado": false,
+      "dimensoes": {
+        "correcao_factual": 3,
+        "correcao_juridica": 2,
+        "fundamentacao": 2,
+        "cobertura_argumentativa": 2,
+        "proveniencia": 1,
+        "alucinacao": 4,
+        "omissao": 1,
+        "coerencia_logica": 3,
+        "resultado_dispositivo": 4,
+        "seguranca_privacidade": 0,
+        "necessidade_intervencao": 1
+      },
+      "citacoes_classificadas": [
+        { "citacao_ref": "CIT-A", "classe": "P0", "verificada_contra": "base_externa_jurisprudencia" },
+        { "citacao_ref": "CIT-B", "classe": "P1", "verificada_contra": "base_externa_jurisprudencia" },
+        { "citacao_ref": "CIT-C", "classe": "P0", "verificada_contra": "base_externa_legislacao" },
+        { "citacao_ref": "CIT-D", "classe": "P2", "verificada_contra": "base_externa_jurisprudencia" },
+        { "citacao_ref": "CIT-E", "classe": "P4", "verificada_contra": "nao_aplicavel" }
+      ],
+      "questoes_endereçadas": ["Q1", "Q2"],
+      "erros": [
+        {
+          "erro_id": "ER-00147-04",
+          "dimensao": "proveniencia",
+          "severidade": 3,
+          "classe_proveniencia": "P1",
+          "localizacao": "seção II, nota 3",
+          "descricao_hash": "9b3e7c15d0a84f629b3e7c15d0a84f629b3e7c15d0a84f629b3e7c15d0a84f62",
+          "afeta_dispositivo": false,
+          "detectado_por_cerne": true,
+          "detectado_por_troia": false
+        },
+        {
+          "erro_id": "ER-00147-05",
+          "dimensao": "seguranca_privacidade",
+          "severidade": 4,
+          "classe_proveniencia": "nao_aplicavel",
+          "localizacao": "relatório, parágrafo 2",
+          "descricao_hash": "4e8a2c60b19d75f34e8a2c60b19d75f34e8a2c60b19d75f34e8a2c60b19d75f3",
+          "afeta_dispositivo": false,
+          "detectado_por_cerne": false,
+          "detectado_por_troia": false
+        },
+        {
+          "erro_id": "ER-00147-06",
+          "dimensao": "omissao",
+          "severidade": 4,
+          "classe_proveniencia": "nao_aplicavel",
+          "localizacao": "ausência de enfrentamento de Q3",
+          "descricao_hash": "1d5f9b37c82e64a01d5f9b37c82e64a01d5f9b37c82e64a01d5f9b37c82e64a0",
+          "afeta_dispositivo": true,
+          "detectado_por_cerne": false,
+          "detectado_por_troia": false
+        }
+      ],
+      "dispositivo_identificado": "provimento_parcial_com_reducao_de_quantum",
+      "dispositivo_no_conjunto_admissivel": true,
+      "aceitavel_sem_intervencao": false,
+      "tempo_estimado_correcao_minutos": 48
+    }
+  ],
+
+  "divergencias": [
+    {
+      "dimensao": "omissao",
+      "avaliadores": ["AVAL-07", "AVAL-12"],
+      "valores": [3, 1],
+      "magnitude": 2,
+      "criterio_acionado": "diferenca_maior_igual_2",
+      "encaminhado_adjudicacao": true
+    },
+    {
+      "dimensao": "severidade_erro_omissao_Q3",
+      "avaliadores": ["AVAL-07", "AVAL-12"],
+      "valores": [2, 4],
+      "magnitude": 2,
+      "criterio_acionado": "discordancia_erro_grave",
+      "encaminhado_adjudicacao": true
+    },
+    {
+      "dimensao": "tempo_estimado_correcao_minutos",
+      "avaliadores": ["AVAL-07", "AVAL-12"],
+      "valores": [25, 48],
+      "magnitude": 23,
+      "criterio_acionado": "diferenca_maior_igual_2",
+      "encaminhado_adjudicacao": false
+    }
+  ],
+
+  "adjudicacao": {
+    "realizada": true,
+    "adjudicadores": ["ADJ-01", "ADJ-02"],
+    "cego": true,
+    "viu_avaliacoes_originais_antes": false,
+    "timestamp": "2026-07-25T10:33:41Z",
+    "decisao_por_dimensao": {
+      "omissao": 2,
+      "severidade_erro_omissao_Q3": 3,
+      "afeta_dispositivo_Q3": false
+    },
+    "severidade_final_maxima": 4,
+    "consenso_entre_adjudicadores": true,
+    "justificativa_hash": "7f2b6d90a35c81e47f2b6d90a35c81e47f2b6d90a35c81e47f2b6d90a35c81e4"
+  },
+
+  "metricas_temporais": {
+    "latencia_total_ms": 286620,
+    "latencia_por_etapa_ms": {
+      "CORPUS": 4120,
+      "RATIO": 96400,
+      "TROIA": 5300,
+      "CERNE": 71800,
+      "LUX": 109000
+    },
+    "tempo_humano_total_minutos": 26.5,
+    "tempo_ate_aceitavel_minutos": 41,
+    "atingiu_aceitacao": true
+  },
+
+  "consumo": {
+    "tokens_entrada": 18422,
+    "tokens_saida": 3164,
+    "tokens_raciocinio": 21740,
+    "chamadas_api_n": 7,
+    "custo_modelo_brl": 4.83,
+    "custo_humano_brl": 78.4,
+    "custo_total_brl": 83.23
+  },
+
+  "estado_execucao": {
+    "status": "concluido",
+    "motivo": "execução completa sem interrupção",
+    "componente_bloqueador": "nenhum",
+    "rerun": false,
+    "rerun_index": 0,
+    "rerun_justificativa": "nao_aplicavel",
+    "excluido_por_criterio": null,
+    "data_exclusao": null,
+    "incluido_analise_primaria": true
+  },
+
+  "resultado_final": {
+    "erro_grave_presente": true,
+    "n_erros_por_severidade": { "S0": 0, "S1": 2, "S2": 1, "S3": 1, "S4": 1 },
+    "densidade_erro_ponderada": 0.42,
+    "precisao_proveniencia": 0.5,
+    "taxa_alucinacao_fonte": 0,
+    "recall_questoes_obrigatorias": 0.667,
+    "f1_cobertura": 0.8,
+    "omissao_ordem_publica": false,
+    "dispositivo_predito": "provimento_parcial_com_reducao_de_quantum",
+    "dispositivo_no_conjunto_admissivel": true,
+    "concordancia_com_decisao_original": false,
+    "aceitavel_sem_intervencao": false,
+    "estabilidade_dispositivo_k": 0.8,
+    "estabilidade_textual": 0.73,
+    "jaccard_citacoes_entre_runs": 0.68
+  },
+
+  "integridade": {
+    "registro_hash": "c05b83f719d6a2e4c05b83f719d6a2e4c05b83f719d6a2e4c05b83f719d6a2e4",
+    "assinado_em": "2026-07-25T18:00:00Z",
+    "custodia": "CUSTODIA-EXTERNA-01",
+    "carimbo_tempo_externo": "RFC3161:ts-2026-07-25-000417",
+    "conjunto_teste_lacrado": true
+  }
+}

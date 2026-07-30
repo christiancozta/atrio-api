@@ -1,0 +1,241 @@
+# INSIGHTS EXTERNOS INCORPORADOS
+
+## Função
+
+Este documento consolida os aprendizados úteis obtidos a partir das auditorias externas realizadas por Perplexity, DeepSeek e Gemini.
+
+A função não é substituir a arquitetura do sistema, mas registrar quais críticas foram acolhidas, quais foram rejeitadas e quais se converteram em ajustes operacionais.
+
+---
+
+# 1. Diagnóstico consolidado
+
+As três auditorias convergiram em um ponto:
+
+```text
+O o sistema está conceitualmente maduro.
+O risco principal agora é operacional.
+```
+
+O sistema não precisa ser reduzido em sua arquitetura central.
+
+Ele precisa de:
+
+```text
+modo piloto;
+log obrigatório;
+casos-controle limpos;
+gestão de estado;
+controle de custo de inferência;
+política de saída cliente;
+fronteira mais clara entre o módulo de validação de fontes e o sistema;
+teste negativo de emergência;
+distribuição monitorada de gates.
+```
+
+---
+
+# 2. Perplexity — o que foi incorporado
+
+## 2.1. Complexidade operacional
+
+Incorporado como:
+
+```text
+MODO_PILOTO
+WORKFLOW_PIPELINE
+LOG_METRICAS
+```
+
+A crítica foi acolhida sem reduzir a matriz. O sistema passa a operar por profundidade progressiva.
+
+## 2.2. Prompt Mestre como risco de atalho
+
+Incorporado como regra:
+
+```text
+O Prompt Mestre orquestra etapas; não as funde.
+Modo completo não autoriza pular Rodadas por lente isolada quando houver Rodada de confronto.
+```
+
+## 2.3. Anti-banalização como métrica
+
+Incorporado nos campos de log:
+
+```text
+lentes_sem_achado
+achados_descartados
+achados_rebaixados
+resultado_limpo
+falso_positivo
+falso_bloqueio
+falso_avanco
+decisao_humana_final
+```
+
+## 2.4. Casos-controle limpos
+
+Incorporado como pendência operacional e regra de validação.
+
+A afirmação “o sistema sabe ficar quieto” permanece hipótese até haver amostra suficiente de textos bons.
+
+---
+
+# 3. DeepSeek — o que foi incorporado
+
+## 3.1. Saída cliente mais clara
+
+A tradução externa do gate foi corrigida.
+
+Antes:
+
+```text
+BLOQUEIO PARCIAL → Não deve avançar parcialmente.
+```
+
+Depois:
+
+```text
+BLOQUEIO PARCIAL → Trecho ou conclusão específica não deve ser usada sem correção.
+```
+
+## 3.2. o módulo de validação de fontes como sinalizador quando não houver RAG
+
+Incorporado como regra:
+
+```text
+Sem o módulo de validação de fontes operacional, a checagem de validade é sinalização obrigatória, não validação automática.
+```
+
+## 3.3. Output interno curto
+
+Incorporado como orientação para modo piloto:
+
+```text
+estado;
+risco principal;
+trecho afetado;
+ação necessária;
+decisão humana requerida;
+bloco de log.
+```
+
+## 3.4. Validação humana
+
+A crítica foi reformulada.
+
+A revisão humana não é falha.
+
+O risco está na distribuição dos gates e na possibilidade de “REVISÃO HUMANA” virar rota de fuga genérica.
+
+---
+
+# 4. Gemini — o que foi incorporado
+
+## 4.1. Gestão de estado
+
+Incorporado como regra:
+
+```text
+TRIAGEM não produz achado definitivo.
+LENTE ISOLADA não produz achado emergente.
+RODADA DE CONFRONTO não refaz lentes isoladas.
+GATE não cria novos achados.
+OUTPUT CLIENTE não revela metodologia interna.
+LOG registra a execução.
+```
+
+## 4.2. Custo de inferência
+
+Incorporado como profundidade progressiva:
+
+```text
+Nível 0 — checagem de entrada;
+Nível 1 — triagem;
+Nível 2 — lente isolada;
+Nível 3 — confronto mecanismo interno de confronto;
+Nível 4 — auditoria completa.
+```
+
+## 4.3. Teste negativo de emergência
+
+Incorporado ao Confronto / Rodada de confronto:
+
+```text
+Se não houver acoplamento funcional, não há emergente.
+Se a interação apenas soma dois erros, não há emergente.
+Se a correção de uma lente resolver, não há emergente.
+```
+
+## 4.4. Justificativa auditável, não cadeia oculta
+
+A sugestão de forçar Chain-of-Thought foi rejeitada.
+
+Foi incorporada a exigência de justificativa externa e verificável:
+
+```text
+achado A;
+achado B;
+mecanismo de acoplamento;
+razão da irredutibilidade;
+consequência para o gate.
+```
+
+## 4.5. Fronteira o módulo de validação de fontes × o sistema
+
+Incorporado:
+
+```text
+o módulo de validação de fontes valida fonte.
+o sistema audita uso da fonte.
+```
+
+---
+
+# 5. O que foi rejeitado
+
+Não foram incorporadas as seguintes propostas:
+
+```text
+reduzir estruturalmente o sistema para 5 lentes;
+tratar BLOQUEIO PARCIAL como padrão;
+substituir Lente isolada por matriz única;
+exigir RAG como condição absoluta para qualquer uso;
+forçar Chain-of-Thought;
+depender de ferramenta específica como LangChain;
+usar execução completa em todos os casos;
+tratar revisão humana como falha do sistema.
+```
+
+---
+
+# 6. Ajustes estruturais gerados
+
+Os pareceres externos levaram à consolidação de quatro camadas adicionais:
+
+```text
+1. log obrigatório;
+2. code-block para reescrita material;
+3. gestão de estado e custo de inferência;
+4. anti-banalização integrada por etapa.
+```
+
+---
+
+# 7. Síntese
+
+O o sistema não deve ser simplificado por amputação.
+
+Deve ser operacionalizado por escalonamento.
+
+A pergunta correta não é:
+
+```text
+Como aplicar tudo sempre?
+```
+
+A pergunta correta é:
+
+```text
+Qual é a menor intervenção capaz de controlar o risco relevante?
+```

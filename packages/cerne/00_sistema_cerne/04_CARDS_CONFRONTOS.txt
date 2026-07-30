@@ -1,0 +1,889 @@
+# CARDS OPERACIONAIS DOS CONFRONTOS ATIVOS
+
+## Versão 0.1
+
+Documento operacional para uso interno no sistema.
+
+Função: orientar a Triagem, o mecanismo interno de confronto e a Rodada de confronto na identificação de achados emergentes decorrentes do confronto entre lentes.
+
+Regra-mãe:
+
+> Lentes isoladas identificam achados próprios.
+> Confrontos ativos verificam se dois achados se acoplam e produzem falha emergente não redutível à soma A+B.
+
+---
+
+# 1. CF-019 — PEIRCE × BION
+
+## Nome operacional
+
+Hipótese blindada por pseudocerteza.
+
+## Tipo de relação
+
+Sobreposição controlada.
+
+## Lentes confrontadas
+
+- Peirce: tipo de inferência, hipótese como conclusão, abduções concorrentes.
+- Bion: segurança não lastreada, apagamento de incerteza, fluência substitutiva.
+
+## Quando acionar
+
+Acionar quando o output:
+
+- qualifica juridicamente fatos de modo categórico;
+- apresenta hipótese interpretativa como conclusão estabilizada;
+- usa percentual, probabilidade, advérbio de certeza ou referência genérica de pacificação;
+- omite hipótese concorrente plausível;
+- transforma cenário controvertido em prognóstico seguro.
+
+## Sintomas típicos
+
+- “inequivocamente”
+- “configura-se”
+- “probabilidade de êxito de 85%”
+- “jurisprudência consolidada”
+- “tese altamente provável”
+- “chances elevadas”
+- “risco baixo”
+
+## Achados isolados esperados
+
+Peirce pode encontrar:
+
+- `[HIPÓTESE COMO CONCLUSÃO]`
+- `[ABDUÇÕES NÃO HIERARQUIZADAS]`
+- `[SALTO INFERENCIAL]`
+
+Bion pode encontrar:
+
+- `[SEGURANÇA NÃO LASTREADA]`
+- `[APAGAMENTO DE INCERTEZA]`
+- `[FLUÊNCIA SUBSTITUTIVA]`
+
+## Achado emergente canônico
+
+`[HIPÓTESE BLINDADA POR PSEUDOCERTEZA]`
+
+## Definição do emergente
+
+O output seleciona uma hipótese interpretativa ou jurídica falível e usa linguagem de certeza, percentual ou pacificação não demonstrada para blindá-la contra hipóteses concorrentes plausíveis.
+
+A falha não está apenas na hipótese mal representada, nem apenas na certeza sem lastro. O problema é que a pseudocerteza funciona como mecanismo de fechamento da hipótese.
+
+## Critério de irredutibilidade
+
+O achado só é emergente se:
+
+1. houver hipótese juridicamente plausível tratada como conclusão forte;
+2. houver mecanismo de certeza não lastreada;
+3. a certeza não lastreada reforçar ou ocultar a fragilidade da hipótese;
+4. a correção de apenas uma lente não resolver o problema.
+
+## Gate padrão
+
+Bloqueio total ou bloqueio parcial, conforme centralidade da hipótese.
+
+## Roteamento corretivo
+
+1. Remover percentual, advérbio de certeza ou pacificação não demonstrada.
+2. Rebaixar a conclusão para hipótese plausível, provável ou condicionada.
+3. Explicitar hipóteses concorrentes.
+4. Substituir prognóstico numérico por matriz qualitativa de risco.
+5. Encaminhar para revisão humana quando houver recomendação estratégica.
+
+## Produto exportável
+
+O output não pode avançar enquanto apresentar hipótese interpretativa como conclusão blindada por certeza sem lastro.
+
+---
+
+# 2. CF-010 — MATTE-BLANCO × PEIRCE
+
+## Nome operacional
+
+Colapso de regime por salto inferencial.
+
+## Tipo de relação
+
+Fronteira negativa.
+
+## Lentes confrontadas
+
+- Matte-Blanco: distinção juridicamente relevante colapsada.
+- Peirce: qualificação jurídica incerta apresentada como conclusão.
+
+## Quando acionar
+
+Acionar quando o output:
+
+- equipara regimes jurídicos distintos;
+- importa efeitos de um regime para outro;
+- qualifica juridicamente a relação de modo categórico;
+- omite hipótese concorrente com suporte fático;
+- transforma enquadramento discutível em gatilho para aplicar efeitos jurídicos fortes.
+
+## Sintomas típicos
+
+- relação B2B tratada como consumo típico;
+- contrato autônomo tratado como relação trabalhista;
+- destinatário fático tratado como destinatário final econômico;
+- assimetria técnica tratada como hipossuficiência consumerista;
+- categoria jurídica incerta usada para aplicar regime inteiro.
+
+## Achados isolados esperados
+
+Matte-Blanco pode encontrar:
+
+- `[DISTINÇÃO COLAPSADA]`
+- `[SIMETRIA INDEVIDA]`
+- `[GENERALIZAÇÃO SUPRESSORA]`
+
+Peirce pode encontrar:
+
+- `[HIPÓTESE COMO CONCLUSÃO]`
+- `[ABDUÇÕES NÃO HIERARQUIZADAS]`
+- `[SALTO INFERENCIAL]`
+
+## Achado emergente canônico
+
+`[COLAPSO DE REGIME POR SALTO INFERENCIAL]`
+
+## Definição do emergente
+
+O output usa uma qualificação jurídica abdutiva, apresentada como conclusão estabilizada, para autorizar a transposição de efeitos de um regime jurídico para outro.
+
+O salto inferencial é a chave que abre o colapso categorial.
+
+## Critério de irredutibilidade
+
+O achado só é emergente se:
+
+1. a qualificação jurídica for incerta ou concorrencial;
+2. essa qualificação for apresentada como estabilizada;
+3. a conclusão acionar efeitos de regime diverso;
+4. a distinção entre regimes alterar ônus, proteção, prazo, responsabilidade ou consequência jurídica.
+
+## Gate padrão
+
+Bloqueio total quando o regime transposto sustentar a conclusão principal.
+
+Bloqueio parcial quando a transposição puder ser corrigida por condicionamento.
+
+## Roteamento corretivo
+
+1. Corrigir primeiro a inferência de enquadramento.
+2. Abrir hipóteses concorrentes.
+3. Condicionar os efeitos jurídicos ao regime que prevalecer.
+4. Separar expressamente os regimes aplicáveis.
+5. Impedir transporte em bloco de proteções, ônus ou responsabilidades.
+
+## Produto exportável
+
+O output deve apresentar os efeitos jurídicos de modo condicional:
+
+- se prevalecer a hipótese A, aplica-se o regime X;
+- se prevalecer a hipótese B, aplica-se o regime Y.
+
+---
+
+# 3. CF-017 — SÓCRATES × BION
+
+## Nome operacional
+
+Risco não lastreado que desestabiliza a tese.
+
+## Tipo de relação
+
+Sobreposição controlada.
+
+## Lentes confrontadas
+
+- Sócrates: tese não estabilizada diante da objeção mais forte.
+- Bion: risco, percentual ou certeza estratégica sem lastro.
+
+## Quando acionar
+
+Acionar quando o output:
+
+- formula tese substantiva vulnerável;
+- não enfrenta a objeção estrutural mais forte;
+- usa estimativa de êxito, risco ou probabilidade para fechar a recomendação;
+- transforma tese ainda instável em orientação estratégica segura.
+
+## Sintomas típicos
+
+- “probabilidade de êxito de 70%”
+- “tese plenamente aplicável”
+- “manifestamente abusiva”
+- “jurisprudência ampla”
+- “recomenda-se ajuizamento”
+- “risco baixo”
+- “alta chance de procedência”
+
+## Achados isolados esperados
+
+Sócrates pode encontrar:
+
+- `[TESE NÃO ESTABILIZADA]`
+- `[OBJEÇÃO NÃO ENFRENTADA]`
+- `[CONCLUSÃO PREMATURA]`
+
+Bion pode encontrar:
+
+- `[SEGURANÇA NÃO LASTREADA]`
+- `[APAGAMENTO DE INCERTEZA]`
+- `[FLUÊNCIA SUBSTITUTIVA]`
+
+## Achado emergente canônico
+
+`[RISCO NÃO LASTREADO QUE DESESTABILIZA A TESE]`
+
+## Definição do emergente
+
+O output usa uma avaliação de risco ou probabilidade sem método para fechar estrategicamente uma tese que ainda não resistiu ao confronto adversarial.
+
+A estimativa não é erro isolado. Ela neutraliza a aporia que deveria permanecer aberta.
+
+## Critério de irredutibilidade
+
+O achado só é emergente se:
+
+1. a tese principal ainda estiver vulnerável à objeção forte;
+2. houver prognóstico, percentual ou recomendação segura;
+3. o prognóstico substituir a estabilização argumentativa;
+4. a recomendação puder induzir decisão processual, negocial ou estratégica mal calibrada.
+
+## Gate padrão
+
+Revisão humana ou bloqueio parcial.
+
+Bloqueio total se a recomendação estratégica depender diretamente do percentual ou do risco não lastreado.
+
+## Roteamento corretivo
+
+1. Remover percentual ou probabilidade sem método.
+2. Declarar as objeções centrais.
+3. Converter prognóstico em matriz qualitativa.
+4. Indicar variáveis pendentes.
+5. Encaminhar para revisão humana antes de uso estratégico.
+
+## Produto exportável
+
+Não há base suficiente para prognóstico numérico enquanto a tese principal não estiver adversarialmente estabilizada.
+
+---
+
+# 4. CF-012 — MATTE-BLANCO × MACCORMICK
+
+## Nome operacional
+
+Regime especial substituído por regra sistêmica não universalizável.
+
+## Tipo de relação
+
+Complementar sistêmica.
+
+## Lentes confrontadas
+
+- Matte-Blanco: apagamento de distinção entre regimes.
+- MacCormick: regra universalizada, consequência sistêmica e coerência com escolha legislativa.
+
+## Quando acionar
+
+Acionar quando o output:
+
+- aproxima regimes jurídicos distintos;
+- importa proteções de um regime para outro;
+- cria regra geral ampla a partir de caso ou vulnerabilidade;
+- desloca regime legal especial sem enfrentar a escolha legislativa;
+- universaliza solução protetiva com efeitos sistêmicos não declarados.
+
+## Sintomas típicos
+
+- regime especial tratado como insuficiente sem critério;
+- hipossuficiência usada como chave para importar regime protetivo externo;
+- aplicação analógica de pacote de direitos;
+- substituição prática de lei especial por princípios gerais;
+- tese boa para o caso, mas ruim para o sistema.
+
+## Achados isolados esperados
+
+Matte-Blanco pode encontrar:
+
+- `[SIMETRIA INDEVIDA]`
+- `[DISTINÇÃO COLAPSADA]`
+- `[GENERALIZAÇÃO SUPRESSORA]`
+
+MacCormick pode encontrar:
+
+- `[REGRA NÃO UNIVERSALIZÁVEL]`
+- `[CONSEQUÊNCIA SISTÊMICA NÃO DECLARADA]`
+- `[INCOERÊNCIA COM ESCOLHA LEGISLATIVA EXPRESSA]`
+- `[ESCOLHA DE PREMISSA NÃO JUSTIFICADA]`
+
+## Achado emergente canônico
+
+`[REGIME ESPECIAL SUBSTITUÍDO POR REGRA SISTÊMICA NÃO UNIVERSALIZÁVEL]`
+
+## Definição do emergente
+
+O output não apenas colapsa categorias jurídicas distintas. Ele transforma esse colapso em regra de decisão com vocação geral, capaz de substituir funcionalmente regimes especiais por um regime paralelo construído por analogia, vulnerabilidade ou princípio amplo.
+
+## Critério de irredutibilidade
+
+O achado só é emergente se:
+
+1. houver equiparação entre regimes jurídicos distintos;
+2. a equiparação produzir efeitos jurídicos estruturais;
+3. a tese, universalizada, deslocar regime especial ou escolha legislativa;
+4. o output não declarar a regra geral que está instaurando;
+5. o risco sistêmico for maior que o erro do caso isolado.
+
+## Gate padrão
+
+Bloqueio total da conclusão como redigida.
+
+## Roteamento corretivo
+
+1. Reintroduzir a distinção entre regimes.
+2. Formular expressamente a regra que a tese criaria.
+3. Testar universalização.
+4. Declarar consequências sistêmicas.
+5. Enfrentar a escolha legislativa expressa.
+6. Estreitar a tese para hipótese excepcional, se possível.
+
+## Produto exportável
+
+A tese não pode avançar como regra ampla. Só pode prosseguir se delimitada como hipótese excepcional, com critérios rigorosos e respeito ao regime especial.
+
+---
+
+# 5. CF-006 — RAZ × BION
+
+## Nome operacional
+
+Autoridade performada como certeza não lastreada.
+
+## Tipo de relação
+
+Sobreposição controlada.
+
+## Lentes confrontadas
+
+- Raz: peso prático da autoridade.
+- Bion: segurança, probabilidade ou certeza sem lastro.
+
+## Quando acionar
+
+Acionar quando o output:
+
+- invoca autoridade jurídica com força superior à adequada;
+- trata fonte persuasiva como consolidada ou decisiva;
+- usa precedente vinculante para resolver subtema não automaticamente coberto;
+- converte autoridade parcial em prognóstico seguro;
+- atribui percentual de êxito com base em “tendência jurisprudencial”.
+
+## Sintomas típicos
+
+- “entendimento pacificado”
+- “jurisprudência consolidada”
+- “reconhecido reiteradamente”
+- “chances de 70% a 80%”
+- “recomenda-se aproveitamento integral”
+- “critério fixado pelo STJ resolve o caso”
+- “posição majoritária autoriza”
+
+## Achados isolados esperados
+
+Raz pode encontrar:
+
+- `[AUTORIDADE SUPERESTIMADA]`
+- `[FONTE PERSUASIVA COMO VINCULANTE]`
+- `[PESO PRÁTICO MAL CALIBRADO]`
+
+Bion pode encontrar:
+
+- `[SEGURANÇA NÃO LASTREADA]`
+- `[APAGAMENTO DE INCERTEZA]`
+- `[FLUÊNCIA SUBSTITUTIVA]`
+
+## Achado emergente canônico
+
+`[AUTORIDADE PERFORMADA COMO CERTEZA NÃO LASTREADA]`
+
+## Definição do emergente
+
+O output usa autoridade jurídica parcial, persuasiva ou limitada para produzir aparência de certeza estratégica, frequentemente reforçada por probabilidade, recomendação categórica ou baixa exposição de risco.
+
+A autoridade superestimada autoriza o percentual. O percentual confirma a autoridade. Forma-se circuito de falsa segurança.
+
+## Critério de irredutibilidade
+
+O achado só é emergente se:
+
+1. a autoridade invocada tiver peso prático inferior ao declarado;
+2. a força declarada da autoridade sustentar recomendação ou prognóstico;
+3. houver certeza, percentual ou baixa controvérsia sem método;
+4. a correção exigir simultaneamente calibrar autoridade e restaurar incerteza.
+
+## Gate padrão
+
+Bloqueio parcial.
+
+Bloqueio total se houver recomendação de conduta com risco financeiro, fiscal, regulatório ou processual relevante.
+
+## Roteamento corretivo
+
+1. Separar autoridade vinculante de autoridade persuasiva.
+2. Delimitar o alcance real da fonte.
+3. Declarar resistências, distinções e posições concorrentes.
+4. Remover percentual sem método.
+5. Trocar prognóstico fechado por risco qualitativo.
+6. Condicionar recomendação à validação do caso concreto.
+
+## Produto exportável
+
+A autoridade jurídica não pode ser usada como substituto de metodologia de risco.
+
+---
+
+# 6. CF-024 — GADAMER × HART
+
+## Nome operacional
+
+Fechamento regulatório sem dupla mediação.
+
+## Tipo de relação
+
+Relação analítica.
+
+## Lentes confrontadas
+
+- Gadamer: horizonte interpretativo.
+- Hart: textura aberta e critério de fechamento.
+
+## Quando acionar
+
+Acionar quando o output:
+
+- interpreta norma, contrato, regulamento ou conceito jurídico aberto;
+- afirma enquadramento como claro;
+- não explicita horizonte interpretativo;
+- fecha conceito aberto sem critério;
+- usa prática administrativa, doutrina ou tradição setorial de modo genérico.
+
+## Sintomas típicos
+
+- “enquadra-se claramente”
+- “a doutrina e a prática convergem”
+- “conceito abrange”
+- “uso comum”
+- “atividade essencial”
+- “compartilhamento regular”
+- “boa-fé”, “razoável”, “proporcional”, “necessário”
+
+## Achados isolados esperados
+
+Gadamer pode encontrar:
+
+- `[HORIZONTE NÃO CONFRONTADO]`
+- `[PRÉ-COMPREENSÃO NÃO DECLARADA]`
+- `[ESTRANHAMENTO SUPRIMIDO]`
+
+Hart pode encontrar:
+
+- `[CRITÉRIO DE FECHAMENTO AUSENTE]`
+- `[FALSA CLAREZA NORMATIVA]`
+- `[PENUMBRA SUPRIMIDA]`
+- `[STANDARD MECANIZADO]`
+
+## Achado emergente canônico
+
+`[FECHAMENTO REGULATÓRIO SEM DUPLA MEDIAÇÃO]`
+
+## Definição do emergente
+
+O output fecha um conceito normativo aberto usando um horizonte interpretativo implícito, sem separar:
+
+1. texto normativo;
+2. horizonte de leitura;
+3. critério de fechamento;
+4. aplicação ao caso concreto.
+
+O problema ocorre no acoplamento entre horizonte e fechamento.
+
+## Critério de irredutibilidade
+
+O achado só é emergente se:
+
+1. houver conceito jurídico aberto ou standard;
+2. houver horizonte interpretativo relevante não declarado;
+3. o conceito for fechado sem critério;
+4. a conclusão depender da interação entre leitura situada e fechamento semântico;
+5. o operador não conseguir distinguir onde termina o texto e onde começa a interpretação aplicada.
+
+## Gate padrão
+
+Bloqueio parcial.
+
+## Roteamento corretivo
+
+1. Declarar primeiro o critério de fechamento do conceito aberto.
+2. Declarar em seguida o horizonte interpretativo adotado.
+3. Separar texto, tradição, critério e aplicação.
+4. Enfrentar leitura concorrente plausível.
+5. Remover linguagem de evidência quando houver penumbra relevante.
+
+## Produto exportável
+
+O output só pode avançar se demonstrar a dupla mediação: horizonte interpretativo e critério de fechamento.
+
+---
+
+# 7. CF-007 — LEVI × MATTE-BLANCO
+
+## Nome operacional
+
+Ponte ementária como veículo de colapso categorial.
+
+## Tipo de relação
+
+Confronto paralelo.
+
+## Lentes confrontadas
+
+- Levi: operação técnica do precedente ou analogia.
+- Matte-Blanco: distinção juridicamente relevante apagada.
+
+## Quando acionar
+
+Acionar quando o output:
+
+- aplica precedente, súmula, tema repetitivo, IRDR ou analogia;
+- não isola adequadamente a o módulo de construção do raciocínio;
+- transporta regime jurídico junto com o precedente;
+- aplica tese de um domínio a outro;
+- usa precedente como ponte para importar efeitos de categoria distinta.
+
+## Sintomas típicos
+
+- “aplica-se a ratio decidendi”
+- “por força do Tema”
+- “diferença factual irrelevante”
+- “teoria do risco do empreendimento”
+- “aplicação integral do CDC”
+- “mesmo raciocínio se aplica”
+- “precedente análogo”
+
+## Achados isolados esperados
+
+Levi pode encontrar:
+
+- `[ANALOGIA EMENTÁRIA]`
+- `[RATIO DECIDENDI NÃO ISOLADA]`
+- `[DISTINGUISHING OMITIDO]`
+- `[ALCANCE DO PRECEDENTE EXCEDIDO]`
+
+Matte-Blanco pode encontrar:
+
+- `[DISTINÇÃO COLAPSADA]`
+- `[SIMETRIA INDEVIDA]`
+- `[GENERALIZAÇÃO SUPRESSORA]`
+
+## Achado emergente canônico
+
+`[PONTE EMENTÁRIA COMO VEÍCULO DE COLAPSO CATEGORIAL]`
+
+## Definição do emergente
+
+O output usa uma operação precedental tecnicamente defeituosa como veículo para transportar regime jurídico, ônus, proteção ou responsabilidade de uma categoria para outra.
+
+A falha precedental não apenas acompanha o colapso categorial. Ela viabiliza o colapso.
+
+## Critério de irredutibilidade
+
+O achado só é emergente se:
+
+1. houver aplicação de precedente ou analogia;
+2. a o módulo de construção do raciocínio não estiver suficientemente isolada ou o alcance for excedido;
+3. a falha precedental permitir importar regime ou efeito de categoria distinta;
+4. a correção do precedente e a correção da distinção dependerem de solução integrada.
+
+## Gate padrão
+
+Bloqueio total quando a conclusão principal depender da ponte precedental.
+
+Bloqueio parcial se o precedente for apenas reforço lateral.
+
+## Roteamento corretivo
+
+1. Reconstruir a o módulo de construção do raciocínio do precedente.
+2. Identificar pressupostos do paradigma.
+3. Separar holding, obiter e alcance.
+4. Verificar se o regime transportado depende de pressuposto próprio.
+5. Demonstrar autonomamente o regime do caso atual.
+6. Só então testar distinguishing reverso.
+
+## Produto exportável
+
+A aplicação do precedente não pode carregar, por arrasto, regime jurídico não demonstrado no caso atual.
+
+---
+
+# 8. CF-008 — LEVI × PEIRCE
+
+## Nome operacional
+
+Analogia técnica com força inferencial excedida.
+
+## Tipo de relação
+
+Complementar produtivo.
+
+## Lentes confrontadas
+
+- Levi: técnica da analogia ou do precedente.
+- Peirce: força epistêmica da inferência.
+
+## Quando acionar
+
+Acionar quando o output:
+
+- aplica precedente ou analogia de modo tecnicamente estruturado;
+- isola o módulo de construção do raciocínio e faz distinguishing reverso;
+- mas apresenta a extensão analógica como conclusão necessária;
+- omite que a aplicação ao novo domínio continua sendo hipótese;
+- deixa de hierarquizar hipóteses concorrentes.
+
+## Sintomas típicos
+
+- “aplica-se ao caso”
+- “deve sujeitar-se”
+- “a diferença é irrelevante”
+- “deve ser afastada”
+- “a o módulo de construção do raciocínio conduz à conclusão”
+- “o precedente resolve a hipótese”
+
+## Achados isolados esperados
+
+Levi pode encontrar:
+
+- nenhum marcador;
+- ou registro positivo de operação técnica adequada.
+
+Peirce pode encontrar:
+
+- `[HIPÓTESE COMO CONCLUSÃO]`
+- `[ABDUÇÕES NÃO HIERARQUIZADAS]`
+- `[SALTO INFERENCIAL]`
+
+## Achado emergente canônico
+
+`[ANALOGIA TÉCNICA COM FORÇA INFERENCIAL EXCEDIDA]`
+
+## Definição do emergente
+
+O output executa corretamente a técnica de precedente ou analogia, mas a qualidade técnica da ponte cria aparência de dedução. O problema não está na ponte. Está na força com que a travessia é apresentada.
+
+## Critério de irredutibilidade
+
+O achado só é emergente se:
+
+1. a operação Levi estiver correta ou suficientemente adequada;
+2. a conclusão depender de extensão analógica;
+3. o output apresentar essa extensão como necessária ou estabilizada;
+4. houver hipóteses concorrentes não descartadas;
+5. a boa técnica precedental aumentar a aparência de certeza indevida.
+
+## Gate padrão
+
+Bloqueio parcial.
+
+## Roteamento corretivo
+
+1. Preservar a técnica precedental.
+2. Rebaixar a força da conclusão.
+3. Declarar que se trata de aplicação analógica plausível.
+4. Enfrentar hipóteses concorrentes.
+5. Indicar necessidade de verificação específica do novo domínio.
+
+## Produto exportável
+
+A analogia pode avançar, mas como hipótese juridicamente plausível, não como dedução operacional.
+
+---
+
+# 9. CF-014 — TOULMIN × PEIRCE
+
+## Nome operacional
+
+Arquitetura formal com inferência não estabilizada.
+
+## Tipo de relação
+
+Fronteira negativa.
+
+## Lentes confrontadas
+
+- Toulmin: estrutura interna do argumento.
+- Peirce: tipo de inferência e força epistêmica.
+
+## Quando acionar
+
+Acionar quando o output:
+
+- possui tese, dados, garantia e backing minimamente identificáveis;
+- aparenta arquitetura argumentativa suficiente;
+- mas transforma inferência abdutiva em conclusão forte;
+- suprime qualificadores;
+- trata nexo causal, enquadramento ou responsabilidade como dado estabilizado.
+
+## Sintomas típicos
+
+- “configura-se responsabilidade”
+- “dano decorre diretamente”
+- “obrigação de indenizar integralmente”
+- “está demonstrado”
+- “os fatos configuram”
+- estrutura jurídica formalmente organizada, mas conclusão categórica demais.
+
+## Achados isolados esperados
+
+Toulmin pode encontrar:
+
+- `[QUALIFICADOR SUPRIMIDO]`
+- `[EXCEÇÃO NÃO TRATADA]`
+- eventualmente nenhum achado estrutural grave.
+
+Peirce pode encontrar:
+
+- `[HIPÓTESE COMO CONCLUSÃO]`
+- `[ABDUÇÕES NÃO HIERARQUIZADAS]`
+- `[SALTO INFERENCIAL]`
+
+## Achado emergente canônico
+
+`[ARQUITETURA FORMAL COM INFERÊNCIA NÃO ESTABILIZADA]`
+
+## Definição do emergente
+
+O output apresenta arquitetura argumentativa suficiente para parecer robusto, mas usa essa arquitetura para sustentar uma conclusão cuja força inferencial não está estabilizada.
+
+A estrutura está montada; o tipo de inferência está super-representado.
+
+## Critério de irredutibilidade
+
+O achado só é emergente se:
+
+1. a arquitetura mínima do argumento existir;
+2. a conclusão depender de inferência abdutiva;
+3. o output não qualificar a força dessa inferência;
+4. a falha não for ausência de estrutura, mas excesso de força conclusiva;
+5. corrigir apenas a arquitetura ou apenas a inferência não resolver a entrega.
+
+## Gate padrão
+
+Bloqueio parcial.
+
+## Roteamento corretivo
+
+1. Preservar a arquitetura válida.
+2. Inserir qualificador modal.
+3. Declarar hipóteses alternativas relevantes.
+4. Diferenciar dado, inferência e conclusão.
+5. Modular a consequência jurídica conforme prova e nexo causal.
+
+## Produto exportável
+
+Argumento formalmente estruturado não equivale a conclusão inferencialmente estabilizada.
+
+---
+
+# 10. CF-016 — SÓCRATES × PEIRCE
+
+## Nome operacional
+
+Tese inovadora não estabilizada como hipótese.
+
+## Tipo de relação
+
+Fronteira negativa.
+
+## Lentes confrontadas
+
+- Sócrates: objeção estrutural mais forte.
+- Peirce: hipótese interpretativa apresentada como conclusão.
+
+## Quando acionar
+
+Acionar quando o output:
+
+- propõe tese inovadora, contra-majoritária ou criativa;
+- apresenta a tese como juridicamente viável com alta probabilidade;
+- não enfrenta objeção estrutural forte;
+- trata interpretação principial ou criativa como conclusão estabilizada;
+- ignora que a tese depende de mudança, superação ou deslocamento de entendimento dominante.
+
+## Sintomas típicos
+
+- “tese inovadora”
+- “elevada probabilidade de êxito”
+- “fundamento principiológico sólido”
+- “não cabe redução”
+- “deve receber”
+- “recomenda-se sustentação”
+- “tese juridicamente viável”
+
+## Achados isolados esperados
+
+Sócrates pode encontrar:
+
+- `[TESE NÃO ESTABILIZADA]`
+- `[OBJEÇÃO NÃO ENFRENTADA]`
+- `[CONCLUSÃO PREMATURA]`
+
+Peirce pode encontrar:
+
+- `[HIPÓTESE COMO CONCLUSÃO]`
+- `[ABDUÇÕES NÃO HIERARQUIZADAS]`
+- `[SALTO INFERENCIAL]`
+
+## Achado emergente canônico
+
+`[TESE INOVADORA NÃO ESTABILIZADA COMO HIPÓTESE]`
+
+## Definição do emergente
+
+O output apresenta uma tese inovadora como se fosse hipótese já suficientemente estabilizada, sem enfrentar a objeção estrutural que impede sua conversão em recomendação segura.
+
+A falha não é apenas objeção não enfrentada, nem apenas hipótese como conclusão. É o uso de linguagem de viabilidade para transformar criação interpretativa em orientação estratégica.
+
+## Critério de irredutibilidade
+
+O achado só é emergente se:
+
+1. a tese for inovadora, minoritária ou contra-majoritária;
+2. houver objeção estrutural forte disponível;
+3. o output não enfrentar adequadamente essa objeção;
+4. a tese for apresentada como viável, provável ou recomendável;
+5. a força da recomendação exceder o grau real de estabilização.
+
+## Gate padrão
+
+Bloqueio parcial ou revisão humana.
+
+Bloqueio total se a recomendação induzir atuação repetitiva, tese de massa ou risco relevante ao cliente.
+
+## Roteamento corretivo
+
+1. Declarar que a tese é inovadora ou contra-majoritária.
+2. Enfrentar a objeção estrutural mais forte.
+3. Rebaixar a probabilidade de êxito.
+4. Separar defensabilidade de chance real de acolhimento.
+5. Indicar riscos de rejeição e necessidade de estratégia subsidiária.
+
+## Produto exportável
+
+Tese inovadora pode ser apresentada como hipótese estratégica, não como orientação estabilizada de alta probabilidade.

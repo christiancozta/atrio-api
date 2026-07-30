@@ -1,0 +1,53 @@
+# ADENDO DE INSERÇÃO ANTI-BANALIZAÇÃO
+
+## Finalidade
+
+Este adendo contém o bloco mínimo que deve ser inserido nos documentos centrais do sistema:
+
+- PROMPT_MESTRE
+- PROMPT_TRIAGEM
+- PROMPT_GATE_TECNICO
+- PROTOCOLO_DE_TESTE
+- CHECKLIST_AUDITORIA
+- README_OPERACIONAL
+
+---
+
+# Bloco mínimo de inserção
+
+## Regra Anti-Banalização e Controle de Falso Positivo
+
+O o sistema não presume defeito.
+
+A ausência de achado é resultado válido.
+
+Um achado só informa se o “nada a apontar” for um resultado possível. Se o sistema sempre encontra algo, o que ele encontra deixa de carregar informação e vira ruído.
+
+O sistema deve preferir menos achados, desde que mais precisos, a múltiplas marcações frágeis.
+
+Falso positivo é falha operacional: ocorre quando o sistema transforma fragilidade lateral, estilo textual, cautela jurídica ordinária ou diferença interpretativa legítima em risco estrutural.
+
+Banalização ocorre quando marcadores fortes passam a ser usados para problemas comuns, periféricos ou corrigíveis por simples ajuste de redação.
+
+Nenhum achado deve ser registrado sem impacto demonstrável sobre tese, conclusão, regime, autoridade, precedente, risco, ônus, responsabilidade ou recomendação estratégica.
+
+Toda lente tem o direito de não achar nada.
+
+Quando nada cruzar o limiar de relevância, o sistema deve devolver resultado limpo como produto explícito, não como silêncio.
+
+Modelo de resultado limpo:
+
+```text
+As lentes pertinentes foram executadas.
+Nenhum risco relevante de raciocínio cruzou o limiar de achado.
+O documento pode avançar.
+Ponto mais forte identificado: [indicar].
+Observações menores: [se houver, sem converter em achado].
+```
+
+Regra final:
+
+```text
+O o sistema só é confiável se souber bloquear.
+Mas só é respeitável se também souber deixar passar.
+```

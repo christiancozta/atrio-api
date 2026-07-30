@@ -1,0 +1,716 @@
+# DOC-MÃE DE LOG, CODE-BLOCK E AJUSTES PÓS-AUDITORIA
+
+## Função
+
+Este documento consolida os ajustes estruturais a incorporar no pacote operacional do sistema após auditoria externa.
+
+Ele fixa quatro decisões:
+
+1. Toda execução do sistema deve gerar BLOCO DE LOG.
+2. Toda reescrita de conteúdo material deve ser entregue em code-block.
+3. O pacote deve incorporar os pontos pendentes pós-auditoria externa: modo piloto, métricas, casos-controle limpos, distribuição de gates e política de saída cliente.
+4. O o sistema deve preservar a doutrina anti-banalização: nada a apontar é produto, não silêncio.
+
+Este documento não substitui os prompts centrais. Ele orienta os ajustes que devem ser inseridos neles.
+
+---
+
+# 1. Regra de log obrigatório
+
+Toda execução operacional do sistema deve terminar com BLOCO DE LOG.
+
+O log não depende da memória da plataforma de IA.
+
+A IA executa.
+O operador valida.
+O log registra.
+
+O log deve ser externo ao chat: planilha, CSV, JSONL, Notion, Airtable, banco local ou outro repositório controlado.
+
+Regra:
+
+```text
+Toda execução sistema gera uma linha de log.
+```
+
+O log deve registrar também resultado limpo.
+
+Sem registro de resultados limpos, o sistema fica enviesado para achar defeito.
+
+---
+
+# 2. Bloco de log obrigatório
+
+Ao final de qualquer execução sistema, inserir obrigatoriamente o bloco abaixo:
+
+```text
+# BLOCO DE LOG
+
+caso_id:
+data:
+plataforma:
+modelo:
+tipo_objeto:
+modo_execucao:
+texto_material_reescrito: sim/não
+code_block_usado_para_reescrita: sim/não
+checagem_validade_entrada: sim/não
+fontes_a_validar:
+lentes_acionadas:
+lentes_sem_achado:
+achados_sugeridos:
+achados_confirmados:
+achados_descartados:
+achados_rebaixados:
+confrontos_acionados:
+emergentes_confirmados:
+gate_final:
+resultado_limpo: sim/não
+saida_interna_gerada: sim/não
+saida_cliente_gerada: sim/não
+revisao_humana: sim/não
+decisao_humana_final: pendente/confirmou/rebaixou/agravou/reverteu
+falso_positivo: sim/não/incerto
+falso_bloqueio: sim/não/incerto
+falso_avanco: sim/não/incerto
+encaminhamento:
+observacao:
+```
+
+---
+
+# 3. Linha CSV opcional
+
+Quando o operador solicitar formato planilha, o sistema deve entregar uma linha CSV.
+
+Modelo:
+
+```csv
+caso_id,data,plataforma,modelo,tipo_objeto,modo_execucao,texto_material_reescrito,code_block_usado_para_reescrita,checagem_validade_entrada,fontes_a_validar,lentes_acionadas,lentes_sem_achado,achados_sugeridos,achados_confirmados,achados_descartados,achados_rebaixados,confrontos_acionados,emergentes_confirmados,gate_final,resultado_limpo,saida_interna_gerada,saida_cliente_gerada,revisao_humana,decisao_humana_final,falso_positivo,falso_bloqueio,falso_avanco,encaminhamento,observacao
+```
+
+Exemplo:
+
+```csv
+0001,2026-06-07,ChatGPT,GPT-5.5 Thinking,parecer,completo,não,não,sim,"Tema STJ citado sem identificação","EX003;EX004","EX001",3,2,1,0,"CF-019",1,BLOQUEIO_PARCIAL,não,sim,sim,sim,confirmou,não,não,não,"o módulo de construção do raciocínio","Percentual sem método confirmado; remover prognóstico numérico"
+```
+
+---
+
+# 4. Regra de code-block para reescrita material
+
+Toda entrega que envolva reescrita de conteúdo material deve ser feita em code-block.
+
+Conteúdo material inclui:
+
+- peça processual;
+- parecer;
+- nota técnica;
+- cláusula contratual;
+- e-mail jurídico;
+- relatório;
+- voto;
+- minuta;
+- fundamento;
+- conclusão;
+- dispositivo;
+- síntese cliente;
+- versão corrigida;
+- versão alternativa;
+- texto reescrito para uso externo.
+
+Regra:
+
+```text
+Se houver reescrita material, entregar em code-block.
+```
+
+Não basta explicar a alteração fora do code-block.
+
+A explicação pode vir antes ou depois.
+A versão utilizável deve estar em code-block.
+
+---
+
+# 5. Modelo obrigatório para reescrita material
+
+Quando o sistema indicar reescrita de trecho, usar:
+
+````markdown
+## Trecho reescrito
+
+```text
+[texto reescrito aqui]
+```
+
+## Nota técnica da reescrita
+[explicar, em até 5 linhas, o que foi corrigido]
+````
+
+Quando houver múltiplas alternativas:
+
+````markdown
+## Versão conservadora
+
+```text
+[texto]
+```
+
+## Versão intermediária
+
+```text
+[texto]
+```
+
+## Versão assertiva
+
+```text
+[texto]
+```
+````
+
+Quando a saída for cliente:
+
+````markdown
+# SÍNTESE DE AUDITORIA
+
+```text
+[saída cliente limpa, sem códigos internos]
+```
+````
+
+---
+
+# 6. Cláusula comum dos prompts centrais
+
+Os prompts centrais do sistema devem conter a seguinte cláusula comum:
+
+```text
+# CLÁUSULA COMUM — LOG E CODE-BLOCK
+
+Toda execução deve terminar com BLOCO DE LOG.
+
+Se a resposta incluir reescrita de conteúdo material, a versão reescrita deve ser entregue em code-block.
+
+Não entregar reescrita material apenas em parágrafo solto.
+
+O BLOCO DE LOG deve informar se houve reescrita material e se o code-block foi usado.
+
+Quando nada cruzar o limiar de achado, gerar RESULTADO LIMPO como produto explícito e registrar resultado_limpo: sim no log.
+```
+
+---
+
+# 7. Inserção no PROMPT MESTRE
+
+Adicionar ao PROMPT MESTRE:
+
+```text
+## Regra de encerramento obrigatório
+
+Ao final de qualquer execução, gere BLOCO DE LOG.
+
+Se houver reescrita de conteúdo material, entregue a versão reescrita em code-block.
+
+O Prompt Mestre orquestra etapas; não as funde.
+
+Modo completo não autoriza pular Rodadas por lente isolada quando houver Rodada de confronto.
+
+Rodada de confronto só pode ocorrer com achados isolados ou sinais estruturados suficientes.
+
+Se o modo for abreviado, declare expressamente que o resultado é triagem ou auditoria preliminar, não auditoria completa.
+
+Se nada cruzar o limiar de relevância, produza RESULTADO LIMPO e registre no log.
+```
+
+---
+
+# 8. Inserção no PROMPT TRIAGEM
+
+Adicionar ao PROMPT TRIAGEM:
+
+```text
+## Regra de log da triagem
+
+A triagem deve terminar com BLOCO DE LOG.
+
+Como a triagem não produz achado definitivo, registrar:
+
+achados_sugeridos: 0
+achados_confirmados: 0
+achados_descartados: 0
+emergentes_confirmados: 0
+
+Registrar lentes_acionadas como lentes sugeridas.
+Registrar confrontos_acionados como confrontos prováveis.
+
+Se a triagem concluir que não há risco relevante, registrar:
+
+resultado_limpo: sim
+gate_final: AVANÇA
+```
+
+Adicionar também:
+
+```text
+## Regra anti-banalização da triagem
+
+Não acionar lente por mera semelhança terminológica.
+
+Não acionar todas as lentes por padrão.
+
+Se o risco for apenas estilístico, encaminhar para o módulo de refinamento textual, não sistema.
+
+Se o risco for de fonte, encaminhar para o módulo de validação de fontes, não para confronto.
+```
+
+---
+
+# 9. Inserção no PROMPT LENTE ISOLADA
+
+Adicionar ao PROMPT LENTE ISOLADA:
+
+```text
+## Regra de log da lente isolada
+
+Toda Lente isolada deve terminar com BLOCO DE LOG.
+
+Registrar:
+
+lentes_acionadas: [lente aplicada]
+lentes_sem_achado: [lente aplicada, se nada foi encontrado]
+achados_sugeridos:
+achados_confirmados:
+achados_descartados:
+achados_rebaixados:
+gate_final: gate preliminar da lente isolada
+resultado_limpo: sim/não
+
+Se a lente não encontrar nada, isso deve ser declarado como resultado válido.
+```
+
+Adicionar campo obrigatório na saída:
+
+```text
+## Resultado negativo da lente
+[preencher quando a lente não encontrar achado]
+
+A lente foi aplicada e não identificou risco relevante dentro do seu escopo.
+Isso não significa que o documento inteiro esteja limpo; significa apenas que esta lente não encontrou achado próprio.
+```
+
+---
+
+# 10. Inserção no PROMPT CONFRONTO / RODADA DE CONFRONTO
+
+Adicionar ao PROMPT CONFRONTO / RODADA DE CONFRONTO:
+
+```text
+## Regra de log da Rodada de confronto
+
+Toda Rodada de confronto deve terminar com BLOCO DE LOG.
+
+Registrar:
+
+confrontos_acionados:
+emergentes_confirmados:
+achados_confirmados:
+achados_descartados:
+falso_positivo: incerto, salvo validação humana posterior
+gate_final: gate sugerido pela Rodada de confronto
+resultado_limpo: sim/não
+
+Se não houver acoplamento funcional, registrar:
+
+emergentes_confirmados: 0
+resultado_limpo: sim, se também não houver achados isolados relevantes
+observacao: Sem achado emergente; não é A+B.
+```
+
+Adicionar regra:
+
+```text
+Rodada de confronto não é obrigatória.
+
+Não produzir emergente por elegância teórica.
+
+Emergente falso é forma grave de banalização.
+
+Se a pergunta “por que não é A+B?” não tiver resposta forte, não há achado emergente.
+```
+
+---
+
+# 11. Inserção no PROMPT GATE TÉCNICO
+
+Adicionar ao PROMPT GATE TÉCNICO:
+
+```text
+## Regra de log do gate
+
+Todo Gate Técnico deve terminar com BLOCO DE LOG.
+
+Registrar:
+
+gate_final:
+achados_confirmados:
+achados_rebaixados:
+achados_descartados:
+resultado_limpo:
+revisao_humana:
+encaminhamento:
+
+Se o gate for AVANÇA, justificar se houve resultado limpo ou apenas ausência de bloqueio.
+
+Se o gate for REVISÃO HUMANA, indicar a natureza da decisão humana:
+- validação de fonte;
+- escolha estratégica;
+- tese inovadora;
+- risco institucional;
+- dúvida de enquadramento;
+- governança.
+```
+
+Adicionar regra:
+
+```text
+REVISÃO HUMANA não é falha do sistema.
+
+O risco operacional está na distribuição dos gates, não na existência da decisão humana.
+
+Não rebaixar artificialmente REVISÃO HUMANA para AVANÇA COM AJUSTE por pressão de produtividade.
+
+Não elevar artificialmente BLOQUEIO PARCIAL para BLOQUEIO TOTAL por desconforto teórico.
+```
+
+---
+
+# 12. Inserção no OUTPUT INTERNO
+
+Adicionar ao OUTPUT INTERNO:
+
+```text
+## Bloco obrigatório de encerramento
+
+Ao final do output interno, incluir:
+
+1. Encaminhamento final.
+2. BLOCO DE LOG.
+3. Se houver reescrita material, versão em code-block.
+
+O output interno pode conter códigos, lentes e confrontos.
+
+O log deve permanecer em formato estruturado e copiável.
+```
+
+Adicionar campo:
+
+```text
+## Resultado limpo
+[preencher se aplicável]
+
+As lentes pertinentes foram executadas.
+Nenhum risco relevante cruzou o limiar de achado.
+O documento pode avançar.
+```
+
+---
+
+# 13. Inserção no OUTPUT CLIENTE
+
+Adicionar ao OUTPUT CLIENTE:
+
+```text
+## Regra de sanitização
+
+A saída cliente deve ser gerada em etapa separada da saída interna.
+
+Não mencionar:
+
+o sistema
+mecanismo interno de confronto
+Rodada por lente isolada
+Rodada por lente isolada
+Rodada de confronto
+lente
+eixo
+confronto
+marcador interno
+gate técnico
+Peirce
+Bion
+Sócrates
+Gadamer
+Hart
+Levi
+Raz
+Toulmin
+Matte-Blanco
+MacCormick
+```
+
+Adicionar regra:
+
+```text
+Se a saída cliente contiver reescrita de conteúdo material, a versão utilizável deve estar em code-block.
+```
+
+Ajustar tradução do gate externo:
+
+```text
+AVANÇA → Pode avançar.
+AVANÇA COM AJUSTE → Pode avançar após ajuste pontual.
+REVISÃO HUMANA → Exige revisão técnica antes de uso.
+BLOQUEIO PARCIAL → Trecho ou conclusão específica não deve ser usada sem correção.
+BLOQUEIO TOTAL → O documento não deve ser usado na forma atual.
+```
+
+Evitar a fórmula anterior “Não deve avançar parcialmente”, por ser pouco clara para cliente.
+
+---
+
+# 14. Pendências pós-auditoria externa
+
+A auditoria externa apontou cinco pendências que devem entrar no pacote operacional.
+
+## 14.1. Modo piloto
+
+Criar documento:
+
+```text
+MODO_PILOTO.txt
+```
+
+Função:
+
+```text
+Reduzir fricção de adoção sem amputar a arquitetura.
+```
+
+Fo módulo de refinamento textualo:
+
+```text
+1. Triagem.
+2. Uma ou duas lentes prioritárias.
+3. Rodada de confronto apenas se houver achados isolados suficientes.
+4. Gate preliminar.
+5. Saída interna curta.
+6. BLOCO DE LOG.
+```
+
+Regra:
+
+```text
+Modo piloto não declara auditoria completa.
+Modo piloto não produz achado emergente sem Lente isolada suficiente.
+```
+
+## 14.2. Log de métricas
+
+Criar documento:
+
+```text
+LOG_METRICAS.txt
+```
+
+Função:
+
+```text
+Medir falso positivo, falso bloqueio, falso avanço, excesso de lentes, distribuição de gates e resultado limpo.
+```
+
+## 14.3. Casos-controle limpos
+
+Criar documento:
+
+```text
+CASOS_CONTROLE_LIMPOS.txt
+```
+
+Função:
+
+```text
+Testar se o sistema sabe ficar quieto.
+```
+
+Requisitos:
+
+```text
+Peça sólida.
+Matéria difícil.
+Hipóteses concorrentes enfrentadas.
+Fontes delimitadas.
+Conceitos abertos com critério.
+Conclusão proporcional.
+Sem percentual inventado.
+Sem transporte de regime.
+Resultado esperado: AVANÇA ou AVANÇA COM AJUSTE leve.
+```
+
+## 14.4. Matriz de distribuição de gates
+
+Criar documento:
+
+```text
+MATRIZ_DISTRIBUICAO_GATES.txt
+```
+
+Função:
+
+```text
+Monitorar se o sistema bloqueia demais, libera demais ou transforma revisão humana em zona morta.
+```
+
+Métricas:
+
+```text
+taxa_avanca
+taxa_avanca_com_ajuste
+taxa_revisao_humana
+taxa_bloqueio_parcial
+taxa_bloqueio_total
+taxa_reversao_humana_por_gate
+taxa_resultado_limpo
+```
+
+Regra:
+
+```text
+Não há percentual ideal universal.
+
+A distribuição deve ser calibrada por tipo de objeto, risco e ambiente de uso.
+```
+
+## 14.5. Política de saída cliente
+
+Criar documento:
+
+```text
+POLITICA_SAIDA_CLIENTE.txt
+```
+
+Função:
+
+```text
+Impedir vazamento de metodologia interna.
+Separar output técnico e output cliente.
+Padronizar tradução de gates.
+Exigir code-block quando houver reescrita material.
+```
+
+---
+
+# 15. Disciplina do módulo de validação de fontes
+
+O o sistema não deve fingir validação de fonte que não executou.
+
+Se houver fonte jurídica a validar, registrar:
+
+```text
+[CHECAGEM DE VALIDADE NA ENTRADA]
+```
+
+Se o o módulo de validação de fontes ainda não estiver implementado como RAG, base documental ou rotina verificável, o sistema deve tratar a validação como pendência humana ou documental.
+
+Modelo:
+
+```text
+# CHECAGEM DE VALIDADE NA ENTRADA
+
+Fonte:
+Risco:
+Status: não validada pelo o módulo de validação de fontes
+Ação necessária: validação humana ou documental antes do avanço
+```
+
+Regra:
+
+```text
+Sem o módulo de validação de fontes operacional, a checagem de validade é sinalização obrigatória, não validação automática.
+```
+
+---
+
+# 16. Política de plataformas de IA
+
+Quando o sistema rodar em plataformas de IA, observar:
+
+```text
+1. O chat não é log.
+2. A memória da plataforma não é log.
+3. O histórico da conversa não substitui planilha, CSV, JSONL ou repositório externo.
+4. Toda execução deve gerar bloco copiável de log.
+5. O operador deve transferir ou automatizar o log para base externa.
+6. Resultado limpo deve ser registrado com o mesmo rigor que bloqueio.
+7. Reversões humanas devem ser registradas.
+```
+
+---
+
+# 17. Métricas derivadas
+
+A partir dos logs, calcular:
+
+```text
+taxa_acionamento_lente = vezes_lente_acionada / total_casos
+taxa_achado_lente = achados_confirmados_lente / vezes_lente_acionada
+taxa_lente_sem_achado = lentes_sem_achado / lentes_acionadas
+taxa_descarte = achados_descartados / achados_sugeridos
+taxa_rebaixamento = achados_rebaixados / achados_sugeridos
+taxa_emergente = emergentes_confirmados / confrontos_acionados
+taxa_resultado_limpo = resultados_limpos / total_casos
+taxa_bloqueio = bloqueios_parciais_e_totais / total_casos
+taxa_reversao_humana = decisoes_revertidas / revisoes_humanas
+taxa_falso_positivo = falsos_positivos / achados_confirmados
+taxa_falso_avanco = falsos_avancos / casos_avanca
+```
+
+---
+
+# 18. Critérios de alerta
+
+Sinal de excesso:
+
+```text
+lente acionada em quase todos os casos
+lente sempre encontra achado
+muitos achados são descartados
+muitos bloqueios são revertidos
+quase nunca há resultado limpo
+Rodada de confronto sempre encontra emergente
+BLOQUEIO PARCIAL vira estado padrão sem motivo
+```
+
+Sinal de frouxidão:
+
+```text
+casos ruins avançam
+percentuais sem método sobrevivem
+colapso de regime vira ajuste leve
+autoridade superestimada não gera revisão
+precedente não validado sustenta conclusão
+revisão humana agrava muitos casos que a IA liberou
+```
+
+---
+
+# 19. Regra final
+
+O o sistema deve produzir controle, não burocracia.
+
+O log existe para provar calibragem.
+
+O code-block existe para preservar rastreabilidade da reescrita.
+
+A anti-banalização existe para proteger a força do achado.
+
+A decisão humana existe porque o Direito exige responsabilidade técnica.
+
+O sistema é bom quando sabe:
+
+```text
+apontar o erro certo;
+calar diante do texto são;
+registrar o que fez;
+e permitir que o humano decida com lastro.
+```

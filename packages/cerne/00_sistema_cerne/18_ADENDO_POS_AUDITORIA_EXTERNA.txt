@@ -1,0 +1,667 @@
+# ADENDO PÓS-AUDITORIA GEMINI
+
+## Função
+
+Este documento consolida os pontos úteis e coerentes do relatório Gemini sobre o sistema.
+
+A auditoria do Gemini foi especialmente relevante em quatro temas:
+
+1. custo de inferência;
+2. gestão de estado;
+3. risco de emergência tautológica na Rodada de confronto;
+4. fronteira entre o módulo de validação de fontes e o sistema na análise de precedentes.
+
+Este adendo não altera a arquitetura central do sistema.
+
+Ele acrescenta regras de engenharia operacional para evitar que a sofisticação conceitual se converta em custo excessivo, perda de estado, fusão indevida de etapas ou vazamento metodológico.
+
+---
+
+# 1. Diagnóstico incorporável
+
+A avaliação do Gemini é útil porque desloca a crítica do plano conceitual para o plano de execução.
+
+O o sistema não deve ser tratado como prompt monolítico.
+
+Em uso robusto, o sistema deve operar por estados:
+
+```text
+TRIAGEM
+LENTE ISOLADA
+CONFRONTO / RODADA DE CONFRONTO
+GATE
+OUTPUT INTERNO
+OUTPUT CLIENTE
+LOG
+```
+
+Cada estado deve receber apenas o insumo necessário da etapa anterior.
+
+O modelo não deve carregar a auditoria inteira como memória livre.
+
+---
+
+# 2. Regra de gestão de estado
+
+Adicionar aos prompts centrais:
+
+```text
+# REGRA DE GESTÃO DE ESTADO
+
+Cada etapa do sistema deve operar apenas sobre os dados estruturados recebidos da etapa anterior.
+
+A etapa atual não deve refazer etapa anterior, salvo comando expresso.
+
+TRIAGEM não produz achado definitivo.
+LENTE ISOLADA não produz achado emergente.
+RODADA DE CONFRONTO não refaz lentes isoladas.
+GATE não cria novos achados.
+OUTPUT CLIENTE não revela metodologia interna.
+LOG registra a execução, não interpreta mérito.
+```
+
+---
+
+# 3. Estado mínimo por etapa
+
+Cada etapa deve entregar um objeto operacional mínimo.
+
+## Triagem
+
+```text
+tipo_objeto:
+tese_principal:
+trechos_de_risco:
+lentes_sugeridas:
+confrontos_possiveis:
+checagem_validade_entrada:
+prioridade:
+```
+
+## Lente isolada
+
+```text
+lente_aplicada:
+achados_confirmados:
+achados_descartados:
+lente_sem_achado:
+sinalizacoes_para_outras_lentes:
+gate_preliminar:
+produto_exportavel_para_rodada_c:
+```
+
+## Rodada de confronto
+
+```text
+confronto:
+achados_considerados:
+acoplamento_funcional: sim/não
+emergente_confirmado: sim/não
+justificativa_de_irredutibilidade:
+risco_dupla_marcacao:
+produto_exportavel_para_gate:
+```
+
+## Gate
+
+```text
+gate_final:
+fundamento_sintetico:
+achados_considerados:
+ponto_bloqueado:
+condicoes_de_avanco:
+encaminhamento:
+```
+
+## Output Cliente
+
+```text
+estado_documento:
+sintese_objetiva:
+ponto_principal:
+impacto_pratico:
+ajustes_necessarios:
+recomendacao_final:
+```
+
+## Log
+
+```text
+bloco_log_o sistema:
+linha_csv_opcional:
+```
+
+---
+
+# 4. Regra de custo de inferência
+
+A execução completa do sistema não deve ser usada por padrão.
+
+A profundidade da auditoria deve ser proporcional ao risco.
+
+Adicionar aos documentos centrais:
+
+```text
+# REGRA DE ESCALONAMENTO DE CUSTO
+
+O o sistema deve operar por profundidade progressiva.
+
+Não aplicar todas as lentes por padrão.
+
+Não executar Rodada de confronto se a triagem ou as lentes isoladas não justificarem confronto.
+
+Não gerar output cliente antes do gate.
+
+Não rodar modo completo quando o modo triagem for suficiente.
+
+Quanto maior o custo de inferência, maior deve ser a justificativa de risco.
+```
+
+---
+
+# 5. Modos de profundidade
+
+## Nível 0 — Checagem de entrada
+
+Uso:
+
+```text
+fonte duvidosa;
+precedente sem identificação;
+vigência normativa;
+súmula ou tema possivelmente superado.
+```
+
+Saída:
+
+```text
+Encaminhar ao módulo de validação de fontes ou à validação humana/documental.
+```
+
+## Nível 1 — Triagem
+
+Uso:
+
+```text
+primeira leitura;
+alto volume;
+dúvida sobre risco;
+seleção de lentes.
+```
+
+Saída:
+
+```text
+lentes sugeridas;
+confrontos possíveis;
+prioridade;
+bloco de log.
+```
+
+## Nível 2 — Lente isolada
+
+Uso:
+
+```text
+risco localizado;
+suspeita clara de uma falha;
+auditoria parcial.
+```
+
+Saída:
+
+```text
+achado isolado ou resultado negativo da lente;
+gate preliminar;
+bloco de log.
+```
+
+## Nível 3 — Confronto mecanismo interno de confronto
+
+Uso:
+
+```text
+dois achados reais;
+duas lentes distintas;
+acoplamento plausível;
+risco de emergente.
+```
+
+Saída:
+
+```text
+emergente confirmado ou negado;
+justificativa de irredutibilidade;
+gate sugerido;
+bloco de log.
+```
+
+## Nível 4 — Auditoria completa
+
+Uso:
+
+```text
+documento sensível;
+recomendação estratégica;
+alto risco institucional;
+peça-padrão de massa;
+caso paradigmático;
+validação de modelo.
+```
+
+Saída:
+
+```text
+triagem;
+lentes necessárias;
+Rodada de confronto quando cabível;
+gate;
+output interno;
+output cliente;
+bloco de log.
+```
+
+---
+
+# 6. Controle de Rodada de confronto contra tautologia
+
+O Gemini acertou ao alertar que modelos podem fabricar justificativas para forçar emergência.
+
+A solução não é eliminar a Rodada de confronto.
+
+A solução é endurecer o teste de irredutibilidade.
+
+Adicionar ao PROMPT CONFRONTO / RODADA DE CONFRONTO:
+
+```text
+# TESTE NEGATIVO DE EMERGÊNCIA
+
+Antes de confirmar achado emergente, responda:
+
+1. Se o achado da lente A for removido, o problema da lente B continua igual?
+2. Se o achado da lente B for removido, o problema da lente A continua igual?
+3. A interação entre A e B altera a natureza do erro ou apenas soma dois erros?
+4. A correção de apenas uma lente resolveria o problema?
+5. Há um mecanismo claro pelo qual um achado encobre, viabiliza, reforça ou distorce o outro?
+
+Se as respostas não demonstrarem acoplamento funcional, não há emergente.
+
+Resultado obrigatório:
+
+Sem achado emergente.
+Manter achados isolados ou registrar resultado limpo.
+```
+
+---
+
+# 7. Justificativa auditável, não chain-of-thought
+
+O relatório Gemini sugere “forçar Chain-of-Thought” na Rodada de confronto.
+
+Não incorporar essa fórmula.
+
+O o sistema não deve exigir cadeia de pensamento oculta.
+
+O que deve ser exigido é justificativa auditável.
+
+Inserção recomendada:
+
+```text
+# JUSTIFICATIVA AUDITÁVEL DE IRREDUTIBILIDADE
+
+A Rodada de confronto deve apresentar uma justificativa externa, curta e verificável, explicando por que o achado emergente não é apenas A+B.
+
+Não expor raciocínio oculto.
+
+Não produzir cadeia especulativa.
+
+Responder em linguagem operacional:
+
+- achado A;
+- achado B;
+- mecanismo de acoplamento;
+- razão da irredutibilidade;
+- consequência para o gate.
+```
+
+---
+
+# 8. Fronteira o módulo de validação de fontes × o sistema em precedentes
+
+O Gemini acertou ao apontar uma tensão real: EX007 audita precedente, mas o módulo de validação de fontes valida fonte.
+
+A solução é separar três planos.
+
+## Plano 1 — Existência e validade da fonte
+
+Pertence ao módulo de validação de fontes.
+
+Perguntas:
+
+```text
+O precedente existe?
+Está corretamente identificado?
+Está vigente?
+Foi superado?
+É vinculante?
+O tema foi cancelado, afetado ou modulado?
+```
+
+## Plano 2 — Alcance técnico do precedente
+
+Pertence ao sistema / EX007.
+
+Perguntas:
+
+```text
+A o módulo de construção do raciocínio foi isolada?
+Houve distinguishing?
+Obiter foi tratado como holding?
+A analogia respeita o domínio do precedente?
+A ementa foi usada como substituto da razão de decidir?
+```
+
+## Plano 3 — Força inferencial do uso do precedente
+
+Pertence ao sistema / EX003, EX011 ou confrontos.
+
+Perguntas:
+
+```text
+A aplicação analógica foi apresentada como dedução?
+A autoridade foi superestimada?
+O precedente parcial virou certeza estratégica?
+A tese depende de transporte indevido de regime?
+```
+
+Regra:
+
+```text
+o módulo de validação de fontes valida fonte.
+o sistema audita uso da fonte.
+```
+
+---
+
+# 9. Inserção no PROMPT TRIAGEM sobre o módulo de validação de fontes
+
+Adicionar:
+
+```text
+## Separação o módulo de validação de fontes × o sistema
+
+Se o problema for existência, vigência, identificação, superação ou força formal da fonte, encaminhar ao módulo de validação de fontes.
+
+Se o problema for uso argumentativo da fonte, manter no sistema.
+
+Exemplos:
+
+- precedente inexistente → o módulo de validação de fontes;
+- precedente superado → o módulo de validação de fontes;
+- o módulo de construção do raciocínio não isolada → o sistema / EX007;
+- ementa usada como o módulo de construção do raciocínio → o sistema / EX007;
+- precedente persuasivo tratado como vinculante → o sistema / EX011, com eventual validação o módulo de validação de fontes;
+- analogia apresentada como conclusão necessária → o sistema / EX003 ou CF-008.
+```
+
+---
+
+# 10. Política de sanitização reforçada
+
+O Gemini acertou sobre o risco de vazamento metodológico ao cliente.
+
+Adicionar à política de saída cliente:
+
+```text
+# CAMADA DE SANITIZAÇÃO FINAL
+
+Antes de entregar saída cliente, verificar se o texto contém qualquer termo interno:
+
+o sistema
+mecanismo interno de confronto
+Rodada
+lente
+confronto
+eixo
+achado emergente
+CF-
+EX-
+Peirce
+Bion
+Sócrates
+Gadamer
+Hart
+Levi
+Raz
+Toulmin
+Matte-Blanco
+MacCormick
+gate técnico
+
+Se contiver, reescrever antes da entrega.
+
+A saída cliente deve conter apenas:
+
+estado do documento;
+ponto de atenção;
+impacto prático;
+ajustes necessários;
+recomendação final.
+```
+
+---
+
+# 11. Revisão humana como rota de fuga
+
+O Gemini acertou ao alertar que modelos podem usar REVISÃO HUMANA como saída fácil para ambiguidade.
+
+A solução não é reduzir revisão humana.
+
+A solução é exigir motivo de revisão humana.
+
+Adicionar ao Gate Técnico:
+
+```text
+# TIPOLOGIA DA REVISÃO HUMANA
+
+Quando o gate for REVISÃO HUMANA, classificar o motivo:
+
+1. validação de fonte;
+2. decisão estratégica;
+3. tese inovadora;
+4. risco institucional;
+5. dúvida de enquadramento;
+6. conflito entre hipóteses plausíveis;
+7. governança;
+8. insuficiência documental.
+
+Não usar REVISÃO HUMANA como fórmula genérica.
+
+Toda revisão humana deve ter pergunta objetiva para o operador.
+```
+
+Modelo:
+
+```text
+## Revisão humana requerida
+
+Motivo:
+Pergunta ao operador:
+Decisão esperada:
+Consequência se confirmado:
+Consequência se rejeitado:
+```
+
+---
+
+# 12. Controle de latência e volume
+
+Para operação em volume, aplicar as seguintes regras:
+
+```text
+1. Rodar triagem em todos os casos.
+2. Rodar lentes apenas quando houver gatilho.
+3. Rodar mecanismo interno de confronto apenas quando houver achados estruturados.
+4. Rodar auditoria completa apenas em casos sensíveis.
+5. Usar output interno curto por padrão no piloto.
+6. Gerar output cliente apenas quando necessário.
+7. Registrar tudo no log.
+```
+
+---
+
+# 13. Política de processamento paralelo
+
+O Gemini sugeriu Rodadas por lente isolada em paralelo.
+
+Incorporar como possibilidade técnica, não como requisito.
+
+Regra:
+
+```text
+Rodadas por lente podem ser executadas em paralelo quando houver orquestração externa que preserve isolamento de contexto.
+
+Sem orquestração externa, preferir execução sequencial para manter rastreabilidade.
+```
+
+---
+
+# 14. Arquitetura futura recomendada
+
+A arquitetura futura pode ser implementada como grafo de estados.
+
+Estados:
+
+```text
+INPUT
+o módulo de validação de fontes_CHECK
+TRIAGEM
+LENTE_ISOLADA
+mecanismo interno de confronto
+GATE
+OUTPUT_INTERNO
+OUTPUT_CLIENTE
+LOG
+HUMAN_REVIEW
+o módulo de refinamento textual
+```
+
+Transições:
+
+```text
+INPUT → o módulo de validação de fontes_CHECK, se houver fonte a validar
+INPUT → TRIAGEM
+TRIAGEM → LENTE_ISOLADA, se houver risco
+TRIAGEM → RESULTADO_LIMPO, se não houver risco
+LENTE_ISOLADA → mecanismo interno de confronto, se houver confronto plausível
+LENTE_ISOLADA → GATE, se não houver confronto
+mecanismo interno de confronto → GATE
+GATE → OUTPUT_INTERNO
+GATE → HUMAN_REVIEW, se necessário
+GATE → o módulo de refinamento textual, se AVANÇA ou AVANÇA COM AJUSTE
+OUTPUT_INTERNO → OUTPUT_CLIENTE, se solicitado
+Qualquer estado → LOG
+```
+
+---
+
+# 15. Resposta à pergunta de escala
+
+Pergunta Gemini:
+
+Como equalizar custo de inferência com necessidade de escala?
+
+Resposta incorporada:
+
+```text
+O o sistema não escala por execução completa universal.
+
+Ele escala por acionamento progressivo.
+
+A triagem é universal.
+As lentes são condicionais.
+A Rodada de confronto é excepcional.
+O gate é obrigatório apenas quando houver achado ou decisão de avanço.
+O output cliente é gerado somente quando houver destinatário externo.
+O log é sempre obrigatório.
+
+A economia vem de três controles:
+
+1. não aplicar lentes sem gatilho;
+2. não confrontar sem achados isolados;
+3. não produzir entrega externa sem necessidade.
+```
+
+---
+
+# 16. O que não incorporar do Gemini
+
+## 16.1. Chain-of-Thought forçado
+
+Não incorporar.
+
+Substituir por justificativa auditável de irredutibilidade.
+
+## 16.2. Dependência de ferramenta específica
+
+Não incorporar.
+
+Pode haver grafo de estados, mas a ferramenta é indiferente.
+
+## 16.3. Sanitização por data masking como requisito único
+
+Não incorporar como única solução.
+
+A saída cliente precisa de sanitização textual e política de separação de contexto. Data masking pode ajudar, mas não substitui prompt disciplinado.
+
+## 16.4. Execução completa como padrão
+
+Não incorporar.
+
+O o sistema deve operar por profundidade progressiva.
+
+---
+
+# 17. Síntese dos ajustes incorporáveis
+
+Incorporar:
+
+```text
+gestão de estado;
+custo de inferência por profundidade progressiva;
+teste negativo de emergência;
+justificativa auditável, não chain-of-thought;
+fronteira o módulo de validação de fontes × o sistema em precedentes;
+sanitização final da saída cliente;
+tipologia da revisão humana;
+política de processamento paralelo;
+arquitetura futura em grafo de estados.
+```
+
+Não incorporar:
+
+```text
+chain-of-thought forçado;
+dependência de ferramenta específica;
+execução completa universal;
+fusão de etapas por conveniência;
+validação de fonte pelo sistema.
+```
+
+---
+
+# 18. Regra final
+
+O o sistema deve ser sofisticado na arquitetura, mas econômico na execução.
+
+A pergunta operacional não é:
+
+```text
+Quantas lentes o sistema consegue aplicar?
+```
+
+A pergunta correta é:
+
+```text
+Qual é a menor intervenção capaz de controlar o risco relevante?
+```

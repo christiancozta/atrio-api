@@ -1,0 +1,5026 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="description"
+      content="Console operacional ATRIO para execução governada do pipeline CORPUS, RATIO, CERNE e LUX."
+    />
+    <meta name="application-name" content="ATRIO Console Operacional" />
+    <title>ATRIO - Console operacional</title>
+
+    <script>
+      (function () {
+        document.documentElement.classList.add("js");
+        var theme = "light";
+        try {
+          var saved = localStorage.getItem("atrio-product-theme");
+          if (saved === "light" || saved === "dark") theme = saved;
+          else if (window.matchMedia("(prefers-color-scheme: dark)").matches) theme = "dark";
+        } catch (error) {
+          if (window.matchMedia("(prefers-color-scheme: dark)").matches) theme = "dark";
+        }
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+
+    <style>
+      :root {
+        --bg: #edf0f1;
+        --bg-deep: #e5e9ea;
+        --surface: rgb(250 251 251 / 91%);
+        --surface-solid: #fafbfb;
+        --surface-soft: #f3f5f5;
+        --surface-raised: #ffffff;
+        --ink: #17191a;
+        --ink-soft: #4f575a;
+        --ink-faint: #737d81;
+        --accent: #a23a25;
+        --accent-strong: #852d1c;
+        --accent-soft: #f2ddd5;
+        --accent-ink: #fffaf7;
+        --line: rgb(42 49 52 / 10%);
+        --line-strong: rgb(42 49 52 / 17%);
+        --line-highlight: rgb(255 255 255 / 80%);
+        --success: #276c55;
+        --success-soft: #dfeee8;
+        --warning: #8a6326;
+        --warning-soft: #f3e9d8;
+        --danger: #9a352f;
+        --danger-soft: #f4dfdc;
+        --shadow-ambient: 0 22px 70px rgb(55 64 67 / 9%);
+        --shadow-float: 0 14px 38px rgb(55 64 67 / 11%);
+        --shadow-inset: inset 0 1px 0 rgb(255 255 255 / 82%);
+        --radius-shell: 26px;
+        --radius-core: 21px;
+        --radius-control: 13px;
+        --ease-out: cubic-bezier(0.32, 0.72, 0, 1);
+        --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+        --font:
+          "Geist", "Aptos", "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
+        --font-display:
+          "Geist", "Aptos Display", "Segoe UI Variable Display", "Segoe UI", system-ui,
+          sans-serif;
+        --font-mono:
+          "Geist Mono", "Cascadia Code", "SFMono-Regular", Consolas, ui-monospace, monospace;
+      }
+
+      html[data-theme="dark"] {
+        --bg: #101314;
+        --bg-deep: #0c0f10;
+        --surface: rgb(25 29 30 / 91%);
+        --surface-solid: #191d1e;
+        --surface-soft: #202526;
+        --surface-raised: #252a2b;
+        --ink: #f0f3f3;
+        --ink-soft: #b1bbbd;
+        --ink-faint: #8c979a;
+        --accent: #d2674d;
+        --accent-strong: #e57c61;
+        --accent-soft: #402b26;
+        --accent-ink: #171918;
+        --line: rgb(235 243 244 / 9%);
+        --line-strong: rgb(235 243 244 / 16%);
+        --line-highlight: rgb(255 255 255 / 9%);
+        --success: #72b99b;
+        --success-soft: #203a31;
+        --warning: #d5aa62;
+        --warning-soft: #3b3222;
+        --danger: #df7770;
+        --danger-soft: #422827;
+        --shadow-ambient: 0 26px 80px rgb(0 0 0 / 24%);
+        --shadow-float: 0 18px 44px rgb(0 0 0 / 28%);
+        --shadow-inset: inset 0 1px 0 rgb(255 255 255 / 7%);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        min-width: 20rem;
+        min-height: 100%;
+        background: var(--bg);
+        scroll-behavior: smooth;
+      }
+
+      body {
+        min-width: 20rem;
+        min-height: 100dvh;
+        margin: 0;
+        overflow-x: hidden;
+        background:
+          radial-gradient(circle at 8% -12%, rgb(162 58 37 / 10%), transparent 32rem),
+          radial-gradient(circle at 96% 12%, rgb(83 104 110 / 9%), transparent 34rem),
+          linear-gradient(145deg, var(--bg), var(--bg-deep));
+        color: var(--ink);
+        font-family: var(--font);
+        font-size: 1rem;
+        font-weight: 450;
+        line-height: 1.5;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      body::before {
+        position: fixed;
+        z-index: 40;
+        inset: 0;
+        content: "";
+        pointer-events: none;
+        opacity: 0.025;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
+      }
+
+      ::selection {
+        background: var(--accent-soft);
+        color: var(--ink);
+      }
+
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+
+      button,
+      a,
+      label {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      button {
+        color: inherit;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      svg {
+        display: block;
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+      }
+
+      .skip-link {
+        position: fixed;
+        z-index: 50;
+        top: 0.75rem;
+        left: 0.75rem;
+        transform: translateY(-160%);
+        border-radius: 999px;
+        background: var(--ink);
+        color: var(--bg);
+        padding: 0.7rem 1rem;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        font-weight: 650;
+        transition: transform 500ms var(--ease-out);
+      }
+
+      .skip-link:focus {
+        transform: translateY(0);
+      }
+
+      .app-nav-wrap {
+        position: sticky;
+        z-index: 20;
+        top: 0;
+        padding: 1rem clamp(1rem, 2.5vw, 2rem) 0;
+        pointer-events: none;
+      }
+
+      .app-nav {
+        display: flex;
+        width: min(100%, 96rem);
+        min-height: 4.25rem;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        margin: 0 auto;
+        border: 1px solid var(--line-highlight);
+        border-radius: 999px;
+        background: color-mix(in srgb, var(--surface) 88%, transparent);
+        box-shadow:
+          var(--shadow-float),
+          inset 0 0 0 1px var(--line);
+        padding: 0.48rem 0.55rem 0.48rem 0.9rem;
+        -webkit-backdrop-filter: blur(24px) saturate(135%);
+        backdrop-filter: blur(24px) saturate(135%);
+        pointer-events: auto;
+      }
+
+      .brand {
+        display: inline-flex;
+        min-width: 0;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .brand-mark {
+        width: 1.65rem;
+        height: 1.65rem;
+        flex: 0 0 auto;
+      }
+
+      .brand-name {
+        font-family: var(--font-display);
+        font-size: 0.95rem;
+        font-weight: 760;
+        letter-spacing: 0.22em;
+        line-height: 1;
+      }
+
+      .brand-context {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.65rem;
+        color: var(--ink-faint);
+        font-family: var(--font-mono);
+        font-size: 0.66rem;
+        letter-spacing: 0.045em;
+        white-space: nowrap;
+      }
+
+      .brand-context::before {
+        width: 1px;
+        height: 1.1rem;
+        content: "";
+        background: var(--line-strong);
+      }
+
+      .nav-center {
+        display: flex;
+        min-width: 0;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .connection-button {
+        display: inline-flex;
+        min-width: 0;
+        align-items: center;
+        gap: 0.6rem;
+        border: 0;
+        border-radius: 999px;
+        background: var(--surface-soft);
+        box-shadow: var(--shadow-inset);
+        color: var(--ink-soft);
+        cursor: pointer;
+        padding: 0.55rem 0.8rem;
+        transition:
+          transform 500ms var(--ease-out),
+          color 500ms var(--ease-out),
+          background-color 500ms var(--ease-out);
+      }
+
+      .connection-button:hover {
+        transform: translateY(-1px);
+        color: var(--ink);
+      }
+
+      .connection-button:active {
+        transform: scale(0.98);
+      }
+
+      .status-light {
+        width: 0.48rem;
+        height: 0.48rem;
+        flex: 0 0 auto;
+        border-radius: 50%;
+        background: var(--warning);
+        box-shadow: 0 0 0 4px var(--warning-soft);
+      }
+
+      .status-light.is-online {
+        background: var(--success);
+        box-shadow: 0 0 0 4px var(--success-soft);
+      }
+
+      .status-light.is-offline {
+        background: var(--danger);
+        box-shadow: 0 0 0 4px var(--danger-soft);
+      }
+
+      .connection-copy {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-family: var(--font-mono);
+        font-size: 0.66rem;
+        font-weight: 600;
+        letter-spacing: 0.025em;
+        white-space: nowrap;
+      }
+
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+      }
+
+      .icon-button {
+        display: inline-flex;
+        width: 2.75rem;
+        height: 2.75rem;
+        align-items: center;
+        justify-content: center;
+        border: 0;
+        border-radius: 50%;
+        background: transparent;
+        color: var(--ink-soft);
+        cursor: pointer;
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        font-weight: 650;
+        transition:
+          transform 500ms var(--ease-out),
+          background-color 500ms var(--ease-out),
+          color 500ms var(--ease-out);
+      }
+
+      .icon-button:hover {
+        transform: translateY(-1px);
+        background: var(--surface-soft);
+        color: var(--ink);
+      }
+
+      .icon-button:active {
+        transform: scale(0.96);
+      }
+
+      .button {
+        display: inline-flex;
+        min-height: 2.9rem;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        border: 0;
+        border-radius: 999px;
+        cursor: pointer;
+        padding: 0.38rem 0.42rem 0.38rem 1.15rem;
+        font-size: 0.82rem;
+        font-weight: 680;
+        line-height: 1;
+        white-space: nowrap;
+        transition:
+          transform 560ms var(--ease-out),
+          background-color 560ms var(--ease-out),
+          color 560ms var(--ease-out),
+          opacity 560ms var(--ease-out);
+      }
+
+      .button:hover {
+        transform: translateY(-2px);
+      }
+
+      .button:active {
+        transform: scale(0.98);
+      }
+
+      .button:disabled {
+        cursor: not-allowed;
+        opacity: 0.42;
+        transform: none;
+      }
+
+      .button-primary {
+        background: var(--ink);
+        color: var(--bg);
+        box-shadow: var(--shadow-inset);
+      }
+
+      .button-primary:hover {
+        background: var(--accent);
+        color: var(--accent-ink);
+      }
+
+      .button-accent {
+        background: var(--accent);
+        color: var(--accent-ink);
+        box-shadow: var(--shadow-inset);
+      }
+
+      .button-accent:hover {
+        background: var(--accent-strong);
+      }
+
+      .button-soft {
+        background: var(--surface-soft);
+        color: var(--ink);
+        box-shadow: var(--shadow-inset);
+      }
+
+      .button-danger {
+        background: var(--danger-soft);
+        color: var(--danger);
+      }
+
+      .button-icon {
+        display: inline-flex;
+        width: 2rem;
+        height: 2rem;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+        border-radius: 50%;
+        background: rgb(255 255 255 / 12%);
+        font-family: var(--font-mono);
+        font-size: 0.88rem;
+        transition: transform 560ms var(--ease-out);
+      }
+
+      .button-soft .button-icon {
+        background: var(--surface-raised);
+      }
+
+      .button:hover .button-icon {
+        transform: translate(3px, -1px) scale(1.04);
+      }
+
+      .app-main {
+        width: min(100%, 99rem);
+        margin: 0 auto;
+        padding: clamp(1rem, 2.5vw, 2rem);
+      }
+
+      .app-shell {
+        display: grid;
+        grid-template-columns: minmax(13rem, 14.5rem) minmax(32rem, 1fr) minmax(17rem, 19rem);
+        align-items: start;
+        gap: clamp(0.9rem, 1.5vw, 1.35rem);
+        min-height: calc(100dvh - 7.5rem);
+      }
+
+      .bezel {
+        border: 1px solid var(--line-highlight);
+        border-radius: var(--radius-shell);
+        background:
+          linear-gradient(145deg, rgb(255 255 255 / 44%), transparent 48%),
+          color-mix(in srgb, var(--ink) 4%, transparent);
+        box-shadow:
+          var(--shadow-ambient),
+          inset 0 0 0 1px var(--line);
+        padding: 0.34rem;
+      }
+
+      .bezel-core {
+        overflow: hidden;
+        border-radius: var(--radius-core);
+        background: var(--surface);
+        box-shadow: var(--shadow-inset);
+      }
+
+      .pipeline-shell,
+      .inspector-shell {
+        position: sticky;
+        top: 6.25rem;
+      }
+
+      .pipeline-core {
+        padding: 1rem;
+      }
+
+      .rail-label {
+        margin: 0 0 0.9rem 0.45rem;
+        color: var(--ink-faint);
+        font-family: var(--font-mono);
+        font-size: 0.61rem;
+        font-weight: 650;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .pipeline-nav {
+        display: grid;
+        gap: 0.35rem;
+      }
+
+      .module-tab {
+        position: relative;
+        display: grid;
+        width: 100%;
+        grid-template-columns: 2.2rem minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 0.75rem;
+        border: 0;
+        border-radius: 16px;
+        background: transparent;
+        color: var(--ink-soft);
+        cursor: pointer;
+        padding: 0.72rem;
+        text-align: left;
+        transition:
+          transform 560ms var(--ease-out),
+          color 560ms var(--ease-out),
+          background-color 560ms var(--ease-out),
+          opacity 560ms var(--ease-out);
+      }
+
+      .module-tab:hover:not(:disabled) {
+        transform: translateX(2px);
+        background: var(--surface-soft);
+        color: var(--ink);
+      }
+
+      .module-tab.is-active {
+        background: var(--ink);
+        color: var(--bg);
+        box-shadow: var(--shadow-inset);
+      }
+
+      .module-tab:disabled {
+        cursor: not-allowed;
+        opacity: 0.4;
+      }
+
+      .tab-mark {
+        width: 2.05rem;
+        height: 2.05rem;
+      }
+
+      .tab-copy {
+        min-width: 0;
+      }
+
+      .tab-name {
+        display: block;
+        font-family: var(--font-display);
+        font-size: 0.82rem;
+        font-weight: 760;
+        letter-spacing: 0.06em;
+        line-height: 1;
+      }
+
+      .tab-role {
+        display: block;
+        overflow: hidden;
+        margin-top: 0.35rem;
+        color: currentColor;
+        font-size: 0.68rem;
+        opacity: 0.68;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .tab-state {
+        width: 0.56rem;
+        height: 0.56rem;
+        border: 1px solid currentColor;
+        border-radius: 50%;
+        opacity: 0.35;
+      }
+
+      .module-tab[data-state="done"] .tab-state {
+        border-color: var(--success);
+        background: var(--success);
+        opacity: 1;
+      }
+
+      .module-tab[data-state="active"] .tab-state {
+        border-color: var(--accent);
+        background: var(--accent);
+        box-shadow: 0 0 0 4px var(--accent-soft);
+        opacity: 1;
+      }
+
+      .module-tab.is-active[data-state="active"] .tab-state {
+        border-color: var(--accent-ink);
+        background: var(--accent);
+        box-shadow: 0 0 0 4px rgb(255 255 255 / 10%);
+      }
+
+      .rail-meter {
+        margin-top: 1rem;
+        border-radius: 16px;
+        background: var(--surface-soft);
+        padding: 0.85rem;
+      }
+
+      .rail-meter-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        color: var(--ink-faint);
+        font-family: var(--font-mono);
+        font-size: 0.61rem;
+      }
+
+      .meter {
+        height: 0.22rem;
+        overflow: hidden;
+        margin-top: 0.65rem;
+        border-radius: 99px;
+        background: var(--line);
+      }
+
+      .meter-fill {
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+        background: var(--accent);
+        transform-origin: left;
+        transform: scaleX(var(--progress-scale, 0));
+        transition: transform 900ms var(--ease-out);
+      }
+
+      .rail-meta {
+        display: grid;
+        margin-top: 1rem;
+        gap: 0.55rem;
+      }
+
+      .rail-meta-row {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 1rem;
+        color: var(--ink-faint);
+        font-size: 0.68rem;
+      }
+
+      .rail-meta-row strong {
+        overflow: hidden;
+        max-width: 8rem;
+        color: var(--ink-soft);
+        font-family: var(--font-mono);
+        font-size: 0.64rem;
+        font-weight: 650;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .workspace {
+        min-width: 0;
+      }
+
+      .workspace-head {
+        display: flex;
+        min-height: 4.7rem;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
+        margin-bottom: 1rem;
+        padding: 0 0.35rem;
+      }
+
+      .workspace-heading {
+        min-width: 0;
+      }
+
+      .workspace-kicker {
+        margin: 0 0 0.35rem;
+        color: var(--accent);
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .workspace-title {
+        overflow: hidden;
+        margin: 0;
+        font-family: var(--font-display);
+        font-size: clamp(1.55rem, 2.6vw, 2.15rem);
+        font-weight: 680;
+        letter-spacing: -0.045em;
+        line-height: 1.05;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .workspace-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        border-radius: 999px;
+        background: var(--surface);
+        box-shadow:
+          var(--shadow-inset),
+          inset 0 0 0 1px var(--line);
+        color: var(--ink-soft);
+        padding: 0.55rem 0.8rem;
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        white-space: nowrap;
+      }
+
+      .workspace-status[data-tone="success"] {
+        background: var(--success-soft);
+        color: var(--success);
+      }
+
+      .workspace-status[data-tone="warning"] {
+        background: var(--warning-soft);
+        color: var(--warning);
+      }
+
+      .workspace-status[data-tone="danger"] {
+        background: var(--danger-soft);
+        color: var(--danger);
+      }
+
+      .module-panel {
+        min-width: 0;
+      }
+
+      .panel-stack {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .panel-hero {
+        position: relative;
+        overflow: hidden;
+        min-height: 15.5rem;
+      }
+
+      .panel-hero-core {
+        display: grid;
+        min-height: 15rem;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: stretch;
+        gap: 2rem;
+        padding: clamp(1.5rem, 4vw, 2.5rem);
+      }
+
+      .panel-hero-copy {
+        display: flex;
+        max-width: 43rem;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 2.5rem;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        width: max-content;
+        align-items: center;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        padding: 0.38rem 0.7rem;
+        font-family: var(--font-mono);
+        font-size: 0.57rem;
+        font-weight: 700;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+
+      .panel-title {
+        max-width: 18ch;
+        margin: 1rem 0 0;
+        font-family: var(--font-display);
+        font-size: clamp(2.15rem, 5vw, 4.15rem);
+        font-weight: 620;
+        letter-spacing: -0.065em;
+        line-height: 0.98;
+      }
+
+      .panel-description {
+        max-width: 56ch;
+        margin: 1.2rem 0 0;
+        color: var(--ink-soft);
+        font-size: 0.92rem;
+        line-height: 1.72;
+      }
+
+      .hero-mark {
+        width: clamp(6rem, 12vw, 9rem);
+        height: clamp(6rem, 12vw, 9rem);
+        align-self: center;
+        color: color-mix(in srgb, var(--ink) 82%, transparent);
+        opacity: 0.92;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.7rem;
+      }
+
+      .bento {
+        display: grid;
+        grid-template-columns: minmax(0, 1.55fr) minmax(15rem, 0.85fr);
+        gap: 1rem;
+      }
+
+      .bento-wide {
+        grid-column: 1 / -1;
+      }
+
+      .card-core {
+        padding: clamp(1.25rem, 2.6vw, 1.7rem);
+      }
+
+      .card-head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 1.2rem;
+      }
+
+      .card-title {
+        margin: 0;
+        font-family: var(--font-display);
+        font-size: 1.03rem;
+        font-weight: 680;
+        letter-spacing: -0.025em;
+      }
+
+      .card-copy {
+        max-width: 54ch;
+        margin: 0.35rem 0 0;
+        color: var(--ink-faint);
+        font-size: 0.75rem;
+        line-height: 1.55;
+      }
+
+      .mini-badge {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        background: var(--surface-soft);
+        color: var(--ink-faint);
+        padding: 0.35rem 0.55rem;
+        font-family: var(--font-mono);
+        font-size: 0.58rem;
+        font-weight: 650;
+        white-space: nowrap;
+      }
+
+      .mini-badge[data-tone="accent"] {
+        background: var(--accent-soft);
+        color: var(--accent);
+      }
+
+      .mini-badge[data-tone="success"] {
+        background: var(--success-soft);
+        color: var(--success);
+      }
+
+      .dropzone {
+        display: grid;
+        min-height: 13.5rem;
+        place-items: center;
+        border: 0;
+        border-radius: 18px;
+        background:
+          radial-gradient(circle at 50% 0%, rgb(162 58 37 / 7%), transparent 60%),
+          var(--surface-soft);
+        box-shadow:
+          inset 0 0 0 1px var(--line),
+          var(--shadow-inset);
+        color: var(--ink);
+        cursor: pointer;
+        padding: 1.5rem;
+        text-align: center;
+        transition:
+          transform 650ms var(--ease-out),
+          background-color 650ms var(--ease-out),
+          box-shadow 650ms var(--ease-out);
+      }
+
+      .dropzone:hover,
+      .dropzone.is-dragging {
+        transform: translateY(-2px);
+        background-color: var(--accent-soft);
+        box-shadow:
+          inset 0 0 0 1px color-mix(in srgb, var(--accent) 38%, transparent),
+          var(--shadow-inset);
+      }
+
+      .dropzone-symbol {
+        display: grid;
+        width: 3.6rem;
+        height: 3.6rem;
+        place-items: center;
+        margin: 0 auto 1rem;
+        border-radius: 50%;
+        background: var(--surface-raised);
+        box-shadow:
+          0 12px 32px rgb(66 75 78 / 10%),
+          var(--shadow-inset);
+        color: var(--accent);
+        font-family: var(--font-mono);
+        font-size: 1.35rem;
+      }
+
+      .dropzone strong {
+        display: block;
+        font-size: 0.9rem;
+      }
+
+      .dropzone span {
+        display: block;
+        margin-top: 0.45rem;
+        color: var(--ink-faint);
+        font-size: 0.72rem;
+      }
+
+      .security-list {
+        display: grid;
+        margin: 0;
+        padding: 0;
+        gap: 0.35rem;
+        list-style: none;
+      }
+
+      .security-item {
+        display: grid;
+        grid-template-columns: 1.65rem minmax(0, 1fr);
+        align-items: center;
+        gap: 0.75rem;
+        border-radius: 14px;
+        padding: 0.7rem;
+        transition: background-color 500ms var(--ease-out);
+      }
+
+      .security-item:hover {
+        background: var(--surface-soft);
+      }
+
+      .security-icon {
+        display: grid;
+        width: 1.65rem;
+        height: 1.65rem;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--success-soft);
+        color: var(--success);
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        font-weight: 750;
+      }
+
+      .security-copy strong {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 660;
+      }
+
+      .security-copy span {
+        display: block;
+        margin-top: 0.16rem;
+        color: var(--ink-faint);
+        font-size: 0.65rem;
+      }
+
+      .file-list {
+        display: grid;
+        gap: 0.5rem;
+      }
+
+      .file-row {
+        display: grid;
+        grid-template-columns: 2.25rem minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 0.8rem;
+        border-radius: 14px;
+        background: var(--surface-soft);
+        padding: 0.65rem 0.7rem;
+      }
+
+      .file-type {
+        display: grid;
+        width: 2.25rem;
+        height: 2.25rem;
+        place-items: center;
+        border-radius: 10px;
+        background: var(--surface-raised);
+        color: var(--accent);
+        font-family: var(--font-mono);
+        font-size: 0.58rem;
+        font-weight: 750;
+      }
+
+      .file-copy {
+        min-width: 0;
+      }
+
+      .file-name {
+        display: block;
+        overflow: hidden;
+        font-size: 0.74rem;
+        font-weight: 650;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .file-meta {
+        display: block;
+        overflow: hidden;
+        margin-top: 0.2rem;
+        color: var(--ink-faint);
+        font-family: var(--font-mono);
+        font-size: 0.58rem;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .file-remove {
+        display: grid;
+        width: 2rem;
+        height: 2rem;
+        place-items: center;
+        border: 0;
+        border-radius: 50%;
+        background: transparent;
+        color: var(--ink-faint);
+        cursor: pointer;
+        transition:
+          transform 500ms var(--ease-out),
+          background-color 500ms var(--ease-out),
+          color 500ms var(--ease-out);
+      }
+
+      .file-remove:hover {
+        transform: rotate(6deg);
+        background: var(--danger-soft);
+        color: var(--danger);
+      }
+
+      .file-actions {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 0.35rem;
+      }
+
+      .file-review {
+        border: 0;
+        border-radius: 999px;
+        background: var(--surface-raised);
+        color: var(--ink-soft);
+        cursor: pointer;
+        padding: 0.45rem 0.62rem;
+        font-family: var(--font-mono);
+        font-size: 0.52rem;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      .file-review[data-decision="APPROVE"] {
+        background: var(--success-soft);
+        color: var(--success);
+      }
+
+      .file-review[data-decision="EXCLUDE"] {
+        background: var(--danger-soft);
+        color: var(--danger);
+      }
+
+      .file-review:disabled,
+      .file-remove:disabled {
+        cursor: not-allowed;
+        opacity: 0.42;
+      }
+
+      .empty-state {
+        display: grid;
+        min-height: 8rem;
+        place-items: center;
+        border-radius: 16px;
+        background: var(--surface-soft);
+        color: var(--ink-faint);
+        padding: 1rem;
+        text-align: center;
+        font-size: 0.74rem;
+      }
+
+      .phase-list {
+        display: grid;
+        gap: 0.45rem;
+      }
+
+      .phase-row {
+        display: grid;
+        grid-template-columns: 2.5rem minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 0.9rem;
+        border-radius: 15px;
+        padding: 0.7rem;
+        transition:
+          transform 560ms var(--ease-out),
+          background-color 560ms var(--ease-out),
+          opacity 560ms var(--ease-out);
+      }
+
+      .phase-row[data-state="future"] {
+        opacity: 0.46;
+      }
+
+      .phase-row[data-state="active"] {
+        transform: translateX(3px);
+        background: var(--accent-soft);
+      }
+
+      .phase-row[data-state="done"] {
+        background: var(--success-soft);
+      }
+
+      .phase-code {
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        font-weight: 700;
+      }
+
+      .phase-name {
+        font-size: 0.76rem;
+        font-weight: 620;
+      }
+
+      .phase-state {
+        font-family: var(--font-mono);
+        font-size: 0.56rem;
+        font-weight: 650;
+        text-transform: uppercase;
+      }
+
+      .phase-row[data-state="active"] .phase-state {
+        color: var(--accent);
+      }
+
+      .phase-row[data-state="done"] .phase-state {
+        color: var(--success);
+      }
+
+      .operator-note {
+        width: 100%;
+        min-height: 9rem;
+        resize: vertical;
+        border: 0;
+        border-radius: 16px;
+        background: var(--surface-soft);
+        box-shadow:
+          inset 0 0 0 1px var(--line),
+          var(--shadow-inset);
+        color: var(--ink);
+        padding: 1rem;
+        font-size: 0.78rem;
+        line-height: 1.6;
+        transition:
+          box-shadow 500ms var(--ease-out),
+          transform 500ms var(--ease-out);
+      }
+
+      .operator-note:focus {
+        outline: 0;
+        box-shadow:
+          inset 0 0 0 2px var(--accent),
+          var(--shadow-inset);
+      }
+
+      .operator-note::placeholder {
+        color: var(--ink-faint);
+      }
+
+      .axis-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0.55rem;
+      }
+
+      .axis-item {
+        position: relative;
+        min-height: 5.5rem;
+        overflow: hidden;
+        border-radius: 16px;
+        background: var(--surface-soft);
+        padding: 0.85rem;
+        transition:
+          transform 650ms var(--ease-out),
+          background-color 650ms var(--ease-out),
+          opacity 650ms var(--ease-out);
+      }
+
+      .axis-item:nth-child(1),
+      .axis-item:nth-child(6) {
+        grid-column: span 2;
+      }
+
+      .axis-item[data-state="running"] {
+        transform: translateY(-2px);
+        background: var(--accent-soft);
+      }
+
+      .axis-item[data-state="done"] {
+        background: var(--success-soft);
+      }
+
+      .axis-number {
+        display: block;
+        color: var(--ink-faint);
+        font-family: var(--font-mono);
+        font-size: 0.55rem;
+      }
+
+      .axis-name {
+        display: block;
+        margin-top: 0.75rem;
+        font-size: 0.72rem;
+        font-weight: 650;
+        line-height: 1.3;
+      }
+
+      .axis-state {
+        position: absolute;
+        top: 0.75rem;
+        right: 0.75rem;
+        width: 0.45rem;
+        height: 0.45rem;
+        border-radius: 50%;
+        background: var(--line-strong);
+      }
+
+      .axis-item[data-state="running"] .axis-state {
+        background: var(--accent);
+        box-shadow: 0 0 0 4px rgb(162 58 37 / 12%);
+      }
+
+      .axis-item[data-state="done"] .axis-state {
+        background: var(--success);
+      }
+
+      .gate-result {
+        display: grid;
+        min-height: 12rem;
+        place-items: center;
+        border-radius: 18px;
+        background:
+          radial-gradient(circle at 50% 0%, rgb(162 58 37 / 10%), transparent 60%),
+          var(--surface-soft);
+        padding: 1.5rem;
+        text-align: center;
+      }
+
+      .gate-code {
+        display: block;
+        color: var(--accent);
+        font-family: var(--font-mono);
+        font-size: clamp(1.05rem, 2.7vw, 1.55rem);
+        font-weight: 760;
+        letter-spacing: -0.035em;
+      }
+
+      .gate-copy {
+        max-width: 34ch;
+        margin: 0.65rem auto 0;
+        color: var(--ink-faint);
+        font-size: 0.72rem;
+        line-height: 1.55;
+      }
+
+      .integrity-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.6rem;
+      }
+
+      .integrity-item {
+        display: grid;
+        min-height: 6.5rem;
+        grid-template-columns: 2.1rem minmax(0, 1fr);
+        align-items: start;
+        gap: 0.8rem;
+        border-radius: 16px;
+        background: var(--surface-soft);
+        padding: 0.85rem;
+        transition:
+          transform 600ms var(--ease-out),
+          background-color 600ms var(--ease-out);
+      }
+
+      .integrity-item[data-state="running"] {
+        transform: translateY(-2px);
+        background: var(--accent-soft);
+      }
+
+      .integrity-item[data-state="done"] {
+        background: var(--success-soft);
+      }
+
+      .integrity-state {
+        display: grid;
+        width: 2.1rem;
+        height: 2.1rem;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--surface-raised);
+        color: var(--ink-faint);
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        font-weight: 750;
+      }
+
+      .integrity-item[data-state="done"] .integrity-state {
+        background: var(--success);
+        color: var(--surface-raised);
+      }
+
+      .integrity-item strong {
+        display: block;
+        font-size: 0.74rem;
+      }
+
+      .integrity-item span {
+        display: block;
+        margin-top: 0.25rem;
+        color: var(--ink-faint);
+        font-size: 0.64rem;
+        line-height: 1.45;
+      }
+
+      .release-panel {
+        display: grid;
+        min-height: 14rem;
+        align-content: space-between;
+        gap: 2rem;
+        border-radius: 18px;
+        background:
+          radial-gradient(circle at 100% 0%, rgb(162 58 37 / 12%), transparent 52%),
+          var(--ink);
+        color: var(--bg);
+        padding: 1.5rem;
+      }
+
+      .release-panel h3 {
+        max-width: 18ch;
+        margin: 0;
+        font-family: var(--font-display);
+        font-size: 1.55rem;
+        font-weight: 610;
+        letter-spacing: -0.045em;
+        line-height: 1.05;
+      }
+
+      .release-panel p {
+        max-width: 42ch;
+        margin: 0.75rem 0 0;
+        color: color-mix(in srgb, var(--bg) 68%, transparent);
+        font-size: 0.72rem;
+        line-height: 1.55;
+      }
+
+      .release-meta {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.55rem;
+      }
+
+      .release-meta-item {
+        border-radius: 12px;
+        background: rgb(255 255 255 / 7%);
+        padding: 0.65rem;
+      }
+
+      .release-meta-item span {
+        display: block;
+        color: color-mix(in srgb, var(--bg) 55%, transparent);
+        font-family: var(--font-mono);
+        font-size: 0.54rem;
+        text-transform: uppercase;
+      }
+
+      .release-meta-item strong {
+        display: block;
+        overflow: hidden;
+        margin-top: 0.25rem;
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .welcome {
+        min-height: calc(100dvh - 9rem);
+      }
+
+      .welcome-core {
+        display: grid;
+        min-height: calc(100dvh - 9.7rem);
+        grid-template-columns: minmax(0, 1.35fr) minmax(17rem, 0.65fr);
+        align-items: stretch;
+        gap: 0;
+      }
+
+      .welcome-main {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 3rem;
+        padding: clamp(2rem, 6vw, 5rem);
+      }
+
+      .welcome-title {
+        max-width: 13ch;
+        margin: 1.2rem 0 0;
+        font-family: var(--font-display);
+        font-size: clamp(3.2rem, 7vw, 6.5rem);
+        font-weight: 590;
+        letter-spacing: -0.078em;
+        line-height: 0.91;
+      }
+
+      .welcome-copy {
+        max-width: 48ch;
+        margin: 1.5rem 0 0;
+        color: var(--ink-soft);
+        font-size: 0.92rem;
+        line-height: 1.75;
+      }
+
+      .welcome-side {
+        display: grid;
+        align-content: space-between;
+        gap: 2rem;
+        background: var(--ink);
+        color: var(--bg);
+        padding: clamp(1.5rem, 4vw, 3rem);
+      }
+
+      .welcome-pipeline {
+        display: grid;
+        gap: 0.5rem;
+      }
+
+      .welcome-step {
+        display: grid;
+        grid-template-columns: 2.25rem minmax(0, 1fr);
+        align-items: center;
+        gap: 0.8rem;
+        border-radius: 14px;
+        background: rgb(255 255 255 / 6%);
+        padding: 0.72rem;
+      }
+
+      .welcome-step svg {
+        width: 2.25rem;
+        height: 2.25rem;
+      }
+
+      .welcome-step strong {
+        display: block;
+        font-family: var(--font-display);
+        font-size: 0.78rem;
+        letter-spacing: 0.04em;
+      }
+
+      .welcome-step span {
+        display: block;
+        margin-top: 0.2rem;
+        color: color-mix(in srgb, var(--bg) 58%, transparent);
+        font-size: 0.62rem;
+      }
+
+      .welcome-version {
+        color: color-mix(in srgb, var(--bg) 55%, transparent);
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        line-height: 1.7;
+      }
+
+      .inspector-core {
+        padding: 1rem;
+      }
+
+      .inspector-section + .inspector-section {
+        margin-top: 1rem;
+        padding-top: 1rem;
+        box-shadow: inset 0 1px 0 var(--line);
+      }
+
+      .inspector-title {
+        margin: 0 0 0.8rem;
+        color: var(--ink-faint);
+        font-family: var(--font-mono);
+        font-size: 0.59rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .summary-list {
+        display: grid;
+        gap: 0.6rem;
+      }
+
+      .summary-row {
+        display: grid;
+        grid-template-columns: 5rem minmax(0, 1fr);
+        align-items: baseline;
+        gap: 0.7rem;
+      }
+
+      .summary-row span {
+        color: var(--ink-faint);
+        font-size: 0.65rem;
+      }
+
+      .summary-row strong {
+        overflow: hidden;
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        font-weight: 650;
+        text-align: right;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .event-list {
+        display: grid;
+        max-height: 25rem;
+        overflow: auto;
+        gap: 0.4rem;
+        padding-right: 0.15rem;
+        scrollbar-width: thin;
+        scrollbar-color: var(--line-strong) transparent;
+      }
+
+      .event-item {
+        display: grid;
+        grid-template-columns: 1.45rem minmax(0, 1fr);
+        gap: 0.6rem;
+        border-radius: 13px;
+        padding: 0.55rem;
+      }
+
+      .event-item:hover {
+        background: var(--surface-soft);
+      }
+
+      .event-index {
+        color: var(--accent);
+        font-family: var(--font-mono);
+        font-size: 0.56rem;
+        font-weight: 700;
+      }
+
+      .event-copy strong {
+        display: block;
+        overflow: hidden;
+        font-size: 0.65rem;
+        font-weight: 650;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .event-copy span {
+        display: block;
+        margin-top: 0.2rem;
+        color: var(--ink-faint);
+        font-family: var(--font-mono);
+        font-size: 0.52rem;
+      }
+
+      .inspector-actions {
+        display: grid;
+        gap: 0.5rem;
+      }
+
+      .text-button {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        border: 0;
+        border-radius: 13px;
+        background: var(--surface-soft);
+        color: var(--ink-soft);
+        cursor: pointer;
+        padding: 0.72rem;
+        font-size: 0.69rem;
+        font-weight: 620;
+        text-align: left;
+        transition:
+          transform 500ms var(--ease-out),
+          background-color 500ms var(--ease-out),
+          color 500ms var(--ease-out);
+      }
+
+      .text-button:hover {
+        transform: translateX(2px);
+        background: var(--accent-soft);
+        color: var(--accent);
+      }
+
+      .text-button:disabled {
+        cursor: not-allowed;
+        opacity: 0.42;
+        transform: none;
+      }
+
+      .text-button span:last-child {
+        font-family: var(--font-mono);
+      }
+
+      dialog {
+        width: min(calc(100% - 2rem), 42rem);
+        max-height: min(88dvh, 50rem);
+        overflow: auto;
+        border: 1px solid var(--line-highlight);
+        border-radius: 30px;
+        background:
+          linear-gradient(145deg, rgb(255 255 255 / 42%), transparent 50%),
+          color-mix(in srgb, var(--ink) 5%, var(--surface-solid));
+        box-shadow:
+          0 42px 110px rgb(20 24 25 / 24%),
+          inset 0 0 0 1px var(--line);
+        color: var(--ink);
+        padding: 0.38rem;
+      }
+
+      dialog::backdrop {
+        background: rgb(20 24 25 / 48%);
+        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(20px);
+      }
+
+      .dialog-core {
+        border-radius: 24px;
+        background: var(--surface-solid);
+        box-shadow: var(--shadow-inset);
+        padding: clamp(1.35rem, 4vw, 2rem);
+      }
+
+      .dialog-head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .dialog-head h2 {
+        margin: 0;
+        font-family: var(--font-display);
+        font-size: clamp(1.7rem, 4vw, 2.35rem);
+        font-weight: 630;
+        letter-spacing: -0.05em;
+        line-height: 1;
+      }
+
+      .dialog-head p {
+        max-width: 52ch;
+        margin: 0.75rem 0 0;
+        color: var(--ink-faint);
+        font-size: 0.75rem;
+        line-height: 1.55;
+      }
+
+      .dialog-close {
+        display: grid;
+        width: 2.5rem;
+        height: 2.5rem;
+        place-items: center;
+        flex: 0 0 auto;
+        border: 0;
+        border-radius: 50%;
+        background: var(--surface-soft);
+        color: var(--ink-soft);
+        cursor: pointer;
+        transition:
+          transform 520ms var(--ease-out),
+          background-color 520ms var(--ease-out);
+      }
+
+      .dialog-close:hover {
+        transform: rotate(8deg);
+        background: var(--accent-soft);
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+        margin-top: 1.6rem;
+      }
+
+      .field {
+        display: grid;
+        gap: 0.45rem;
+      }
+
+      .field-full {
+        grid-column: 1 / -1;
+      }
+
+      .field label,
+      .field-label {
+        color: var(--ink-soft);
+        font-size: 0.68rem;
+        font-weight: 650;
+      }
+
+      .field small {
+        color: var(--ink-faint);
+        font-size: 0.6rem;
+        line-height: 1.4;
+      }
+
+      .input,
+      .select {
+        width: 100%;
+        min-height: 3rem;
+        border: 0;
+        border-radius: var(--radius-control);
+        background: var(--surface-soft);
+        box-shadow:
+          inset 0 0 0 1px var(--line),
+          var(--shadow-inset);
+        color: var(--ink);
+        padding: 0.75rem 0.9rem;
+        font-size: 0.78rem;
+        transition:
+          box-shadow 520ms var(--ease-out),
+          transform 520ms var(--ease-out);
+      }
+
+      .input:focus,
+      .select:focus {
+        outline: 0;
+        box-shadow:
+          inset 0 0 0 2px var(--accent),
+          var(--shadow-inset);
+      }
+
+      .input::placeholder {
+        color: var(--ink-faint);
+      }
+
+      .choice-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.55rem;
+      }
+
+      .choice {
+        position: relative;
+      }
+
+      .choice input {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .choice label {
+        display: grid;
+        min-height: 4.7rem;
+        align-content: center;
+        border-radius: 15px;
+        background: var(--surface-soft);
+        box-shadow: inset 0 0 0 1px var(--line);
+        cursor: pointer;
+        padding: 0.75rem;
+        transition:
+          transform 520ms var(--ease-out),
+          background-color 520ms var(--ease-out),
+          box-shadow 520ms var(--ease-out);
+      }
+
+      .choice label:hover {
+        transform: translateY(-1px);
+      }
+
+      .choice input:checked + label {
+        background: var(--accent-soft);
+        box-shadow: inset 0 0 0 2px var(--accent);
+      }
+
+      .choice input:focus-visible + label {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+      }
+
+      .choice strong {
+        display: block;
+        font-size: 0.73rem;
+      }
+
+      .choice span {
+        display: block;
+        margin-top: 0.25rem;
+        color: var(--ink-faint);
+        font-size: 0.58rem;
+        line-height: 1.35;
+      }
+
+      .form-error {
+        margin: 0.85rem 0 0;
+        border-radius: 13px;
+        background: var(--danger-soft);
+        color: var(--danger);
+        padding: 0.7rem 0.8rem;
+        font-size: 0.67rem;
+      }
+
+      .dialog-actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 0.65rem;
+        margin-top: 1.5rem;
+      }
+
+      .mode-switch {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.5rem;
+        border-radius: 18px;
+        background: var(--surface-soft);
+        padding: 0.35rem;
+      }
+
+      .mode-option {
+        position: relative;
+      }
+
+      .mode-option input {
+        position: absolute;
+        opacity: 0;
+      }
+
+      .mode-option label {
+        display: grid;
+        min-height: 5rem;
+        align-content: center;
+        border-radius: 14px;
+        cursor: pointer;
+        padding: 0.8rem;
+        transition:
+          transform 520ms var(--ease-out),
+          background-color 520ms var(--ease-out),
+          box-shadow 520ms var(--ease-out);
+      }
+
+      .mode-option input:checked + label {
+        background: var(--surface-raised);
+        box-shadow:
+          0 8px 24px rgb(55 64 67 / 8%),
+          var(--shadow-inset);
+      }
+
+      .mode-option strong {
+        display: block;
+        font-size: 0.74rem;
+      }
+
+      .mode-option span {
+        display: block;
+        margin-top: 0.3rem;
+        color: var(--ink-faint);
+        font-size: 0.61rem;
+        line-height: 1.4;
+      }
+
+      .health-card {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 0.8rem;
+        margin-top: 1rem;
+        border-radius: 16px;
+        background: var(--surface-soft);
+        padding: 0.8rem;
+      }
+
+      .health-card strong {
+        display: block;
+        font-size: 0.7rem;
+      }
+
+      .health-card span {
+        display: block;
+        margin-top: 0.2rem;
+        color: var(--ink-faint);
+        font-family: var(--font-mono);
+        font-size: 0.57rem;
+      }
+
+      .toast-region {
+        position: fixed;
+        z-index: 35;
+        right: 1.25rem;
+        bottom: 1.25rem;
+        display: grid;
+        width: min(calc(100% - 2rem), 23rem);
+        gap: 0.55rem;
+        pointer-events: none;
+      }
+
+      .toast {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: start;
+        gap: 0.75rem;
+        border: 1px solid var(--line-highlight);
+        border-radius: 17px;
+        background: color-mix(in srgb, var(--surface-solid) 94%, transparent);
+        box-shadow:
+          var(--shadow-float),
+          inset 0 0 0 1px var(--line);
+        padding: 0.85rem;
+        opacity: 0;
+        transform: translateY(1rem) scale(0.98);
+        transition:
+          opacity 600ms var(--ease-out),
+          transform 600ms var(--ease-out);
+        -webkit-backdrop-filter: blur(18px);
+        backdrop-filter: blur(18px);
+      }
+
+      .toast.is-visible {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+
+      .toast-mark {
+        width: 0.55rem;
+        height: 0.55rem;
+        margin-top: 0.25rem;
+        border-radius: 50%;
+        background: var(--accent);
+      }
+
+      .toast[data-tone="success"] .toast-mark {
+        background: var(--success);
+      }
+
+      .toast[data-tone="danger"] .toast-mark {
+        background: var(--danger);
+      }
+
+      .toast strong {
+        display: block;
+        font-size: 0.7rem;
+      }
+
+      .toast span {
+        display: block;
+        margin-top: 0.2rem;
+        color: var(--ink-faint);
+        font-size: 0.63rem;
+        line-height: 1.4;
+      }
+
+      .busy-overlay {
+        position: fixed;
+        z-index: 30;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        background: rgb(15 18 19 / 26%);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 500ms var(--ease-out);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+      }
+
+      .busy-overlay.is-visible {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .busy-card {
+        width: min(calc(100% - 2rem), 20rem);
+        border: 1px solid var(--line-highlight);
+        border-radius: 24px;
+        background: var(--surface-solid);
+        box-shadow:
+          var(--shadow-float),
+          inset 0 0 0 1px var(--line);
+        padding: 1.5rem;
+        text-align: center;
+        transform: translateY(1rem) scale(0.98);
+        transition: transform 560ms var(--ease-out);
+      }
+
+      .busy-overlay.is-visible .busy-card {
+        transform: translateY(0) scale(1);
+      }
+
+      .busy-orbit {
+        position: relative;
+        width: 3.4rem;
+        height: 3.4rem;
+        margin: 0 auto 1rem;
+        border-radius: 50%;
+        box-shadow: inset 0 0 0 1px var(--line-strong);
+      }
+
+      .busy-orbit::after {
+        position: absolute;
+        top: 0.25rem;
+        left: 50%;
+        width: 0.65rem;
+        height: 0.65rem;
+        content: "";
+        border-radius: 50%;
+        background: var(--accent);
+        transform: translateX(-50%);
+        transform-origin: 0.33rem 1.45rem;
+        animation: orbit 1.2s var(--ease-spring) infinite;
+      }
+
+      .busy-title {
+        display: block;
+        font-size: 0.8rem;
+      }
+
+      .busy-copy {
+        display: block;
+        margin-top: 0.35rem;
+        color: var(--ink-faint);
+        font-size: 0.66rem;
+      }
+
+      @keyframes orbit {
+        to {
+          transform: translateX(-50%) rotate(360deg);
+        }
+      }
+
+      .js .reveal {
+        opacity: 0;
+        transform: translateY(1.7rem);
+        transition:
+          opacity 860ms var(--ease-out),
+          transform 860ms var(--ease-out);
+      }
+
+      .js .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .enter {
+        animation: enter 720ms var(--ease-out) both;
+      }
+
+      @keyframes enter {
+        from {
+          opacity: 0;
+          transform: translateY(1rem);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 78rem) {
+        .app-shell {
+          grid-template-columns: minmax(12rem, 13rem) minmax(30rem, 1fr) minmax(15rem, 17rem);
+        }
+
+        .panel-hero-core {
+          gap: 1rem;
+        }
+
+        .axis-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 64rem) {
+        .app-shell {
+          grid-template-columns: minmax(0, 1fr);
+        }
+
+        .pipeline-shell,
+        .inspector-shell {
+          position: static;
+        }
+
+        .pipeline-shell {
+          order: 1;
+        }
+
+        .workspace {
+          order: 2;
+        }
+
+        .inspector-shell {
+          order: 3;
+        }
+
+        .pipeline-core {
+          padding: 0.6rem;
+        }
+
+        .rail-label,
+        .rail-meter,
+        .rail-meta {
+          display: none;
+        }
+
+        .pipeline-nav {
+          grid-template-columns: repeat(4, minmax(10rem, 1fr));
+          overflow-x: auto;
+          scrollbar-width: none;
+        }
+
+        .pipeline-nav::-webkit-scrollbar {
+          display: none;
+        }
+
+        .module-tab:hover:not(:disabled) {
+          transform: translateY(-2px);
+        }
+
+        .inspector-core {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 1rem;
+        }
+
+        .inspector-section + .inspector-section {
+          margin-top: 0;
+          padding-top: 0;
+          box-shadow: inset 1px 0 0 var(--line);
+          padding-left: 1rem;
+        }
+
+        .event-list {
+          max-height: 13rem;
+        }
+      }
+
+      @media (max-width: 48rem) {
+        .app-nav-wrap {
+          padding: 0.7rem 0.7rem 0;
+        }
+
+        .app-nav {
+          min-height: 3.9rem;
+          padding-left: 0.75rem;
+        }
+
+        .brand-context,
+        .nav-center {
+          display: none;
+        }
+
+        .app-main {
+          padding: 0.8rem;
+        }
+
+        .app-shell {
+          min-height: auto;
+          gap: 0.8rem;
+        }
+
+        .workspace-head {
+          min-height: auto;
+          align-items: flex-start;
+          padding: 0.7rem 0.35rem;
+        }
+
+        .workspace-title {
+          max-width: 65vw;
+          font-size: 1.45rem;
+        }
+
+        .workspace-status {
+          padding-inline: 0.65rem;
+        }
+
+        .panel-hero-core,
+        .welcome-core,
+        .bento {
+          grid-template-columns: minmax(0, 1fr);
+        }
+
+        .panel-hero-core {
+          min-height: auto;
+          padding: 1.35rem;
+        }
+
+        .panel-hero-copy {
+          gap: 1.7rem;
+        }
+
+        .panel-title {
+          font-size: clamp(2.2rem, 12vw, 3.2rem);
+        }
+
+        .hero-mark {
+          width: 5rem;
+          height: 5rem;
+          justify-self: end;
+          margin-top: -4.4rem;
+          opacity: 0.65;
+        }
+
+        .bento-wide {
+          grid-column: auto;
+        }
+
+        .axis-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .axis-item:nth-child(1),
+        .axis-item:nth-child(6) {
+          grid-column: span 1;
+        }
+
+        .integrity-grid {
+          grid-template-columns: minmax(0, 1fr);
+        }
+
+        .welcome {
+          min-height: auto;
+        }
+
+        .welcome-core {
+          min-height: auto;
+        }
+
+        .welcome-main,
+        .welcome-side {
+          padding: 1.5rem;
+        }
+
+        .welcome-title {
+          font-size: clamp(3rem, 17vw, 5rem);
+        }
+
+        .inspector-core {
+          grid-template-columns: minmax(0, 1fr);
+        }
+
+        .inspector-section + .inspector-section {
+          margin-top: 1rem;
+          padding-top: 1rem;
+          padding-left: 0;
+          box-shadow: inset 0 1px 0 var(--line);
+        }
+
+        .form-grid,
+        .choice-grid {
+          grid-template-columns: minmax(0, 1fr);
+        }
+
+        .field-full {
+          grid-column: auto;
+        }
+
+        .dialog-actions {
+          display: grid;
+          grid-template-columns: minmax(0, 1fr);
+        }
+
+        .dialog-actions .button {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 34rem) {
+        .brand-name {
+          font-size: 0.84rem;
+        }
+
+        .icon-button {
+          width: 2.4rem;
+          height: 2.4rem;
+        }
+
+        .nav-actions > .button {
+          width: 2.4rem;
+          min-height: 2.4rem;
+          gap: 0;
+          overflow: hidden;
+          padding: 0;
+          font-size: 0;
+        }
+
+        .nav-actions > .button .button-icon {
+          width: 2rem;
+          height: 2rem;
+          font-size: 0.9rem;
+        }
+
+        .workspace-status {
+          max-width: 8rem;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .pipeline-nav {
+          grid-template-columns: repeat(4, 10rem);
+        }
+
+        .hero-mark {
+          display: none;
+        }
+
+        .mode-switch {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+        }
+
+        .js .reveal {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      @media (prefers-reduced-transparency: reduce) {
+        .app-nav,
+        .toast,
+        .busy-overlay,
+        dialog::backdrop {
+          -webkit-backdrop-filter: none;
+          backdrop-filter: none;
+        }
+
+        .app-nav,
+        .toast {
+          background: var(--surface-solid);
+        }
+      }
+
+      @media print {
+        :root,
+        html[data-theme="dark"] {
+          --bg: #ffffff;
+          --bg-deep: #ffffff;
+          --surface: #ffffff;
+          --surface-solid: #ffffff;
+          --surface-soft: #f5f5f5;
+          --surface-raised: #ffffff;
+          --ink: #151718;
+          --ink-soft: #363b3d;
+          --ink-faint: #596164;
+          --line: rgb(0 0 0 / 12%);
+          --line-strong: rgb(0 0 0 / 20%);
+          --shadow-ambient: none;
+          --shadow-float: none;
+          --shadow-inset: none;
+        }
+
+        body {
+          background: #ffffff;
+        }
+
+        body::before,
+        .app-nav-wrap,
+        .pipeline-shell,
+        .inspector-actions,
+        .toast-region,
+        .busy-overlay,
+        dialog,
+        .hero-actions,
+        .dropzone,
+        .file-remove {
+          display: none !important;
+        }
+
+        .app-main {
+          width: 100%;
+          padding: 0;
+        }
+
+        .app-shell {
+          display: block;
+        }
+
+        .workspace-head {
+          margin-bottom: 1rem;
+        }
+
+        .bezel {
+          break-inside: avoid;
+          border-color: var(--line);
+          box-shadow: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#workspace">Ir para a execução</a>
+
+    <svg aria-hidden="true" width="0" height="0" style="position: absolute; overflow: hidden">
+      <defs>
+        <symbol id="mark-atrio" viewBox="0 0 1080 1080">
+          <path
+            fill="currentColor"
+            fill-rule="evenodd"
+            d="M0,0H1080V1080H0Z M226.5,226.5H851.5V919.5H659.21L657.5,917.79V390.5H420.5V917.79L418.79,919.5H226.5Z"
+          />
+          <path
+            fill="var(--accent)"
+            fill-rule="evenodd"
+            d="M226.06,1080H851.94L852,227L851,920H659L657.5,917.79V390.5H420.5V917.79L419,920L226,919Z"
+          />
+        </symbol>
+        <symbol id="mark-corpus" viewBox="0 0 1080 1080">
+          <path
+            fill="currentColor"
+            fill-rule="evenodd"
+            d="M0,973.25V1080H1080V962.45L403,896L326,887L301.14,884.95L298.39,884.16L270.62,881.84L268.51,882.14Z M0,788.96V907.61L302.35,776.75L1080,896.96V791.08L373.59,587.5H370.04Z M0,610.2V723.19L391.9,487.78L400.12,484.49L1080,725.5V606.25L469.5,295.61L466.97,296.24Z M0,414.38V539.2L333,300L485.59,192.75L1080,547.8V409.68L538.09,0Z"
+          />
+          <path
+            fill="var(--accent)"
+            fill-rule="evenodd"
+            d="M0,973.25V1080H1080V962.45L403,896L326,887L301.14,884.95L298.39,884.16L270.62,881.84L268.51,882.14Z"
+          />
+        </symbol>
+        <symbol id="mark-ratio" viewBox="0 0 1080 1080">
+          <path
+            fill="currentColor"
+            fill-rule="evenodd"
+            d="M-.5,714.53V1080.5H1080.5V714.17L982.46,777.32L880.89,837.65L828.62,871.63L539.94,1031.16L260.39,876.74L133.75,796.42Z M-.5,427.06V641.83L538.99,975.97L544.74,973.42L1077.64,643.37L1080.5,637.66V430.24L1078.32,426.96L1067.26,436.44L1018.66,472.63L880.89,568.16L757.21,657.65L699.89,695.87L649.61,733.07L580.22,779.33L548.26,802.8L543.9,804.97H539.11L433.41,733.07L357.99,677.76L303.69,641.56L81.45,481.68L1.47,426.08Z M-.5,-.5V173.17L2.19,175.87L55.31,172.96H338.88L436.5,172.46L439.88,175.17V670L446.05,677.12L494.75,708.94L525.55,732.08L539.51,737.73L553.05,734.6L638.74,676.49L642.79,668.38V179.91L644,176.31L648.76,173.45L657.65,171.96L1079.65,174.1L1080.5,168.98V2.87L1078.26,-.5Z"
+          />
+          <path
+            fill="var(--accent)"
+            fill-rule="evenodd"
+            d="M1080,908.55H766.57L765.54,906.49L539.91,1031.18L314.43,906.55L313.43,908.55H-.5V1080.5H1080.12Z"
+          />
+        </symbol>
+        <symbol id="mark-cerne" viewBox="0 0 1080 1080">
+          <path
+            fill="currentColor"
+            fill-rule="evenodd"
+            d="M544.5,897.5V1080.5H1080.5V897.5Z M-.5,897.5V1080.5H534.49V897.5Z M1080.5,763.13L544.5,818.28V895H1080.5Z M535.5,663.06L-.5,800.51V894.6L535.5,840.68Z M1080.5,518.46L1071.77,519.18L544.5,626.81V703.91L1080.5,648.71Z M535.5,387.1L-.5,608.07V702.22L535.5,564.77Z M1080.5,270.67L544.5,435.03V512.42L1080.5,403.19Z M535.5,111.55L-.5,416.05V550.5L535.5,329.53Z M1080.5,24L544.5,242.22V360.88L1078.7,196.98L1080.5,195.21Z"
+          />
+          <path
+            fill="var(--accent)"
+            fill-rule="evenodd"
+            d="M544.5,897.5V1080.5H1080.5V897.5Z M-.5,897.5V1080.5H534.49V897.5Z"
+          />
+        </symbol>
+        <symbol id="mark-lux" viewBox="0 0 1080 1080">
+          <path
+            fill="currentColor"
+            fill-rule="evenodd"
+            d="M1080,875.75L0,1045.08V1080H1080Z M1080,501.75L0,1036.05V1042.1L1080,745.92Z M1080,0H980.51L0,1023.04V1032.81L1080,324.35Z M0,1017.22L522.83,0H786.46Z M0,1017.22L116.06,0H295.73Z"
+          />
+          <path
+            fill="var(--accent)"
+            fill-rule="evenodd"
+            d="M1080,875.75L0,1045.08V1080H1080Z"
+          />
+        </symbol>
+      </defs>
+    </svg>
+
+    <header class="app-nav-wrap">
+      <div class="app-nav" aria-label="Barra principal">
+        <a class="brand" href="#workspace" aria-label="ATRIO, ir para a execução">
+          <svg class="brand-mark" viewBox="0 0 1080 1080" role="img" aria-label="ATRIO">
+            <use href="#mark-atrio"></use>
+          </svg>
+          <span class="brand-name">ATRIO</span>
+          <span class="brand-context">console operacional</span>
+        </a>
+
+        <div class="nav-center">
+          <button class="connection-button" id="connection-button" type="button">
+            <span class="status-light" id="connection-light" aria-hidden="true"></span>
+            <span class="connection-copy" id="connection-copy">Demonstração local</span>
+          </button>
+        </div>
+
+        <div class="nav-actions">
+          <button
+            class="icon-button"
+            id="theme-toggle"
+            type="button"
+            aria-label="Ativar modo escuro"
+            title="Alternar tema"
+          >
+            TEMA
+          </button>
+          <button class="button button-primary" id="new-run-button" type="button">
+            Nova execução
+            <span class="button-icon" aria-hidden="true">+</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="app-main" id="workspace">
+      <div class="app-shell" id="product-shell" hidden>
+        <aside class="bezel pipeline-shell" aria-label="Pipeline ATRIO">
+          <div class="bezel-core pipeline-core">
+            <p class="rail-label">Pipeline governado</p>
+            <nav class="pipeline-nav">
+              <button class="module-tab" type="button" data-module="corpus" data-state="active">
+                <svg class="tab-mark" viewBox="0 0 1080 1080" aria-hidden="true">
+                  <use href="#mark-corpus"></use>
+                </svg>
+                <span class="tab-copy">
+                  <span class="tab-name">CORPUS</span>
+                  <span class="tab-role">Ingestão segura</span>
+                </span>
+                <span class="tab-state" aria-hidden="true"></span>
+              </button>
+
+              <button class="module-tab" type="button" data-module="ratio" data-state="future">
+                <svg class="tab-mark" viewBox="0 0 1080 1080" aria-hidden="true">
+                  <use href="#mark-ratio"></use>
+                </svg>
+                <span class="tab-copy">
+                  <span class="tab-name">RATIO</span>
+                  <span class="tab-role">Decisão governada</span>
+                </span>
+                <span class="tab-state" aria-hidden="true"></span>
+              </button>
+
+              <button class="module-tab" type="button" data-module="cerne" data-state="future">
+                <svg class="tab-mark" viewBox="0 0 1080 1080" aria-hidden="true">
+                  <use href="#mark-cerne"></use>
+                </svg>
+                <span class="tab-copy">
+                  <span class="tab-name">CERNE</span>
+                  <span class="tab-role">Auditoria adversarial</span>
+                </span>
+                <span class="tab-state" aria-hidden="true"></span>
+              </button>
+
+              <button class="module-tab" type="button" data-module="lux" data-state="future">
+                <svg class="tab-mark" viewBox="0 0 1080 1080" aria-hidden="true">
+                  <use href="#mark-lux"></use>
+                </svg>
+                <span class="tab-copy">
+                  <span class="tab-name">LUX</span>
+                  <span class="tab-role">Saída íntegra</span>
+                </span>
+                <span class="tab-state" aria-hidden="true"></span>
+              </button>
+            </nav>
+
+            <div class="rail-meter">
+              <div class="rail-meter-head">
+                <span>PROGRESSO</span>
+                <strong id="progress-copy">0%</strong>
+              </div>
+              <div class="meter" aria-hidden="true">
+                <div class="meter-fill" id="progress-fill"></div>
+              </div>
+            </div>
+
+            <div class="rail-meta">
+              <div class="rail-meta-row">
+                <span>Módulo</span>
+                <strong id="rail-module">RI</strong>
+              </div>
+              <div class="rail-meta-row">
+                <span>Destino</span>
+                <strong id="rail-destination">INTERNO</strong>
+              </div>
+              <div class="rail-meta-row">
+                <span>Estado</span>
+                <strong id="rail-stage">CREATED</strong>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <section class="workspace">
+          <header class="workspace-head">
+            <div class="workspace-heading">
+              <p class="workspace-kicker" id="workspace-kicker">Execução local</p>
+              <h1 class="workspace-title" id="workspace-title">Nova execução</h1>
+            </div>
+            <span class="workspace-status" id="workspace-status">CREATED</span>
+          </header>
+
+          <section class="module-panel" data-module-panel="corpus">
+            <div class="panel-stack">
+              <div class="bezel panel-hero reveal">
+                <div class="bezel-core panel-hero-core">
+                  <div class="panel-hero-copy">
+                    <div>
+                      <span class="eyebrow">Ingestão controlada</span>
+                      <h2 class="panel-title">Documentos entram. Identidades não saem.</h2>
+                      <p class="panel-description">
+                        Validação de formato, cifragem e registro imutável dentro da zona
+                        segura. Inventário, OCR e pseudonimização entram nas próximas etapas
+                        do adaptador CORPUS.
+                      </p>
+                    </div>
+                    <div class="hero-actions">
+                      <button class="button button-accent" id="process-corpus" type="button">
+                        Processar documentos
+                        <span class="button-icon" aria-hidden="true">→</span>
+                      </button>
+                      <button class="button button-soft" id="sync-corpus" type="button">
+                        Sincronizar
+                        <span class="button-icon" aria-hidden="true">↻</span>
+                      </button>
+                    </div>
+                  </div>
+                  <svg class="hero-mark" viewBox="0 0 1080 1080" aria-hidden="true">
+                    <use href="#mark-corpus"></use>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="bento">
+                <div class="bezel reveal">
+                  <div class="bezel-core card-core">
+                    <div class="card-head">
+                      <div>
+                        <h3 class="card-title">Entrada documental</h3>
+                        <p class="card-copy">
+                          PDF, DOCX, imagem ou TXT em UTF-8, até 50 MiB por arquivo.
+                        </p>
+                      </div>
+                      <span class="mini-badge" id="file-count-badge">0 arquivos</span>
+                    </div>
+
+                    <button class="dropzone" id="dropzone" type="button">
+                      <span>
+                        <span class="dropzone-symbol" aria-hidden="true">+</span>
+                        <strong>Selecione ou arraste os documentos</strong>
+                        <span>O conteúdo fica apenas na memória da sessão até o envio.</span>
+                      </span>
+                    </button>
+                    <input
+                      id="document-input"
+                      type="file"
+                      accept=".pdf,.docx,.jpg,.jpeg,.png,.tif,.tiff,.txt,.md,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/jpeg,image/png,image/tiff,text/plain,text/markdown"
+                      multiple
+                      hidden
+                    />
+                  </div>
+                </div>
+
+                <div class="bezel reveal">
+                  <div class="bezel-core card-core">
+                    <div class="card-head">
+                      <div>
+                        <h3 class="card-title">Zona segura</h3>
+                        <p class="card-copy">Regras aplicadas antes do primeiro handoff.</p>
+                      </div>
+                    </div>
+                    <ul class="security-list">
+                      <li class="security-item">
+                        <span class="security-icon">01</span>
+                        <span class="security-copy">
+                          <strong>Cofre AES-256-GCM</strong>
+                          <span>Mapa reversível separado</span>
+                        </span>
+                      </li>
+                      <li class="security-item">
+                        <span class="security-icon">02</span>
+                        <span class="security-copy">
+                          <strong>Falha fechada</strong>
+                          <span>Sigilo incerto bloqueia saída</span>
+                        </span>
+                      </li>
+                      <li class="security-item">
+                        <span class="security-icon">03</span>
+                        <span class="security-copy">
+                          <strong>Hash por documento</strong>
+                          <span>Trilha sem conteúdo jurídico</span>
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="bezel bento-wide reveal">
+                  <div class="bezel-core card-core">
+                    <div class="card-head">
+                      <div>
+                        <h3 class="card-title">Lote desta execução</h3>
+                        <p class="card-copy">
+                          Metadados locais. Bytes não são persistidos pelo navegador.
+                        </p>
+                      </div>
+                      <span class="mini-badge" data-tone="accent">CORPUS 1.5.0</span>
+                    </div>
+                    <div class="file-list" id="file-list">
+                      <div class="empty-state">Nenhum documento adicionado.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="module-panel" data-module-panel="ratio" hidden>
+            <div class="panel-stack">
+              <div class="bezel panel-hero reveal">
+                <div class="bezel-core panel-hero-core">
+                  <div class="panel-hero-copy">
+                    <div>
+                      <span class="eyebrow">Protocolo decisório</span>
+                      <h2 class="panel-title">Cada fase exige prova antes do avanço.</h2>
+                      <p class="panel-description">
+                        O RATIO executa o módulo ativo sem validar a própria fase. Hard stops e
+                        decisões humanas permanecem explícitos.
+                      </p>
+                    </div>
+                    <div class="hero-actions">
+                      <button class="button button-accent" id="run-ratio-phase" type="button">
+                        Executar fase
+                        <span class="button-icon" aria-hidden="true">→</span>
+                      </button>
+                    </div>
+                  </div>
+                  <svg class="hero-mark" viewBox="0 0 1080 1080" aria-hidden="true">
+                    <use href="#mark-ratio"></use>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="bento">
+                <div class="bezel reveal">
+                  <div class="bezel-core card-core">
+                    <div class="card-head">
+                      <div>
+                        <h3 class="card-title">Fases governadas</h3>
+                        <p class="card-copy" id="ratio-module-copy">Recurso Inominado</p>
+                      </div>
+                      <span class="mini-badge" data-tone="accent" id="ratio-version-badge">
+                        RATIO 7.0.0
+                      </span>
+                    </div>
+                    <div class="phase-list" id="phase-list"></div>
+                  </div>
+                </div>
+
+                <div class="bezel reveal">
+                  <div class="bezel-core card-core">
+                    <div class="card-head">
+                      <div>
+                        <h3 class="card-title">Nota do operador</h3>
+                        <p class="card-copy">Contexto local, não enviado no log de eventos.</p>
+                      </div>
+                    </div>
+                    <label class="field-label" for="operator-note">Observação de trabalho</label>
+                    <textarea
+                      class="operator-note"
+                      id="operator-note"
+                      placeholder="Registre uma ressalva, decisão ou ponto que exige conferência humana."
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="module-panel" data-module-panel="cerne" hidden>
+            <div class="panel-stack">
+              <div class="bezel panel-hero reveal">
+                <div class="bezel-core panel-hero-core">
+                  <div class="panel-hero-copy">
+                    <div>
+                      <span class="eyebrow">Auditoria adversarial</span>
+                      <h2 class="panel-title">A minuta enfrenta onze lentes independentes.</h2>
+                      <p class="panel-description">
+                        O CERNE testa coerência, fonte, inferência e risco antes de emitir um dos
+                        cinco gates formais do pipeline.
+                      </p>
+                    </div>
+                    <div class="hero-actions">
+                      <button class="button button-accent" id="run-cerne" type="button">
+                        Executar auditoria
+                        <span class="button-icon" aria-hidden="true">→</span>
+                      </button>
+                      <button class="button button-soft" id="return-ratio" type="button" hidden>
+                        Retornar ao RATIO
+                        <span class="button-icon" aria-hidden="true">↩</span>
+                      </button>
+                    </div>
+                  </div>
+                  <svg class="hero-mark" viewBox="0 0 1080 1080" aria-hidden="true">
+                    <use href="#mark-cerne"></use>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="bento">
+                <div class="bezel reveal">
+                  <div class="bezel-core card-core">
+                    <div class="card-head">
+                      <div>
+                        <h3 class="card-title">Matriz de confronto</h3>
+                        <p class="card-copy">Onze eixos, consolidação por gate.</p>
+                      </div>
+                      <span class="mini-badge" data-tone="accent">CERNE 1.2.0</span>
+                    </div>
+                    <div class="axis-grid" id="axis-grid"></div>
+                  </div>
+                </div>
+
+                <div class="bezel reveal">
+                  <div class="bezel-core card-core">
+                    <div class="card-head">
+                      <div>
+                        <h3 class="card-title">Gate consolidado</h3>
+                        <p class="card-copy">Somente AVANCA autoriza entrada no LUX.</p>
+                      </div>
+                    </div>
+                    <div class="gate-result" id="gate-result">
+                      <div>
+                        <span class="gate-code">AGUARDANDO</span>
+                        <p class="gate-copy">A auditoria ainda não foi executada.</p>
+                      </div>
+                    </div>
+                    <div class="field" id="demo-gate-field" style="margin-top: 1rem">
+                      <label for="demo-gate">Resultado da demonstração</label>
+                      <select class="select" id="demo-gate">
+                        <option value="AVANCA">AVANCA</option>
+                        <option value="AVANCA_COM_AJUSTE">AVANCA_COM_AJUSTE</option>
+                        <option value="REVISAO_HUMANA">REVISAO_HUMANA</option>
+                        <option value="BLOQUEIO_PARCIAL">BLOQUEIO_PARCIAL</option>
+                        <option value="BLOQUEIO_TOTAL">BLOQUEIO_TOTAL</option>
+                      </select>
+                      <small>Disponível apenas no modo de demonstração.</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="module-panel" data-module-panel="lux" hidden>
+            <div class="panel-stack">
+              <div class="bezel panel-hero reveal">
+                <div class="bezel-core panel-hero-core">
+                  <div class="panel-hero-copy">
+                    <div>
+                      <span class="eyebrow">Acabamento e saída</span>
+                      <h2 class="panel-title">Forma refinada. Conteúdo material preservado.</h2>
+                      <p class="panel-description">
+                        O LUX naturaliza o texto, aplica anonimização irreversível e submete a
+                        saída ao gate determinístico de integridade.
+                      </p>
+                    </div>
+                    <div class="hero-actions">
+                      <button class="button button-accent" id="run-lux" type="button">
+                        Executar LUX
+                        <span class="button-icon" aria-hidden="true">→</span>
+                      </button>
+                      <button class="button button-primary" id="release-output" type="button" hidden>
+                        Liberar saída
+                        <span class="button-icon" aria-hidden="true">↗</span>
+                      </button>
+                    </div>
+                  </div>
+                  <svg class="hero-mark" viewBox="0 0 1080 1080" aria-hidden="true">
+                    <use href="#mark-lux"></use>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="bento">
+                <div class="bezel reveal">
+                  <div class="bezel-core card-core">
+                    <div class="card-head">
+                      <div>
+                        <h3 class="card-title">Gate final de integridade</h3>
+                        <p class="card-copy">Âncoras protegidas e DLP antes da liberação.</p>
+                      </div>
+                      <span class="mini-badge" data-tone="accent">LUX 6.0.0</span>
+                    </div>
+                    <div class="integrity-grid" id="integrity-grid"></div>
+                  </div>
+                </div>
+
+                <div class="bezel reveal">
+                  <div class="bezel-core card-core">
+                    <div class="release-panel">
+                      <div>
+                        <h3 id="release-title">Saída ainda não liberada</h3>
+                        <p id="release-copy">
+                          O pacote final aparecerá após aprovação do CERNE, execução do LUX e
+                          passagem pelo gate de integridade.
+                        </p>
+                      </div>
+                      <div class="release-meta">
+                        <div class="release-meta-item">
+                          <span>Destino</span>
+                          <strong id="release-destination">INTERNO</strong>
+                        </div>
+                        <div class="release-meta-item">
+                          <span>Classificação</span>
+                          <strong id="release-classification">RESTRITO</strong>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <aside class="bezel inspector-shell" aria-label="Detalhes da execução">
+          <div class="bezel-core inspector-core">
+            <section class="inspector-section">
+              <h2 class="inspector-title">Execução</h2>
+              <div class="summary-list">
+                <div class="summary-row">
+                  <span>ID</span>
+                  <strong id="summary-id">-</strong>
+                </div>
+                <div class="summary-row">
+                  <span>Tenant</span>
+                  <strong id="summary-tenant">-</strong>
+                </div>
+                <div class="summary-row">
+                  <span>Operador</span>
+                  <strong id="summary-actor">-</strong>
+                </div>
+                <div class="summary-row">
+                  <span>Release</span>
+                  <strong id="summary-release">-</strong>
+                </div>
+                <div class="summary-row">
+                  <span>Versão</span>
+                  <strong id="summary-version">0</strong>
+                </div>
+              </div>
+            </section>
+
+            <section class="inspector-section">
+              <h2 class="inspector-title">Eventos seguros</h2>
+              <div class="event-list" id="event-list">
+                <div class="empty-state">Nenhum evento registrado.</div>
+              </div>
+            </section>
+
+            <section class="inspector-section">
+              <h2 class="inspector-title">Ações</h2>
+              <div class="inspector-actions">
+                <button class="text-button" id="sync-run" type="button">
+                  <span>Sincronizar execução</span>
+                  <span>↻</span>
+                </button>
+                <button class="text-button" id="export-run" type="button">
+                  <span>Exportar dossiê JSON</span>
+                  <span>↓</span>
+                </button>
+                <button class="text-button" id="reset-run" type="button">
+                  <span>Encerrar sessão local</span>
+                  <span>×</span>
+                </button>
+              </div>
+            </section>
+          </div>
+        </aside>
+      </div>
+
+      <section class="bezel welcome reveal" id="welcome-panel">
+        <div class="bezel-core welcome-core">
+          <div class="welcome-main">
+            <div>
+              <span class="eyebrow">Via única local</span>
+              <h1 class="welcome-title">Do documento à saída governada.</h1>
+              <p class="welcome-copy">
+                Crie uma execução imutável e acompanhe cada handoff do ATRIO. O conteúdo jurídico
+                permanece nos módulos; a interface transporta apenas estados, códigos e
+                referências.
+              </p>
+            </div>
+            <div class="hero-actions">
+              <button class="button button-accent" id="welcome-new-run" type="button">
+                Criar execução
+                <span class="button-icon" aria-hidden="true">→</span>
+              </button>
+              <button class="button button-soft" id="welcome-settings" type="button">
+                Configurar motor
+                <span class="button-icon" aria-hidden="true">↗</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="welcome-side">
+            <div class="welcome-pipeline">
+              <div class="welcome-step">
+                <svg viewBox="0 0 1080 1080" aria-hidden="true">
+                  <use href="#mark-corpus"></use>
+                </svg>
+                <span>
+                  <strong>CORPUS</strong>
+                  <span>PDF/DOCX/imagem/TXT, cofre cifrado</span>
+                </span>
+              </div>
+              <div class="welcome-step">
+                <svg viewBox="0 0 1080 1080" aria-hidden="true">
+                  <use href="#mark-ratio"></use>
+                </svg>
+                <span>
+                  <strong>RATIO</strong>
+                  <span>RI, ED ou MS com hard stops</span>
+                </span>
+              </div>
+              <div class="welcome-step">
+                <svg viewBox="0 0 1080 1080" aria-hidden="true">
+                  <use href="#mark-cerne"></use>
+                </svg>
+                <span>
+                  <strong>CERNE</strong>
+                  <span>11 eixos e 5 gates formais</span>
+                </span>
+              </div>
+              <div class="welcome-step">
+                <svg viewBox="0 0 1080 1080" aria-hidden="true">
+                  <use href="#mark-lux"></use>
+                </svg>
+                <span>
+                  <strong>LUX</strong>
+                  <span>Acabamento, DLP e integridade</span>
+                </span>
+              </div>
+            </div>
+            <p class="welcome-version">
+              ATRIO API 0.6.0<br />
+              Release pinada pelo servidor<br />
+              Execução restrita a 127.0.0.1
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="new-run-dialog" aria-labelledby="new-run-title">
+      <form class="dialog-core" id="new-run-form">
+        <div class="dialog-head">
+          <div>
+            <h2 id="new-run-title">Criar execução</h2>
+            <p>
+              A release é definida pelo servidor ou pelo catálogo local da demonstração. Ela não
+              pode ser trocada durante o fluxo.
+            </p>
+          </div>
+          <button
+            class="dialog-close"
+            type="button"
+            data-close-dialog="new-run-dialog"
+            aria-label="Fechar"
+          >
+            ×
+          </button>
+        </div>
+
+        <div class="form-grid">
+          <div class="field field-full">
+            <label for="case-label">Nome de trabalho</label>
+            <input
+              class="input"
+              id="case-label"
+              name="case_label"
+              type="text"
+              maxlength="120"
+              placeholder="Ex.: Recurso sobre fornecimento essencial"
+              required
+            />
+            <small>Fica somente nesta interface e não é enviado ao log seguro.</small>
+          </div>
+
+          <div class="field">
+            <label for="tenant-id">Tenant</label>
+            <input
+              class="input"
+              id="tenant-id"
+              name="tenant_id"
+              type="text"
+              value="gabinete-local"
+              pattern="[A-Za-z0-9_][A-Za-z0-9_.:@/-]*"
+              maxlength="200"
+              required
+            />
+          </div>
+
+          <div class="field">
+            <label for="actor-id">Operador</label>
+            <input
+              class="input"
+              id="actor-id"
+              name="actor_id"
+              type="text"
+              value="operador-local"
+              pattern="[A-Za-z0-9_][A-Za-z0-9_.:@/-]*"
+              maxlength="200"
+              required
+            />
+          </div>
+
+          <div class="field field-full">
+            <span class="field-label">Módulo RATIO</span>
+            <div class="choice-grid">
+              <div class="choice">
+                <input id="ratio-ri" type="radio" name="ratio_module" value="RI" checked />
+                <label for="ratio-ri">
+                  <strong>RI</strong>
+                  <span>Recurso Inominado, 6 fases</span>
+                </label>
+              </div>
+              <div class="choice">
+                <input id="ratio-ed" type="radio" name="ratio_module" value="ED" />
+                <label for="ratio-ed">
+                  <strong>ED</strong>
+                  <span>Embargos de Declaração, 5 fases</span>
+                </label>
+              </div>
+              <div class="choice">
+                <input id="ratio-ms" type="radio" name="ratio_module" value="MS" />
+                <label for="ratio-ms">
+                  <strong>MS</strong>
+                  <span>Mandado de Segurança, 7 fases</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="field field-full">
+            <span class="field-label">Destino da saída</span>
+            <div class="choice-grid">
+              <div class="choice">
+                <input id="dest-interno" type="radio" name="destination" value="interno" checked />
+                <label for="dest-interno">
+                  <strong>Interno</strong>
+                  <span>Circulação restrita</span>
+                </label>
+              </div>
+              <div class="choice">
+                <input id="dest-externo" type="radio" name="destination" value="externo" />
+                <label for="dest-externo">
+                  <strong>Externo</strong>
+                  <span>Anonimização irreversível</span>
+                </label>
+              </div>
+              <div class="choice">
+                <input id="dest-publico" type="radio" name="destination" value="publico" />
+                <label for="dest-publico">
+                  <strong>Público</strong>
+                  <span>CNJ reduzido a [processo]</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="form-error" id="new-run-error" role="alert" hidden></p>
+
+        <div class="dialog-actions">
+          <button class="button button-soft" type="button" data-close-dialog="new-run-dialog">
+            Cancelar
+            <span class="button-icon" aria-hidden="true">×</span>
+          </button>
+          <button class="button button-accent" id="create-run-submit" type="submit">
+            Criar execução
+            <span class="button-icon" aria-hidden="true">→</span>
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="settings-dialog" aria-labelledby="settings-title">
+      <form class="dialog-core" id="settings-form">
+        <div class="dialog-head">
+          <div>
+            <h2 id="settings-title">Motor de execução</h2>
+            <p>
+              Use a API FastAPI local quando estiver disponível ou explore a jornada completa em
+              demonstração. O modo ativo fica sempre visível.
+            </p>
+          </div>
+          <button
+            class="dialog-close"
+            type="button"
+            data-close-dialog="settings-dialog"
+            aria-label="Fechar"
+          >
+            ×
+          </button>
+        </div>
+
+        <div class="form-grid">
+          <div class="field field-full">
+            <span class="field-label">Modo</span>
+            <div class="mode-switch">
+              <div class="mode-option">
+                <input id="mode-demo" type="radio" name="mode" value="demo" checked />
+                <label for="mode-demo">
+                  <strong>Demonstração local</strong>
+                  <span>Simula estados sem fabricar conteúdo jurídico.</span>
+                </label>
+              </div>
+              <div class="mode-option">
+                <input id="mode-api" type="radio" name="mode" value="api" />
+                <label for="mode-api">
+                  <strong>API local</strong>
+                  <span>Cria execuções, envia documentos e lê eventos reais.</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="field field-full">
+            <label for="api-url">Endpoint ATRIO</label>
+            <input
+              class="input"
+              id="api-url"
+              name="api_url"
+              type="url"
+              value="http://127.0.0.1:8080"
+              required
+            />
+            <small>
+              A interface e a API oficial compartilham a mesma origem local, restrita a
+              127.0.0.1.
+            </small>
+          </div>
+        </div>
+
+        <div class="health-card">
+          <span class="status-light" id="settings-health-light" aria-hidden="true"></span>
+          <span>
+            <strong id="settings-health-title">Não testado</strong>
+            <span id="settings-health-copy">ATRIO API 0.6.0 esperada</span>
+          </span>
+          <button class="button button-soft" id="test-connection" type="button">
+            Testar
+            <span class="button-icon" aria-hidden="true">↻</span>
+          </button>
+        </div>
+
+        <p class="form-error" id="settings-error" role="alert" hidden></p>
+
+        <div class="dialog-actions">
+          <button class="button button-soft" type="button" data-close-dialog="settings-dialog">
+            Cancelar
+            <span class="button-icon" aria-hidden="true">×</span>
+          </button>
+          <button class="button button-accent" type="submit">
+            Salvar configuração
+            <span class="button-icon" aria-hidden="true">→</span>
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="reset-dialog" aria-labelledby="reset-title">
+      <div class="dialog-core">
+        <div class="dialog-head">
+          <div>
+            <h2 id="reset-title">Encerrar sessão local?</h2>
+            <p>
+              A execução remota, quando existente, não será cancelada. Apenas o estado salvo nesta
+              interface será removido.
+            </p>
+          </div>
+          <button
+            class="dialog-close"
+            type="button"
+            data-close-dialog="reset-dialog"
+            aria-label="Fechar"
+          >
+            ×
+          </button>
+        </div>
+        <div class="dialog-actions">
+          <button class="button button-soft" type="button" data-close-dialog="reset-dialog">
+            Manter sessão
+            <span class="button-icon" aria-hidden="true">×</span>
+          </button>
+          <button class="button button-danger" id="confirm-reset" type="button">
+            Encerrar
+            <span class="button-icon" aria-hidden="true">→</span>
+          </button>
+        </div>
+      </div>
+    </dialog>
+
+    <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="true"></div>
+
+    <div class="busy-overlay" id="busy-overlay" aria-live="assertive" aria-hidden="true">
+      <div class="busy-card">
+        <div class="busy-orbit" aria-hidden="true"></div>
+        <strong class="busy-title" id="busy-title">Processando</strong>
+        <span class="busy-copy" id="busy-copy">Aguarde a conclusão da etapa.</span>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        "use strict";
+
+        var STORAGE_KEY = "atrio-product-console-v2";
+        var SETTINGS_KEY = "atrio-product-settings-v2";
+        var MAX_FILE_BYTES = 50 * 1024 * 1024;
+        var runtimeFiles = new Map();
+        var busy = false;
+        var pendingCreateRequest = null;
+
+        var MODULE_ORDER = ["corpus", "ratio", "cerne", "lux"];
+        var MODULE_LABELS = {
+          corpus: "CORPUS",
+          ratio: "RATIO",
+          cerne: "CERNE",
+          lux: "LUX",
+        };
+
+        var PHASES = {
+          RI: [
+            ["RI_01", "Admissibilidade"],
+            ["RI_02", "Relatório técnico"],
+            ["RI_03", "Matriz contrafactual e risco"],
+            ["RI_04", "Parecer estratégico"],
+            ["RI_05", "Minuta ou voto"],
+            ["RI_06", "Validação e refinamento"],
+          ],
+          ED: [
+            ["ED_01", "Admissibilidade"],
+            ["ED_02", "Relatório técnico"],
+            ["ED_03", "Parecer estratégico"],
+            ["ED_04", "Minuta ou voto"],
+            ["ED_05", "Validação e refinamento"],
+          ],
+          MS: [
+            ["MS_01", "Cabimento e admissibilidade"],
+            ["MS_02", "Mapa do ato coator"],
+            ["MS_03", "Decisão liminar"],
+            ["MS_04", "Processamento pós-liminar"],
+            ["MS_05", "Parecer de mérito"],
+            ["MS_06", "Sentença ou acórdão"],
+            ["MS_07", "Validação e refinamento"],
+          ],
+        };
+
+        var RATIO_NAMES = {
+          RI: "Recurso Inominado",
+          ED: "Embargos de Declaração",
+          MS: "Mandado de Segurança",
+        };
+
+        var AXES = [
+          "Toulmin",
+          "Sócrates",
+          "Peirce",
+          "Bion",
+          "Gadamer",
+          "Matte Blanco",
+          "Lévi",
+          "MacCormick",
+          "Hart",
+          "Kelsen",
+          "Raz",
+        ];
+
+        var INTEGRITY_CHECKS = [
+          ["Âncoras protegidas", "Dispositivo, valores e referências preservados"],
+          ["DLP determinístico", "Pseudotokens e identificadores conferidos"],
+          ["Coerência material", "Nenhuma alteração de sentido detectada"],
+          ["Envelope de saída", "Versão, hash e classificação registrados"],
+        ];
+
+        var GATE_COPY = {
+          AVANCA: "Auditoria aprovada. O handoff para o LUX está autorizado.",
+          AVANCA_COM_AJUSTE: "Ajustes obrigatórios. A execução retorna ao RATIO.",
+          REVISAO_HUMANA: "A auditoria exige uma decisão humana antes de prosseguir.",
+          BLOQUEIO_PARCIAL: "Há bloqueios localizados. O texto retorna ao RATIO.",
+          BLOQUEIO_TOTAL: "Inconsistência material. A execução permanece bloqueada.",
+        };
+
+        var STAGE_META = {
+          CREATED: ["corpus", "Preparada", "neutral"],
+          CORPUS_INGESTING: ["corpus", "CORPUS processando", "warning"],
+          CORPUS_REVIEW_REQUIRED: ["corpus", "Revisão CORPUS", "warning"],
+          CORPUS_READY: ["ratio", "CORPUS concluído", "success"],
+          RATIO_RUNNING: ["ratio", "RATIO em execução", "warning"],
+          RATIO_WAITING_OPERATOR: ["ratio", "Decisão humana", "warning"],
+          RATIO_READY: ["cerne", "RATIO concluído", "success"],
+          RATIO_REWORK: ["ratio", "Retrabalho RATIO", "warning"],
+          CERNE_AUDITING: ["cerne", "CERNE auditando", "warning"],
+          CERNE_APPROVED: ["lux", "CERNE aprovado", "success"],
+          CERNE_HUMAN_REVIEW: ["cerne", "Revisão humana", "warning"],
+          CERNE_PARTIAL_BLOCK: ["cerne", "Bloqueio parcial", "danger"],
+          CERNE_TOTAL_BLOCK: ["cerne", "Bloqueio total", "danger"],
+          LUX_REFINING: ["lux", "LUX refinando", "warning"],
+          FINAL_INTEGRITY_CHECK: ["lux", "Gate de integridade", "warning"],
+          FINAL_INTEGRITY_BLOCK: ["lux", "Integridade bloqueada", "danger"],
+          READY_FOR_RELEASE: ["lux", "Pronta para liberação", "success"],
+          RELEASED: ["lux", "Saída liberada", "success"],
+          TECHNICAL_FAILURE: ["corpus", "Falha técnica", "danger"],
+          CANCELLED: ["corpus", "Cancelada", "danger"],
+        };
+
+        function loadSettings() {
+          var sameOrigin =
+            window.location.protocol === "http:" || window.location.protocol === "https:"
+              ? window.location.origin
+              : "http://127.0.0.1:8080";
+          var fallback = {
+            mode: "api",
+            apiUrl: sameOrigin,
+            health: null,
+          };
+          try {
+            var saved = JSON.parse(localStorage.getItem(SETTINGS_KEY) || "null");
+            if (!saved || typeof saved !== "object") return fallback;
+            return {
+              mode: saved.mode === "api" ? "api" : "demo",
+              apiUrl: String(saved.apiUrl || fallback.apiUrl).replace(/\/+$/, ""),
+              health: null,
+            };
+          } catch (error) {
+            return fallback;
+          }
+        }
+
+        function loadState() {
+          try {
+            var saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+            if (!saved || !saved.run) return freshState();
+            return {
+              run: saved.run,
+              activeModule: saved.activeModule || stageModule(saved.run.stage),
+              files: Array.isArray(saved.files) ? saved.files : [],
+              ratioPhase: Number.isInteger(saved.ratioPhase) ? saved.ratioPhase : 0,
+              axisStates: Array.isArray(saved.axisStates)
+                ? saved.axisStates
+                : AXES.map(function () {
+                    return "pending";
+                  }),
+              integrityStates: Array.isArray(saved.integrityStates)
+                ? saved.integrityStates
+                : INTEGRITY_CHECKS.map(function () {
+                    return "pending";
+                  }),
+              events: Array.isArray(saved.events) ? saved.events : [],
+              gate: saved.gate || null,
+              moduleDone: Object.assign(
+                { corpus: false, ratio: false, cerne: false, lux: false },
+                saved.moduleDone || {},
+              ),
+              released: Boolean(saved.released),
+            };
+          } catch (error) {
+            return freshState();
+          }
+        }
+
+        function freshState() {
+          return {
+            run: null,
+            activeModule: "corpus",
+            files: [],
+            ratioPhase: 0,
+            axisStates: AXES.map(function () {
+              return "pending";
+            }),
+            integrityStates: INTEGRITY_CHECKS.map(function () {
+              return "pending";
+            }),
+            events: [],
+            gate: null,
+            moduleDone: { corpus: false, ratio: false, cerne: false, lux: false },
+            released: false,
+          };
+        }
+
+        var settings = loadSettings();
+        var state = loadState();
+
+        function persist() {
+          try {
+            localStorage.setItem(
+              STORAGE_KEY,
+              JSON.stringify({
+                run: state.run,
+                activeModule: state.activeModule,
+                files: state.files,
+                ratioPhase: state.ratioPhase,
+                axisStates: state.axisStates,
+                integrityStates: state.integrityStates,
+                events: state.events,
+                gate: state.gate,
+                moduleDone: state.moduleDone,
+                released: state.released,
+              }),
+            );
+          } catch (error) {
+            toast("Persistência indisponível", "A sessão seguirá apenas na memória.", "danger");
+          }
+        }
+
+        function persistSettings() {
+          try {
+            localStorage.setItem(
+              SETTINGS_KEY,
+              JSON.stringify({ mode: settings.mode, apiUrl: settings.apiUrl }),
+            );
+          } catch (error) {
+            toast("Configuração não salva", "O navegador bloqueou o armazenamento local.", "danger");
+          }
+        }
+
+        function id(prefix) {
+          var suffix;
+          if (window.crypto && typeof window.crypto.randomUUID === "function") {
+            suffix = window.crypto.randomUUID().slice(0, 8);
+          } else {
+            suffix = Math.random().toString(36).slice(2, 10);
+          }
+          return prefix + "-" + suffix;
+        }
+
+        function nowIso() {
+          return new Date().toISOString();
+        }
+
+        function shortTime(value) {
+          try {
+            return new Intl.DateTimeFormat("pt-BR", {
+              hour: "2-digit",
+              minute: "2-digit",
+              second: "2-digit",
+            }).format(new Date(value));
+          } catch (error) {
+            return "--:--";
+          }
+        }
+
+        function formatBytes(bytes) {
+          if (bytes < 1024) return bytes + " B";
+          if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KiB";
+          return (bytes / (1024 * 1024)).toFixed(1) + " MiB";
+        }
+
+        function escapeHtml(value) {
+          return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+        }
+
+        function stageModule(stage) {
+          return (STAGE_META[stage] || ["corpus"])[0];
+        }
+
+        function currentMode() {
+          return state.run && state.run.interface_mode
+            ? state.run.interface_mode
+            : settings.mode;
+        }
+
+        function setBusy(visible, title, copy) {
+          busy = visible;
+          var overlay = document.getElementById("busy-overlay");
+          overlay.classList.toggle("is-visible", visible);
+          overlay.setAttribute("aria-hidden", String(!visible));
+          if (title) document.getElementById("busy-title").textContent = title;
+          if (copy) document.getElementById("busy-copy").textContent = copy;
+          if (state.run) renderActions();
+        }
+
+        function wait(ms) {
+          return new Promise(function (resolve) {
+            window.setTimeout(resolve, ms);
+          });
+        }
+
+        function toast(title, copy, tone) {
+          var region = document.getElementById("toast-region");
+          var item = document.createElement("div");
+          item.className = "toast";
+          item.dataset.tone = tone || "neutral";
+          item.innerHTML =
+            '<span class="toast-mark" aria-hidden="true"></span>' +
+            "<span><strong>" +
+            escapeHtml(title) +
+            "</strong><span>" +
+            escapeHtml(copy) +
+            "</span></span>";
+          region.appendChild(item);
+          requestAnimationFrame(function () {
+            item.classList.add("is-visible");
+          });
+          window.setTimeout(function () {
+            item.classList.remove("is-visible");
+            window.setTimeout(function () {
+              item.remove();
+            }, 650);
+          }, 4200);
+        }
+
+        function addEvent(command, component, metadata, remote) {
+          var event = {
+            sequence: state.events.length + 1,
+            command: command,
+            component: component,
+            occurred_at: nowIso(),
+            metadata: metadata || {},
+            remote: Boolean(remote),
+          };
+          state.events.push(event);
+          if (state.run && !remote) state.run.state_version += 1;
+          persist();
+        }
+
+        function moduleAvailability() {
+          if (!state.run) {
+            return {
+              corpus: "future",
+              ratio: "future",
+              cerne: "future",
+              lux: "future",
+            };
+          }
+          var current = stageModule(state.run.stage);
+          var currentIndex = MODULE_ORDER.indexOf(current);
+          var availability = {};
+          MODULE_ORDER.forEach(function (module, index) {
+            if (state.moduleDone[module]) availability[module] = "done";
+            else if (module === current) availability[module] = "active";
+            else if (index < currentIndex) availability[module] = "done";
+            else availability[module] = "future";
+          });
+          if (state.run.stage === "RELEASED") {
+            MODULE_ORDER.forEach(function (module) {
+              availability[module] = "done";
+            });
+          }
+          return availability;
+        }
+
+        function progressValue() {
+          var complete = MODULE_ORDER.filter(function (module) {
+            return state.moduleDone[module];
+          }).length;
+          if (state.run && state.run.stage === "RELEASED") complete = 4;
+          return Math.round((complete / 4) * 100);
+        }
+
+        function renderShell() {
+          var hasRun = Boolean(state.run);
+          document.getElementById("product-shell").hidden = !hasRun;
+          document.getElementById("welcome-panel").hidden = hasRun;
+          if (!hasRun) {
+            renderConnection();
+            return;
+          }
+
+          var meta = STAGE_META[state.run.stage] || [
+            state.activeModule,
+            state.run.stage,
+            "neutral",
+          ];
+          var availability = moduleAvailability();
+          var progress = progressValue();
+
+          document.getElementById("workspace-kicker").textContent =
+            currentMode() === "api" ? "Execução conectada" : "Demonstração operacional";
+          document.getElementById("workspace-title").textContent = state.run.case_label;
+          document.getElementById("workspace-status").textContent = meta[1];
+          document.getElementById("workspace-status").dataset.tone = meta[2];
+          document.getElementById("progress-copy").textContent = progress + "%";
+          document
+            .getElementById("progress-fill")
+            .style.setProperty("--progress-scale", String(progress / 100));
+          document.getElementById("rail-module").textContent = state.run.ratio_module;
+          document.getElementById("rail-destination").textContent =
+            state.run.destination.toUpperCase();
+          document.getElementById("rail-stage").textContent = state.run.stage;
+
+          document.querySelectorAll(".module-tab").forEach(function (button) {
+            var module = button.dataset.module;
+            button.dataset.state = availability[module];
+            button.classList.toggle("is-active", module === state.activeModule);
+            button.disabled = availability[module] === "future";
+            button.setAttribute(
+              "aria-current",
+              module === state.activeModule ? "step" : "false",
+            );
+          });
+
+          document.querySelectorAll("[data-module-panel]").forEach(function (panel) {
+            panel.hidden = panel.dataset.modulePanel !== state.activeModule;
+          });
+
+          document.getElementById("summary-id").textContent = state.run.execution_id;
+          document.getElementById("summary-tenant").textContent = state.run.tenant_id;
+          document.getElementById("summary-actor").textContent = state.run.created_by;
+          document.getElementById("summary-release").textContent =
+            state.run.release.release_id;
+          document.getElementById("summary-version").textContent =
+            String(state.run.state_version);
+
+          document.getElementById("release-destination").textContent =
+            state.run.destination.toUpperCase();
+          document.getElementById("release-classification").textContent =
+            state.run.destination === "interno" ? "RESTRITO" : "ANONIMIZADO";
+
+          renderFiles();
+          renderPhases();
+          renderAxes();
+          renderIntegrity();
+          renderEvents();
+          renderActions();
+          renderConnection();
+          revealVisible();
+        }
+
+        function renderConnection() {
+          var mode = currentMode();
+          var online = mode === "api" && settings.health;
+          var light = document.getElementById("connection-light");
+          var copy = document.getElementById("connection-copy");
+          light.classList.toggle("is-online", Boolean(online));
+          light.classList.toggle("is-offline", mode === "api" && !online);
+          if (mode === "demo") copy.textContent = "Demonstração local";
+          else if (online) copy.textContent = "API " + settings.health.atrio_api_version;
+          else copy.textContent = "API não verificada";
+
+          document.getElementById("demo-gate-field").hidden = mode !== "demo";
+        }
+
+        function renderFiles() {
+          var list = document.getElementById("file-list");
+          var badge = document.getElementById("file-count-badge");
+          badge.textContent =
+            state.files.length + (state.files.length === 1 ? " arquivo" : " arquivos");
+          if (!state.files.length) {
+            list.innerHTML = '<div class="empty-state">Nenhum documento adicionado.</div>';
+            return;
+          }
+          list.innerHTML = state.files
+            .map(function (file) {
+              var type = documentTypeLabel(file.type);
+              var hash = file.sha256 ? file.sha256.slice(0, 12) + "…" : "hash pendente";
+              var status = file.status;
+              if (
+                currentMode() === "api" &&
+                !file.document_id &&
+                !runtimeFiles.has(file.id)
+              ) {
+                status = "reanexar para enviar";
+              }
+              var inventory = file.inventory || null;
+              var inventoryCopy = inventory
+                ? [
+                    inventory.extraction_method,
+                    inventory.extracted_char_count + " caracteres",
+                    inventory.cnj || "sem CNJ",
+                    inventory.review_type || "sem revisão",
+                  ].join(" / ")
+                : "";
+              var actions = "";
+              if (file.effective_status === "REVIEW_REQUIRED" && file.document_id) {
+                actions =
+                  '<span class="file-actions">' +
+                  '<button class="file-review" type="button" data-review-document="' +
+                  escapeHtml(file.document_id) +
+                  '" data-decision="APPROVE">Aprovar</button>' +
+                  '<button class="file-review" type="button" data-review-document="' +
+                  escapeHtml(file.document_id) +
+                  '" data-decision="EXCLUDE">Excluir</button>' +
+                  "</span>";
+              } else {
+                actions =
+                  '<button class="file-remove" type="button" data-remove-file="' +
+                  escapeHtml(file.id) +
+                  '" aria-label="Remover ' +
+                  escapeHtml(file.name) +
+                  '"' +
+                  (file.document_id ? " disabled" : "") +
+                  '>×</button>';
+              }
+              return (
+                '<div class="file-row enter">' +
+                '<span class="file-type">' +
+                type +
+                "</span>" +
+                '<span class="file-copy"><span class="file-name">' +
+                escapeHtml(file.name) +
+                '</span><span class="file-meta">' +
+                formatBytes(file.size) +
+                " / " +
+                hash +
+                " / " +
+                escapeHtml(status) +
+                (inventoryCopy ? "<br>" + escapeHtml(inventoryCopy) : "") +
+                "</span></span>" +
+                actions +
+                "</div>"
+              );
+            })
+            .join("");
+        }
+
+        function renderPhases() {
+          if (!state.run) return;
+          var phases = PHASES[state.run.ratio_module];
+          document.getElementById("ratio-module-copy").textContent =
+            RATIO_NAMES[state.run.ratio_module];
+          document.getElementById("phase-list").innerHTML = phases
+            .map(function (phase, index) {
+              var phaseState = "future";
+              if (index < state.ratioPhase) phaseState = "done";
+              else if (index === state.ratioPhase && !state.moduleDone.ratio)
+                phaseState = "active";
+              var stateCopy =
+                phaseState === "done" ? "concluída" : phaseState === "active" ? "ativa" : "futura";
+              return (
+                '<div class="phase-row" data-state="' +
+                phaseState +
+                '">' +
+                '<span class="phase-code">' +
+                escapeHtml(phase[0]) +
+                "</span>" +
+                '<span class="phase-name">' +
+                escapeHtml(phase[1]) +
+                "</span>" +
+                '<span class="phase-state">' +
+                stateCopy +
+                "</span>" +
+                "</div>"
+              );
+            })
+            .join("");
+        }
+
+        function renderAxes() {
+          document.getElementById("axis-grid").innerHTML = AXES.map(function (axis, index) {
+            return (
+              '<div class="axis-item" data-state="' +
+              state.axisStates[index] +
+              '">' +
+              '<span class="axis-number">' +
+              String(index + 1).padStart(2, "0") +
+              "</span>" +
+              '<strong class="axis-name">' +
+              escapeHtml(axis) +
+              "</strong>" +
+              '<span class="axis-state" aria-hidden="true"></span>' +
+              "</div>"
+            );
+          }).join("");
+
+          var result = document.getElementById("gate-result");
+          if (!state.gate) {
+            result.innerHTML =
+              '<div><span class="gate-code">AGUARDANDO</span>' +
+              '<p class="gate-copy">A auditoria ainda não foi executada.</p></div>';
+          } else {
+            result.innerHTML =
+              '<div><span class="gate-code">' +
+              escapeHtml(state.gate) +
+              "</span>" +
+              '<p class="gate-copy">' +
+              escapeHtml(GATE_COPY[state.gate]) +
+              "</p></div>";
+          }
+        }
+
+        function renderIntegrity() {
+          document.getElementById("integrity-grid").innerHTML = INTEGRITY_CHECKS.map(
+            function (item, index) {
+              var current = state.integrityStates[index];
+              var symbol = current === "done" ? "✓" : String(index + 1).padStart(2, "0");
+              return (
+                '<div class="integrity-item" data-state="' +
+                current +
+                '">' +
+                '<span class="integrity-state">' +
+                symbol +
+                "</span>" +
+                "<span><strong>" +
+                escapeHtml(item[0]) +
+                "</strong><span>" +
+                escapeHtml(item[1]) +
+                "</span></span>" +
+                "</div>"
+              );
+            },
+          ).join("");
+
+          var title = document.getElementById("release-title");
+          var copy = document.getElementById("release-copy");
+          if (state.released) {
+            title.textContent = "Saída liberada e versionada";
+            copy.textContent =
+              "O dossiê desta interface contém apenas metadados e eventos seguros. O documento jurídico permanece no motor.";
+          } else if (state.run && state.run.stage === "READY_FOR_RELEASE") {
+            title.textContent = "Saída pronta para liberação";
+            copy.textContent =
+              "O gate final passou. Confirme a liberação para concluir a execução.";
+          } else {
+            title.textContent = "Saída ainda não liberada";
+            copy.textContent =
+              "O pacote final aparecerá após aprovação do CERNE, execução do LUX e passagem pelo gate de integridade.";
+          }
+        }
+
+        function renderEvents() {
+          var list = document.getElementById("event-list");
+          if (!state.events.length) {
+            list.innerHTML = '<div class="empty-state">Nenhum evento registrado.</div>';
+            return;
+          }
+          list.innerHTML = state.events
+            .slice()
+            .reverse()
+            .slice(0, 14)
+            .map(function (event) {
+              return (
+                '<div class="event-item">' +
+                '<span class="event-index">' +
+                String(event.sequence).padStart(2, "0") +
+                "</span>" +
+                '<span class="event-copy"><strong>' +
+                escapeHtml(event.command) +
+                "</strong><span>" +
+                escapeHtml(event.component.toUpperCase()) +
+                " / " +
+                shortTime(event.occurred_at) +
+                "</span></span>" +
+                "</div>"
+              );
+            })
+            .join("");
+        }
+
+        function renderActions() {
+          if (!state.run) return;
+          var mode = currentMode();
+          var isDemo = mode === "demo";
+          var stage = state.run.stage;
+          document.getElementById("process-corpus").disabled =
+            busy ||
+            !state.files.length ||
+            state.moduleDone.corpus ||
+            (mode === "api" &&
+              !["CREATED", "CORPUS_INGESTING"].includes(stage));
+          document.getElementById("sync-corpus").disabled = mode !== "api";
+          document.getElementById("run-ratio-phase").disabled =
+            busy ||
+            !isDemo ||
+            !state.moduleDone.corpus ||
+            state.moduleDone.ratio ||
+            !["RATIO_RUNNING", "CORPUS_READY", "RATIO_REWORK"].includes(stage);
+          document.getElementById("run-cerne").disabled =
+            busy || !isDemo || !state.moduleDone.ratio || state.moduleDone.cerne;
+          document.getElementById("run-lux").disabled =
+            busy ||
+            !isDemo ||
+            !state.moduleDone.cerne ||
+            state.gate !== "AVANCA" ||
+            state.moduleDone.lux;
+          document.getElementById("release-output").hidden =
+            stage !== "READY_FOR_RELEASE" || state.released;
+          document.getElementById("return-ratio").hidden =
+            !state.gate || state.gate === "AVANCA" || state.moduleDone.cerne;
+          document.getElementById("sync-run").disabled = mode !== "api";
+          document.getElementById("export-run").disabled = !state.run;
+        }
+
+        function revealVisible() {
+          if (!("IntersectionObserver" in window)) {
+            document.querySelectorAll(".reveal").forEach(function (item) {
+              item.classList.add("is-visible");
+            });
+            return;
+          }
+          document.querySelectorAll(".reveal:not(.is-visible)").forEach(function (item) {
+            revealObserver.observe(item);
+          });
+        }
+
+        var revealObserver = new IntersectionObserver(
+          function (entries, observer) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12 },
+        );
+
+        function openDialog(dialogId) {
+          var dialog = document.getElementById(dialogId);
+          if (typeof dialog.showModal === "function") dialog.showModal();
+          else dialog.setAttribute("open", "");
+        }
+
+        function closeDialog(dialogId) {
+          var dialog = document.getElementById(dialogId);
+          if (typeof dialog.close === "function") dialog.close();
+          else dialog.removeAttribute("open");
+        }
+
+        function renderSettingsForm() {
+          document.getElementById("mode-demo").checked = settings.mode === "demo";
+          document.getElementById("mode-api").checked = settings.mode === "api";
+          document.getElementById("api-url").value = settings.apiUrl;
+          renderHealth();
+        }
+
+        function renderHealth() {
+          var light = document.getElementById("settings-health-light");
+          var title = document.getElementById("settings-health-title");
+          var copy = document.getElementById("settings-health-copy");
+          light.classList.toggle("is-online", Boolean(settings.health));
+          light.classList.toggle("is-offline", settings.mode === "api" && !settings.health);
+          if (settings.health) {
+            title.textContent = "Motor pronto";
+            copy.textContent =
+              "API " +
+              settings.health.atrio_api_version +
+              " / release " +
+              settings.health.release_id;
+          } else {
+            title.textContent = "Não testado";
+            copy.textContent = "ATRIO API 0.6.0 esperada";
+          }
+          renderConnection();
+        }
+
+        async function apiFetch(path, options) {
+          options = options || {};
+          var controller = new AbortController();
+          var requestOptions = Object.assign({}, options);
+          var timeoutMs = Number(requestOptions.timeoutMs || 12000);
+          delete requestOptions.timeoutMs;
+          var timeout = window.setTimeout(function () {
+            controller.abort();
+          }, timeoutMs);
+          try {
+            requestOptions.signal = controller.signal;
+            var response = await fetch(settings.apiUrl + path, requestOptions);
+            var text = await response.text();
+            var data = text ? JSON.parse(text) : null;
+            if (!response.ok) {
+              var code =
+                data && data.error && data.error.code
+                  ? data.error.code
+                  : "HTTP_" + response.status;
+              throw new Error(code);
+            }
+            return data;
+          } catch (error) {
+            if (error.name === "AbortError") throw new Error("CONNECTION_TIMEOUT");
+            if (error instanceof SyntaxError) throw new Error("INVALID_API_RESPONSE");
+            throw error;
+          } finally {
+            window.clearTimeout(timeout);
+          }
+        }
+
+        async function testConnection() {
+          var errorBox = document.getElementById("settings-error");
+          errorBox.hidden = true;
+          settings.apiUrl = document.getElementById("api-url").value.trim().replace(/\/+$/, "");
+          setBusy(true, "Testando motor", "Consultando readiness da API local.");
+          try {
+            settings.health = await apiFetch("/v1/health/ready", { method: "GET" });
+            renderHealth();
+            toast("Motor pronto", "A API local respondeu com a release ativa.", "success");
+          } catch (error) {
+            settings.health = null;
+            renderHealth();
+            errorBox.textContent =
+              "Não foi possível acessar a API. Confirme o serviço, a origem permitida e o endpoint. Código: " +
+              error.message;
+            errorBox.hidden = false;
+          } finally {
+            setBusy(false);
+          }
+        }
+
+        function releaseCatalog() {
+          if (settings.health) {
+            return {
+              release_id: settings.health.release_id,
+              atrio_api_version: settings.health.atrio_api_version,
+              corpus_version: "1.5.0",
+              ratio_version: "7.0.0",
+              cerne_module_version: "1.2.0",
+              lux_version: "6.0.0",
+              schema_version: settings.health.database_schema_version || "1.2.0",
+            };
+          }
+          return {
+            release_id: "demo-local-2026.07",
+            atrio_api_version: "0.6.0-demo",
+            corpus_version: "1.5.0",
+            ratio_version: "7.0.0",
+            cerne_module_version: "1.2.0",
+            lux_version: "6.0.0",
+            schema_version: "1.2.0",
+          };
+        }
+
+        async function createRun(form) {
+          var formData = new FormData(form);
+          var body = {
+            tenant_id: String(formData.get("tenant_id") || "").trim(),
+            actor_id: String(formData.get("actor_id") || "").trim(),
+            ratio_module: String(formData.get("ratio_module") || "RI"),
+            destination: String(formData.get("destination") || "interno"),
+          };
+          var caseLabel = String(formData.get("case_label") || "").trim();
+          var errorBox = document.getElementById("new-run-error");
+          errorBox.hidden = true;
+
+          if (!caseLabel || !body.tenant_id || !body.actor_id) {
+            errorBox.textContent = "Preencha os campos obrigatórios.";
+            errorBox.hidden = false;
+            return;
+          }
+
+          setBusy(true, "Criando execução", "Fixando release e estado inicial.");
+          try {
+            var run;
+            if (settings.mode === "api") {
+              if (!settings.health) await testConnection();
+              if (!settings.health) throw new Error("API_NOT_READY");
+              var requestSignature = JSON.stringify({
+                body: body,
+                case_label: caseLabel,
+              });
+              if (
+                !pendingCreateRequest ||
+                pendingCreateRequest.signature !== requestSignature
+              ) {
+                pendingCreateRequest = {
+                  signature: requestSignature,
+                  key: id("ui-create"),
+                };
+              }
+              var response = await apiFetch("/v1/executions", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  "Idempotency-Key": pendingCreateRequest.key,
+                },
+                body: JSON.stringify(body),
+              });
+              pendingCreateRequest = null;
+              run = Object.assign({}, response.execution, {
+                case_label: caseLabel,
+                interface_mode: "api",
+              });
+              state.events = [];
+            } else {
+              run = {
+                execution_id: id("ATR"),
+                tenant_id: body.tenant_id,
+                created_by: body.actor_id,
+                ratio_module: body.ratio_module,
+                destination: body.destination,
+                release: releaseCatalog(),
+                stage: "CREATED",
+                status: "ACTIVE",
+                state_version: 0,
+                case_label: caseLabel,
+                interface_mode: "demo",
+              };
+              state.events = [];
+            }
+
+            state = Object.assign(freshState(), {
+              run: run,
+              activeModule: "corpus",
+              events: state.events,
+            });
+            persist();
+            closeDialog("new-run-dialog");
+            renderShell();
+            toast("Execução criada", "A release foi fixada para toda a cadeia.", "success");
+          } catch (error) {
+            errorBox.textContent =
+              "A execução não foi criada. Verifique o motor local. Código: " + error.message;
+            errorBox.hidden = false;
+          } finally {
+            setBusy(false);
+          }
+        }
+
+        async function digestFile(file) {
+          if (!window.crypto || !window.crypto.subtle) return null;
+          var buffer = await file.arrayBuffer();
+          var digest = await window.crypto.subtle.digest("SHA-256", buffer);
+          return Array.from(new Uint8Array(digest))
+            .map(function (value) {
+              return value.toString(16).padStart(2, "0");
+            })
+            .join("");
+        }
+
+        function documentMediaType(file) {
+          var name = file.name.toLowerCase();
+          if (file.type === "application/pdf" || name.endsWith(".pdf")) {
+            return "application/pdf";
+          }
+          if (
+            file.type ===
+              "application/vnd.openxmlformats-officedocument.wordprocessingml.document" ||
+            name.endsWith(".docx")
+          ) {
+            return "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+          }
+          if (file.type === "image/jpeg" || /\.(jpe?g)$/.test(name)) {
+            return "image/jpeg";
+          }
+          if (file.type === "image/png" || name.endsWith(".png")) {
+            return "image/png";
+          }
+          if (file.type === "image/tiff" || /\.(tiff?)$/.test(name)) {
+            return "image/tiff";
+          }
+          if (
+            file.type === "text/plain" ||
+            file.type === "text/markdown" ||
+            name.endsWith(".txt") ||
+            name.endsWith(".md")
+          ) {
+            return "text/plain";
+          }
+          return "";
+        }
+
+        function documentTypeLabel(mediaType) {
+          return {
+            "application/pdf": "PDF",
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+              "DOCX",
+            "image/jpeg": "JPEG",
+            "image/png": "PNG",
+            "image/tiff": "TIFF",
+            "text/plain": "TXT",
+          }[mediaType] || "DOC";
+        }
+
+        async function addFiles(fileList) {
+          if (!state.run || busy) return;
+          var files = Array.from(fileList || []);
+          if (!files.length) return;
+          setBusy(true, "Preparando documentos", "Validando tipo, tamanho e hash local.");
+          try {
+            for (var index = 0; index < files.length; index += 1) {
+              var file = files[index];
+              var type = documentMediaType(file);
+              if (!type) {
+                toast(
+                  "Arquivo recusado",
+                  file.name + " não tem um formato aceito pelo CORPUS.",
+                  "danger",
+                );
+                continue;
+              }
+              if (file.size > MAX_FILE_BYTES) {
+                toast("Arquivo excede 50 MiB", file.name + " não foi adicionado.", "danger");
+                continue;
+              }
+              var fileId = id("doc");
+              var hash = await digestFile(file);
+              if (!hash) {
+                throw new Error("BROWSER_SHA256_UNAVAILABLE");
+              }
+              var existing = state.files.find(function (candidate) {
+                return candidate.sha256 === hash;
+              });
+              if (existing) {
+                runtimeFiles.set(existing.id, file);
+                if (!existing.document_id) existing.status = "pronto";
+                toast(
+                  "Documento reconhecido",
+                  file.name + " foi vinculado novamente sem duplicação.",
+                  "success",
+                );
+                continue;
+              }
+              runtimeFiles.set(fileId, file);
+              state.files.push({
+                id: fileId,
+                name: file.name,
+                size: file.size,
+                type: type,
+                sha256: hash,
+                status: "pronto",
+              });
+            }
+            persist();
+            renderShell();
+          } finally {
+            setBusy(false);
+          }
+        }
+
+        function mergeCorpusDocuments(documents) {
+          var previous = state.files.slice();
+          state.files = documents.map(function (document) {
+            var local = previous.find(function (file) {
+              return (
+                file.document_id === document.document_id ||
+                file.sha256 === document.input_sha256
+              );
+            });
+            var statusLabel = {
+              PENDING: "registrado",
+              READY: "pseudonimizado",
+              REVIEW_REQUIRED: "revisão obrigatória",
+              APPROVED: "revisado e aprovado",
+              EXCLUDED: "excluído da saída",
+            }[document.effective_status] || document.effective_status;
+            return {
+              id: local ? local.id : "remote-" + document.document_id,
+              name: local ? local.name : "Documento " + document.document_id.slice(0, 8),
+              size: document.byte_length,
+              type: document.media_type,
+              sha256: document.input_sha256,
+              status: statusLabel,
+              document_id: document.document_id,
+              effective_status: document.effective_status,
+              review_decision: document.review_decision,
+              inventory: document.inventory,
+            };
+          });
+        }
+
+        async function reviewCorpusDocument(documentId, decision) {
+          if (busy || currentMode() !== "api" || !state.run) return;
+          setBusy(
+            true,
+            decision === "APPROVE" ? "Aprovando revisão" : "Excluindo documento",
+            "Registrando decisão humana na trilha imutável.",
+          );
+          try {
+            var response = await apiFetch(
+              "/v1/executions/" +
+                encodeURIComponent(state.run.execution_id) +
+                "/corpus/documents/" +
+                encodeURIComponent(documentId) +
+                "/review",
+              {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  expected_version: state.run.state_version,
+                  actor_id: state.run.created_by,
+                  decision: decision,
+                }),
+                timeoutMs: 60000,
+              },
+            );
+            state.run = Object.assign({}, response.execution, {
+              case_label: state.run.case_label,
+              interface_mode: "api",
+            });
+            var documents = await apiFetch(
+              "/v1/executions/" +
+                encodeURIComponent(state.run.execution_id) +
+                "/corpus/documents",
+              { method: "GET" },
+            );
+            mergeCorpusDocuments(documents);
+            persist();
+            renderShell();
+            toast(
+              "Revisão registrada",
+              decision === "APPROVE"
+                ? "O documento foi aprovado. Processe novamente para concluir o lote."
+                : "O documento foi excluído do artefato final.",
+              "success",
+            );
+          } catch (error) {
+            toast("Revisão interrompida", "Código: " + error.message, "danger");
+          } finally {
+            setBusy(false);
+          }
+        }
+
+        async function processCorpus() {
+          if (busy || !state.run || !state.files.length) return;
+          if (currentMode() === "api") {
+            var missingFile = state.files.find(function (file) {
+              return !file.document_id && !runtimeFiles.has(file.id);
+            });
+            if (missingFile) {
+              toast(
+                "Reanexe o documento",
+                missingFile.name +
+                  " precisa ser selecionado novamente após a recarga da página.",
+                "danger",
+              );
+              document.getElementById("document-input").click();
+              return;
+            }
+          }
+          var previousStage = state.run.stage;
+          var previousVersion = state.run.state_version;
+          setBusy(
+            true,
+            "CORPUS em execução",
+            "Extraindo, inventariando e pseudonimizando dentro da zona segura.",
+          );
+          try {
+            if (currentMode() === "demo") {
+              state.run.stage = "CORPUS_INGESTING";
+              addEvent("START_INGESTION", "corpus", {});
+              renderShell();
+            }
+
+            if (currentMode() === "api") {
+              for (var index = 0; index < state.files.length; index += 1) {
+                var meta = state.files[index];
+                if (meta.document_id) continue;
+                if (!meta.sha256) throw new Error("DOCUMENT_SHA256_UNAVAILABLE");
+                var file = runtimeFiles.get(meta.id);
+                if (!file) throw new Error("FILE_BYTES_NOT_AVAILABLE");
+                var intake = await apiFetch(
+                  "/v1/executions/" +
+                    encodeURIComponent(state.run.execution_id) +
+                    "/corpus/documents",
+                  {
+                    method: "POST",
+                    headers: {
+                      "Content-Type":
+                        meta.type === "text/plain" ? "text/plain; charset=utf-8" : meta.type,
+                      "Idempotency-Key": "ui-doc-" + meta.sha256,
+                      "X-ATRIO-Expected-Version": String(state.run.state_version),
+                      "X-ATRIO-Actor": state.run.created_by,
+                    },
+                    body: file,
+                    timeoutMs: 60000,
+                  },
+                );
+                state.run = Object.assign({}, intake.execution, {
+                  case_label: state.run.case_label,
+                  interface_mode: "api",
+                });
+                meta.status = "registrado";
+                meta.document_id = intake.document.document_id;
+                persist();
+                renderShell();
+              }
+
+              var batch = await apiFetch(
+                "/v1/executions/" +
+                  encodeURIComponent(state.run.execution_id) +
+                  "/corpus/process",
+                {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    expected_version: state.run.state_version,
+                    actor_id: state.run.created_by,
+                  }),
+                  timeoutMs: 300000,
+                },
+              );
+              state.run = Object.assign({}, batch.execution, {
+                case_label: state.run.case_label,
+                interface_mode: "api",
+              });
+              mergeCorpusDocuments(batch.documents);
+
+              if (batch.halted_for_review) {
+                toast(
+                  "Revisão obrigatória",
+                  "Use Aprovar ou Excluir no documento indicado antes de continuar.",
+                  "danger",
+                );
+              } else {
+                var unresolved = batch.documents.some(function (document) {
+                  return ["PENDING", "REVIEW_REQUIRED"].includes(
+                    document.effective_status,
+                  );
+                });
+                if (!unresolved) {
+                  var finalized = await apiFetch(
+                    "/v1/executions/" +
+                      encodeURIComponent(state.run.execution_id) +
+                      "/corpus/finalize",
+                    {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({
+                        expected_version: state.run.state_version,
+                        actor_id: state.run.created_by,
+                      }),
+                      timeoutMs: 60000,
+                    },
+                  );
+                  state.run = Object.assign({}, finalized.execution, {
+                    case_label: state.run.case_label,
+                    interface_mode: "api",
+                  });
+                  state.moduleDone.corpus = true;
+                  state.activeModule = "ratio";
+                  toast(
+                    "CORPUS concluído",
+                    finalized.document_count +
+                      " documento(s) entraram no artefato cifrado para o RATIO.",
+                    "success",
+                  );
+                }
+              }
+            } else {
+              for (var step = 0; step < state.files.length; step += 1) {
+                state.files[step].status = "inventariado";
+                renderFiles();
+                await wait(320);
+                state.files[step].status = "pseudonimizado";
+                renderFiles();
+                await wait(320);
+              }
+              state.run.stage = "CORPUS_READY";
+              state.run.status = "ACTIVE";
+              state.moduleDone.corpus = true;
+              addEvent("COMPLETE_CORPUS", "corpus", {
+                artifact_id: "demo-corpus-" + state.run.execution_id,
+              });
+              state.activeModule = "ratio";
+              state.run.stage = "RATIO_RUNNING";
+              addEvent("START_RATIO", "ratio", {});
+              toast("CORPUS concluído", "O texto pseudonimizado entrou no RATIO.", "success");
+            }
+            persist();
+            renderShell();
+          } catch (error) {
+            if (
+              currentMode() === "api" &&
+              state.run &&
+              state.run.state_version === previousVersion
+            ) {
+              state.run.stage = previousStage;
+              persist();
+            }
+            toast("CORPUS interrompido", "Código: " + error.message, "danger");
+          } finally {
+            setBusy(false);
+            renderShell();
+          }
+        }
+
+        async function runRatioPhase() {
+          if (busy || currentMode() !== "demo" || !state.run) return;
+          var phases = PHASES[state.run.ratio_module];
+          if (state.ratioPhase >= phases.length) return;
+          var phase = phases[state.ratioPhase];
+          setBusy(true, phase[0], "Executando " + phase[1].toLowerCase() + ".");
+          try {
+            state.run.stage = "RATIO_RUNNING";
+            await wait(650);
+            addEvent("RATIO_PHASE_COMPLETED", "ratio", { phase: phase[0] });
+            state.ratioPhase += 1;
+            if (state.ratioPhase >= phases.length) {
+              state.moduleDone.ratio = true;
+              state.run.stage = "RATIO_READY";
+              addEvent("COMPLETE_RATIO", "ratio", {
+                artifact_id: "demo-ratio-" + state.run.execution_id,
+              });
+              state.activeModule = "cerne";
+              state.run.stage = "CERNE_AUDITING";
+              addEvent("START_CERNE", "cerne", {});
+              toast("RATIO concluído", "A minuta seguiu para auditoria adversarial.", "success");
+            } else {
+              toast("Fase concluída", phase[0] + " passou pelo hard stop local.", "success");
+            }
+            persist();
+            renderShell();
+          } finally {
+            setBusy(false);
+            renderShell();
+          }
+        }
+
+        async function runCerne() {
+          if (busy || currentMode() !== "demo" || !state.run) return;
+          setBusy(true, "CERNE em auditoria", "Confrontando onze eixos independentes.");
+          try {
+            state.run.stage = "CERNE_AUDITING";
+            state.axisStates = AXES.map(function () {
+              return "pending";
+            });
+            state.gate = null;
+            renderShell();
+            for (var index = 0; index < AXES.length; index += 1) {
+              state.axisStates[index] = "running";
+              renderAxes();
+              await wait(150);
+              state.axisStates[index] = "done";
+              renderAxes();
+            }
+
+            state.gate = document.getElementById("demo-gate").value;
+            addEvent("APPLY_CERNE_GATE", "cerne", { gate: state.gate });
+            if (state.gate === "AVANCA") {
+              state.moduleDone.cerne = true;
+              state.run.stage = "CERNE_APPROVED";
+              state.activeModule = "lux";
+              state.run.stage = "LUX_REFINING";
+              addEvent("START_LUX", "lux", {});
+              toast("CERNE aprovado", "O gate AVANCA autorizou entrada no LUX.", "success");
+            } else if (state.gate === "AVANCA_COM_AJUSTE") {
+              state.run.stage = "RATIO_REWORK";
+              toast("Ajuste obrigatório", "A execução deve retornar ao RATIO.", "danger");
+            } else if (state.gate === "REVISAO_HUMANA") {
+              state.run.stage = "CERNE_HUMAN_REVIEW";
+              toast("Revisão humana", "O avanço está suspenso até decisão do operador.", "danger");
+            } else if (state.gate === "BLOQUEIO_PARCIAL") {
+              state.run.stage = "CERNE_PARTIAL_BLOCK";
+              toast("Bloqueio parcial", "O texto precisa retornar ao RATIO.", "danger");
+            } else {
+              state.run.stage = "CERNE_TOTAL_BLOCK";
+              toast("Bloqueio total", "A execução não pode avançar para o LUX.", "danger");
+            }
+            persist();
+            renderShell();
+          } finally {
+            setBusy(false);
+            renderShell();
+          }
+        }
+
+        function returnToRatio() {
+          if (!state.run || !state.gate || state.gate === "AVANCA") return;
+          state.run.stage = "RATIO_REWORK";
+          state.activeModule = "ratio";
+          state.moduleDone.ratio = false;
+          state.ratioPhase = Math.max(0, PHASES[state.run.ratio_module].length - 1);
+          state.gate = null;
+          state.axisStates = AXES.map(function () {
+            return "pending";
+          });
+          addEvent("RETURN_TO_RATIO", "ratio", { decision_code: "REABRIR_PARA_SANEAMENTO" });
+          persist();
+          renderShell();
+          toast("Retorno registrado", "A validação final do RATIO foi reaberta.", "success");
+        }
+
+        async function runLux() {
+          if (busy || currentMode() !== "demo" || !state.run || state.gate !== "AVANCA")
+            return;
+          setBusy(true, "LUX em execução", "Lapidando a forma e verificando integridade.");
+          try {
+            state.run.stage = "LUX_REFINING";
+            state.integrityStates = INTEGRITY_CHECKS.map(function () {
+              return "pending";
+            });
+            renderShell();
+            await wait(550);
+            state.run.stage = "FINAL_INTEGRITY_CHECK";
+            addEvent("COMPLETE_LUX", "lux", {
+              artifact_id: "demo-lux-" + state.run.execution_id,
+            });
+            for (var index = 0; index < INTEGRITY_CHECKS.length; index += 1) {
+              state.integrityStates[index] = "running";
+              renderIntegrity();
+              await wait(330);
+              state.integrityStates[index] = "done";
+              renderIntegrity();
+            }
+            state.moduleDone.lux = true;
+            state.run.stage = "READY_FOR_RELEASE";
+            addEvent("PASS_FINAL_INTEGRITY", "lux", {});
+            persist();
+            renderShell();
+            toast("Integridade confirmada", "A saída está pronta para liberação.", "success");
+          } finally {
+            setBusy(false);
+            renderShell();
+          }
+        }
+
+        function releaseOutput() {
+          if (!state.run || state.run.stage !== "READY_FOR_RELEASE") return;
+          state.run.stage = "RELEASED";
+          state.run.status = "COMPLETED";
+          state.released = true;
+          MODULE_ORDER.forEach(function (module) {
+            state.moduleDone[module] = true;
+          });
+          addEvent("RELEASE", "atrio_api", {
+            destination: state.run.destination,
+          });
+          persist();
+          renderShell();
+          toast("Saída liberada", "A execução foi concluída sem expor conteúdo no log.", "success");
+        }
+
+        async function syncRemote() {
+          if (currentMode() !== "api" || !state.run) {
+            toast("Modo local", "A sincronização exige conexão com a API.", "danger");
+            return;
+          }
+          setBusy(true, "Sincronizando", "Lendo estado e eventos seguros.");
+          try {
+            var execution = await apiFetch(
+              "/v1/executions/" + encodeURIComponent(state.run.execution_id),
+              { method: "GET" },
+            );
+            var events = await apiFetch(
+              "/v1/executions/" + encodeURIComponent(state.run.execution_id) + "/events",
+              { method: "GET" },
+            );
+            var documents = await apiFetch(
+              "/v1/executions/" +
+                encodeURIComponent(state.run.execution_id) +
+                "/corpus/documents",
+              { method: "GET" },
+            );
+            state.run = Object.assign({}, execution, {
+              case_label: state.run.case_label,
+              interface_mode: "api",
+            });
+            mergeCorpusDocuments(documents);
+            state.events = events.map(function (event) {
+              return Object.assign({}, event, { remote: true });
+            });
+            state.activeModule = stageModule(state.run.stage);
+            deriveRemoteCompletion();
+            persist();
+            renderShell();
+            toast("Execução sincronizada", "Estado remoto e eventos foram atualizados.", "success");
+          } catch (error) {
+            toast("Sincronização falhou", "Código: " + error.message, "danger");
+          } finally {
+            setBusy(false);
+          }
+        }
+
+        function deriveRemoteCompletion() {
+          if (!state.run) return;
+          var stage = state.run.stage;
+          var currentIndex = MODULE_ORDER.indexOf(stageModule(stage));
+          MODULE_ORDER.forEach(function (module, index) {
+            state.moduleDone[module] = index < currentIndex;
+          });
+          if (["RELEASED"].includes(stage)) {
+            MODULE_ORDER.forEach(function (module) {
+              state.moduleDone[module] = true;
+            });
+            state.released = true;
+          }
+          if (state.run.cerne_gate) state.gate = state.run.cerne_gate;
+        }
+
+        function exportDossier() {
+          if (!state.run) return;
+          var exportedExecution = Object.assign({}, state.run);
+          delete exportedExecution.operator_note;
+          var dossier = {
+            exported_at: nowIso(),
+            interface: "ATRIO Console Operacional",
+            interface_mode: currentMode(),
+            notice:
+              "Este arquivo contém somente metadados e eventos da interface. Não contém conteúdo jurídico.",
+            execution: exportedExecution,
+            documents: state.files.map(function (file) {
+              return {
+                local_ref: file.id,
+                byte_length: file.size,
+                media_type: file.type,
+                sha256: file.sha256,
+                status: file.status,
+              };
+            }),
+            gate: state.gate,
+            events: state.events,
+          };
+          var blob = new Blob([JSON.stringify(dossier, null, 2)], {
+            type: "application/json",
+          });
+          var url = URL.createObjectURL(blob);
+          var anchor = document.createElement("a");
+          anchor.href = url;
+          anchor.download = "atrio-" + state.run.execution_id + "-dossie.json";
+          document.body.appendChild(anchor);
+          anchor.click();
+          anchor.remove();
+          URL.revokeObjectURL(url);
+          toast("Dossiê exportado", "O arquivo contém apenas metadados seguros.", "success");
+        }
+
+        function resetLocalSession() {
+          state = freshState();
+          runtimeFiles.clear();
+          try {
+            localStorage.removeItem(STORAGE_KEY);
+          } catch (error) {
+            /* O estado em memória ainda é reiniciado. */
+          }
+          closeDialog("reset-dialog");
+          renderShell();
+          toast("Sessão encerrada", "Nenhuma execução remota foi cancelada.", "success");
+        }
+
+        function bindEvents() {
+          document.getElementById("theme-toggle").addEventListener("click", function () {
+            var next =
+              document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+            document.documentElement.dataset.theme = next;
+            try {
+              localStorage.setItem("atrio-product-theme", next);
+            } catch (error) {
+              /* O tema continua aplicado nesta sessão. */
+            }
+            syncThemeButton();
+          });
+
+          document.getElementById("new-run-button").addEventListener("click", function () {
+            if (state.run) openDialog("reset-dialog");
+            else openDialog("new-run-dialog");
+          });
+
+          document.getElementById("welcome-new-run").addEventListener("click", function () {
+            openDialog("new-run-dialog");
+          });
+
+          [
+            "connection-button",
+            "welcome-settings",
+          ].forEach(function (buttonId) {
+            document.getElementById(buttonId).addEventListener("click", function () {
+              renderSettingsForm();
+              openDialog("settings-dialog");
+            });
+          });
+
+          document.querySelectorAll("[data-close-dialog]").forEach(function (button) {
+            button.addEventListener("click", function () {
+              closeDialog(button.dataset.closeDialog);
+            });
+          });
+
+          document.querySelectorAll("dialog").forEach(function (dialog) {
+            dialog.addEventListener("click", function (event) {
+              if (event.target === dialog) closeDialog(dialog.id);
+            });
+          });
+
+          document.getElementById("new-run-form").addEventListener("submit", function (event) {
+            event.preventDefault();
+            createRun(event.currentTarget);
+          });
+
+          document.getElementById("settings-form").addEventListener("submit", function (event) {
+            event.preventDefault();
+            var formData = new FormData(event.currentTarget);
+            settings.mode = String(formData.get("mode") || "demo");
+            settings.apiUrl = String(formData.get("api_url") || "")
+              .trim()
+              .replace(/\/+$/, "");
+            if (settings.mode === "demo") settings.health = null;
+            persistSettings();
+            closeDialog("settings-dialog");
+            renderShell();
+            toast(
+              "Motor configurado",
+              settings.mode === "api" ? "Modo API local selecionado." : "Demonstração local ativa.",
+              "success",
+            );
+          });
+
+          document.getElementById("test-connection").addEventListener("click", testConnection);
+
+          document.querySelectorAll(".module-tab").forEach(function (button) {
+            button.addEventListener("click", function () {
+              if (button.disabled) return;
+              state.activeModule = button.dataset.module;
+              persist();
+              renderShell();
+            });
+          });
+
+          var dropzone = document.getElementById("dropzone");
+          var input = document.getElementById("document-input");
+          dropzone.addEventListener("click", function () {
+            input.click();
+          });
+          input.addEventListener("change", function () {
+            addFiles(input.files);
+            input.value = "";
+          });
+          ["dragenter", "dragover"].forEach(function (eventName) {
+            dropzone.addEventListener(eventName, function (event) {
+              event.preventDefault();
+              dropzone.classList.add("is-dragging");
+            });
+          });
+          ["dragleave", "drop"].forEach(function (eventName) {
+            dropzone.addEventListener(eventName, function (event) {
+              event.preventDefault();
+              dropzone.classList.remove("is-dragging");
+            });
+          });
+          dropzone.addEventListener("drop", function (event) {
+            addFiles(event.dataTransfer.files);
+          });
+
+          document.getElementById("file-list").addEventListener("click", function (event) {
+            var reviewButton = event.target.closest("[data-review-document]");
+            if (reviewButton && !busy) {
+              reviewCorpusDocument(
+                reviewButton.dataset.reviewDocument,
+                reviewButton.dataset.decision,
+              );
+              return;
+            }
+            var button = event.target.closest("[data-remove-file]");
+            if (!button || busy) return;
+            var fileId = button.dataset.removeFile;
+            state.files = state.files.filter(function (file) {
+              return file.id !== fileId;
+            });
+            runtimeFiles.delete(fileId);
+            persist();
+            renderShell();
+          });
+
+          document.getElementById("process-corpus").addEventListener("click", processCorpus);
+          document.getElementById("sync-corpus").addEventListener("click", syncRemote);
+          document.getElementById("run-ratio-phase").addEventListener("click", runRatioPhase);
+          document.getElementById("run-cerne").addEventListener("click", runCerne);
+          document.getElementById("return-ratio").addEventListener("click", returnToRatio);
+          document.getElementById("run-lux").addEventListener("click", runLux);
+          document.getElementById("release-output").addEventListener("click", releaseOutput);
+          document.getElementById("sync-run").addEventListener("click", syncRemote);
+          document.getElementById("export-run").addEventListener("click", exportDossier);
+          document.getElementById("reset-run").addEventListener("click", function () {
+            openDialog("reset-dialog");
+          });
+          document.getElementById("confirm-reset").addEventListener("click", resetLocalSession);
+
+          document.getElementById("operator-note").addEventListener("input", function (event) {
+            if (state.run) state.run.operator_note = event.target.value.slice(0, 2000);
+            persist();
+          });
+        }
+
+        function syncThemeButton() {
+          var dark = document.documentElement.dataset.theme === "dark";
+          var button = document.getElementById("theme-toggle");
+          button.setAttribute("aria-label", dark ? "Ativar modo claro" : "Ativar modo escuro");
+          button.title = dark ? "Ativar modo claro" : "Ativar modo escuro";
+        }
+
+        async function verifyApiOnBoot() {
+          if (settings.mode !== "api") return;
+          try {
+            settings.health = await apiFetch("/v1/health/ready", { method: "GET" });
+          } catch (error) {
+            settings.health = null;
+          }
+          renderHealth();
+          renderShell();
+        }
+
+        function boot() {
+          bindEvents();
+          syncThemeButton();
+          if (state.run && state.run.operator_note) {
+            document.getElementById("operator-note").value = state.run.operator_note;
+          }
+          renderShell();
+          renderSettingsForm();
+          revealVisible();
+          verifyApiOnBoot();
+        }
+
+        boot();
+      })();
+    </script>
+  </body>
+</html>

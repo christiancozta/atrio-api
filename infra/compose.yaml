@@ -1,0 +1,134 @@
+name: atrio
+
+services:
+  atrio_db:
+    image: "${POSTGRES_IMAGE:?Defina POSTGRES_IMAGE no arquivo .env}"
+    container_name: atrio_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: atrio
+      POSTGRES_USER: atrio_app
+      POSTGRES_PASSWORD_FILE: /run/secrets/atrio_db_password
+      PGDATA: /var/lib/postgresql/18/docker
+    secrets:
+      - atrio_db_password
+    volumes:
+      - atrio_postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U atrio_app -d atrio"]
+      interval: 5s
+      timeout: 5s
+      start_period: 10s
+      retries: 12
+    networks:
+      - atrio_internal
+    labels:
+      org.atrio.component: atrio_db
+      org.atrio.version: "18.4"
+
+  atrio_api:
+    build:
+      context: ..
+      dockerfile: infra/atrio_api/Dockerfile
+      args:
+        ATRIO_API_VERSION: "${ATRIO_API_VERSION:?Defina ATRIO_API_VERSION no arquivo .env}"
+    image: "atrio-api:${ATRIO_API_VERSION}"
+    container_name: atrio_api
+    restart: unless-stopped
+    init: true
+    depends_on:
+      atrio_db:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:${ATRIO_API_PORT:-8080}:8080"
+    environment:
+      ATRIO_API_HOST: 0.0.0.0
+      ATRIO_API_PORT: "8080"
+      ATRIO_DB_HOST: atrio_db
+      ATRIO_DB_PORT: "5432"
+      ATRIO_DB_NAME: atrio
+      ATRIO_DB_USER: atrio_app
+      ATRIO_DB_PASSWORD_FILE: /run/secrets/atrio_db_password
+      ATRIO_VAULT_ROOT: /data/vault
+      ATRIO_VAULT_PASSPHRASE_FILE: /run/secrets/atrio_vault_passphrase
+      ATRIO_REPOSITORY_ROOT: /app
+      ATRIO_PACKAGES_ROOT: /app/packages
+      ATRIO_UI_PATH: /app/ATRIO-Core-Orchestrator.html
+      ATRIO_OLLAMA_URL: http://ollama:11434
+      ATRIO_OLLAMA_MODEL: "${OLLAMA_MODEL:?Defina OLLAMA_MODEL no arquivo .env}"
+      ATRIO_OLLAMA_NUM_CTX: "${OLLAMA_NUM_CTX:?Defina OLLAMA_NUM_CTX no arquivo .env}"
+      ATRIO_OLLAMA_NUM_PREDICT: "${OLLAMA_NUM_PREDICT:?Defina OLLAMA_NUM_PREDICT no arquivo .env}"
+    secrets:
+      - atrio_db_password
+      - atrio_vault_passphrase
+    volumes:
+      - atrio_vault:/data/vault
+    read_only: true
+    tmpfs:
+      - /tmp:size=256m,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - >-
+          import urllib.request;
+          urllib.request.urlopen('http://127.0.0.1:8080/v1/health/ready',
+          timeout=4).read()
+      interval: 15s
+      timeout: 5s
+      start_period: 30s
+      retries: 8
+    networks:
+      - atrio_internal
+    labels:
+      org.atrio.component: atrio_api
+      org.atrio.version: "${ATRIO_API_VERSION}"
+      org.atrio.infra.version: "${ATRIO_INFRA_VERSION}"
+
+  ollama:
+    image: "${OLLAMA_IMAGE:?Defina OLLAMA_IMAGE no arquivo .env}"
+    container_name: atrio_ollama
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${OLLAMA_PORT:-11434}:11434"
+    environment:
+      OLLAMA_HOST: 0.0.0.0:11434
+      OLLAMA_KEEP_ALIVE: 5m
+      OLLAMA_CONTEXT_LENGTH: "${OLLAMA_NUM_CTX:?Defina OLLAMA_NUM_CTX no arquivo .env}"
+    volumes:
+      - ollama_data:/root/.ollama
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 15s
+      timeout: 10s
+      start_period: 30s
+      retries: 8
+    networks:
+      - atrio_internal
+    labels:
+      org.atrio.component: ollama
+      org.atrio.version: "0.32.4"
+
+secrets:
+  atrio_db_password:
+    file: ./secrets/atrio_db_password.txt
+  atrio_vault_passphrase:
+    file: ./secrets/atrio_vault_passphrase.txt
+
+volumes:
+  atrio_postgres_data:
+    name: atrio_postgres_data
+  atrio_vault:
+    name: atrio_vault
+  ollama_data:
+    name: atrio_ollama_data
+
+networks:
+  atrio_internal:
+    name: atrio_internal
+    driver: bridge

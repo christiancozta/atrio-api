@@ -1,0 +1,8 @@
+Reservado. O servico que atende POST /v1/auditorias EXISTE e roda, mas fora
+deste monorepo, em CORPUS/.ATRIO/3.CERNE/api/.
+
+Por decisao do autor, o codigo nao foi movido: o pacote tem .env, banco local
+e ambiente virtual que nao devem entrar no repositorio. Aqui fica apenas
+contrato_v1.yaml, documentado a partir do codigo em execucao.
+
+Registrado em RELATORIO_NORMALIZACAO.md.

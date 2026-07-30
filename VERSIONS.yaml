@@ -1,0 +1,94 @@
+# Versoes canonicas dos componentes do ATRIO.
+#
+# Ja auditadas. A normalizacao NAO moveu nenhuma delas, porque nao alterou
+# contrato. Nao recalcule, nao renumere, nao reinicie em 0.x.
+#
+# A versao nao vive dentro do conteudo servido. Ela vive aqui e no
+# MANIFEST.yaml, que mapeia o hash curto do build para versao, data e caminho
+# de origem. Quando os modulos virarem API, a versao viaja no envelope da
+# resposta e num endpoint de saude, nunca no corpo servido.
+
+produto:
+  nome: ATRIO
+  candidato_experimental: 1.0.0-rc.1
+  estado: pre-dados; nao congelado externamente
+
+componentes:
+
+  corpus:
+    versao: 1.5.0
+    funcao: ingestao, pseudonimizacao reversivel, cofre, inventario, OCR
+
+  ratio:
+    versao: 7.0.0
+    funcao: protocolo decisorio governado, modulos RI, ED e MS
+
+  cerne:
+    versao: 1.2.0
+    funcao: auditoria adversarial do raciocinio, 11 eixos, 5 gates, API /v1
+    nota: >
+      O servico em CORPUS/.ATRIO/3.CERNE/api/ declara 0.2.0 no pyproject.toml
+      e no __init__.py. Os dois numeros foram preservados como estao. A
+      divergencia esta registrada em RELATORIO_NORMALIZACAO.md e pede decisao
+      do autor.
+
+  lux:
+    versao: 6.0.0
+    funcao: acabamento textual e anonimizacao irreversivel de saida
+    nota: >
+      O kernel se dizia v2.1 e os arquivos de conhecimento se diziam v2. Os
+      dois passam a 6.0.0, gravado so aqui e no manifesto. O texto interno
+      nao foi alterado: quem se declara v2.1 continua se declarando, porque
+      mexer nisso seria alterar conteudo.
+
+  atrio_pii:
+    versao: 1.0.0
+    funcao: deteccao compartilhada entre CORPUS e LUX
+    nota: >
+      Agora declarada tambem em codigo, na constante VERSAO, e gravada no
+      cabecalho de todo log de execucao. E o que impede a biblioteca
+      compartilhada de mudar o comportamento de dois modulos sem deixar rastro.
+
+  atrio_api:
+    versao: 0.7.0
+    funcao: plano de controle local da execucao integral dos quatro modulos
+    nota: >
+      A versao 0.7.0 acrescenta runtime nao interativo para containers e o
+      contrato governado do adapter Ollama, sem acoplar inferencia a regra
+      juridica. O fluxo operacional do CORPUS permanece inalterado.
+
+  ollama_adapter:
+    versao: 0.2.0
+    funcao: inferencia local versionada, deterministica e sem resposta bruta
+    nota: >
+      Registra digest do modelo, hashes de entrada, saida e opcoes; fixa
+      num_ctx e num_predict; recusa prompts sem margem conservadora de
+      contexto e respostas sem telemetria de tokens. O adapter ainda nao
+      autoriza avancos na maquina de estados.
+
+  atrio_infra:
+    versao: 1.0.0
+    funcao: PostgreSQL, API e Ollama em containers locais
+    nota: >
+      Primeira infraestrutura oficial. Usa imagens fixas, arquivos de segredo,
+      contexto de build por allowlist e nao inclui Temporal.
+
+  atrio_backup:
+    versao: 1.0.0
+    funcao: backup autenticado e restauracao nativa reversivel
+    nota: >
+      Une dump PostgreSQL e vault sob manifesto HMAC-SHA-256. Nao possui
+      rotacao destrutiva; a restauracao preserva banco e vault anteriores.
+
+  atrio_db_schema:
+    versao: 1.3.0
+    funcao: persistencia transacional, idempotencia e trilha operacional
+    nota: >
+      O schema 1.3.0 acrescenta a execucao persistida do RATIO ao schema
+      1.2.0, que ja continha resultados imutaveis do CORPUS, decisoes de
+      revisao e handoff cifrado. Cada migracao e identificada por versao
+      e SHA-256.
+
+# O corpus documental nao entra em semver. E citado por snapshot datado.
+corpus_documental:
+  criterio: snapshot datado, nunca semver

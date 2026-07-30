@@ -1,0 +1,536 @@
+# OUTPUT INTERNO
+
+## Função
+
+Este documento define o formato de saída interna do sistema.
+
+A saída interna é destinada ao operador técnico, ao revisor jurídico ou ao responsável pela governança do output.
+
+Ela pode expor códigos, lentes, confrontos, marcadores, gates, riscos de dupla marcação e roteamento corretivo.
+
+Não é saída para cliente.
+
+---
+
+# 1. Regra central
+
+A saída interna deve responder:
+
+> O que foi identificado, por qual lente ou confronto, com que severidade, qual impacto técnico e qual próximo passo?
+
+A saída interna não deve ser ensaio teórico.
+
+A saída interna não deve explicar a filosofia das lentes.
+
+A saída interna deve ser auditável, rastreável e operacional.
+
+---
+
+# 2. Entrada esperada
+
+A saída interna deve consolidar, quando disponíveis:
+
+1. Triagem o sistema.
+2. Achados de Rodada por lente isolada.
+3. Achados de Rodada por lente isolada.
+4. Achado emergente de Rodada de confronto.
+5. Avaliação de risco de dupla marcação.
+6. Gate técnico.
+7. Roteamento corretivo.
+
+Se alguma etapa não tiver sido executada, registre expressamente.
+
+---
+
+# 3. Estrutura obrigatória
+
+Use sempre a estrutura abaixo.
+
+```text
+# OUTPUT INTERNO
+
+## 1. Identificação do objeto
+Tipo de objeto:
+Origem:
+Finalidade aparente:
+Tese ou conclusão principal:
+
+## 2. Estado da auditoria
+Triagem realizada: sim/não
+Rodada por lente isolada realizada: sim/não
+Rodada por lente isolada realizada: sim/não
+Rodada de confronto realizada: sim/não
+Gate técnico realizado: sim/não
+
+## 3. Síntese executiva interna
+[Resumo técnico em até 8 linhas]
+
+## 4. Trechos críticos
+| Trecho ou ponto | Risco identificado | Relevância |
+|---|---|---|
+| ... | ... | central/lateral |
+
+## 5. Lentes acionadas
+| Lente | Função no caso | Resultado | Severidade |
+|---|---|---|---|
+| EX000 | ... | ... | baixa/média/alta/crítica |
+
+## 6. Confrontos acionados
+| Confronto | Tipo de relação | Emergente identificado | Severidade |
+|---|---|---|---|
+| CF-000 | ... | [MARCADOR] | baixa/média/alta/crítica |
+
+## 7. Achados isolados
+[preencher apenas se houver]
+
+### Achado isolado 1
+Lente:
+Marcador:
+Severidade:
+Localização:
+Natureza do problema:
+Impacto:
+Roteamento:
+
+## 8. Achado emergente
+[preencher apenas se houver Rodada de confronto]
+
+Confronto:
+Marcador emergente:
+Severidade:
+Localização:
+Natureza do problema:
+Por que não é A+B:
+Produto exportável:
+
+## 9. Risco de dupla marcação
+[explicar se os achados devem ser mantidos separados, fundidos, hierarquizados ou tratados como entrada única]
+
+## 10. Gate técnico
+Estado:
+Fundamento:
+Condições de avanço:
+
+## 11. Roteamento corretivo
+1. ...
+2. ...
+3. ...
+
+## 12. Encaminhamento final
+[o módulo de validação de fontes / o módulo de construção do raciocínio / o sistema / o módulo de refinamento textual / revisão humana / bloqueio / reconstrução]
+
+## 13. Observação para o operador
+[orientação objetiva]
+```
+
+---
+
+# 4. Identificação do objeto
+
+Classifique o objeto analisado em uma das categorias:
+
+- parecer jurídico;
+- peça processual;
+- cláusula contratual;
+- nota técnica;
+- decisão judicial;
+- output de IA jurídica externa;
+- recomendação estratégica;
+- análise de risco;
+- memorial;
+- outro.
+
+Se houver objeto híbrido, registre o tipo dominante e o tipo secundário.
+
+Exemplo:
+
+```text
+Tipo de objeto: parecer jurídico com recomendação estratégica.
+```
+
+---
+
+# 5. Síntese executiva interna
+
+A síntese executiva deve conter:
+
+1. tese central;
+2. risco principal;
+3. confronto mais relevante;
+4. gate;
+5. ação necessária.
+
+Modelo:
+
+```text
+O output sustenta tese revisional com recomendação estratégica de ajuizamento. O risco principal é a conversão de tese ainda não estabilizada em prognóstico numérico sem método. O confronto relevante é CF-017, com achado emergente [RISCO NÃO LASTREADO QUE DESESTABILIZA A TESE]. O gate é REVISÃO HUMANA/BLOQUEIO PARCIAL. A ação necessária é remover o percentual, explicitar objeções centrais e substituir o prognóstico por matriz qualitativa.
+```
+
+---
+
+# 6. Trechos críticos
+
+Liste apenas trechos com impacto real.
+
+Não liste frases meramente estilísticas.
+
+Critérios para incluir trecho crítico:
+
+- sustenta a conclusão principal;
+- aciona regime jurídico;
+- define probabilidade ou risco;
+- aplica precedente;
+- fecha conceito aberto;
+- transporta regime;
+- recomenda conduta;
+- cria tese inovadora;
+- altera ônus, prazo, proteção ou responsabilidade.
+
+---
+
+# 7. Lentes acionadas
+
+Cada lente deve ser registrada com sua função específica no caso.
+
+Não use descrições genéricas.
+
+Evite:
+
+```text
+EX003: analisa inferência.
+```
+
+Prefira:
+
+```text
+EX003: verifica se a qualificação da relação como consumo foi apresentada como conclusão estabilizada, embora dependa de inferência abdutiva.
+```
+
+---
+
+# 8. Confrontos acionados
+
+Registre somente confrontos que tenham acoplamento real.
+
+Não acione confronto apenas porque duas lentes apareceram.
+
+Para registrar confronto, deve haver:
+
+1. achados ou sinais compatíveis em duas lentes;
+2. acoplamento funcional entre eles;
+3. possibilidade de achado emergente;
+4. risco de dupla marcação se analisados separadamente.
+
+---
+
+# 9. Achados isolados
+
+Use achados isolados quando uma lente identificou problema próprio.
+
+Formato obrigatório:
+
+```text
+### Achado isolado 1
+
+Lente: EX000 — Nome operacional
+Marcador: [MARCADOR]
+Severidade: baixa/média/alta/crítica
+Localização: [trecho ou seção]
+
+Natureza do problema:
+[descrever em linguagem técnica]
+
+Impacto:
+[explicar efeito sobre tese, conclusão, regime, ônus, risco ou recomendação]
+
+Roteamento:
+[indicar próxima ação]
+```
+
+---
+
+# 10. Achado emergente
+
+Use achado emergente apenas quando a Rodada de confronto identificar falha não redutível à soma dos achados isolados.
+
+Formato obrigatório:
+
+```text
+## Achado emergente
+
+Confronto: CF-000 — Lente A × Lente B
+Marcador emergente: [MARCADOR]
+Severidade: baixa/média/alta/crítica
+Localização: [trecho ou núcleo argumentativo]
+
+Natureza do problema:
+[explicar a estrutura do acoplamento]
+
+Por que não é A+B:
+[explicar por que o defeito não se resolve com a soma dos achados isolados]
+
+Produto exportável:
+[gate, bloqueio, nota, matriz, reescrita condicionada ou revisão humana]
+```
+
+---
+
+# 11. Como escrever “Por que não é A+B”
+
+Este campo é obrigatório quando houver Rodada de confronto.
+
+Ele deve explicar a irredutibilidade do achado.
+
+Boas formulações:
+
+```text
+EX003 isolado captaria a hipótese como conclusão. EX004 isolado captaria a segurança numérica sem lastro. O confronto revela que a segurança numérica funciona como mecanismo de blindagem da hipótese, impedindo que o leitor perceba sua fragilidade inferencial.
+```
+
+```text
+EX007 isolado captaria falha precedental. EX006 isolado captaria colapso categorial. O confronto revela que a falha precedental é o veículo pelo qual o regime jurídico é transportado sem verificação autônoma.
+```
+
+Evite:
+
+```text
+Os dois achados são graves.
+```
+
+Isso não demonstra emergência.
+
+---
+
+# 12. Risco de dupla marcação
+
+Classifique o risco:
+
+- baixo;
+- médio;
+- alto.
+
+E indique o tratamento:
+
+- manter achados separados;
+- tratar como entrada única;
+- hierarquizar achado principal e secundário;
+- fundir no emergente;
+- descartar achado redundante;
+- encaminhar para revisão humana.
+
+Modelo:
+
+```text
+Risco de dupla marcação: alto.
+
+Tratamento: os achados isolados de EX007 e EX006 incidem sobre o mesmo núcleo textual. Não devem ser somados aritmeticamente. O achado emergente deve ser registrado como entrada única de gate, com referência aos marcadores isolados.
+```
+
+---
+
+# 13. Gate técnico
+
+Use apenas os cinco estados autorizados:
+
+- AVANÇA;
+- AVANÇA COM AJUSTE;
+- REVISÃO HUMANA;
+- BLOQUEIO PARCIAL;
+- BLOQUEIO TOTAL.
+
+Não crie novos estados.
+
+Não use expressões alternativas como:
+
+- “aprovação cautelosa”;
+- “revisão recomendada”;
+- “bloqueio crítico”;
+- “gate moderado”.
+
+Se precisar qualificar, faça no fundamento, não no estado.
+
+---
+
+# 14. Roteamento corretivo
+
+O roteamento deve ser prático.
+
+Deve indicar o que fazer.
+
+Evite formulações vagas:
+
+```text
+melhorar fundamentação.
+```
+
+Prefira:
+
+```text
+1. Remover o percentual de êxito.
+2. Inserir objeção adversarial sobre ausência de prova concreta.
+3. Substituir prognóstico numérico por matriz qualitativa.
+4. Encaminhar a tese para revisão humana antes de uso estratégico.
+```
+
+---
+
+# 15. Encaminhamento final
+
+Escolha uma ou mais opções:
+
+## o módulo de validação de fontes
+
+Quando houver necessidade de validar:
+
+- fonte;
+- vigência;
+- precedente;
+- súmula;
+- norma;
+- documento;
+- lastro factual;
+- jurisprudência citada.
+
+## o módulo de construção do raciocínio
+
+Quando o output precisar ser reconstruído em sua tese, fundamentação ou arquitetura de raciocínio.
+
+## o sistema
+
+Quando a auditoria precisar continuar com outra lente ou confronto.
+
+## o módulo de refinamento textual
+
+Quando o raciocínio estiver suficientemente saneado e o problema restante for redação, clareza, forma, tom ou entrega.
+
+## Revisão humana
+
+Quando houver escolha técnica sensível, tese inovadora, risco estratégico ou decisão não automatizável.
+
+## Bloqueio
+
+Quando o output não puder seguir.
+
+## Reconstrução
+
+Quando o output precisar ser refeito a partir da base.
+
+---
+
+# 16. Regras negativas
+
+Não exponha filosofia das lentes.
+
+Não explique autores.
+
+Não faça revisão estilística.
+
+Não transforme saída interna em parecer ao cliente.
+
+Não omita gate.
+
+Não suavize achado crítico por elegância textual.
+
+Não multiplique achados sem impacto.
+
+Não some severidade de modo aritmético.
+
+Não confunda falha de raciocínio com problema de redação.
+
+Não encaminhe para o módulo de refinamento textual se houver bloqueio de raciocínio.
+
+---
+
+# 17. Modelo de saída preenchível
+
+```text
+# OUTPUT INTERNO
+
+## 1. Identificação do objeto
+Tipo de objeto:
+Origem:
+Finalidade aparente:
+Tese ou conclusão principal:
+
+## 2. Estado da auditoria
+Triagem realizada:
+Rodada por lente isolada realizada:
+Rodada por lente isolada realizada:
+Rodada de confronto realizada:
+Gate técnico realizado:
+
+## 3. Síntese executiva interna
+
+## 4. Trechos críticos
+| Trecho ou ponto | Risco identificado | Relevância |
+|---|---|---|
+| | | |
+
+## 5. Lentes acionadas
+| Lente | Função no caso | Resultado | Severidade |
+|---|---|---|---|
+| | | | |
+
+## 6. Confrontos acionados
+| Confronto | Tipo de relação | Emergente identificado | Severidade |
+|---|---|---|---|
+| | | | |
+
+## 7. Achados isolados
+
+### Achado isolado 1
+Lente:
+Marcador:
+Severidade:
+Localização:
+
+Natureza do problema:
+
+Impacto:
+
+Roteamento:
+
+## 8. Achado emergente
+
+Confronto:
+Marcador emergente:
+Severidade:
+Localização:
+
+Natureza do problema:
+
+Por que não é A+B:
+
+Produto exportável:
+
+## 9. Risco de dupla marcação
+
+## 10. Gate técnico
+Estado:
+Fundamento:
+Condições de avanço:
+
+## 11. Roteamento corretivo
+1.
+2.
+3.
+
+## 12. Encaminhamento final
+
+## 13. Observação para o operador
+```
+
+---
+
+# 18. Regra final
+
+A saída interna deve permitir que outro operador entenda:
+
+1. o que aconteceu;
+2. onde aconteceu;
+3. por que importa;
+4. qual marcador foi aplicado;
+5. qual gate foi definido;
+6. o que fazer depois.
+
+Se a saída não permitir decisão operacional, ela está longa demais ou abstrata demais.
